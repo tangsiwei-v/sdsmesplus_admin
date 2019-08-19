@@ -55,6 +55,7 @@ public interface PackBoxService {
 	//查询额定装箱数主数据
 	PageInfo<BoxInfoPO> standard(Integer prod_code, String customer_code, Integer fcId, Integer page_size,
 			Integer page_num);
+	
 	//删除装箱数主数据
 	void deleteBoxInfo(Integer bifId);
 	
