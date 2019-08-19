@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.PlanOrderPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.PlanOrderPO">
+    <id column="po_id" jdbcType="INTEGER" property="poId" />
+    <result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    <result column="po_code" jdbcType="VARCHAR" property="poCode" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="po_start_date" jdbcType="DATE" property="poStartDate" />
+    <result column="po_start_time" jdbcType="TIME" property="poStartTime" />
+    <result column="po_end_date" jdbcType="DATE" property="poEndDate" />
+    <result column="po_end_time" jdbcType="TIME" property="poEndTime" />
+    <result column="po_start_datetime" jdbcType="TIMESTAMP" property="poStartDatetime" />
+    <result column="po_end_datetime" jdbcType="TIMESTAMP" property="poEndDatetime" />
+    <result column="po_count" jdbcType="INTEGER" property="poCount" />
+    <result column="po_count_unit" jdbcType="VARCHAR" property="poCountUnit" />
+    <result column="po_cust_matcode" jdbcType="VARCHAR" property="poCustMatcode" />
+    <result column="po_prod_version" jdbcType="VARCHAR" property="poProdVersion" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+    <result column="po_status" jdbcType="VARCHAR" property="poStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    po_id, fc_code, po_code, prod_code, customer_code, po_start_date, po_start_time, 
+    po_end_date, po_end_time, po_start_datetime, po_end_datetime, po_count, po_count_unit, 
+    po_cust_matcode, po_prod_version, line_id, vsm_id, po_status, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.PlanOrderPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from plan_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from plan_order
+    where po_id = #{poId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from plan_order
+    where po_id = #{poId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.PlanOrderPOExample">
+    delete from plan_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.PlanOrderPO">
+    insert into plan_order (po_id, fc_code, po_code, 
+      prod_code, customer_code, po_start_date, 
+      po_start_time, po_end_date, po_end_time, 
+      po_start_datetime, po_end_datetime, po_count, 
+      po_count_unit, po_cust_matcode, po_prod_version, 
+      line_id, vsm_id, po_status, 
+      create_time, update_time)
+    values (#{poId,jdbcType=INTEGER}, #{fcCode,jdbcType=VARCHAR}, #{poCode,jdbcType=VARCHAR}, 
+      #{prodCode,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, #{poStartDate,jdbcType=DATE}, 
+      #{poStartTime,jdbcType=TIME}, #{poEndDate,jdbcType=DATE}, #{poEndTime,jdbcType=TIME}, 
+      #{poStartDatetime,jdbcType=TIMESTAMP}, #{poEndDatetime,jdbcType=TIMESTAMP}, #{poCount,jdbcType=INTEGER}, 
+      #{poCountUnit,jdbcType=VARCHAR}, #{poCustMatcode,jdbcType=VARCHAR}, #{poProdVersion,jdbcType=VARCHAR}, 
+      #{lineId,jdbcType=INTEGER}, #{vsmId,jdbcType=INTEGER}, #{poStatus,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.PlanOrderPO">
+    insert into plan_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="poId != null">
+        po_id,
+      </if>
+      <if test="fcCode != null">
+        fc_code,
+      </if>
+      <if test="poCode != null">
+        po_code,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="poStartDate != null">
+        po_start_date,
+      </if>
+      <if test="poStartTime != null">
+        po_start_time,
+      </if>
+      <if test="poEndDate != null">
+        po_end_date,
+      </if>
+      <if test="poEndTime != null">
+        po_end_time,
+      </if>
+      <if test="poStartDatetime != null">
+        po_start_datetime,
+      </if>
+      <if test="poEndDatetime != null">
+        po_end_datetime,
+      </if>
+      <if test="poCount != null">
+        po_count,
+      </if>
+      <if test="poCountUnit != null">
+        po_count_unit,
+      </if>
+      <if test="poCustMatcode != null">
+        po_cust_matcode,
+      </if>
+      <if test="poProdVersion != null">
+        po_prod_version,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="vsmId != null">
+        vsm_id,
+      </if>
+      <if test="poStatus != null">
+        po_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="poId != null">
+        #{poId,jdbcType=INTEGER},
+      </if>
+      <if test="fcCode != null">
+        #{fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="poCode != null">
+        #{poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="poStartDate != null">
+        #{poStartDate,jdbcType=DATE},
+      </if>
+      <if test="poStartTime != null">
+        #{poStartTime,jdbcType=TIME},
+      </if>
+      <if test="poEndDate != null">
+        #{poEndDate,jdbcType=DATE},
+      </if>
+      <if test="poEndTime != null">
+        #{poEndTime,jdbcType=TIME},
+      </if>
+      <if test="poStartDatetime != null">
+        #{poStartDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poEndDatetime != null">
+        #{poEndDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poCount != null">
+        #{poCount,jdbcType=INTEGER},
+      </if>
+      <if test="poCountUnit != null">
+        #{poCountUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="poCustMatcode != null">
+        #{poCustMatcode,jdbcType=VARCHAR},
+      </if>
+      <if test="poProdVersion != null">
+        #{poProdVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="vsmId != null">
+        #{vsmId,jdbcType=INTEGER},
+      </if>
+      <if test="poStatus != null">
+        #{poStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.PlanOrderPOExample" resultType="java.lang.Long">
+    select count(*) from plan_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update plan_order
+    <set>
+      <if test="record.poId != null">
+        po_id = #{record.poId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcCode != null">
+        fc_code = #{record.fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poCode != null">
+        po_code = #{record.poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poStartDate != null">
+        po_start_date = #{record.poStartDate,jdbcType=DATE},
+      </if>
+      <if test="record.poStartTime != null">
+        po_start_time = #{record.poStartTime,jdbcType=TIME},
+      </if>
+      <if test="record.poEndDate != null">
+        po_end_date = #{record.poEndDate,jdbcType=DATE},
+      </if>
+      <if test="record.poEndTime != null">
+        po_end_time = #{record.poEndTime,jdbcType=TIME},
+      </if>
+      <if test="record.poStartDatetime != null">
+        po_start_datetime = #{record.poStartDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.poEndDatetime != null">
+        po_end_datetime = #{record.poEndDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.poCount != null">
+        po_count = #{record.poCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.poCountUnit != null">
+        po_count_unit = #{record.poCountUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poCustMatcode != null">
+        po_cust_matcode = #{record.poCustMatcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poProdVersion != null">
+        po_prod_version = #{record.poProdVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vsmId != null">
+        vsm_id = #{record.vsmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.poStatus != null">
+        po_status = #{record.poStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update plan_order
+    set po_id = #{record.poId,jdbcType=INTEGER},
+      fc_code = #{record.fcCode,jdbcType=VARCHAR},
+      po_code = #{record.poCode,jdbcType=VARCHAR},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      po_start_date = #{record.poStartDate,jdbcType=DATE},
+      po_start_time = #{record.poStartTime,jdbcType=TIME},
+      po_end_date = #{record.poEndDate,jdbcType=DATE},
+      po_end_time = #{record.poEndTime,jdbcType=TIME},
+      po_start_datetime = #{record.poStartDatetime,jdbcType=TIMESTAMP},
+      po_end_datetime = #{record.poEndDatetime,jdbcType=TIMESTAMP},
+      po_count = #{record.poCount,jdbcType=INTEGER},
+      po_count_unit = #{record.poCountUnit,jdbcType=VARCHAR},
+      po_cust_matcode = #{record.poCustMatcode,jdbcType=VARCHAR},
+      po_prod_version = #{record.poProdVersion,jdbcType=VARCHAR},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      vsm_id = #{record.vsmId,jdbcType=INTEGER},
+      po_status = #{record.poStatus,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.PlanOrderPO">
+    update plan_order
+    <set>
+      <if test="fcCode != null">
+        fc_code = #{fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="poCode != null">
+        po_code = #{poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="poStartDate != null">
+        po_start_date = #{poStartDate,jdbcType=DATE},
+      </if>
+      <if test="poStartTime != null">
+        po_start_time = #{poStartTime,jdbcType=TIME},
+      </if>
+      <if test="poEndDate != null">
+        po_end_date = #{poEndDate,jdbcType=DATE},
+      </if>
+      <if test="poEndTime != null">
+        po_end_time = #{poEndTime,jdbcType=TIME},
+      </if>
+      <if test="poStartDatetime != null">
+        po_start_datetime = #{poStartDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poEndDatetime != null">
+        po_end_datetime = #{poEndDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poCount != null">
+        po_count = #{poCount,jdbcType=INTEGER},
+      </if>
+      <if test="poCountUnit != null">
+        po_count_unit = #{poCountUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="poCustMatcode != null">
+        po_cust_matcode = #{poCustMatcode,jdbcType=VARCHAR},
+      </if>
+      <if test="poProdVersion != null">
+        po_prod_version = #{poProdVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="vsmId != null">
+        vsm_id = #{vsmId,jdbcType=INTEGER},
+      </if>
+      <if test="poStatus != null">
+        po_status = #{poStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where po_id = #{poId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.PlanOrderPO">
+    update plan_order
+    set fc_code = #{fcCode,jdbcType=VARCHAR},
+      po_code = #{poCode,jdbcType=VARCHAR},
+      prod_code = #{prodCode,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      po_start_date = #{poStartDate,jdbcType=DATE},
+      po_start_time = #{poStartTime,jdbcType=TIME},
+      po_end_date = #{poEndDate,jdbcType=DATE},
+      po_end_time = #{poEndTime,jdbcType=TIME},
+      po_start_datetime = #{poStartDatetime,jdbcType=TIMESTAMP},
+      po_end_datetime = #{poEndDatetime,jdbcType=TIMESTAMP},
+      po_count = #{poCount,jdbcType=INTEGER},
+      po_count_unit = #{poCountUnit,jdbcType=VARCHAR},
+      po_cust_matcode = #{poCustMatcode,jdbcType=VARCHAR},
+      po_prod_version = #{poProdVersion,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=INTEGER},
+      vsm_id = #{vsmId,jdbcType=INTEGER},
+      po_status = #{poStatus,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where po_id = #{poId,jdbcType=INTEGER}
+  </update>
+</mapper>

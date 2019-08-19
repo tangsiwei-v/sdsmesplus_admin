@@ -1,0 +1,16 @@
+target/
+.settings/
+
+.class
+.jar
+.log
+.error
+.idea/
+sdsMaintenance.iml
+bin/
+
+#ignore config files
+jdbc.properties
+params_config.properties
+sdsmesplus.iml
+src/main/resources/generatorConfig.xml

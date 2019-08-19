@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.CodePackagePODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.CodePackagePO">
+    <id column="cp_id" jdbcType="INTEGER" property="cpId" />
+    <result column="hu_type" jdbcType="VARCHAR" property="huType" />
+    <result column="pkg_day" jdbcType="VARCHAR" property="pkgDay" />
+    <result column="fc_pkg_id" jdbcType="VARCHAR" property="fcPkgId" />
+    <result column="pkg_systeam" jdbcType="VARCHAR" property="pkgSysteam" />
+    <result column="pkg_counter" jdbcType="INTEGER" property="pkgCounter" />
+    <result column="pkg_code" jdbcType="VARCHAR" property="pkgCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cp_id, hu_type, pkg_day, fc_pkg_id, pkg_systeam, pkg_counter, pkg_code, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.CodePackagePOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from code_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from code_package
+    where cp_id = #{cpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from code_package
+    where cp_id = #{cpId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.CodePackagePOExample">
+    delete from code_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.CodePackagePO">
+    insert into code_package (cp_id, hu_type, pkg_day, 
+      fc_pkg_id, pkg_systeam, pkg_counter, 
+      pkg_code, create_time)
+    values (#{cpId,jdbcType=INTEGER}, #{huType,jdbcType=VARCHAR}, #{pkgDay,jdbcType=VARCHAR}, 
+      #{fcPkgId,jdbcType=VARCHAR}, #{pkgSysteam,jdbcType=VARCHAR}, #{pkgCounter,jdbcType=INTEGER}, 
+      #{pkgCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.CodePackagePO">
+    insert into code_package
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cpId != null">
+        cp_id,
+      </if>
+      <if test="huType != null">
+        hu_type,
+      </if>
+      <if test="pkgDay != null">
+        pkg_day,
+      </if>
+      <if test="fcPkgId != null">
+        fc_pkg_id,
+      </if>
+      <if test="pkgSysteam != null">
+        pkg_systeam,
+      </if>
+      <if test="pkgCounter != null">
+        pkg_counter,
+      </if>
+      <if test="pkgCode != null">
+        pkg_code,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cpId != null">
+        #{cpId,jdbcType=INTEGER},
+      </if>
+      <if test="huType != null">
+        #{huType,jdbcType=VARCHAR},
+      </if>
+      <if test="pkgDay != null">
+        #{pkgDay,jdbcType=VARCHAR},
+      </if>
+      <if test="fcPkgId != null">
+        #{fcPkgId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkgSysteam != null">
+        #{pkgSysteam,jdbcType=VARCHAR},
+      </if>
+      <if test="pkgCounter != null">
+        #{pkgCounter,jdbcType=INTEGER},
+      </if>
+      <if test="pkgCode != null">
+        #{pkgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.CodePackagePOExample" resultType="java.lang.Long">
+    select count(*) from code_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update code_package
+    <set>
+      <if test="record.cpId != null">
+        cp_id = #{record.cpId,jdbcType=INTEGER},
+      </if>
+      <if test="record.huType != null">
+        hu_type = #{record.huType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pkgDay != null">
+        pkg_day = #{record.pkgDay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcPkgId != null">
+        fc_pkg_id = #{record.fcPkgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pkgSysteam != null">
+        pkg_systeam = #{record.pkgSysteam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pkgCounter != null">
+        pkg_counter = #{record.pkgCounter,jdbcType=INTEGER},
+      </if>
+      <if test="record.pkgCode != null">
+        pkg_code = #{record.pkgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update code_package
+    set cp_id = #{record.cpId,jdbcType=INTEGER},
+      hu_type = #{record.huType,jdbcType=VARCHAR},
+      pkg_day = #{record.pkgDay,jdbcType=VARCHAR},
+      fc_pkg_id = #{record.fcPkgId,jdbcType=VARCHAR},
+      pkg_systeam = #{record.pkgSysteam,jdbcType=VARCHAR},
+      pkg_counter = #{record.pkgCounter,jdbcType=INTEGER},
+      pkg_code = #{record.pkgCode,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.CodePackagePO">
+    update code_package
+    <set>
+      <if test="huType != null">
+        hu_type = #{huType,jdbcType=VARCHAR},
+      </if>
+      <if test="pkgDay != null">
+        pkg_day = #{pkgDay,jdbcType=VARCHAR},
+      </if>
+      <if test="fcPkgId != null">
+        fc_pkg_id = #{fcPkgId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkgSysteam != null">
+        pkg_systeam = #{pkgSysteam,jdbcType=VARCHAR},
+      </if>
+      <if test="pkgCounter != null">
+        pkg_counter = #{pkgCounter,jdbcType=INTEGER},
+      </if>
+      <if test="pkgCode != null">
+        pkg_code = #{pkgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cp_id = #{cpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.CodePackagePO">
+    update code_package
+    set hu_type = #{huType,jdbcType=VARCHAR},
+      pkg_day = #{pkgDay,jdbcType=VARCHAR},
+      fc_pkg_id = #{fcPkgId,jdbcType=VARCHAR},
+      pkg_systeam = #{pkgSysteam,jdbcType=VARCHAR},
+      pkg_counter = #{pkgCounter,jdbcType=INTEGER},
+      pkg_code = #{pkgCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where cp_id = #{cpId,jdbcType=INTEGER}
+  </update>
+ 
+</mapper>

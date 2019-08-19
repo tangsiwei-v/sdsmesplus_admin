@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.DeviceVerifyLogDao">
+  <resultMap id="DeviceVerifyLogMap" type="com.uspring.sdsmesplus.entity.po.DeviceVerifyLogPO">
+    <id column="dv_id" jdbcType="INTEGER" property="dvId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="shift_date" jdbcType="DATE" property="shiftDate" />
+    <result column="shift_id" jdbcType="VARCHAR" property="shiftId" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="dv_device" jdbcType="VARCHAR" property="dvDevice" />
+    <result column="dv_procedure" jdbcType="VARCHAR" property="dvProcedure" />
+    <result column="dv_item" jdbcType="VARCHAR" property="dvItem" />
+    <result column="dv_requirement" jdbcType="VARCHAR" property="dvRequirement" />
+    <result column="dv_result" jdbcType="VARCHAR" property="dvResult" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="dv_person" jdbcType="VARCHAR" property="dvPerson" />
+    <result column="dv_authorizer" jdbcType="VARCHAR" property="dvAuthorizer" />
+    <result column="dv_auth_time" jdbcType="TIMESTAMP" property="dvAuthTime" />
+  </resultMap>
+  
+  <sql id="DeviceVerifyLogList">
+    dv_id, line_id, shift_date, shift_id, order_code, prod_code, dv_device, dv_procedure, 
+    dv_item, dv_requirement, dv_result, create_time, dv_person, dv_authorizer, dv_auth_time
+  </sql>
+  
+  <insert id="insertDeviceVerifyLog" parameterType="com.uspring.sdsmesplus.entity.po.DeviceVerifyLogPO">
+    insert into prod_device_verify_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dvId != null">
+        dv_id,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="shiftDate != null">
+        shift_date,
+      </if>
+      <if test="shiftId != null">
+        shift_id,
+      </if>
+      <if test="orderCode != null">
+        order_code,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="dvDevice != null">
+        dv_device,
+      </if>
+      <if test="dvProcedure != null">
+        dv_procedure,
+      </if>
+      <if test="dvItem != null">
+        dv_item,
+      </if>
+      <if test="dvRequirement != null">
+        dv_requirement,
+      </if>
+      <if test="dvResult != null">
+        dv_result,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="dvPerson != null">
+        dv_person,
+      </if>
+      <if test="dvAuthorizer != null">
+        dv_authorizer,
+      </if>
+      <if test="dvAuthTime != null">
+        dv_auth_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dvId != null">
+        #{dvId},
+      </if>
+      <if test="lineId != null">
+        #{lineId},
+      </if>
+      <if test="shiftDate != null">
+        #{shiftDate,jdbcType=DATE},
+      </if>
+      <if test="shiftId != null">
+        #{shiftId},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode},
+      </if>
+      <if test="dvDevice != null">
+        #{dvDevice},
+      </if>
+      <if test="dvProcedure != null">
+        #{dvProcedure},
+      </if>
+      <if test="dvItem != null">
+        #{dvItem},
+      </if>
+      <if test="dvRequirement != null">
+        #{dvRequirement},
+      </if>
+      <if test="dvResult != null">
+        #{dvResult},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="dvPerson != null">
+        #{dvPerson},
+      </if>
+      <if test="dvAuthorizer != null">
+        #{dvAuthorizer},
+      </if>
+      <if test="dvAuthTime != null">
+        #{dvAuthTime},
+      </if>
+    </trim>
+  </insert>
+  
+ <select id="compare" resultMap="DeviceVerifyLogMap">
+    select 
+    <include refid="DeviceVerifyLogList" />
+    from prod_device_verify_log
+    where create_time &gt;= #{shiftStartTimeOfTime}
+	and create_time &lt;= #{shiftEndTimeOfTime}
+	and line_id = #{line_id}
+  </select>
+  
+ </mapper>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.SysDeviceVerifyItemPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPO">
+    <id column="dvi_id" jdbcType="INTEGER" property="dviId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="dev_code" jdbcType="VARCHAR" property="devCode" />
+    <result column="dvi_item" jdbcType="VARCHAR" property="dviItem" />
+    <result column="dvi_req" jdbcType="VARCHAR" property="dviReq" />
+    <result column="dvi_time" jdbcType="VARCHAR" property="dviTime" />
+    <result column="is_switch_active" jdbcType="BIT" property="isSwitchActive" />
+    <result column="is_active" jdbcType="BIT" property="isActive" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    dvi_id, line_id, dev_code, dvi_item, dvi_req, dvi_time, is_switch_active, is_active, 
+    create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_device_verify_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_device_verify_item
+    where dvi_id = #{dviId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_device_verify_item
+    where dvi_id = #{dviId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPOExample">
+    delete from sys_device_verify_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPO">
+    insert into sys_device_verify_item (dvi_id, line_id, dev_code, 
+      dvi_item, dvi_req, dvi_time, 
+      is_switch_active, is_active, create_time
+      )
+    values (#{dviId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{devCode,jdbcType=VARCHAR}, 
+      #{dviItem,jdbcType=VARCHAR}, #{dviReq,jdbcType=VARCHAR}, #{dviTime,jdbcType=VARCHAR}, 
+      #{isSwitchActive,jdbcType=BIT}, #{isActive,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPO">
+    insert into sys_device_verify_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dviId != null">
+        dvi_id,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="devCode != null">
+        dev_code,
+      </if>
+      <if test="dviItem != null">
+        dvi_item,
+      </if>
+      <if test="dviReq != null">
+        dvi_req,
+      </if>
+      <if test="dviTime != null">
+        dvi_time,
+      </if>
+      <if test="isSwitchActive != null">
+        is_switch_active,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dviId != null">
+        #{dviId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="devCode != null">
+        #{devCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dviItem != null">
+        #{dviItem,jdbcType=VARCHAR},
+      </if>
+      <if test="dviReq != null">
+        #{dviReq,jdbcType=VARCHAR},
+      </if>
+      <if test="dviTime != null">
+        #{dviTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isSwitchActive != null">
+        #{isSwitchActive,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPOExample" resultType="java.lang.Long">
+    select count(*) from sys_device_verify_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_device_verify_item
+    <set>
+      <if test="record.dviId != null">
+        dvi_id = #{record.dviId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.devCode != null">
+        dev_code = #{record.devCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dviItem != null">
+        dvi_item = #{record.dviItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dviReq != null">
+        dvi_req = #{record.dviReq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dviTime != null">
+        dvi_time = #{record.dviTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isSwitchActive != null">
+        is_switch_active = #{record.isSwitchActive,jdbcType=BIT},
+      </if>
+      <if test="record.isActive != null">
+        is_active = #{record.isActive,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_device_verify_item
+    set dvi_id = #{record.dviId,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      dev_code = #{record.devCode,jdbcType=VARCHAR},
+      dvi_item = #{record.dviItem,jdbcType=VARCHAR},
+      dvi_req = #{record.dviReq,jdbcType=VARCHAR},
+      dvi_time = #{record.dviTime,jdbcType=VARCHAR},
+      is_switch_active = #{record.isSwitchActive,jdbcType=BIT},
+      is_active = #{record.isActive,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPO">
+    update sys_device_verify_item
+    <set>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="devCode != null">
+        dev_code = #{devCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dviItem != null">
+        dvi_item = #{dviItem,jdbcType=VARCHAR},
+      </if>
+      <if test="dviReq != null">
+        dvi_req = #{dviReq,jdbcType=VARCHAR},
+      </if>
+      <if test="dviTime != null">
+        dvi_time = #{dviTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isSwitchActive != null">
+        is_switch_active = #{isSwitchActive,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where dvi_id = #{dviId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPO">
+    update sys_device_verify_item
+    set line_id = #{lineId,jdbcType=INTEGER},
+      dev_code = #{devCode,jdbcType=VARCHAR},
+      dvi_item = #{dviItem,jdbcType=VARCHAR},
+      dvi_req = #{dviReq,jdbcType=VARCHAR},
+      dvi_time = #{dviTime,jdbcType=VARCHAR},
+      is_switch_active = #{isSwitchActive,jdbcType=BIT},
+      is_active = #{isActive,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where dvi_id = #{dviId,jdbcType=INTEGER}
+  </update>
+</mapper>

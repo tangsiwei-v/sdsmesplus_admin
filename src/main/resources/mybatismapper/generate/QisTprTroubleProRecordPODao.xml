@@ -1,0 +1,1592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.QisTprTroubleProRecordPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.QisTprTroubleProRecordPO">
+    <id column="tpr_ID" jdbcType="INTEGER" property="tprId" />
+    <result column="tpr_TroProRecordNo" jdbcType="VARCHAR" property="tprTroprorecordno" />
+    <result column="tpr_Domain" jdbcType="VARCHAR" property="tprDomain" />
+    <result column="tpr_Site" jdbcType="VARCHAR" property="tprSite" />
+    <result column="tpr_Workshop" jdbcType="VARCHAR" property="tprWorkshop" />
+    <result column="tpr_ProductLine" jdbcType="VARCHAR" property="tprProductline" />
+    <result column="tpr_ProductDate" jdbcType="TIMESTAMP" property="tprProductdate" />
+    <result column="tpr_Shift" jdbcType="VARCHAR" property="tprShift" />
+    <result column="tpr_EffectiveDate" jdbcType="TIMESTAMP" property="tprEffectivedate" />
+    <result column="tpr_Part" jdbcType="VARCHAR" property="tprPart" />
+    <result column="tpr_PartCatalog" jdbcType="VARCHAR" property="tprPartcatalog" />
+    <result column="tpr_QRCode" jdbcType="VARCHAR" property="tprQrcode" />
+    <result column="tpr_Routing" jdbcType="VARCHAR" property="tprRouting" />
+    <result column="tpr_MaterialCode" jdbcType="VARCHAR" property="tprMaterialcode" />
+    <result column="tpr_BoxBarCodeNo" jdbcType="VARCHAR" property="tprBoxbarcodeno" />
+    <result column="tpr_MaterialQRCode" jdbcType="VARCHAR" property="tprMaterialqrcode" />
+    <result column="tpr_Lot" jdbcType="VARCHAR" property="tprLot" />
+    <result column="tpr_Ref" jdbcType="VARCHAR" property="tprRef" />
+    <result column="tpr_FurnaceNo" jdbcType="VARCHAR" property="tprFurnaceno" />
+    <result column="tpr_MetalMark" jdbcType="VARCHAR" property="tprMetalmark" />
+    <result column="tpr_FindOp" jdbcType="VARCHAR" property="tprFindop" />
+    <result column="tpr_FindOpName" jdbcType="VARCHAR" property="tprFindopname" />
+    <result column="tpr_ProduceOp" jdbcType="VARCHAR" property="tprProduceop" />
+    <result column="tpr_ProduceOpName" jdbcType="VARCHAR" property="tprProduceopname" />
+    <result column="tpr_Loc" jdbcType="VARCHAR" property="tprLoc" />
+    <result column="tpr_Loc_Desc" jdbcType="VARCHAR" property="tprLocDesc" />
+    <result column="tpr_Mch" jdbcType="VARCHAR" property="tprMch" />
+    <result column="tpr_TroubleCodes" jdbcType="VARCHAR" property="tprTroublecodes" />
+    <result column="tpr_CostCenter" jdbcType="VARCHAR" property="tprCostcenter" />
+    <result column="tpr_CostCenterName" jdbcType="VARCHAR" property="tprCostcentername" />
+    <result column="tpr_TroubleQty" jdbcType="INTEGER" property="tprTroubleqty" />
+    <result column="tpr_BatchProductStatus" jdbcType="VARCHAR" property="tprBatchproductstatus" />
+    <result column="tpr_IsTestPart" jdbcType="INTEGER" property="tprIstestpart" />
+    <result column="tpr_EquipNo" jdbcType="VARCHAR" property="tprEquipno" />
+    <result column="tpr_CreatePerson" jdbcType="VARCHAR" property="tprCreateperson" />
+    <result column="tpr_CreateTime" jdbcType="TIMESTAMP" property="tprCreatetime" />
+    <result column="tpr_Memo" jdbcType="VARCHAR" property="tprMemo" />
+    <result column="tpr_DeleteFlag" jdbcType="INTEGER" property="tprDeleteflag" />
+    <result column="tpr_CurLoc" jdbcType="VARCHAR" property="tprCurloc" />
+    <result column="tpr_CurSite" jdbcType="VARCHAR" property="tprCursite" />
+    <result column="tpr_CurRef" jdbcType="VARCHAR" property="tprCurref" />
+    <result column="tpr_ReviewResult" jdbcType="VARCHAR" property="tprReviewresult" />
+    <result column="tpr_ReviewTime" jdbcType="TIMESTAMP" property="tprReviewtime" />
+    <result column="tpr_ReviewPerson" jdbcType="VARCHAR" property="tprReviewperson" />
+    <result column="trp_ReviewMemo" jdbcType="VARCHAR" property="trpReviewmemo" />
+    <result column="tpr_QCReviewResult" jdbcType="VARCHAR" property="tprQcreviewresult" />
+    <result column="tpr_QCReviewTime" jdbcType="TIMESTAMP" property="tprQcreviewtime" />
+    <result column="tpr_QCReviewPerson" jdbcType="VARCHAR" property="tprQcreviewperson" />
+    <result column="tpr_QCReviewMemo" jdbcType="VARCHAR" property="tprQcreviewmemo" />
+    <result column="tpr_OfflineProcess" jdbcType="INTEGER" property="tprOfflineprocess" />
+    <result column="tpr_FileName" jdbcType="VARCHAR" property="tprFilename" />
+    <result column="tpr_ResponsibleParty" jdbcType="VARCHAR" property="tprResponsibleparty" />
+    <result column="tpr_DutyType" jdbcType="VARCHAR" property="tprDutytype" />
+    <result column="tpr_DutyVendNo" jdbcType="VARCHAR" property="tprDutyvendno" />
+    <result column="tpr_DutyVendDomain" jdbcType="VARCHAR" property="tprDutyvenddomain" />
+    <result column="tpr_poNbr" jdbcType="VARCHAR" property="tprPonbr" />
+    <result column="tpr_podLine" jdbcType="VARCHAR" property="tprPodline" />
+    <result column="tpr_podPurCost" jdbcType="DECIMAL" property="tprPodpurcost" />
+    <result column="tpr_DutyWkctr" jdbcType="VARCHAR" property="tprDutywkctr" />
+    <result column="tpr_DutyWkctrName" jdbcType="VARCHAR" property="tprDutywkctrname" />
+    <result column="tpr_DutyWorkshop" jdbcType="VARCHAR" property="tprDutyworkshop" />
+    <result column="tpr_DutyDomain" jdbcType="VARCHAR" property="tprDutydomain" />
+    <result column="tpr_DutySite" jdbcType="VARCHAR" property="tprDutysite" />
+    <result column="tpr_DutyCostCenter" jdbcType="VARCHAR" property="tprDutycostcenter" />
+    <result column="tpr_DutyCostCenterName" jdbcType="VARCHAR" property="tprDutycostcentername" />
+    <result column="tpr_DutyPart" jdbcType="VARCHAR" property="tprDutypart" />
+    <result column="tpr_DutyRouting" jdbcType="VARCHAR" property="tprDutyrouting" />
+    <result column="tpr_DutyOp" jdbcType="VARCHAR" property="tprDutyop" />
+    <result column="tpr_DutyOpName" jdbcType="VARCHAR" property="tprDutyopname" />
+    <result column="tpr_RecordStatus" jdbcType="INTEGER" property="tprRecordstatus" />
+    <result column="tpr_ScrapQty" jdbcType="INTEGER" property="tprScrapqty" />
+    <result column="tpr_QualifiedQty" jdbcType="INTEGER" property="tprQualifiedqty" />
+    <result column="tpr_DutyIsConfirm" jdbcType="INTEGER" property="tprDutyisconfirm" />
+    <result column="tpr_StartVendDomain" jdbcType="VARCHAR" property="tprStartvenddomain" />
+    <result column="tpr_StartVendNo" jdbcType="VARCHAR" property="tprStartvendno" />
+    <result column="tpr_EndVendDomain" jdbcType="VARCHAR" property="tprEndvenddomain" />
+    <result column="tpr_EndVendNo" jdbcType="VARCHAR" property="tprEndvendno" />
+    <result column="tpr_WasteTime" jdbcType="DECIMAL" property="tprWastetime" />
+    <result column="tpr_DirectNo" jdbcType="VARCHAR" property="tprDirectno" />
+    <result column="tpr_ParentRecordNo" jdbcType="VARCHAR" property="tprParentrecordno" />
+    <result column="tpr_RecordType" jdbcType="INTEGER" property="tprRecordtype" />
+    <result column="tpr_AssemblyPart" jdbcType="VARCHAR" property="tprAssemblypart" />
+    <result column="tpr_DutyObjectType" jdbcType="INTEGER" property="tprDutyobjecttype" />
+    <result column="tpr_UnitCost" jdbcType="DECIMAL" property="tprUnitcost" />
+    <result column="tpr_LaborAndMachineCost" jdbcType="DECIMAL" property="tprLaborandmachinecost" />
+    <result column="iro_run_time" jdbcType="DECIMAL" property="iroRunTime" />
+    <result column="iro_cost_tot" jdbcType="DECIMAL" property="iroCostTot" />
+    <result column="iro_mtl_ll" jdbcType="DECIMAL" property="iroMtlLl" />
+    <result column="iro_lbr_ll" jdbcType="DECIMAL" property="iroLbrLl" />
+    <result column="iro_bdn_ll" jdbcType="DECIMAL" property="iroBdnLl" />
+    <result column="iro_sub_ll" jdbcType="DECIMAL" property="iroSubLl" />
+    <result column="iro_ovh_ll" jdbcType="DECIMAL" property="iroOvhLl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    tpr_ID, tpr_TroProRecordNo, tpr_Domain, tpr_Site, tpr_Workshop, tpr_ProductLine, 
+    tpr_ProductDate, tpr_Shift, tpr_EffectiveDate, tpr_Part, tpr_PartCatalog, tpr_QRCode, 
+    tpr_Routing, tpr_MaterialCode, tpr_BoxBarCodeNo, tpr_MaterialQRCode, tpr_Lot, tpr_Ref, 
+    tpr_FurnaceNo, tpr_MetalMark, tpr_FindOp, tpr_FindOpName, tpr_ProduceOp, tpr_ProduceOpName, 
+    tpr_Loc, tpr_Loc_Desc, tpr_Mch, tpr_TroubleCodes, tpr_CostCenter, tpr_CostCenterName, 
+    tpr_TroubleQty, tpr_BatchProductStatus, tpr_IsTestPart, tpr_EquipNo, tpr_CreatePerson, 
+    tpr_CreateTime, tpr_Memo, tpr_DeleteFlag, tpr_CurLoc, tpr_CurSite, tpr_CurRef, tpr_ReviewResult, 
+    tpr_ReviewTime, tpr_ReviewPerson, trp_ReviewMemo, tpr_QCReviewResult, tpr_QCReviewTime, 
+    tpr_QCReviewPerson, tpr_QCReviewMemo, tpr_OfflineProcess, tpr_FileName, tpr_ResponsibleParty, 
+    tpr_DutyType, tpr_DutyVendNo, tpr_DutyVendDomain, tpr_poNbr, tpr_podLine, tpr_podPurCost, 
+    tpr_DutyWkctr, tpr_DutyWkctrName, tpr_DutyWorkshop, tpr_DutyDomain, tpr_DutySite, 
+    tpr_DutyCostCenter, tpr_DutyCostCenterName, tpr_DutyPart, tpr_DutyRouting, tpr_DutyOp, 
+    tpr_DutyOpName, tpr_RecordStatus, tpr_ScrapQty, tpr_QualifiedQty, tpr_DutyIsConfirm, 
+    tpr_StartVendDomain, tpr_StartVendNo, tpr_EndVendDomain, tpr_EndVendNo, tpr_WasteTime, 
+    tpr_DirectNo, tpr_ParentRecordNo, tpr_RecordType, tpr_AssemblyPart, tpr_DutyObjectType, 
+    tpr_UnitCost, tpr_LaborAndMachineCost, iro_run_time, iro_cost_tot, iro_mtl_ll, iro_lbr_ll, 
+    iro_bdn_ll, iro_sub_ll, iro_ovh_ll
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.QisTprTroubleProRecordPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from QIS_tpr_TroubleProRecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from QIS_tpr_TroubleProRecord
+    where tpr_ID = #{tprId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from QIS_tpr_TroubleProRecord
+    where tpr_ID = #{tprId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.QisTprTroubleProRecordPOExample">
+    delete from QIS_tpr_TroubleProRecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.QisTprTroubleProRecordPO">
+    insert into QIS_tpr_TroubleProRecord (tpr_ID, tpr_TroProRecordNo, tpr_Domain, 
+      tpr_Site, tpr_Workshop, tpr_ProductLine, 
+      tpr_ProductDate, tpr_Shift, tpr_EffectiveDate, 
+      tpr_Part, tpr_PartCatalog, tpr_QRCode, 
+      tpr_Routing, tpr_MaterialCode, tpr_BoxBarCodeNo, 
+      tpr_MaterialQRCode, tpr_Lot, tpr_Ref, 
+      tpr_FurnaceNo, tpr_MetalMark, tpr_FindOp, 
+      tpr_FindOpName, tpr_ProduceOp, tpr_ProduceOpName, 
+      tpr_Loc, tpr_Loc_Desc, tpr_Mch, 
+      tpr_TroubleCodes, tpr_CostCenter, tpr_CostCenterName, 
+      tpr_TroubleQty, tpr_BatchProductStatus, tpr_IsTestPart, 
+      tpr_EquipNo, tpr_CreatePerson, tpr_CreateTime, 
+      tpr_Memo, tpr_DeleteFlag, tpr_CurLoc, 
+      tpr_CurSite, tpr_CurRef, tpr_ReviewResult, 
+      tpr_ReviewTime, tpr_ReviewPerson, trp_ReviewMemo, 
+      tpr_QCReviewResult, tpr_QCReviewTime, tpr_QCReviewPerson, 
+      tpr_QCReviewMemo, tpr_OfflineProcess, tpr_FileName, 
+      tpr_ResponsibleParty, tpr_DutyType, tpr_DutyVendNo, 
+      tpr_DutyVendDomain, tpr_poNbr, tpr_podLine, 
+      tpr_podPurCost, tpr_DutyWkctr, tpr_DutyWkctrName, 
+      tpr_DutyWorkshop, tpr_DutyDomain, tpr_DutySite, 
+      tpr_DutyCostCenter, tpr_DutyCostCenterName, 
+      tpr_DutyPart, tpr_DutyRouting, tpr_DutyOp, 
+      tpr_DutyOpName, tpr_RecordStatus, tpr_ScrapQty, 
+      tpr_QualifiedQty, tpr_DutyIsConfirm, tpr_StartVendDomain, 
+      tpr_StartVendNo, tpr_EndVendDomain, tpr_EndVendNo, 
+      tpr_WasteTime, tpr_DirectNo, tpr_ParentRecordNo, 
+      tpr_RecordType, tpr_AssemblyPart, tpr_DutyObjectType, 
+      tpr_UnitCost, tpr_LaborAndMachineCost, iro_run_time, 
+      iro_cost_tot, iro_mtl_ll, iro_lbr_ll, 
+      iro_bdn_ll, iro_sub_ll, iro_ovh_ll
+      )
+    values (#{tprId,jdbcType=INTEGER}, #{tprTroprorecordno,jdbcType=VARCHAR}, #{tprDomain,jdbcType=VARCHAR}, 
+      #{tprSite,jdbcType=VARCHAR}, #{tprWorkshop,jdbcType=VARCHAR}, #{tprProductline,jdbcType=VARCHAR}, 
+      #{tprProductdate,jdbcType=TIMESTAMP}, #{tprShift,jdbcType=VARCHAR}, #{tprEffectivedate,jdbcType=TIMESTAMP}, 
+      #{tprPart,jdbcType=VARCHAR}, #{tprPartcatalog,jdbcType=VARCHAR}, #{tprQrcode,jdbcType=VARCHAR}, 
+      #{tprRouting,jdbcType=VARCHAR}, #{tprMaterialcode,jdbcType=VARCHAR}, #{tprBoxbarcodeno,jdbcType=VARCHAR}, 
+      #{tprMaterialqrcode,jdbcType=VARCHAR}, #{tprLot,jdbcType=VARCHAR}, #{tprRef,jdbcType=VARCHAR}, 
+      #{tprFurnaceno,jdbcType=VARCHAR}, #{tprMetalmark,jdbcType=VARCHAR}, #{tprFindop,jdbcType=VARCHAR}, 
+      #{tprFindopname,jdbcType=VARCHAR}, #{tprProduceop,jdbcType=VARCHAR}, #{tprProduceopname,jdbcType=VARCHAR}, 
+      #{tprLoc,jdbcType=VARCHAR}, #{tprLocDesc,jdbcType=VARCHAR}, #{tprMch,jdbcType=VARCHAR}, 
+      #{tprTroublecodes,jdbcType=VARCHAR}, #{tprCostcenter,jdbcType=VARCHAR}, #{tprCostcentername,jdbcType=VARCHAR}, 
+      #{tprTroubleqty,jdbcType=INTEGER}, #{tprBatchproductstatus,jdbcType=VARCHAR}, #{tprIstestpart,jdbcType=INTEGER}, 
+      #{tprEquipno,jdbcType=VARCHAR}, #{tprCreateperson,jdbcType=VARCHAR}, #{tprCreatetime,jdbcType=TIMESTAMP}, 
+      #{tprMemo,jdbcType=VARCHAR}, #{tprDeleteflag,jdbcType=INTEGER}, #{tprCurloc,jdbcType=VARCHAR}, 
+      #{tprCursite,jdbcType=VARCHAR}, #{tprCurref,jdbcType=VARCHAR}, #{tprReviewresult,jdbcType=VARCHAR}, 
+      #{tprReviewtime,jdbcType=TIMESTAMP}, #{tprReviewperson,jdbcType=VARCHAR}, #{trpReviewmemo,jdbcType=VARCHAR}, 
+      #{tprQcreviewresult,jdbcType=VARCHAR}, #{tprQcreviewtime,jdbcType=TIMESTAMP}, #{tprQcreviewperson,jdbcType=VARCHAR}, 
+      #{tprQcreviewmemo,jdbcType=VARCHAR}, #{tprOfflineprocess,jdbcType=INTEGER}, #{tprFilename,jdbcType=VARCHAR}, 
+      #{tprResponsibleparty,jdbcType=VARCHAR}, #{tprDutytype,jdbcType=VARCHAR}, #{tprDutyvendno,jdbcType=VARCHAR}, 
+      #{tprDutyvenddomain,jdbcType=VARCHAR}, #{tprPonbr,jdbcType=VARCHAR}, #{tprPodline,jdbcType=VARCHAR}, 
+      #{tprPodpurcost,jdbcType=DECIMAL}, #{tprDutywkctr,jdbcType=VARCHAR}, #{tprDutywkctrname,jdbcType=VARCHAR}, 
+      #{tprDutyworkshop,jdbcType=VARCHAR}, #{tprDutydomain,jdbcType=VARCHAR}, #{tprDutysite,jdbcType=VARCHAR}, 
+      #{tprDutycostcenter,jdbcType=VARCHAR}, #{tprDutycostcentername,jdbcType=VARCHAR}, 
+      #{tprDutypart,jdbcType=VARCHAR}, #{tprDutyrouting,jdbcType=VARCHAR}, #{tprDutyop,jdbcType=VARCHAR}, 
+      #{tprDutyopname,jdbcType=VARCHAR}, #{tprRecordstatus,jdbcType=INTEGER}, #{tprScrapqty,jdbcType=INTEGER}, 
+      #{tprQualifiedqty,jdbcType=INTEGER}, #{tprDutyisconfirm,jdbcType=INTEGER}, #{tprStartvenddomain,jdbcType=VARCHAR}, 
+      #{tprStartvendno,jdbcType=VARCHAR}, #{tprEndvenddomain,jdbcType=VARCHAR}, #{tprEndvendno,jdbcType=VARCHAR}, 
+      #{tprWastetime,jdbcType=DECIMAL}, #{tprDirectno,jdbcType=VARCHAR}, #{tprParentrecordno,jdbcType=VARCHAR}, 
+      #{tprRecordtype,jdbcType=INTEGER}, #{tprAssemblypart,jdbcType=VARCHAR}, #{tprDutyobjecttype,jdbcType=INTEGER}, 
+      #{tprUnitcost,jdbcType=DECIMAL}, #{tprLaborandmachinecost,jdbcType=DECIMAL}, #{iroRunTime,jdbcType=DECIMAL}, 
+      #{iroCostTot,jdbcType=DECIMAL}, #{iroMtlLl,jdbcType=DECIMAL}, #{iroLbrLl,jdbcType=DECIMAL}, 
+      #{iroBdnLl,jdbcType=DECIMAL}, #{iroSubLl,jdbcType=DECIMAL}, #{iroOvhLl,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.QisTprTroubleProRecordPO">
+    insert into QIS_tpr_TroubleProRecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tprId != null">
+        tpr_ID,
+      </if>
+      <if test="tprTroprorecordno != null">
+        tpr_TroProRecordNo,
+      </if>
+      <if test="tprDomain != null">
+        tpr_Domain,
+      </if>
+      <if test="tprSite != null">
+        tpr_Site,
+      </if>
+      <if test="tprWorkshop != null">
+        tpr_Workshop,
+      </if>
+      <if test="tprProductline != null">
+        tpr_ProductLine,
+      </if>
+      <if test="tprProductdate != null">
+        tpr_ProductDate,
+      </if>
+      <if test="tprShift != null">
+        tpr_Shift,
+      </if>
+      <if test="tprEffectivedate != null">
+        tpr_EffectiveDate,
+      </if>
+      <if test="tprPart != null">
+        tpr_Part,
+      </if>
+      <if test="tprPartcatalog != null">
+        tpr_PartCatalog,
+      </if>
+      <if test="tprQrcode != null">
+        tpr_QRCode,
+      </if>
+      <if test="tprRouting != null">
+        tpr_Routing,
+      </if>
+      <if test="tprMaterialcode != null">
+        tpr_MaterialCode,
+      </if>
+      <if test="tprBoxbarcodeno != null">
+        tpr_BoxBarCodeNo,
+      </if>
+      <if test="tprMaterialqrcode != null">
+        tpr_MaterialQRCode,
+      </if>
+      <if test="tprLot != null">
+        tpr_Lot,
+      </if>
+      <if test="tprRef != null">
+        tpr_Ref,
+      </if>
+      <if test="tprFurnaceno != null">
+        tpr_FurnaceNo,
+      </if>
+      <if test="tprMetalmark != null">
+        tpr_MetalMark,
+      </if>
+      <if test="tprFindop != null">
+        tpr_FindOp,
+      </if>
+      <if test="tprFindopname != null">
+        tpr_FindOpName,
+      </if>
+      <if test="tprProduceop != null">
+        tpr_ProduceOp,
+      </if>
+      <if test="tprProduceopname != null">
+        tpr_ProduceOpName,
+      </if>
+      <if test="tprLoc != null">
+        tpr_Loc,
+      </if>
+      <if test="tprLocDesc != null">
+        tpr_Loc_Desc,
+      </if>
+      <if test="tprMch != null">
+        tpr_Mch,
+      </if>
+      <if test="tprTroublecodes != null">
+        tpr_TroubleCodes,
+      </if>
+      <if test="tprCostcenter != null">
+        tpr_CostCenter,
+      </if>
+      <if test="tprCostcentername != null">
+        tpr_CostCenterName,
+      </if>
+      <if test="tprTroubleqty != null">
+        tpr_TroubleQty,
+      </if>
+      <if test="tprBatchproductstatus != null">
+        tpr_BatchProductStatus,
+      </if>
+      <if test="tprIstestpart != null">
+        tpr_IsTestPart,
+      </if>
+      <if test="tprEquipno != null">
+        tpr_EquipNo,
+      </if>
+      <if test="tprCreateperson != null">
+        tpr_CreatePerson,
+      </if>
+      <if test="tprCreatetime != null">
+        tpr_CreateTime,
+      </if>
+      <if test="tprMemo != null">
+        tpr_Memo,
+      </if>
+      <if test="tprDeleteflag != null">
+        tpr_DeleteFlag,
+      </if>
+      <if test="tprCurloc != null">
+        tpr_CurLoc,
+      </if>
+      <if test="tprCursite != null">
+        tpr_CurSite,
+      </if>
+      <if test="tprCurref != null">
+        tpr_CurRef,
+      </if>
+      <if test="tprReviewresult != null">
+        tpr_ReviewResult,
+      </if>
+      <if test="tprReviewtime != null">
+        tpr_ReviewTime,
+      </if>
+      <if test="tprReviewperson != null">
+        tpr_ReviewPerson,
+      </if>
+      <if test="trpReviewmemo != null">
+        trp_ReviewMemo,
+      </if>
+      <if test="tprQcreviewresult != null">
+        tpr_QCReviewResult,
+      </if>
+      <if test="tprQcreviewtime != null">
+        tpr_QCReviewTime,
+      </if>
+      <if test="tprQcreviewperson != null">
+        tpr_QCReviewPerson,
+      </if>
+      <if test="tprQcreviewmemo != null">
+        tpr_QCReviewMemo,
+      </if>
+      <if test="tprOfflineprocess != null">
+        tpr_OfflineProcess,
+      </if>
+      <if test="tprFilename != null">
+        tpr_FileName,
+      </if>
+      <if test="tprResponsibleparty != null">
+        tpr_ResponsibleParty,
+      </if>
+      <if test="tprDutytype != null">
+        tpr_DutyType,
+      </if>
+      <if test="tprDutyvendno != null">
+        tpr_DutyVendNo,
+      </if>
+      <if test="tprDutyvenddomain != null">
+        tpr_DutyVendDomain,
+      </if>
+      <if test="tprPonbr != null">
+        tpr_poNbr,
+      </if>
+      <if test="tprPodline != null">
+        tpr_podLine,
+      </if>
+      <if test="tprPodpurcost != null">
+        tpr_podPurCost,
+      </if>
+      <if test="tprDutywkctr != null">
+        tpr_DutyWkctr,
+      </if>
+      <if test="tprDutywkctrname != null">
+        tpr_DutyWkctrName,
+      </if>
+      <if test="tprDutyworkshop != null">
+        tpr_DutyWorkshop,
+      </if>
+      <if test="tprDutydomain != null">
+        tpr_DutyDomain,
+      </if>
+      <if test="tprDutysite != null">
+        tpr_DutySite,
+      </if>
+      <if test="tprDutycostcenter != null">
+        tpr_DutyCostCenter,
+      </if>
+      <if test="tprDutycostcentername != null">
+        tpr_DutyCostCenterName,
+      </if>
+      <if test="tprDutypart != null">
+        tpr_DutyPart,
+      </if>
+      <if test="tprDutyrouting != null">
+        tpr_DutyRouting,
+      </if>
+      <if test="tprDutyop != null">
+        tpr_DutyOp,
+      </if>
+      <if test="tprDutyopname != null">
+        tpr_DutyOpName,
+      </if>
+      <if test="tprRecordstatus != null">
+        tpr_RecordStatus,
+      </if>
+      <if test="tprScrapqty != null">
+        tpr_ScrapQty,
+      </if>
+      <if test="tprQualifiedqty != null">
+        tpr_QualifiedQty,
+      </if>
+      <if test="tprDutyisconfirm != null">
+        tpr_DutyIsConfirm,
+      </if>
+      <if test="tprStartvenddomain != null">
+        tpr_StartVendDomain,
+      </if>
+      <if test="tprStartvendno != null">
+        tpr_StartVendNo,
+      </if>
+      <if test="tprEndvenddomain != null">
+        tpr_EndVendDomain,
+      </if>
+      <if test="tprEndvendno != null">
+        tpr_EndVendNo,
+      </if>
+      <if test="tprWastetime != null">
+        tpr_WasteTime,
+      </if>
+      <if test="tprDirectno != null">
+        tpr_DirectNo,
+      </if>
+      <if test="tprParentrecordno != null">
+        tpr_ParentRecordNo,
+      </if>
+      <if test="tprRecordtype != null">
+        tpr_RecordType,
+      </if>
+      <if test="tprAssemblypart != null">
+        tpr_AssemblyPart,
+      </if>
+      <if test="tprDutyobjecttype != null">
+        tpr_DutyObjectType,
+      </if>
+      <if test="tprUnitcost != null">
+        tpr_UnitCost,
+      </if>
+      <if test="tprLaborandmachinecost != null">
+        tpr_LaborAndMachineCost,
+      </if>
+      <if test="iroRunTime != null">
+        iro_run_time,
+      </if>
+      <if test="iroCostTot != null">
+        iro_cost_tot,
+      </if>
+      <if test="iroMtlLl != null">
+        iro_mtl_ll,
+      </if>
+      <if test="iroLbrLl != null">
+        iro_lbr_ll,
+      </if>
+      <if test="iroBdnLl != null">
+        iro_bdn_ll,
+      </if>
+      <if test="iroSubLl != null">
+        iro_sub_ll,
+      </if>
+      <if test="iroOvhLl != null">
+        iro_ovh_ll,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tprId != null">
+        #{tprId,jdbcType=INTEGER},
+      </if>
+      <if test="tprTroprorecordno != null">
+        #{tprTroprorecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDomain != null">
+        #{tprDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="tprSite != null">
+        #{tprSite,jdbcType=VARCHAR},
+      </if>
+      <if test="tprWorkshop != null">
+        #{tprWorkshop,jdbcType=VARCHAR},
+      </if>
+      <if test="tprProductline != null">
+        #{tprProductline,jdbcType=VARCHAR},
+      </if>
+      <if test="tprProductdate != null">
+        #{tprProductdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tprShift != null">
+        #{tprShift,jdbcType=VARCHAR},
+      </if>
+      <if test="tprEffectivedate != null">
+        #{tprEffectivedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tprPart != null">
+        #{tprPart,jdbcType=VARCHAR},
+      </if>
+      <if test="tprPartcatalog != null">
+        #{tprPartcatalog,jdbcType=VARCHAR},
+      </if>
+      <if test="tprQrcode != null">
+        #{tprQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tprRouting != null">
+        #{tprRouting,jdbcType=VARCHAR},
+      </if>
+      <if test="tprMaterialcode != null">
+        #{tprMaterialcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tprBoxbarcodeno != null">
+        #{tprBoxbarcodeno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprMaterialqrcode != null">
+        #{tprMaterialqrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tprLot != null">
+        #{tprLot,jdbcType=VARCHAR},
+      </if>
+      <if test="tprRef != null">
+        #{tprRef,jdbcType=VARCHAR},
+      </if>
+      <if test="tprFurnaceno != null">
+        #{tprFurnaceno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprMetalmark != null">
+        #{tprMetalmark,jdbcType=VARCHAR},
+      </if>
+      <if test="tprFindop != null">
+        #{tprFindop,jdbcType=VARCHAR},
+      </if>
+      <if test="tprFindopname != null">
+        #{tprFindopname,jdbcType=VARCHAR},
+      </if>
+      <if test="tprProduceop != null">
+        #{tprProduceop,jdbcType=VARCHAR},
+      </if>
+      <if test="tprProduceopname != null">
+        #{tprProduceopname,jdbcType=VARCHAR},
+      </if>
+      <if test="tprLoc != null">
+        #{tprLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="tprLocDesc != null">
+        #{tprLocDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tprMch != null">
+        #{tprMch,jdbcType=VARCHAR},
+      </if>
+      <if test="tprTroublecodes != null">
+        #{tprTroublecodes,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCostcenter != null">
+        #{tprCostcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCostcentername != null">
+        #{tprCostcentername,jdbcType=VARCHAR},
+      </if>
+      <if test="tprTroubleqty != null">
+        #{tprTroubleqty,jdbcType=INTEGER},
+      </if>
+      <if test="tprBatchproductstatus != null">
+        #{tprBatchproductstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tprIstestpart != null">
+        #{tprIstestpart,jdbcType=INTEGER},
+      </if>
+      <if test="tprEquipno != null">
+        #{tprEquipno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCreateperson != null">
+        #{tprCreateperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCreatetime != null">
+        #{tprCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tprMemo != null">
+        #{tprMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDeleteflag != null">
+        #{tprDeleteflag,jdbcType=INTEGER},
+      </if>
+      <if test="tprCurloc != null">
+        #{tprCurloc,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCursite != null">
+        #{tprCursite,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCurref != null">
+        #{tprCurref,jdbcType=VARCHAR},
+      </if>
+      <if test="tprReviewresult != null">
+        #{tprReviewresult,jdbcType=VARCHAR},
+      </if>
+      <if test="tprReviewtime != null">
+        #{tprReviewtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tprReviewperson != null">
+        #{tprReviewperson,jdbcType=VARCHAR},
+      </if>
+      <if test="trpReviewmemo != null">
+        #{trpReviewmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="tprQcreviewresult != null">
+        #{tprQcreviewresult,jdbcType=VARCHAR},
+      </if>
+      <if test="tprQcreviewtime != null">
+        #{tprQcreviewtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tprQcreviewperson != null">
+        #{tprQcreviewperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tprQcreviewmemo != null">
+        #{tprQcreviewmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="tprOfflineprocess != null">
+        #{tprOfflineprocess,jdbcType=INTEGER},
+      </if>
+      <if test="tprFilename != null">
+        #{tprFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="tprResponsibleparty != null">
+        #{tprResponsibleparty,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutytype != null">
+        #{tprDutytype,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyvendno != null">
+        #{tprDutyvendno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyvenddomain != null">
+        #{tprDutyvenddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="tprPonbr != null">
+        #{tprPonbr,jdbcType=VARCHAR},
+      </if>
+      <if test="tprPodline != null">
+        #{tprPodline,jdbcType=VARCHAR},
+      </if>
+      <if test="tprPodpurcost != null">
+        #{tprPodpurcost,jdbcType=DECIMAL},
+      </if>
+      <if test="tprDutywkctr != null">
+        #{tprDutywkctr,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutywkctrname != null">
+        #{tprDutywkctrname,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyworkshop != null">
+        #{tprDutyworkshop,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutydomain != null">
+        #{tprDutydomain,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutysite != null">
+        #{tprDutysite,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutycostcenter != null">
+        #{tprDutycostcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutycostcentername != null">
+        #{tprDutycostcentername,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutypart != null">
+        #{tprDutypart,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyrouting != null">
+        #{tprDutyrouting,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyop != null">
+        #{tprDutyop,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyopname != null">
+        #{tprDutyopname,jdbcType=VARCHAR},
+      </if>
+      <if test="tprRecordstatus != null">
+        #{tprRecordstatus,jdbcType=INTEGER},
+      </if>
+      <if test="tprScrapqty != null">
+        #{tprScrapqty,jdbcType=INTEGER},
+      </if>
+      <if test="tprQualifiedqty != null">
+        #{tprQualifiedqty,jdbcType=INTEGER},
+      </if>
+      <if test="tprDutyisconfirm != null">
+        #{tprDutyisconfirm,jdbcType=INTEGER},
+      </if>
+      <if test="tprStartvenddomain != null">
+        #{tprStartvenddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="tprStartvendno != null">
+        #{tprStartvendno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprEndvenddomain != null">
+        #{tprEndvenddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="tprEndvendno != null">
+        #{tprEndvendno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprWastetime != null">
+        #{tprWastetime,jdbcType=DECIMAL},
+      </if>
+      <if test="tprDirectno != null">
+        #{tprDirectno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprParentrecordno != null">
+        #{tprParentrecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprRecordtype != null">
+        #{tprRecordtype,jdbcType=INTEGER},
+      </if>
+      <if test="tprAssemblypart != null">
+        #{tprAssemblypart,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyobjecttype != null">
+        #{tprDutyobjecttype,jdbcType=INTEGER},
+      </if>
+      <if test="tprUnitcost != null">
+        #{tprUnitcost,jdbcType=DECIMAL},
+      </if>
+      <if test="tprLaborandmachinecost != null">
+        #{tprLaborandmachinecost,jdbcType=DECIMAL},
+      </if>
+      <if test="iroRunTime != null">
+        #{iroRunTime,jdbcType=DECIMAL},
+      </if>
+      <if test="iroCostTot != null">
+        #{iroCostTot,jdbcType=DECIMAL},
+      </if>
+      <if test="iroMtlLl != null">
+        #{iroMtlLl,jdbcType=DECIMAL},
+      </if>
+      <if test="iroLbrLl != null">
+        #{iroLbrLl,jdbcType=DECIMAL},
+      </if>
+      <if test="iroBdnLl != null">
+        #{iroBdnLl,jdbcType=DECIMAL},
+      </if>
+      <if test="iroSubLl != null">
+        #{iroSubLl,jdbcType=DECIMAL},
+      </if>
+      <if test="iroOvhLl != null">
+        #{iroOvhLl,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.QisTprTroubleProRecordPOExample" resultType="java.lang.Long">
+    select count(*) from QIS_tpr_TroubleProRecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update QIS_tpr_TroubleProRecord
+    <set>
+      <if test="record.tprId != null">
+        tpr_ID = #{record.tprId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprTroprorecordno != null">
+        tpr_TroProRecordNo = #{record.tprTroprorecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDomain != null">
+        tpr_Domain = #{record.tprDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprSite != null">
+        tpr_Site = #{record.tprSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprWorkshop != null">
+        tpr_Workshop = #{record.tprWorkshop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprProductline != null">
+        tpr_ProductLine = #{record.tprProductline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprProductdate != null">
+        tpr_ProductDate = #{record.tprProductdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tprShift != null">
+        tpr_Shift = #{record.tprShift,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprEffectivedate != null">
+        tpr_EffectiveDate = #{record.tprEffectivedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tprPart != null">
+        tpr_Part = #{record.tprPart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprPartcatalog != null">
+        tpr_PartCatalog = #{record.tprPartcatalog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprQrcode != null">
+        tpr_QRCode = #{record.tprQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprRouting != null">
+        tpr_Routing = #{record.tprRouting,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprMaterialcode != null">
+        tpr_MaterialCode = #{record.tprMaterialcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprBoxbarcodeno != null">
+        tpr_BoxBarCodeNo = #{record.tprBoxbarcodeno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprMaterialqrcode != null">
+        tpr_MaterialQRCode = #{record.tprMaterialqrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprLot != null">
+        tpr_Lot = #{record.tprLot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprRef != null">
+        tpr_Ref = #{record.tprRef,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprFurnaceno != null">
+        tpr_FurnaceNo = #{record.tprFurnaceno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprMetalmark != null">
+        tpr_MetalMark = #{record.tprMetalmark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprFindop != null">
+        tpr_FindOp = #{record.tprFindop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprFindopname != null">
+        tpr_FindOpName = #{record.tprFindopname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprProduceop != null">
+        tpr_ProduceOp = #{record.tprProduceop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprProduceopname != null">
+        tpr_ProduceOpName = #{record.tprProduceopname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprLoc != null">
+        tpr_Loc = #{record.tprLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprLocDesc != null">
+        tpr_Loc_Desc = #{record.tprLocDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprMch != null">
+        tpr_Mch = #{record.tprMch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprTroublecodes != null">
+        tpr_TroubleCodes = #{record.tprTroublecodes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprCostcenter != null">
+        tpr_CostCenter = #{record.tprCostcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprCostcentername != null">
+        tpr_CostCenterName = #{record.tprCostcentername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprTroubleqty != null">
+        tpr_TroubleQty = #{record.tprTroubleqty,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprBatchproductstatus != null">
+        tpr_BatchProductStatus = #{record.tprBatchproductstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprIstestpart != null">
+        tpr_IsTestPart = #{record.tprIstestpart,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprEquipno != null">
+        tpr_EquipNo = #{record.tprEquipno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprCreateperson != null">
+        tpr_CreatePerson = #{record.tprCreateperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprCreatetime != null">
+        tpr_CreateTime = #{record.tprCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tprMemo != null">
+        tpr_Memo = #{record.tprMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDeleteflag != null">
+        tpr_DeleteFlag = #{record.tprDeleteflag,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprCurloc != null">
+        tpr_CurLoc = #{record.tprCurloc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprCursite != null">
+        tpr_CurSite = #{record.tprCursite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprCurref != null">
+        tpr_CurRef = #{record.tprCurref,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprReviewresult != null">
+        tpr_ReviewResult = #{record.tprReviewresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprReviewtime != null">
+        tpr_ReviewTime = #{record.tprReviewtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tprReviewperson != null">
+        tpr_ReviewPerson = #{record.tprReviewperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trpReviewmemo != null">
+        trp_ReviewMemo = #{record.trpReviewmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprQcreviewresult != null">
+        tpr_QCReviewResult = #{record.tprQcreviewresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprQcreviewtime != null">
+        tpr_QCReviewTime = #{record.tprQcreviewtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tprQcreviewperson != null">
+        tpr_QCReviewPerson = #{record.tprQcreviewperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprQcreviewmemo != null">
+        tpr_QCReviewMemo = #{record.tprQcreviewmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprOfflineprocess != null">
+        tpr_OfflineProcess = #{record.tprOfflineprocess,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprFilename != null">
+        tpr_FileName = #{record.tprFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprResponsibleparty != null">
+        tpr_ResponsibleParty = #{record.tprResponsibleparty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutytype != null">
+        tpr_DutyType = #{record.tprDutytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutyvendno != null">
+        tpr_DutyVendNo = #{record.tprDutyvendno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutyvenddomain != null">
+        tpr_DutyVendDomain = #{record.tprDutyvenddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprPonbr != null">
+        tpr_poNbr = #{record.tprPonbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprPodline != null">
+        tpr_podLine = #{record.tprPodline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprPodpurcost != null">
+        tpr_podPurCost = #{record.tprPodpurcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tprDutywkctr != null">
+        tpr_DutyWkctr = #{record.tprDutywkctr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutywkctrname != null">
+        tpr_DutyWkctrName = #{record.tprDutywkctrname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutyworkshop != null">
+        tpr_DutyWorkshop = #{record.tprDutyworkshop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutydomain != null">
+        tpr_DutyDomain = #{record.tprDutydomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutysite != null">
+        tpr_DutySite = #{record.tprDutysite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutycostcenter != null">
+        tpr_DutyCostCenter = #{record.tprDutycostcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutycostcentername != null">
+        tpr_DutyCostCenterName = #{record.tprDutycostcentername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutypart != null">
+        tpr_DutyPart = #{record.tprDutypart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutyrouting != null">
+        tpr_DutyRouting = #{record.tprDutyrouting,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutyop != null">
+        tpr_DutyOp = #{record.tprDutyop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutyopname != null">
+        tpr_DutyOpName = #{record.tprDutyopname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprRecordstatus != null">
+        tpr_RecordStatus = #{record.tprRecordstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprScrapqty != null">
+        tpr_ScrapQty = #{record.tprScrapqty,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprQualifiedqty != null">
+        tpr_QualifiedQty = #{record.tprQualifiedqty,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprDutyisconfirm != null">
+        tpr_DutyIsConfirm = #{record.tprDutyisconfirm,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprStartvenddomain != null">
+        tpr_StartVendDomain = #{record.tprStartvenddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprStartvendno != null">
+        tpr_StartVendNo = #{record.tprStartvendno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprEndvenddomain != null">
+        tpr_EndVendDomain = #{record.tprEndvenddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprEndvendno != null">
+        tpr_EndVendNo = #{record.tprEndvendno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprWastetime != null">
+        tpr_WasteTime = #{record.tprWastetime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tprDirectno != null">
+        tpr_DirectNo = #{record.tprDirectno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprParentrecordno != null">
+        tpr_ParentRecordNo = #{record.tprParentrecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprRecordtype != null">
+        tpr_RecordType = #{record.tprRecordtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprAssemblypart != null">
+        tpr_AssemblyPart = #{record.tprAssemblypart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tprDutyobjecttype != null">
+        tpr_DutyObjectType = #{record.tprDutyobjecttype,jdbcType=INTEGER},
+      </if>
+      <if test="record.tprUnitcost != null">
+        tpr_UnitCost = #{record.tprUnitcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tprLaborandmachinecost != null">
+        tpr_LaborAndMachineCost = #{record.tprLaborandmachinecost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.iroRunTime != null">
+        iro_run_time = #{record.iroRunTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.iroCostTot != null">
+        iro_cost_tot = #{record.iroCostTot,jdbcType=DECIMAL},
+      </if>
+      <if test="record.iroMtlLl != null">
+        iro_mtl_ll = #{record.iroMtlLl,jdbcType=DECIMAL},
+      </if>
+      <if test="record.iroLbrLl != null">
+        iro_lbr_ll = #{record.iroLbrLl,jdbcType=DECIMAL},
+      </if>
+      <if test="record.iroBdnLl != null">
+        iro_bdn_ll = #{record.iroBdnLl,jdbcType=DECIMAL},
+      </if>
+      <if test="record.iroSubLl != null">
+        iro_sub_ll = #{record.iroSubLl,jdbcType=DECIMAL},
+      </if>
+      <if test="record.iroOvhLl != null">
+        iro_ovh_ll = #{record.iroOvhLl,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update QIS_tpr_TroubleProRecord
+    set tpr_ID = #{record.tprId,jdbcType=INTEGER},
+      tpr_TroProRecordNo = #{record.tprTroprorecordno,jdbcType=VARCHAR},
+      tpr_Domain = #{record.tprDomain,jdbcType=VARCHAR},
+      tpr_Site = #{record.tprSite,jdbcType=VARCHAR},
+      tpr_Workshop = #{record.tprWorkshop,jdbcType=VARCHAR},
+      tpr_ProductLine = #{record.tprProductline,jdbcType=VARCHAR},
+      tpr_ProductDate = #{record.tprProductdate,jdbcType=TIMESTAMP},
+      tpr_Shift = #{record.tprShift,jdbcType=VARCHAR},
+      tpr_EffectiveDate = #{record.tprEffectivedate,jdbcType=TIMESTAMP},
+      tpr_Part = #{record.tprPart,jdbcType=VARCHAR},
+      tpr_PartCatalog = #{record.tprPartcatalog,jdbcType=VARCHAR},
+      tpr_QRCode = #{record.tprQrcode,jdbcType=VARCHAR},
+      tpr_Routing = #{record.tprRouting,jdbcType=VARCHAR},
+      tpr_MaterialCode = #{record.tprMaterialcode,jdbcType=VARCHAR},
+      tpr_BoxBarCodeNo = #{record.tprBoxbarcodeno,jdbcType=VARCHAR},
+      tpr_MaterialQRCode = #{record.tprMaterialqrcode,jdbcType=VARCHAR},
+      tpr_Lot = #{record.tprLot,jdbcType=VARCHAR},
+      tpr_Ref = #{record.tprRef,jdbcType=VARCHAR},
+      tpr_FurnaceNo = #{record.tprFurnaceno,jdbcType=VARCHAR},
+      tpr_MetalMark = #{record.tprMetalmark,jdbcType=VARCHAR},
+      tpr_FindOp = #{record.tprFindop,jdbcType=VARCHAR},
+      tpr_FindOpName = #{record.tprFindopname,jdbcType=VARCHAR},
+      tpr_ProduceOp = #{record.tprProduceop,jdbcType=VARCHAR},
+      tpr_ProduceOpName = #{record.tprProduceopname,jdbcType=VARCHAR},
+      tpr_Loc = #{record.tprLoc,jdbcType=VARCHAR},
+      tpr_Loc_Desc = #{record.tprLocDesc,jdbcType=VARCHAR},
+      tpr_Mch = #{record.tprMch,jdbcType=VARCHAR},
+      tpr_TroubleCodes = #{record.tprTroublecodes,jdbcType=VARCHAR},
+      tpr_CostCenter = #{record.tprCostcenter,jdbcType=VARCHAR},
+      tpr_CostCenterName = #{record.tprCostcentername,jdbcType=VARCHAR},
+      tpr_TroubleQty = #{record.tprTroubleqty,jdbcType=INTEGER},
+      tpr_BatchProductStatus = #{record.tprBatchproductstatus,jdbcType=VARCHAR},
+      tpr_IsTestPart = #{record.tprIstestpart,jdbcType=INTEGER},
+      tpr_EquipNo = #{record.tprEquipno,jdbcType=VARCHAR},
+      tpr_CreatePerson = #{record.tprCreateperson,jdbcType=VARCHAR},
+      tpr_CreateTime = #{record.tprCreatetime,jdbcType=TIMESTAMP},
+      tpr_Memo = #{record.tprMemo,jdbcType=VARCHAR},
+      tpr_DeleteFlag = #{record.tprDeleteflag,jdbcType=INTEGER},
+      tpr_CurLoc = #{record.tprCurloc,jdbcType=VARCHAR},
+      tpr_CurSite = #{record.tprCursite,jdbcType=VARCHAR},
+      tpr_CurRef = #{record.tprCurref,jdbcType=VARCHAR},
+      tpr_ReviewResult = #{record.tprReviewresult,jdbcType=VARCHAR},
+      tpr_ReviewTime = #{record.tprReviewtime,jdbcType=TIMESTAMP},
+      tpr_ReviewPerson = #{record.tprReviewperson,jdbcType=VARCHAR},
+      trp_ReviewMemo = #{record.trpReviewmemo,jdbcType=VARCHAR},
+      tpr_QCReviewResult = #{record.tprQcreviewresult,jdbcType=VARCHAR},
+      tpr_QCReviewTime = #{record.tprQcreviewtime,jdbcType=TIMESTAMP},
+      tpr_QCReviewPerson = #{record.tprQcreviewperson,jdbcType=VARCHAR},
+      tpr_QCReviewMemo = #{record.tprQcreviewmemo,jdbcType=VARCHAR},
+      tpr_OfflineProcess = #{record.tprOfflineprocess,jdbcType=INTEGER},
+      tpr_FileName = #{record.tprFilename,jdbcType=VARCHAR},
+      tpr_ResponsibleParty = #{record.tprResponsibleparty,jdbcType=VARCHAR},
+      tpr_DutyType = #{record.tprDutytype,jdbcType=VARCHAR},
+      tpr_DutyVendNo = #{record.tprDutyvendno,jdbcType=VARCHAR},
+      tpr_DutyVendDomain = #{record.tprDutyvenddomain,jdbcType=VARCHAR},
+      tpr_poNbr = #{record.tprPonbr,jdbcType=VARCHAR},
+      tpr_podLine = #{record.tprPodline,jdbcType=VARCHAR},
+      tpr_podPurCost = #{record.tprPodpurcost,jdbcType=DECIMAL},
+      tpr_DutyWkctr = #{record.tprDutywkctr,jdbcType=VARCHAR},
+      tpr_DutyWkctrName = #{record.tprDutywkctrname,jdbcType=VARCHAR},
+      tpr_DutyWorkshop = #{record.tprDutyworkshop,jdbcType=VARCHAR},
+      tpr_DutyDomain = #{record.tprDutydomain,jdbcType=VARCHAR},
+      tpr_DutySite = #{record.tprDutysite,jdbcType=VARCHAR},
+      tpr_DutyCostCenter = #{record.tprDutycostcenter,jdbcType=VARCHAR},
+      tpr_DutyCostCenterName = #{record.tprDutycostcentername,jdbcType=VARCHAR},
+      tpr_DutyPart = #{record.tprDutypart,jdbcType=VARCHAR},
+      tpr_DutyRouting = #{record.tprDutyrouting,jdbcType=VARCHAR},
+      tpr_DutyOp = #{record.tprDutyop,jdbcType=VARCHAR},
+      tpr_DutyOpName = #{record.tprDutyopname,jdbcType=VARCHAR},
+      tpr_RecordStatus = #{record.tprRecordstatus,jdbcType=INTEGER},
+      tpr_ScrapQty = #{record.tprScrapqty,jdbcType=INTEGER},
+      tpr_QualifiedQty = #{record.tprQualifiedqty,jdbcType=INTEGER},
+      tpr_DutyIsConfirm = #{record.tprDutyisconfirm,jdbcType=INTEGER},
+      tpr_StartVendDomain = #{record.tprStartvenddomain,jdbcType=VARCHAR},
+      tpr_StartVendNo = #{record.tprStartvendno,jdbcType=VARCHAR},
+      tpr_EndVendDomain = #{record.tprEndvenddomain,jdbcType=VARCHAR},
+      tpr_EndVendNo = #{record.tprEndvendno,jdbcType=VARCHAR},
+      tpr_WasteTime = #{record.tprWastetime,jdbcType=DECIMAL},
+      tpr_DirectNo = #{record.tprDirectno,jdbcType=VARCHAR},
+      tpr_ParentRecordNo = #{record.tprParentrecordno,jdbcType=VARCHAR},
+      tpr_RecordType = #{record.tprRecordtype,jdbcType=INTEGER},
+      tpr_AssemblyPart = #{record.tprAssemblypart,jdbcType=VARCHAR},
+      tpr_DutyObjectType = #{record.tprDutyobjecttype,jdbcType=INTEGER},
+      tpr_UnitCost = #{record.tprUnitcost,jdbcType=DECIMAL},
+      tpr_LaborAndMachineCost = #{record.tprLaborandmachinecost,jdbcType=DECIMAL},
+      iro_run_time = #{record.iroRunTime,jdbcType=DECIMAL},
+      iro_cost_tot = #{record.iroCostTot,jdbcType=DECIMAL},
+      iro_mtl_ll = #{record.iroMtlLl,jdbcType=DECIMAL},
+      iro_lbr_ll = #{record.iroLbrLl,jdbcType=DECIMAL},
+      iro_bdn_ll = #{record.iroBdnLl,jdbcType=DECIMAL},
+      iro_sub_ll = #{record.iroSubLl,jdbcType=DECIMAL},
+      iro_ovh_ll = #{record.iroOvhLl,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.QisTprTroubleProRecordPO">
+    update QIS_tpr_TroubleProRecord
+    <set>
+      <if test="tprTroprorecordno != null">
+        tpr_TroProRecordNo = #{tprTroprorecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDomain != null">
+        tpr_Domain = #{tprDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="tprSite != null">
+        tpr_Site = #{tprSite,jdbcType=VARCHAR},
+      </if>
+      <if test="tprWorkshop != null">
+        tpr_Workshop = #{tprWorkshop,jdbcType=VARCHAR},
+      </if>
+      <if test="tprProductline != null">
+        tpr_ProductLine = #{tprProductline,jdbcType=VARCHAR},
+      </if>
+      <if test="tprProductdate != null">
+        tpr_ProductDate = #{tprProductdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tprShift != null">
+        tpr_Shift = #{tprShift,jdbcType=VARCHAR},
+      </if>
+      <if test="tprEffectivedate != null">
+        tpr_EffectiveDate = #{tprEffectivedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tprPart != null">
+        tpr_Part = #{tprPart,jdbcType=VARCHAR},
+      </if>
+      <if test="tprPartcatalog != null">
+        tpr_PartCatalog = #{tprPartcatalog,jdbcType=VARCHAR},
+      </if>
+      <if test="tprQrcode != null">
+        tpr_QRCode = #{tprQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tprRouting != null">
+        tpr_Routing = #{tprRouting,jdbcType=VARCHAR},
+      </if>
+      <if test="tprMaterialcode != null">
+        tpr_MaterialCode = #{tprMaterialcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tprBoxbarcodeno != null">
+        tpr_BoxBarCodeNo = #{tprBoxbarcodeno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprMaterialqrcode != null">
+        tpr_MaterialQRCode = #{tprMaterialqrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tprLot != null">
+        tpr_Lot = #{tprLot,jdbcType=VARCHAR},
+      </if>
+      <if test="tprRef != null">
+        tpr_Ref = #{tprRef,jdbcType=VARCHAR},
+      </if>
+      <if test="tprFurnaceno != null">
+        tpr_FurnaceNo = #{tprFurnaceno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprMetalmark != null">
+        tpr_MetalMark = #{tprMetalmark,jdbcType=VARCHAR},
+      </if>
+      <if test="tprFindop != null">
+        tpr_FindOp = #{tprFindop,jdbcType=VARCHAR},
+      </if>
+      <if test="tprFindopname != null">
+        tpr_FindOpName = #{tprFindopname,jdbcType=VARCHAR},
+      </if>
+      <if test="tprProduceop != null">
+        tpr_ProduceOp = #{tprProduceop,jdbcType=VARCHAR},
+      </if>
+      <if test="tprProduceopname != null">
+        tpr_ProduceOpName = #{tprProduceopname,jdbcType=VARCHAR},
+      </if>
+      <if test="tprLoc != null">
+        tpr_Loc = #{tprLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="tprLocDesc != null">
+        tpr_Loc_Desc = #{tprLocDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tprMch != null">
+        tpr_Mch = #{tprMch,jdbcType=VARCHAR},
+      </if>
+      <if test="tprTroublecodes != null">
+        tpr_TroubleCodes = #{tprTroublecodes,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCostcenter != null">
+        tpr_CostCenter = #{tprCostcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCostcentername != null">
+        tpr_CostCenterName = #{tprCostcentername,jdbcType=VARCHAR},
+      </if>
+      <if test="tprTroubleqty != null">
+        tpr_TroubleQty = #{tprTroubleqty,jdbcType=INTEGER},
+      </if>
+      <if test="tprBatchproductstatus != null">
+        tpr_BatchProductStatus = #{tprBatchproductstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tprIstestpart != null">
+        tpr_IsTestPart = #{tprIstestpart,jdbcType=INTEGER},
+      </if>
+      <if test="tprEquipno != null">
+        tpr_EquipNo = #{tprEquipno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCreateperson != null">
+        tpr_CreatePerson = #{tprCreateperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCreatetime != null">
+        tpr_CreateTime = #{tprCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tprMemo != null">
+        tpr_Memo = #{tprMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDeleteflag != null">
+        tpr_DeleteFlag = #{tprDeleteflag,jdbcType=INTEGER},
+      </if>
+      <if test="tprCurloc != null">
+        tpr_CurLoc = #{tprCurloc,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCursite != null">
+        tpr_CurSite = #{tprCursite,jdbcType=VARCHAR},
+      </if>
+      <if test="tprCurref != null">
+        tpr_CurRef = #{tprCurref,jdbcType=VARCHAR},
+      </if>
+      <if test="tprReviewresult != null">
+        tpr_ReviewResult = #{tprReviewresult,jdbcType=VARCHAR},
+      </if>
+      <if test="tprReviewtime != null">
+        tpr_ReviewTime = #{tprReviewtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tprReviewperson != null">
+        tpr_ReviewPerson = #{tprReviewperson,jdbcType=VARCHAR},
+      </if>
+      <if test="trpReviewmemo != null">
+        trp_ReviewMemo = #{trpReviewmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="tprQcreviewresult != null">
+        tpr_QCReviewResult = #{tprQcreviewresult,jdbcType=VARCHAR},
+      </if>
+      <if test="tprQcreviewtime != null">
+        tpr_QCReviewTime = #{tprQcreviewtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tprQcreviewperson != null">
+        tpr_QCReviewPerson = #{tprQcreviewperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tprQcreviewmemo != null">
+        tpr_QCReviewMemo = #{tprQcreviewmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="tprOfflineprocess != null">
+        tpr_OfflineProcess = #{tprOfflineprocess,jdbcType=INTEGER},
+      </if>
+      <if test="tprFilename != null">
+        tpr_FileName = #{tprFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="tprResponsibleparty != null">
+        tpr_ResponsibleParty = #{tprResponsibleparty,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutytype != null">
+        tpr_DutyType = #{tprDutytype,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyvendno != null">
+        tpr_DutyVendNo = #{tprDutyvendno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyvenddomain != null">
+        tpr_DutyVendDomain = #{tprDutyvenddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="tprPonbr != null">
+        tpr_poNbr = #{tprPonbr,jdbcType=VARCHAR},
+      </if>
+      <if test="tprPodline != null">
+        tpr_podLine = #{tprPodline,jdbcType=VARCHAR},
+      </if>
+      <if test="tprPodpurcost != null">
+        tpr_podPurCost = #{tprPodpurcost,jdbcType=DECIMAL},
+      </if>
+      <if test="tprDutywkctr != null">
+        tpr_DutyWkctr = #{tprDutywkctr,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutywkctrname != null">
+        tpr_DutyWkctrName = #{tprDutywkctrname,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyworkshop != null">
+        tpr_DutyWorkshop = #{tprDutyworkshop,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutydomain != null">
+        tpr_DutyDomain = #{tprDutydomain,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutysite != null">
+        tpr_DutySite = #{tprDutysite,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutycostcenter != null">
+        tpr_DutyCostCenter = #{tprDutycostcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutycostcentername != null">
+        tpr_DutyCostCenterName = #{tprDutycostcentername,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutypart != null">
+        tpr_DutyPart = #{tprDutypart,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyrouting != null">
+        tpr_DutyRouting = #{tprDutyrouting,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyop != null">
+        tpr_DutyOp = #{tprDutyop,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyopname != null">
+        tpr_DutyOpName = #{tprDutyopname,jdbcType=VARCHAR},
+      </if>
+      <if test="tprRecordstatus != null">
+        tpr_RecordStatus = #{tprRecordstatus,jdbcType=INTEGER},
+      </if>
+      <if test="tprScrapqty != null">
+        tpr_ScrapQty = #{tprScrapqty,jdbcType=INTEGER},
+      </if>
+      <if test="tprQualifiedqty != null">
+        tpr_QualifiedQty = #{tprQualifiedqty,jdbcType=INTEGER},
+      </if>
+      <if test="tprDutyisconfirm != null">
+        tpr_DutyIsConfirm = #{tprDutyisconfirm,jdbcType=INTEGER},
+      </if>
+      <if test="tprStartvenddomain != null">
+        tpr_StartVendDomain = #{tprStartvenddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="tprStartvendno != null">
+        tpr_StartVendNo = #{tprStartvendno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprEndvenddomain != null">
+        tpr_EndVendDomain = #{tprEndvenddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="tprEndvendno != null">
+        tpr_EndVendNo = #{tprEndvendno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprWastetime != null">
+        tpr_WasteTime = #{tprWastetime,jdbcType=DECIMAL},
+      </if>
+      <if test="tprDirectno != null">
+        tpr_DirectNo = #{tprDirectno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprParentrecordno != null">
+        tpr_ParentRecordNo = #{tprParentrecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="tprRecordtype != null">
+        tpr_RecordType = #{tprRecordtype,jdbcType=INTEGER},
+      </if>
+      <if test="tprAssemblypart != null">
+        tpr_AssemblyPart = #{tprAssemblypart,jdbcType=VARCHAR},
+      </if>
+      <if test="tprDutyobjecttype != null">
+        tpr_DutyObjectType = #{tprDutyobjecttype,jdbcType=INTEGER},
+      </if>
+      <if test="tprUnitcost != null">
+        tpr_UnitCost = #{tprUnitcost,jdbcType=DECIMAL},
+      </if>
+      <if test="tprLaborandmachinecost != null">
+        tpr_LaborAndMachineCost = #{tprLaborandmachinecost,jdbcType=DECIMAL},
+      </if>
+      <if test="iroRunTime != null">
+        iro_run_time = #{iroRunTime,jdbcType=DECIMAL},
+      </if>
+      <if test="iroCostTot != null">
+        iro_cost_tot = #{iroCostTot,jdbcType=DECIMAL},
+      </if>
+      <if test="iroMtlLl != null">
+        iro_mtl_ll = #{iroMtlLl,jdbcType=DECIMAL},
+      </if>
+      <if test="iroLbrLl != null">
+        iro_lbr_ll = #{iroLbrLl,jdbcType=DECIMAL},
+      </if>
+      <if test="iroBdnLl != null">
+        iro_bdn_ll = #{iroBdnLl,jdbcType=DECIMAL},
+      </if>
+      <if test="iroSubLl != null">
+        iro_sub_ll = #{iroSubLl,jdbcType=DECIMAL},
+      </if>
+      <if test="iroOvhLl != null">
+        iro_ovh_ll = #{iroOvhLl,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where tpr_ID = #{tprId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.QisTprTroubleProRecordPO">
+    update QIS_tpr_TroubleProRecord
+    set tpr_TroProRecordNo = #{tprTroprorecordno,jdbcType=VARCHAR},
+      tpr_Domain = #{tprDomain,jdbcType=VARCHAR},
+      tpr_Site = #{tprSite,jdbcType=VARCHAR},
+      tpr_Workshop = #{tprWorkshop,jdbcType=VARCHAR},
+      tpr_ProductLine = #{tprProductline,jdbcType=VARCHAR},
+      tpr_ProductDate = #{tprProductdate,jdbcType=TIMESTAMP},
+      tpr_Shift = #{tprShift,jdbcType=VARCHAR},
+      tpr_EffectiveDate = #{tprEffectivedate,jdbcType=TIMESTAMP},
+      tpr_Part = #{tprPart,jdbcType=VARCHAR},
+      tpr_PartCatalog = #{tprPartcatalog,jdbcType=VARCHAR},
+      tpr_QRCode = #{tprQrcode,jdbcType=VARCHAR},
+      tpr_Routing = #{tprRouting,jdbcType=VARCHAR},
+      tpr_MaterialCode = #{tprMaterialcode,jdbcType=VARCHAR},
+      tpr_BoxBarCodeNo = #{tprBoxbarcodeno,jdbcType=VARCHAR},
+      tpr_MaterialQRCode = #{tprMaterialqrcode,jdbcType=VARCHAR},
+      tpr_Lot = #{tprLot,jdbcType=VARCHAR},
+      tpr_Ref = #{tprRef,jdbcType=VARCHAR},
+      tpr_FurnaceNo = #{tprFurnaceno,jdbcType=VARCHAR},
+      tpr_MetalMark = #{tprMetalmark,jdbcType=VARCHAR},
+      tpr_FindOp = #{tprFindop,jdbcType=VARCHAR},
+      tpr_FindOpName = #{tprFindopname,jdbcType=VARCHAR},
+      tpr_ProduceOp = #{tprProduceop,jdbcType=VARCHAR},
+      tpr_ProduceOpName = #{tprProduceopname,jdbcType=VARCHAR},
+      tpr_Loc = #{tprLoc,jdbcType=VARCHAR},
+      tpr_Loc_Desc = #{tprLocDesc,jdbcType=VARCHAR},
+      tpr_Mch = #{tprMch,jdbcType=VARCHAR},
+      tpr_TroubleCodes = #{tprTroublecodes,jdbcType=VARCHAR},
+      tpr_CostCenter = #{tprCostcenter,jdbcType=VARCHAR},
+      tpr_CostCenterName = #{tprCostcentername,jdbcType=VARCHAR},
+      tpr_TroubleQty = #{tprTroubleqty,jdbcType=INTEGER},
+      tpr_BatchProductStatus = #{tprBatchproductstatus,jdbcType=VARCHAR},
+      tpr_IsTestPart = #{tprIstestpart,jdbcType=INTEGER},
+      tpr_EquipNo = #{tprEquipno,jdbcType=VARCHAR},
+      tpr_CreatePerson = #{tprCreateperson,jdbcType=VARCHAR},
+      tpr_CreateTime = #{tprCreatetime,jdbcType=TIMESTAMP},
+      tpr_Memo = #{tprMemo,jdbcType=VARCHAR},
+      tpr_DeleteFlag = #{tprDeleteflag,jdbcType=INTEGER},
+      tpr_CurLoc = #{tprCurloc,jdbcType=VARCHAR},
+      tpr_CurSite = #{tprCursite,jdbcType=VARCHAR},
+      tpr_CurRef = #{tprCurref,jdbcType=VARCHAR},
+      tpr_ReviewResult = #{tprReviewresult,jdbcType=VARCHAR},
+      tpr_ReviewTime = #{tprReviewtime,jdbcType=TIMESTAMP},
+      tpr_ReviewPerson = #{tprReviewperson,jdbcType=VARCHAR},
+      trp_ReviewMemo = #{trpReviewmemo,jdbcType=VARCHAR},
+      tpr_QCReviewResult = #{tprQcreviewresult,jdbcType=VARCHAR},
+      tpr_QCReviewTime = #{tprQcreviewtime,jdbcType=TIMESTAMP},
+      tpr_QCReviewPerson = #{tprQcreviewperson,jdbcType=VARCHAR},
+      tpr_QCReviewMemo = #{tprQcreviewmemo,jdbcType=VARCHAR},
+      tpr_OfflineProcess = #{tprOfflineprocess,jdbcType=INTEGER},
+      tpr_FileName = #{tprFilename,jdbcType=VARCHAR},
+      tpr_ResponsibleParty = #{tprResponsibleparty,jdbcType=VARCHAR},
+      tpr_DutyType = #{tprDutytype,jdbcType=VARCHAR},
+      tpr_DutyVendNo = #{tprDutyvendno,jdbcType=VARCHAR},
+      tpr_DutyVendDomain = #{tprDutyvenddomain,jdbcType=VARCHAR},
+      tpr_poNbr = #{tprPonbr,jdbcType=VARCHAR},
+      tpr_podLine = #{tprPodline,jdbcType=VARCHAR},
+      tpr_podPurCost = #{tprPodpurcost,jdbcType=DECIMAL},
+      tpr_DutyWkctr = #{tprDutywkctr,jdbcType=VARCHAR},
+      tpr_DutyWkctrName = #{tprDutywkctrname,jdbcType=VARCHAR},
+      tpr_DutyWorkshop = #{tprDutyworkshop,jdbcType=VARCHAR},
+      tpr_DutyDomain = #{tprDutydomain,jdbcType=VARCHAR},
+      tpr_DutySite = #{tprDutysite,jdbcType=VARCHAR},
+      tpr_DutyCostCenter = #{tprDutycostcenter,jdbcType=VARCHAR},
+      tpr_DutyCostCenterName = #{tprDutycostcentername,jdbcType=VARCHAR},
+      tpr_DutyPart = #{tprDutypart,jdbcType=VARCHAR},
+      tpr_DutyRouting = #{tprDutyrouting,jdbcType=VARCHAR},
+      tpr_DutyOp = #{tprDutyop,jdbcType=VARCHAR},
+      tpr_DutyOpName = #{tprDutyopname,jdbcType=VARCHAR},
+      tpr_RecordStatus = #{tprRecordstatus,jdbcType=INTEGER},
+      tpr_ScrapQty = #{tprScrapqty,jdbcType=INTEGER},
+      tpr_QualifiedQty = #{tprQualifiedqty,jdbcType=INTEGER},
+      tpr_DutyIsConfirm = #{tprDutyisconfirm,jdbcType=INTEGER},
+      tpr_StartVendDomain = #{tprStartvenddomain,jdbcType=VARCHAR},
+      tpr_StartVendNo = #{tprStartvendno,jdbcType=VARCHAR},
+      tpr_EndVendDomain = #{tprEndvenddomain,jdbcType=VARCHAR},
+      tpr_EndVendNo = #{tprEndvendno,jdbcType=VARCHAR},
+      tpr_WasteTime = #{tprWastetime,jdbcType=DECIMAL},
+      tpr_DirectNo = #{tprDirectno,jdbcType=VARCHAR},
+      tpr_ParentRecordNo = #{tprParentrecordno,jdbcType=VARCHAR},
+      tpr_RecordType = #{tprRecordtype,jdbcType=INTEGER},
+      tpr_AssemblyPart = #{tprAssemblypart,jdbcType=VARCHAR},
+      tpr_DutyObjectType = #{tprDutyobjecttype,jdbcType=INTEGER},
+      tpr_UnitCost = #{tprUnitcost,jdbcType=DECIMAL},
+      tpr_LaborAndMachineCost = #{tprLaborandmachinecost,jdbcType=DECIMAL},
+      iro_run_time = #{iroRunTime,jdbcType=DECIMAL},
+      iro_cost_tot = #{iroCostTot,jdbcType=DECIMAL},
+      iro_mtl_ll = #{iroMtlLl,jdbcType=DECIMAL},
+      iro_lbr_ll = #{iroLbrLl,jdbcType=DECIMAL},
+      iro_bdn_ll = #{iroBdnLl,jdbcType=DECIMAL},
+      iro_sub_ll = #{iroSubLl,jdbcType=DECIMAL},
+      iro_ovh_ll = #{iroOvhLl,jdbcType=DECIMAL}
+    where tpr_ID = #{tprId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.SysVsmPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SysVsmPO">
+    <id column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+    <result column="vsm_name" jdbcType="VARCHAR" property="vsmName" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="vsm_sds_id" jdbcType="VARCHAR" property="vsmSdsId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    vsm_id, vsm_name, shop_id, vsm_sds_id
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysVsmPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_vsm
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_vsm
+    where vsm_id = #{vsmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_vsm
+    where vsm_id = #{vsmId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysVsmPOExample">
+    delete from sys_vsm
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysVsmPO">
+    insert into sys_vsm (vsm_id, vsm_name, shop_id, 
+      vsm_sds_id)
+    values (#{vsmId,jdbcType=INTEGER}, #{vsmName,jdbcType=VARCHAR}, #{shopId,jdbcType=INTEGER}, 
+      #{vsmSdsId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysVsmPO">
+    insert into sys_vsm
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vsmId != null">
+        vsm_id,
+      </if>
+      <if test="vsmName != null">
+        vsm_name,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="vsmSdsId != null">
+        vsm_sds_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vsmId != null">
+        #{vsmId,jdbcType=INTEGER},
+      </if>
+      <if test="vsmName != null">
+        #{vsmName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="vsmSdsId != null">
+        #{vsmSdsId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysVsmPOExample" resultType="java.lang.Long">
+    select count(*) from sys_vsm
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_vsm
+    <set>
+      <if test="record.vsmId != null">
+        vsm_id = #{record.vsmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vsmName != null">
+        vsm_name = #{record.vsmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vsmSdsId != null">
+        vsm_sds_id = #{record.vsmSdsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_vsm
+    set vsm_id = #{record.vsmId,jdbcType=INTEGER},
+      vsm_name = #{record.vsmName,jdbcType=VARCHAR},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      vsm_sds_id = #{record.vsmSdsId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SysVsmPO">
+    update sys_vsm
+    <set>
+      <if test="vsmName != null">
+        vsm_name = #{vsmName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="vsmSdsId != null">
+        vsm_sds_id = #{vsmSdsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vsm_id = #{vsmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SysVsmPO">
+    update sys_vsm
+    set vsm_name = #{vsmName,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      vsm_sds_id = #{vsmSdsId,jdbcType=VARCHAR}
+    where vsm_id = #{vsmId,jdbcType=INTEGER}
+  </update>
+</mapper>

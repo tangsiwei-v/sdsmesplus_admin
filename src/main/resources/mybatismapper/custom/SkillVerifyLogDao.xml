@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.SkillVerifyLogDao">
+	<resultMap id="BaseSkillVerifyLogMap" type="com.uspring.sdsmesplus.entity.po.ProdSkillVerifyLogPO">
+		<id column="sv_id" jdbcType="INTEGER" property="svId" />
+		<result column="line_id" jdbcType="INTEGER" property="lineId" />
+		<result column="shift_date" jdbcType="DATE"	property="shiftDate" />
+		<result column="shift_id" jdbcType="INTEGER" property="shiftId" />
+		<result column="order_code" jdbcType="VARCHAR"
+			property="orderCode" />
+		<result column="sv_procedure" jdbcType="VARCHAR"
+			property="svProcedure" />
+		<result column="sv_machine" jdbcType="VARCHAR"
+			property="svMachine" />
+		<result column="sv_skill_need" jdbcType="VARCHAR"
+			property="svSkillNeed" />
+		<result column="sv_skill_real" jdbcType="VARCHAR"
+			property="svSkillReal" />
+		<result column="emp_number" jdbcType="VARCHAR"
+			property="empNumber" />
+		<result column="sv_result" jdbcType="VARCHAR"
+			property="svResult" />
+		<result column="sv_authorizer" jdbcType="VARCHAR"
+			property="svAuthorizer" />
+		<result column="sv_auth_time" jdbcType="TIMESTAMP"
+			property="svAuthTime" />
+		<result column="create_time" jdbcType="TIMESTAMP"
+			property="createTime" />
+		</resultMap>
+	<sql id="BaseSkillVerifyLogList">
+   		 sv_id, line_id, shift_date, shift_id, order_code, sv_procedure, sv_machine, sv_skill_need, 
+   		 sv_skill_real, emp_number, sv_result, sv_authorizer, sv_auth_time, create_time
+ 	</sql>
+		<select id="compare" resultMap="BaseSkillVerifyLogMap">
+			select
+			<include refid="BaseSkillVerifyLogList" />
+			from prod_skill_verify_log
+			where create_time &gt;= #{shiftStartTimeOfTime}
+			and create_time &lt;= #{shiftEndTimeOfTime}
+			and line_id = #{line_id}
+		</select>
+</mapper>

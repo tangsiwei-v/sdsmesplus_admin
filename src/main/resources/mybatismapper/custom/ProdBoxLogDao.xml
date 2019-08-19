@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ProdBoxLogDao">
+
+	<!--根据工单查询产品数量-->
+	<select id="quryProdCounts" resultType="Integer">
+		select COALESCE(SUM(box_quan), 0) from prod_box_log where po_code=#{poCode}
+	</select>
+
+	<!--根据工单查询装箱数量-->
+	<select id="queryBoxCounts" resultType="Integer">
+		select COUNT(bl_id) from prod_box_log where po_code=#{poCode}
+	</select>
+
+</mapper>

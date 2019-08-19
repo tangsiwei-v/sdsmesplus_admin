@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.DeviceVerifyLogPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.DeviceVerifyLogPO">
+    <id column="dv_id" jdbcType="INTEGER" property="dvId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="shift_date" jdbcType="DATE" property="shiftDate" />
+    <result column="shift_id" jdbcType="VARCHAR" property="shiftId" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="dv_device" jdbcType="VARCHAR" property="dvDevice" />
+    <result column="dv_procedure" jdbcType="VARCHAR" property="dvProcedure" />
+    <result column="dv_item" jdbcType="VARCHAR" property="dvItem" />
+    <result column="dv_requirement" jdbcType="VARCHAR" property="dvRequirement" />
+    <result column="dv_result" jdbcType="VARCHAR" property="dvResult" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="dv_person" jdbcType="VARCHAR" property="dvPerson" />
+    <result column="dv_authorizer" jdbcType="VARCHAR" property="dvAuthorizer" />
+    <result column="dv_auth_time" jdbcType="TIMESTAMP" property="dvAuthTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    dv_id, line_id, shift_date, shift_id, order_code, prod_code, dv_device, dv_procedure, 
+    dv_item, dv_requirement, dv_result, create_time, dv_person, dv_authorizer, dv_auth_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.DeviceVerifyLogPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prod_device_verify_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_device_verify_log
+    where dv_id = #{dvId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prod_device_verify_log
+    where dv_id = #{dvId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.DeviceVerifyLogPOExample">
+    delete from prod_device_verify_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.DeviceVerifyLogPO">
+    insert into prod_device_verify_log (dv_id, line_id, shift_date, 
+      shift_id, order_code, prod_code, 
+      dv_device, dv_procedure, dv_item, 
+      dv_requirement, dv_result, create_time, 
+      dv_person, dv_authorizer, dv_auth_time
+      )
+    values (#{dvId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{shiftDate,jdbcType=DATE}, 
+      #{shiftId,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR}, #{prodCode,jdbcType=VARCHAR}, 
+      #{dvDevice,jdbcType=VARCHAR}, #{dvProcedure,jdbcType=VARCHAR}, #{dvItem,jdbcType=VARCHAR}, 
+      #{dvRequirement,jdbcType=VARCHAR}, #{dvResult,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{dvPerson,jdbcType=VARCHAR}, #{dvAuthorizer,jdbcType=VARCHAR}, #{dvAuthTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.DeviceVerifyLogPO">
+    insert into prod_device_verify_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dvId != null">
+        dv_id,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="shiftDate != null">
+        shift_date,
+      </if>
+      <if test="shiftId != null">
+        shift_id,
+      </if>
+      <if test="orderCode != null">
+        order_code,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="dvDevice != null">
+        dv_device,
+      </if>
+      <if test="dvProcedure != null">
+        dv_procedure,
+      </if>
+      <if test="dvItem != null">
+        dv_item,
+      </if>
+      <if test="dvRequirement != null">
+        dv_requirement,
+      </if>
+      <if test="dvResult != null">
+        dv_result,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="dvPerson != null">
+        dv_person,
+      </if>
+      <if test="dvAuthorizer != null">
+        dv_authorizer,
+      </if>
+      <if test="dvAuthTime != null">
+        dv_auth_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dvId != null">
+        #{dvId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="shiftDate != null">
+        #{shiftDate,jdbcType=DATE},
+      </if>
+      <if test="shiftId != null">
+        #{shiftId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dvDevice != null">
+        #{dvDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="dvProcedure != null">
+        #{dvProcedure,jdbcType=VARCHAR},
+      </if>
+      <if test="dvItem != null">
+        #{dvItem,jdbcType=VARCHAR},
+      </if>
+      <if test="dvRequirement != null">
+        #{dvRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="dvResult != null">
+        #{dvResult,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dvPerson != null">
+        #{dvPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="dvAuthorizer != null">
+        #{dvAuthorizer,jdbcType=VARCHAR},
+      </if>
+      <if test="dvAuthTime != null">
+        #{dvAuthTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.DeviceVerifyLogPOExample" resultType="java.lang.Long">
+    select count(*) from prod_device_verify_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_device_verify_log
+    <set>
+      <if test="record.dvId != null">
+        dv_id = #{record.dvId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shiftDate != null">
+        shift_date = #{record.shiftDate,jdbcType=DATE},
+      </if>
+      <if test="record.shiftId != null">
+        shift_id = #{record.shiftId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCode != null">
+        order_code = #{record.orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dvDevice != null">
+        dv_device = #{record.dvDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dvProcedure != null">
+        dv_procedure = #{record.dvProcedure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dvItem != null">
+        dv_item = #{record.dvItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dvRequirement != null">
+        dv_requirement = #{record.dvRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dvResult != null">
+        dv_result = #{record.dvResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dvPerson != null">
+        dv_person = #{record.dvPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dvAuthorizer != null">
+        dv_authorizer = #{record.dvAuthorizer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dvAuthTime != null">
+        dv_auth_time = #{record.dvAuthTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_device_verify_log
+    set dv_id = #{record.dvId,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      shift_date = #{record.shiftDate,jdbcType=DATE},
+      shift_id = #{record.shiftId,jdbcType=VARCHAR},
+      order_code = #{record.orderCode,jdbcType=VARCHAR},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      dv_device = #{record.dvDevice,jdbcType=VARCHAR},
+      dv_procedure = #{record.dvProcedure,jdbcType=VARCHAR},
+      dv_item = #{record.dvItem,jdbcType=VARCHAR},
+      dv_requirement = #{record.dvRequirement,jdbcType=VARCHAR},
+      dv_result = #{record.dvResult,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      dv_person = #{record.dvPerson,jdbcType=VARCHAR},
+      dv_authorizer = #{record.dvAuthorizer,jdbcType=VARCHAR},
+      dv_auth_time = #{record.dvAuthTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.DeviceVerifyLogPO">
+    update prod_device_verify_log
+    <set>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="shiftDate != null">
+        shift_date = #{shiftDate,jdbcType=DATE},
+      </if>
+      <if test="shiftId != null">
+        shift_id = #{shiftId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dvDevice != null">
+        dv_device = #{dvDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="dvProcedure != null">
+        dv_procedure = #{dvProcedure,jdbcType=VARCHAR},
+      </if>
+      <if test="dvItem != null">
+        dv_item = #{dvItem,jdbcType=VARCHAR},
+      </if>
+      <if test="dvRequirement != null">
+        dv_requirement = #{dvRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="dvResult != null">
+        dv_result = #{dvResult,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dvPerson != null">
+        dv_person = #{dvPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="dvAuthorizer != null">
+        dv_authorizer = #{dvAuthorizer,jdbcType=VARCHAR},
+      </if>
+      <if test="dvAuthTime != null">
+        dv_auth_time = #{dvAuthTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where dv_id = #{dvId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.DeviceVerifyLogPO">
+    update prod_device_verify_log
+    set line_id = #{lineId,jdbcType=INTEGER},
+      shift_date = #{shiftDate,jdbcType=DATE},
+      shift_id = #{shiftId,jdbcType=VARCHAR},
+      order_code = #{orderCode,jdbcType=VARCHAR},
+      prod_code = #{prodCode,jdbcType=VARCHAR},
+      dv_device = #{dvDevice,jdbcType=VARCHAR},
+      dv_procedure = #{dvProcedure,jdbcType=VARCHAR},
+      dv_item = #{dvItem,jdbcType=VARCHAR},
+      dv_requirement = #{dvRequirement,jdbcType=VARCHAR},
+      dv_result = #{dvResult,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      dv_person = #{dvPerson,jdbcType=VARCHAR},
+      dv_authorizer = #{dvAuthorizer,jdbcType=VARCHAR},
+      dv_auth_time = #{dvAuthTime,jdbcType=TIMESTAMP}
+    where dv_id = #{dvId,jdbcType=INTEGER}
+  </update>
+</mapper>

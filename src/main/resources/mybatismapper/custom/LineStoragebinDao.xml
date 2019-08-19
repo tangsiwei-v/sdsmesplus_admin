@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.LineStoragebinDao">
+	<select id="findBinByType" resultMap="com.uspring.sdsmesplus.dao.generate.SysStoragebinPODao.BaseResultMap">
+		select 
+			bin.bin_id, 
+			bin.warehouse_num, 
+			bin.warehouse_loc, 
+			bin.storage_type, 
+			storage_type_desc, 
+			work_station, 
+    		work_station_desc, 
+    		entitled_part, 
+    		bin_area, is_active, 
+    		bin.create_time, 
+    		bin.update_time
+		from 
+			sys_storagebin bin
+			left join sys_line_storagebin lbin on lbin.bin_id = bin.bin_id
+		where 
+			lbin.line_id = #{line_id}
+			and lbin.storage_type = #{storage_type}
+	</select>
+</mapper>

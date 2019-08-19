@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.DevicePODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.DevicePO">
+    <id column="dev_id" jdbcType="INTEGER" property="devId" />
+    <result column="dev_code" jdbcType="VARCHAR" property="devCode" />
+    <result column="dev_name" jdbcType="VARCHAR" property="devName" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="dev_size" jdbcType="NVARCHAR" property="devSize" />
+    <result column="dev_procedure" jdbcType="NVARCHAR" property="devProcedure" />
+    <result column="note" jdbcType="NVARCHAR" property="note" />
+    <result column="dev_loc_img" jdbcType="NVARCHAR" property="devLocImg" />
+    <result column="dev_barcode_img" jdbcType="NVARCHAR" property="devBarcodeImg" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    dev_id, dev_code, dev_name, fc_id, shop_id, vsm_id, line_id, dev_size, dev_procedure, 
+    note, dev_loc_img, dev_barcode_img, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.DevicePOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_device
+    where dev_id = #{devId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_device
+    where dev_id = #{devId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.DevicePOExample">
+    delete from sys_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.DevicePO">
+    insert into sys_device (dev_id, dev_code, dev_name, 
+      fc_id, shop_id, vsm_id, 
+      line_id, dev_size, dev_procedure, 
+      note, dev_loc_img, dev_barcode_img, 
+      create_time)
+    values (#{devId,jdbcType=INTEGER}, #{devCode,jdbcType=VARCHAR}, #{devName,jdbcType=VARCHAR}, 
+      #{fcId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{vsmId,jdbcType=INTEGER}, 
+      #{lineId,jdbcType=INTEGER}, #{devSize,jdbcType=NVARCHAR}, #{devProcedure,jdbcType=NVARCHAR}, 
+      #{note,jdbcType=NVARCHAR}, #{devLocImg,jdbcType=NVARCHAR}, #{devBarcodeImg,jdbcType=NVARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.DevicePO">
+    insert into sys_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="devId != null">
+        dev_id,
+      </if>
+      <if test="devCode != null">
+        dev_code,
+      </if>
+      <if test="devName != null">
+        dev_name,
+      </if>
+      <if test="fcId != null">
+        fc_id,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="vsmId != null">
+        vsm_id,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="devSize != null">
+        dev_size,
+      </if>
+      <if test="devProcedure != null">
+        dev_procedure,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="devLocImg != null">
+        dev_loc_img,
+      </if>
+      <if test="devBarcodeImg != null">
+        dev_barcode_img,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="devId != null">
+        #{devId,jdbcType=INTEGER},
+      </if>
+      <if test="devCode != null">
+        #{devCode,jdbcType=VARCHAR},
+      </if>
+      <if test="devName != null">
+        #{devName,jdbcType=VARCHAR},
+      </if>
+      <if test="fcId != null">
+        #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="vsmId != null">
+        #{vsmId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="devSize != null">
+        #{devSize,jdbcType=NVARCHAR},
+      </if>
+      <if test="devProcedure != null">
+        #{devProcedure,jdbcType=NVARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=NVARCHAR},
+      </if>
+      <if test="devLocImg != null">
+        #{devLocImg,jdbcType=NVARCHAR},
+      </if>
+      <if test="devBarcodeImg != null">
+        #{devBarcodeImg,jdbcType=NVARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.DevicePOExample" resultType="java.lang.Long">
+    select count(*) from sys_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_device
+    <set>
+      <if test="record.devId != null">
+        dev_id = #{record.devId,jdbcType=INTEGER},
+      </if>
+      <if test="record.devCode != null">
+        dev_code = #{record.devCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devName != null">
+        dev_name = #{record.devName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcId != null">
+        fc_id = #{record.fcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vsmId != null">
+        vsm_id = #{record.vsmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.devSize != null">
+        dev_size = #{record.devSize,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.devProcedure != null">
+        dev_procedure = #{record.devProcedure,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.devLocImg != null">
+        dev_loc_img = #{record.devLocImg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.devBarcodeImg != null">
+        dev_barcode_img = #{record.devBarcodeImg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_device
+    set dev_id = #{record.devId,jdbcType=INTEGER},
+      dev_code = #{record.devCode,jdbcType=VARCHAR},
+      dev_name = #{record.devName,jdbcType=VARCHAR},
+      fc_id = #{record.fcId,jdbcType=INTEGER},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      vsm_id = #{record.vsmId,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      dev_size = #{record.devSize,jdbcType=NVARCHAR},
+      dev_procedure = #{record.devProcedure,jdbcType=NVARCHAR},
+      note = #{record.note,jdbcType=NVARCHAR},
+      dev_loc_img = #{record.devLocImg,jdbcType=NVARCHAR},
+      dev_barcode_img = #{record.devBarcodeImg,jdbcType=NVARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.DevicePO">
+    update sys_device
+    <set>
+      <if test="devCode != null">
+        dev_code = #{devCode,jdbcType=VARCHAR},
+      </if>
+      <if test="devName != null">
+        dev_name = #{devName,jdbcType=VARCHAR},
+      </if>
+      <if test="fcId != null">
+        fc_id = #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="vsmId != null">
+        vsm_id = #{vsmId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="devSize != null">
+        dev_size = #{devSize,jdbcType=NVARCHAR},
+      </if>
+      <if test="devProcedure != null">
+        dev_procedure = #{devProcedure,jdbcType=NVARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=NVARCHAR},
+      </if>
+      <if test="devLocImg != null">
+        dev_loc_img = #{devLocImg,jdbcType=NVARCHAR},
+      </if>
+      <if test="devBarcodeImg != null">
+        dev_barcode_img = #{devBarcodeImg,jdbcType=NVARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where dev_id = #{devId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.DevicePO">
+    update sys_device
+    set dev_code = #{devCode,jdbcType=VARCHAR},
+      dev_name = #{devName,jdbcType=VARCHAR},
+      fc_id = #{fcId,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      vsm_id = #{vsmId,jdbcType=INTEGER},
+      line_id = #{lineId,jdbcType=INTEGER},
+      dev_size = #{devSize,jdbcType=NVARCHAR},
+      dev_procedure = #{devProcedure,jdbcType=NVARCHAR},
+      note = #{note,jdbcType=NVARCHAR},
+      dev_loc_img = #{devLocImg,jdbcType=NVARCHAR},
+      dev_barcode_img = #{devBarcodeImg,jdbcType=NVARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where dev_id = #{devId,jdbcType=INTEGER}
+  </update>
+</mapper>

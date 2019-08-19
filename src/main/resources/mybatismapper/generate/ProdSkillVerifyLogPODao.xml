@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.ProdSkillVerifyLogPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.ProdSkillVerifyLogPO">
+    <id column="sv_id" jdbcType="INTEGER" property="svId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="shift_date" jdbcType="DATE" property="shiftDate" />
+    <result column="shift_id" jdbcType="INTEGER" property="shiftId" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="sv_procedure" jdbcType="VARCHAR" property="svProcedure" />
+    <result column="sv_machine" jdbcType="VARCHAR" property="svMachine" />
+    <result column="sv_skill_need" jdbcType="VARCHAR" property="svSkillNeed" />
+    <result column="sv_skill_real" jdbcType="VARCHAR" property="svSkillReal" />
+    <result column="emp_number" jdbcType="VARCHAR" property="empNumber" />
+    <result column="sv_result" jdbcType="VARCHAR" property="svResult" />
+    <result column="sv_authorizer" jdbcType="VARCHAR" property="svAuthorizer" />
+    <result column="sv_auth_time" jdbcType="TIMESTAMP" property="svAuthTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sv_id, line_id, shift_date, shift_id, order_code, sv_procedure, sv_machine, sv_skill_need, 
+    sv_skill_real, emp_number, sv_result, sv_authorizer, sv_auth_time, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdSkillVerifyLogPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prod_skill_verify_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_skill_verify_log
+    where sv_id = #{svId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prod_skill_verify_log
+    where sv_id = #{svId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdSkillVerifyLogPOExample">
+    delete from prod_skill_verify_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdSkillVerifyLogPO">
+    insert into prod_skill_verify_log (sv_id, line_id, shift_date, 
+      shift_id, order_code, sv_procedure, 
+      sv_machine, sv_skill_need, sv_skill_real, 
+      emp_number, sv_result, sv_authorizer, 
+      sv_auth_time, create_time)
+    values (#{svId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{shiftDate,jdbcType=DATE}, 
+      #{shiftId,jdbcType=INTEGER}, #{orderCode,jdbcType=VARCHAR}, #{svProcedure,jdbcType=VARCHAR}, 
+      #{svMachine,jdbcType=VARCHAR}, #{svSkillNeed,jdbcType=VARCHAR}, #{svSkillReal,jdbcType=VARCHAR}, 
+      #{empNumber,jdbcType=VARCHAR}, #{svResult,jdbcType=VARCHAR}, #{svAuthorizer,jdbcType=VARCHAR}, 
+      #{svAuthTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdSkillVerifyLogPO">
+    insert into prod_skill_verify_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="svId != null">
+        sv_id,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="shiftDate != null">
+        shift_date,
+      </if>
+      <if test="shiftId != null">
+        shift_id,
+      </if>
+      <if test="orderCode != null">
+        order_code,
+      </if>
+      <if test="svProcedure != null">
+        sv_procedure,
+      </if>
+      <if test="svMachine != null">
+        sv_machine,
+      </if>
+      <if test="svSkillNeed != null">
+        sv_skill_need,
+      </if>
+      <if test="svSkillReal != null">
+        sv_skill_real,
+      </if>
+      <if test="empNumber != null">
+        emp_number,
+      </if>
+      <if test="svResult != null">
+        sv_result,
+      </if>
+      <if test="svAuthorizer != null">
+        sv_authorizer,
+      </if>
+      <if test="svAuthTime != null">
+        sv_auth_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="svId != null">
+        #{svId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="shiftDate != null">
+        #{shiftDate,jdbcType=DATE},
+      </if>
+      <if test="shiftId != null">
+        #{shiftId,jdbcType=INTEGER},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="svProcedure != null">
+        #{svProcedure,jdbcType=VARCHAR},
+      </if>
+      <if test="svMachine != null">
+        #{svMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="svSkillNeed != null">
+        #{svSkillNeed,jdbcType=VARCHAR},
+      </if>
+      <if test="svSkillReal != null">
+        #{svSkillReal,jdbcType=VARCHAR},
+      </if>
+      <if test="empNumber != null">
+        #{empNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="svResult != null">
+        #{svResult,jdbcType=VARCHAR},
+      </if>
+      <if test="svAuthorizer != null">
+        #{svAuthorizer,jdbcType=VARCHAR},
+      </if>
+      <if test="svAuthTime != null">
+        #{svAuthTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdSkillVerifyLogPOExample" resultType="java.lang.Long">
+    select count(*) from prod_skill_verify_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_skill_verify_log
+    <set>
+      <if test="record.svId != null">
+        sv_id = #{record.svId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shiftDate != null">
+        shift_date = #{record.shiftDate,jdbcType=DATE},
+      </if>
+      <if test="record.shiftId != null">
+        shift_id = #{record.shiftId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderCode != null">
+        order_code = #{record.orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svProcedure != null">
+        sv_procedure = #{record.svProcedure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svMachine != null">
+        sv_machine = #{record.svMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svSkillNeed != null">
+        sv_skill_need = #{record.svSkillNeed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svSkillReal != null">
+        sv_skill_real = #{record.svSkillReal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empNumber != null">
+        emp_number = #{record.empNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svResult != null">
+        sv_result = #{record.svResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svAuthorizer != null">
+        sv_authorizer = #{record.svAuthorizer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svAuthTime != null">
+        sv_auth_time = #{record.svAuthTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_skill_verify_log
+    set sv_id = #{record.svId,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      shift_date = #{record.shiftDate,jdbcType=DATE},
+      shift_id = #{record.shiftId,jdbcType=INTEGER},
+      order_code = #{record.orderCode,jdbcType=VARCHAR},
+      sv_procedure = #{record.svProcedure,jdbcType=VARCHAR},
+      sv_machine = #{record.svMachine,jdbcType=VARCHAR},
+      sv_skill_need = #{record.svSkillNeed,jdbcType=VARCHAR},
+      sv_skill_real = #{record.svSkillReal,jdbcType=VARCHAR},
+      emp_number = #{record.empNumber,jdbcType=VARCHAR},
+      sv_result = #{record.svResult,jdbcType=VARCHAR},
+      sv_authorizer = #{record.svAuthorizer,jdbcType=VARCHAR},
+      sv_auth_time = #{record.svAuthTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdSkillVerifyLogPO">
+    update prod_skill_verify_log
+    <set>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="shiftDate != null">
+        shift_date = #{shiftDate,jdbcType=DATE},
+      </if>
+      <if test="shiftId != null">
+        shift_id = #{shiftId,jdbcType=INTEGER},
+      </if>
+      <if test="orderCode != null">
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="svProcedure != null">
+        sv_procedure = #{svProcedure,jdbcType=VARCHAR},
+      </if>
+      <if test="svMachine != null">
+        sv_machine = #{svMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="svSkillNeed != null">
+        sv_skill_need = #{svSkillNeed,jdbcType=VARCHAR},
+      </if>
+      <if test="svSkillReal != null">
+        sv_skill_real = #{svSkillReal,jdbcType=VARCHAR},
+      </if>
+      <if test="empNumber != null">
+        emp_number = #{empNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="svResult != null">
+        sv_result = #{svResult,jdbcType=VARCHAR},
+      </if>
+      <if test="svAuthorizer != null">
+        sv_authorizer = #{svAuthorizer,jdbcType=VARCHAR},
+      </if>
+      <if test="svAuthTime != null">
+        sv_auth_time = #{svAuthTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sv_id = #{svId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.ProdSkillVerifyLogPO">
+    update prod_skill_verify_log
+    set line_id = #{lineId,jdbcType=INTEGER},
+      shift_date = #{shiftDate,jdbcType=DATE},
+      shift_id = #{shiftId,jdbcType=INTEGER},
+      order_code = #{orderCode,jdbcType=VARCHAR},
+      sv_procedure = #{svProcedure,jdbcType=VARCHAR},
+      sv_machine = #{svMachine,jdbcType=VARCHAR},
+      sv_skill_need = #{svSkillNeed,jdbcType=VARCHAR},
+      sv_skill_real = #{svSkillReal,jdbcType=VARCHAR},
+      emp_number = #{empNumber,jdbcType=VARCHAR},
+      sv_result = #{svResult,jdbcType=VARCHAR},
+      sv_authorizer = #{svAuthorizer,jdbcType=VARCHAR},
+      sv_auth_time = #{svAuthTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where sv_id = #{svId,jdbcType=INTEGER}
+  </update>
+</mapper>

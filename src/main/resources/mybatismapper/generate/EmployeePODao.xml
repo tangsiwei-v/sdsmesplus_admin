@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.EmployeePODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.EmployeePO">
+    <id column="badge" jdbcType="NVARCHAR" property="badge" />
+    <result column="cardid" jdbcType="NVARCHAR" property="cardid" />
+    <result column="extension" jdbcType="NVARCHAR" property="extension" />
+    <result column="compid" jdbcType="NVARCHAR" property="compid" />
+    <result column="name" jdbcType="NVARCHAR" property="name" />
+    <result column="status" jdbcType="NVARCHAR" property="status" />
+    <result column="depid" jdbcType="NVARCHAR" property="depid" />
+    <result column="jobid" jdbcType="NVARCHAR" property="jobid" />
+    <result column="joindate" jdbcType="TIMESTAMP" property="joindate" />
+    <result column="gender" jdbcType="NVARCHAR" property="gender" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="mobiletelephone" jdbcType="NVARCHAR" property="mobiletelephone" />
+    <result column="comp_email" jdbcType="NVARCHAR" property="compEmail" />
+    <result column="changetime" jdbcType="TIMESTAMP" property="changetime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    badge, cardid, extension, compid, name, status, depid, jobid, joindate, gender, birthday, 
+    mobiletelephone, comp_email, changetime
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.EmployeePOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_employee
+    where badge = #{badge,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_employee
+    where badge = #{badge,jdbcType=NVARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.EmployeePOExample">
+    delete from sys_employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.EmployeePO">
+    insert into sys_employee (badge, cardid, extension, 
+      compid, name, status, 
+      depid, jobid, joindate, 
+      gender, birthday, mobiletelephone, 
+      comp_email, changetime)
+    values (#{badge,jdbcType=NVARCHAR}, #{cardid,jdbcType=NVARCHAR}, #{extension,jdbcType=NVARCHAR}, 
+      #{compid,jdbcType=NVARCHAR}, #{name,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}, 
+      #{depid,jdbcType=NVARCHAR}, #{jobid,jdbcType=NVARCHAR}, #{joindate,jdbcType=TIMESTAMP}, 
+      #{gender,jdbcType=NVARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{mobiletelephone,jdbcType=NVARCHAR}, 
+      #{compEmail,jdbcType=NVARCHAR}, #{changetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.EmployeePO">
+    insert into sys_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="badge != null">
+        badge,
+      </if>
+      <if test="cardid != null">
+        cardid,
+      </if>
+      <if test="extension != null">
+        extension,
+      </if>
+      <if test="compid != null">
+        compid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="depid != null">
+        depid,
+      </if>
+      <if test="jobid != null">
+        jobid,
+      </if>
+      <if test="joindate != null">
+        joindate,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="mobiletelephone != null">
+        mobiletelephone,
+      </if>
+      <if test="compEmail != null">
+        comp_email,
+      </if>
+      <if test="changetime != null">
+        changetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="badge != null">
+        #{badge,jdbcType=NVARCHAR},
+      </if>
+      <if test="cardid != null">
+        #{cardid,jdbcType=NVARCHAR},
+      </if>
+      <if test="extension != null">
+        #{extension,jdbcType=NVARCHAR},
+      </if>
+      <if test="compid != null">
+        #{compid,jdbcType=NVARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="depid != null">
+        #{depid,jdbcType=NVARCHAR},
+      </if>
+      <if test="jobid != null">
+        #{jobid,jdbcType=NVARCHAR},
+      </if>
+      <if test="joindate != null">
+        #{joindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=NVARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobiletelephone != null">
+        #{mobiletelephone,jdbcType=NVARCHAR},
+      </if>
+      <if test="compEmail != null">
+        #{compEmail,jdbcType=NVARCHAR},
+      </if>
+      <if test="changetime != null">
+        #{changetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.EmployeePOExample" resultType="java.lang.Long">
+    select count(*) from sys_employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_employee
+    <set>
+      <if test="record.badge != null">
+        badge = #{record.badge,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cardid != null">
+        cardid = #{record.cardid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.extension != null">
+        extension = #{record.extension,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.compid != null">
+        compid = #{record.compid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.depid != null">
+        depid = #{record.depid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.jobid != null">
+        jobid = #{record.jobid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.joindate != null">
+        joindate = #{record.joindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mobiletelephone != null">
+        mobiletelephone = #{record.mobiletelephone,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.compEmail != null">
+        comp_email = #{record.compEmail,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.changetime != null">
+        changetime = #{record.changetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_employee
+    set badge = #{record.badge,jdbcType=NVARCHAR},
+      cardid = #{record.cardid,jdbcType=NVARCHAR},
+      extension = #{record.extension,jdbcType=NVARCHAR},
+      compid = #{record.compid,jdbcType=NVARCHAR},
+      name = #{record.name,jdbcType=NVARCHAR},
+      status = #{record.status,jdbcType=NVARCHAR},
+      depid = #{record.depid,jdbcType=NVARCHAR},
+      jobid = #{record.jobid,jdbcType=NVARCHAR},
+      joindate = #{record.joindate,jdbcType=TIMESTAMP},
+      gender = #{record.gender,jdbcType=NVARCHAR},
+      birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      mobiletelephone = #{record.mobiletelephone,jdbcType=NVARCHAR},
+      comp_email = #{record.compEmail,jdbcType=NVARCHAR},
+      changetime = #{record.changetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.EmployeePO">
+    update sys_employee
+    <set>
+      <if test="cardid != null">
+        cardid = #{cardid,jdbcType=NVARCHAR},
+      </if>
+      <if test="extension != null">
+        extension = #{extension,jdbcType=NVARCHAR},
+      </if>
+      <if test="compid != null">
+        compid = #{compid,jdbcType=NVARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="depid != null">
+        depid = #{depid,jdbcType=NVARCHAR},
+      </if>
+      <if test="jobid != null">
+        jobid = #{jobid,jdbcType=NVARCHAR},
+      </if>
+      <if test="joindate != null">
+        joindate = #{joindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=NVARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobiletelephone != null">
+        mobiletelephone = #{mobiletelephone,jdbcType=NVARCHAR},
+      </if>
+      <if test="compEmail != null">
+        comp_email = #{compEmail,jdbcType=NVARCHAR},
+      </if>
+      <if test="changetime != null">
+        changetime = #{changetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where badge = #{badge,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.EmployeePO">
+    update sys_employee
+    set cardid = #{cardid,jdbcType=NVARCHAR},
+      extension = #{extension,jdbcType=NVARCHAR},
+      compid = #{compid,jdbcType=NVARCHAR},
+      name = #{name,jdbcType=NVARCHAR},
+      status = #{status,jdbcType=NVARCHAR},
+      depid = #{depid,jdbcType=NVARCHAR},
+      jobid = #{jobid,jdbcType=NVARCHAR},
+      joindate = #{joindate,jdbcType=TIMESTAMP},
+      gender = #{gender,jdbcType=NVARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      mobiletelephone = #{mobiletelephone,jdbcType=NVARCHAR},
+      comp_email = #{compEmail,jdbcType=NVARCHAR},
+      changetime = #{changetime,jdbcType=TIMESTAMP}
+    where badge = #{badge,jdbcType=NVARCHAR}
+  </update>
+</mapper>

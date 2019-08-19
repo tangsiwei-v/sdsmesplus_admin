@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.SafelunchOrderDao">
+  <resultMap id="SafelunchOrderMap" type="com.uspring.sdsmesplus.entity.vo.SafeLunchOrderVO">
+    <id column="safbox_id" jdbcType="INTEGER" property="safboxId" />
+    <result column="safelunch_order" jdbcType="VARCHAR" property="safelunchOrder" />
+    <result column="safline_id" jdbcType="INTEGER" property="saflineId" />
+    <result column="box_barcode" jdbcType="VARCHAR" property="boxBarcode" />
+    <result column="product_count" jdbcType="INTEGER" property="productCount" />
+    <result column="pass_count" jdbcType="INTEGER" property="passCount" />
+    <result column="failed_count" jdbcType="INTEGER" property="failedCount" />
+    <result column="is_pass" jdbcType="BIT" property="isPass" />
+    <result column="is_commit" jdbcType="BIT" property="isCommit" />
+    <result column="check_person_number" jdbcType="VARCHAR" property="checkPersonNumber" />
+    <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName" />
+    <result column="box_pass" jdbcType="VARCHAR" property="boxPass" />
+    <result column="box_failed" jdbcType="VARCHAR" property="boxFailed" />
+    <result column="box_confirmed" jdbcType="BIT" property="boxConfirmed" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <collection property="safelunchProductLogPOs" ofType="com.uspring.sdsmesplus.entity.po.SafelunchProductLogPO">
+         <id column="res_id" jdbcType="INTEGER" property="resId" />
+   		 <result column="p_safelunch_order" jdbcType="VARCHAR" property="safelunchOrder" />
+    	 <result column="fp_barcode" jdbcType="VARCHAR" property="fpBarcode" />
+    	 <result column="p_box_barcode" jdbcType="VARCHAR" property="boxBarcode" />
+    	 <result column="p_is_pass" jdbcType="BIT" property="isPass" />
+    	 <result column="p_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    	 <result column="p_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </collection>
+  </resultMap>    
+    <select id="queryOrder" parameterType="map" resultMap="SafelunchOrderMap">
+   		 select o.safbox_id,o.safelunch_order,o.safline_id,o.box_barcode,
+			o.product_count,o.pass_count,o.failed_count,o.is_pass,
+			o.is_commit,o.check_person_number,o.check_person_name,
+			o.box_pass,o.box_failed,o.box_confirmed,o.create_time,
+			o.update_time,		
+			p.res_id,p.fp_barcode,p.box_barcode as p_box_barcode,p.is_pass p_is_pass,
+			p.create_time p_create_time,p.update_time p_update_time
+		from safelunch_order o 
+			left join safelunch_product_log p 
+			on o.safelunch_order = p.safelunch_order
+		where 1 = 1
+			<if test="isCommit != null">
+				and o.is_commit = #{isCommit}
+			</if>
+			<if test="saflineId != null">
+				and o.safline_id = #{saflineId}
+			</if>
+			<if test="boxConfirmed != null">
+				and o.box_confirmed = #{boxConfirmed}
+			</if>
+			<if test="boxBarcode != null">
+				and o.box_barcode = #{boxBarcode}
+			</if>
+			<if test="start_time != null">
+				and o.create_time &gt;=#{start_time}
+			</if>
+			<if test="end_time != null">
+				and o.create_time &lt;= #{end_time}
+			</if>
+    </select>
+
+</mapper>

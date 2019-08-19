@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.NonconformProductLogPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.NonconformProductLogPO">
+    <id column="npl_id" jdbcType="INTEGER" property="nplId" />
+    <result column="npl_barcode" jdbcType="VARCHAR" property="nplBarcode" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="shop_code" jdbcType="VARCHAR" property="shopCode" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="line_code" jdbcType="VARCHAR" property="lineCode" />
+    <result column="prod_date" jdbcType="TIMESTAMP" property="prodDate" />
+    <result column="shift_id" jdbcType="INTEGER" property="shiftId" />
+    <result column="shift_code" jdbcType="VARCHAR" property="shiftCode" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="prod_batch_code" jdbcType="VARCHAR" property="prodBatchCode" />
+    <result column="prod_order_code" jdbcType="VARCHAR" property="prodOrderCode" />
+    <result column="prod_barcode" jdbcType="VARCHAR" property="prodBarcode" />
+    <result column="npl_find_op" jdbcType="VARCHAR" property="nplFindOp" />
+    <result column="npl_find_op_name" jdbcType="VARCHAR" property="nplFindOpName" />
+    <result column="npl_prod_op" jdbcType="VARCHAR" property="nplProdOp" />
+    <result column="npl_prod_op_name" jdbcType="VARCHAR" property="nplProdOpName" />
+    <result column="npl_workcenter" jdbcType="VARCHAR" property="nplWorkcenter" />
+    <result column="npl_workcenter_name" jdbcType="VARCHAR" property="nplWorkcenterName" />
+    <result column="npl_defect" jdbcType="VARCHAR" property="nplDefect" />
+    <result column="npl_defect_desc" jdbcType="VARCHAR" property="nplDefectDesc" />
+    <result column="npl_cost_center" jdbcType="VARCHAR" property="nplCostCenter" />
+    <result column="npl_cost_center_name" jdbcType="VARCHAR" property="nplCostCenterName" />
+    <result column="npl_qty" jdbcType="INTEGER" property="nplQty" />
+    <result column="npl_batch_status" jdbcType="VARCHAR" property="nplBatchStatus" />
+    <result column="npl_is_test_part" jdbcType="BIT" property="nplIsTestPart" />
+    <result column="npl_device_code" jdbcType="VARCHAR" property="nplDeviceCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_person_no" jdbcType="VARCHAR" property="createPersonNo" />
+    <result column="create_person_name" jdbcType="VARCHAR" property="createPersonName" />
+    <result column="npl_note" jdbcType="VARCHAR" property="nplNote" />
+    <result column="npl_status" jdbcType="VARCHAR" property="nplStatus" />
+    <result column="confirm_person_no" jdbcType="VARCHAR" property="confirmPersonNo" />
+    <result column="confirm_person_name" jdbcType="VARCHAR" property="confirmPersonName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    npl_id, npl_barcode, fc_id, fc_code, shop_id, shop_code, line_id, line_code, prod_date, 
+    shift_id, shift_code, prod_code, prod_batch_code, prod_order_code, prod_barcode, 
+    npl_find_op, npl_find_op_name, npl_prod_op, npl_prod_op_name, npl_workcenter, npl_workcenter_name, 
+    npl_defect, npl_defect_desc, npl_cost_center, npl_cost_center_name, npl_qty, npl_batch_status, 
+    npl_is_test_part, npl_device_code, create_time, create_person_no, create_person_name, 
+    npl_note, npl_status, confirm_person_no, confirm_person_name
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductLogPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from nonconform_product_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from nonconform_product_log
+    where npl_id = #{nplId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from nonconform_product_log
+    where npl_id = #{nplId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductLogPOExample">
+    delete from nonconform_product_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductLogPO">
+    insert into nonconform_product_log (npl_id, npl_barcode, fc_id, 
+      fc_code, shop_id, shop_code, 
+      line_id, line_code, prod_date, 
+      shift_id, shift_code, prod_code, 
+      prod_batch_code, prod_order_code, prod_barcode, 
+      npl_find_op, npl_find_op_name, npl_prod_op, 
+      npl_prod_op_name, npl_workcenter, npl_workcenter_name, 
+      npl_defect, npl_defect_desc, npl_cost_center, 
+      npl_cost_center_name, npl_qty, npl_batch_status, 
+      npl_is_test_part, npl_device_code, create_time, 
+      create_person_no, create_person_name, npl_note, 
+      npl_status, confirm_person_no, confirm_person_name
+      )
+    values (#{nplId,jdbcType=INTEGER}, #{nplBarcode,jdbcType=VARCHAR}, #{fcId,jdbcType=INTEGER}, 
+      #{fcCode,jdbcType=VARCHAR}, #{shopId,jdbcType=INTEGER}, #{shopCode,jdbcType=VARCHAR}, 
+      #{lineId,jdbcType=INTEGER}, #{lineCode,jdbcType=VARCHAR}, #{prodDate,jdbcType=TIMESTAMP}, 
+      #{shiftId,jdbcType=INTEGER}, #{shiftCode,jdbcType=VARCHAR}, #{prodCode,jdbcType=VARCHAR}, 
+      #{prodBatchCode,jdbcType=VARCHAR}, #{prodOrderCode,jdbcType=VARCHAR}, #{prodBarcode,jdbcType=VARCHAR}, 
+      #{nplFindOp,jdbcType=VARCHAR}, #{nplFindOpName,jdbcType=VARCHAR}, #{nplProdOp,jdbcType=VARCHAR}, 
+      #{nplProdOpName,jdbcType=VARCHAR}, #{nplWorkcenter,jdbcType=VARCHAR}, #{nplWorkcenterName,jdbcType=VARCHAR}, 
+      #{nplDefect,jdbcType=VARCHAR}, #{nplDefectDesc,jdbcType=VARCHAR}, #{nplCostCenter,jdbcType=VARCHAR}, 
+      #{nplCostCenterName,jdbcType=VARCHAR}, #{nplQty,jdbcType=INTEGER}, #{nplBatchStatus,jdbcType=VARCHAR}, 
+      #{nplIsTestPart,jdbcType=BIT}, #{nplDeviceCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createPersonNo,jdbcType=VARCHAR}, #{createPersonName,jdbcType=VARCHAR}, #{nplNote,jdbcType=VARCHAR}, 
+      #{nplStatus,jdbcType=VARCHAR}, #{confirmPersonNo,jdbcType=VARCHAR}, #{confirmPersonName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductLogPO">
+    insert into nonconform_product_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nplId != null">
+        npl_id,
+      </if>
+      <if test="nplBarcode != null">
+        npl_barcode,
+      </if>
+      <if test="fcId != null">
+        fc_id,
+      </if>
+      <if test="fcCode != null">
+        fc_code,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="shopCode != null">
+        shop_code,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="lineCode != null">
+        line_code,
+      </if>
+      <if test="prodDate != null">
+        prod_date,
+      </if>
+      <if test="shiftId != null">
+        shift_id,
+      </if>
+      <if test="shiftCode != null">
+        shift_code,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="prodBatchCode != null">
+        prod_batch_code,
+      </if>
+      <if test="prodOrderCode != null">
+        prod_order_code,
+      </if>
+      <if test="prodBarcode != null">
+        prod_barcode,
+      </if>
+      <if test="nplFindOp != null">
+        npl_find_op,
+      </if>
+      <if test="nplFindOpName != null">
+        npl_find_op_name,
+      </if>
+      <if test="nplProdOp != null">
+        npl_prod_op,
+      </if>
+      <if test="nplProdOpName != null">
+        npl_prod_op_name,
+      </if>
+      <if test="nplWorkcenter != null">
+        npl_workcenter,
+      </if>
+      <if test="nplWorkcenterName != null">
+        npl_workcenter_name,
+      </if>
+      <if test="nplDefect != null">
+        npl_defect,
+      </if>
+      <if test="nplDefectDesc != null">
+        npl_defect_desc,
+      </if>
+      <if test="nplCostCenter != null">
+        npl_cost_center,
+      </if>
+      <if test="nplCostCenterName != null">
+        npl_cost_center_name,
+      </if>
+      <if test="nplQty != null">
+        npl_qty,
+      </if>
+      <if test="nplBatchStatus != null">
+        npl_batch_status,
+      </if>
+      <if test="nplIsTestPart != null">
+        npl_is_test_part,
+      </if>
+      <if test="nplDeviceCode != null">
+        npl_device_code,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createPersonNo != null">
+        create_person_no,
+      </if>
+      <if test="createPersonName != null">
+        create_person_name,
+      </if>
+      <if test="nplNote != null">
+        npl_note,
+      </if>
+      <if test="nplStatus != null">
+        npl_status,
+      </if>
+      <if test="confirmPersonNo != null">
+        confirm_person_no,
+      </if>
+      <if test="confirmPersonName != null">
+        confirm_person_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nplId != null">
+        #{nplId,jdbcType=INTEGER},
+      </if>
+      <if test="nplBarcode != null">
+        #{nplBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcId != null">
+        #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="fcCode != null">
+        #{fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="shopCode != null">
+        #{shopCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="lineCode != null">
+        #{lineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodDate != null">
+        #{prodDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shiftId != null">
+        #{shiftId,jdbcType=INTEGER},
+      </if>
+      <if test="shiftCode != null">
+        #{shiftCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBatchCode != null">
+        #{prodBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodOrderCode != null">
+        #{prodOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBarcode != null">
+        #{prodBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="nplFindOp != null">
+        #{nplFindOp,jdbcType=VARCHAR},
+      </if>
+      <if test="nplFindOpName != null">
+        #{nplFindOpName,jdbcType=VARCHAR},
+      </if>
+      <if test="nplProdOp != null">
+        #{nplProdOp,jdbcType=VARCHAR},
+      </if>
+      <if test="nplProdOpName != null">
+        #{nplProdOpName,jdbcType=VARCHAR},
+      </if>
+      <if test="nplWorkcenter != null">
+        #{nplWorkcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="nplWorkcenterName != null">
+        #{nplWorkcenterName,jdbcType=VARCHAR},
+      </if>
+      <if test="nplDefect != null">
+        #{nplDefect,jdbcType=VARCHAR},
+      </if>
+      <if test="nplDefectDesc != null">
+        #{nplDefectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="nplCostCenter != null">
+        #{nplCostCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="nplCostCenterName != null">
+        #{nplCostCenterName,jdbcType=VARCHAR},
+      </if>
+      <if test="nplQty != null">
+        #{nplQty,jdbcType=INTEGER},
+      </if>
+      <if test="nplBatchStatus != null">
+        #{nplBatchStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="nplIsTestPart != null">
+        #{nplIsTestPart,jdbcType=BIT},
+      </if>
+      <if test="nplDeviceCode != null">
+        #{nplDeviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPersonNo != null">
+        #{createPersonNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createPersonName != null">
+        #{createPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="nplNote != null">
+        #{nplNote,jdbcType=VARCHAR},
+      </if>
+      <if test="nplStatus != null">
+        #{nplStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmPersonNo != null">
+        #{confirmPersonNo,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmPersonName != null">
+        #{confirmPersonName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductLogPOExample" resultType="java.lang.Long">
+    select count(*) from nonconform_product_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update nonconform_product_log
+    <set>
+      <if test="record.nplId != null">
+        npl_id = #{record.nplId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nplBarcode != null">
+        npl_barcode = #{record.nplBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcId != null">
+        fc_id = #{record.fcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcCode != null">
+        fc_code = #{record.fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopCode != null">
+        shop_code = #{record.shopCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineCode != null">
+        line_code = #{record.lineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodDate != null">
+        prod_date = #{record.prodDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shiftId != null">
+        shift_id = #{record.shiftId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shiftCode != null">
+        shift_code = #{record.shiftCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodBatchCode != null">
+        prod_batch_code = #{record.prodBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodOrderCode != null">
+        prod_order_code = #{record.prodOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodBarcode != null">
+        prod_barcode = #{record.prodBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplFindOp != null">
+        npl_find_op = #{record.nplFindOp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplFindOpName != null">
+        npl_find_op_name = #{record.nplFindOpName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplProdOp != null">
+        npl_prod_op = #{record.nplProdOp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplProdOpName != null">
+        npl_prod_op_name = #{record.nplProdOpName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplWorkcenter != null">
+        npl_workcenter = #{record.nplWorkcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplWorkcenterName != null">
+        npl_workcenter_name = #{record.nplWorkcenterName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplDefect != null">
+        npl_defect = #{record.nplDefect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplDefectDesc != null">
+        npl_defect_desc = #{record.nplDefectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplCostCenter != null">
+        npl_cost_center = #{record.nplCostCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplCostCenterName != null">
+        npl_cost_center_name = #{record.nplCostCenterName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplQty != null">
+        npl_qty = #{record.nplQty,jdbcType=INTEGER},
+      </if>
+      <if test="record.nplBatchStatus != null">
+        npl_batch_status = #{record.nplBatchStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplIsTestPart != null">
+        npl_is_test_part = #{record.nplIsTestPart,jdbcType=BIT},
+      </if>
+      <if test="record.nplDeviceCode != null">
+        npl_device_code = #{record.nplDeviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createPersonNo != null">
+        create_person_no = #{record.createPersonNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createPersonName != null">
+        create_person_name = #{record.createPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplNote != null">
+        npl_note = #{record.nplNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplStatus != null">
+        npl_status = #{record.nplStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmPersonNo != null">
+        confirm_person_no = #{record.confirmPersonNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmPersonName != null">
+        confirm_person_name = #{record.confirmPersonName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update nonconform_product_log
+    set npl_id = #{record.nplId,jdbcType=INTEGER},
+      npl_barcode = #{record.nplBarcode,jdbcType=VARCHAR},
+      fc_id = #{record.fcId,jdbcType=INTEGER},
+      fc_code = #{record.fcCode,jdbcType=VARCHAR},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      shop_code = #{record.shopCode,jdbcType=VARCHAR},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      line_code = #{record.lineCode,jdbcType=VARCHAR},
+      prod_date = #{record.prodDate,jdbcType=TIMESTAMP},
+      shift_id = #{record.shiftId,jdbcType=INTEGER},
+      shift_code = #{record.shiftCode,jdbcType=VARCHAR},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      prod_batch_code = #{record.prodBatchCode,jdbcType=VARCHAR},
+      prod_order_code = #{record.prodOrderCode,jdbcType=VARCHAR},
+      prod_barcode = #{record.prodBarcode,jdbcType=VARCHAR},
+      npl_find_op = #{record.nplFindOp,jdbcType=VARCHAR},
+      npl_find_op_name = #{record.nplFindOpName,jdbcType=VARCHAR},
+      npl_prod_op = #{record.nplProdOp,jdbcType=VARCHAR},
+      npl_prod_op_name = #{record.nplProdOpName,jdbcType=VARCHAR},
+      npl_workcenter = #{record.nplWorkcenter,jdbcType=VARCHAR},
+      npl_workcenter_name = #{record.nplWorkcenterName,jdbcType=VARCHAR},
+      npl_defect = #{record.nplDefect,jdbcType=VARCHAR},
+      npl_defect_desc = #{record.nplDefectDesc,jdbcType=VARCHAR},
+      npl_cost_center = #{record.nplCostCenter,jdbcType=VARCHAR},
+      npl_cost_center_name = #{record.nplCostCenterName,jdbcType=VARCHAR},
+      npl_qty = #{record.nplQty,jdbcType=INTEGER},
+      npl_batch_status = #{record.nplBatchStatus,jdbcType=VARCHAR},
+      npl_is_test_part = #{record.nplIsTestPart,jdbcType=BIT},
+      npl_device_code = #{record.nplDeviceCode,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_person_no = #{record.createPersonNo,jdbcType=VARCHAR},
+      create_person_name = #{record.createPersonName,jdbcType=VARCHAR},
+      npl_note = #{record.nplNote,jdbcType=VARCHAR},
+      npl_status = #{record.nplStatus,jdbcType=VARCHAR},
+      confirm_person_no = #{record.confirmPersonNo,jdbcType=VARCHAR},
+      confirm_person_name = #{record.confirmPersonName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductLogPO">
+    update nonconform_product_log
+    <set>
+      <if test="nplBarcode != null">
+        npl_barcode = #{nplBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcId != null">
+        fc_id = #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="fcCode != null">
+        fc_code = #{fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="shopCode != null">
+        shop_code = #{shopCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="lineCode != null">
+        line_code = #{lineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodDate != null">
+        prod_date = #{prodDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shiftId != null">
+        shift_id = #{shiftId,jdbcType=INTEGER},
+      </if>
+      <if test="shiftCode != null">
+        shift_code = #{shiftCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBatchCode != null">
+        prod_batch_code = #{prodBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodOrderCode != null">
+        prod_order_code = #{prodOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBarcode != null">
+        prod_barcode = #{prodBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="nplFindOp != null">
+        npl_find_op = #{nplFindOp,jdbcType=VARCHAR},
+      </if>
+      <if test="nplFindOpName != null">
+        npl_find_op_name = #{nplFindOpName,jdbcType=VARCHAR},
+      </if>
+      <if test="nplProdOp != null">
+        npl_prod_op = #{nplProdOp,jdbcType=VARCHAR},
+      </if>
+      <if test="nplProdOpName != null">
+        npl_prod_op_name = #{nplProdOpName,jdbcType=VARCHAR},
+      </if>
+      <if test="nplWorkcenter != null">
+        npl_workcenter = #{nplWorkcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="nplWorkcenterName != null">
+        npl_workcenter_name = #{nplWorkcenterName,jdbcType=VARCHAR},
+      </if>
+      <if test="nplDefect != null">
+        npl_defect = #{nplDefect,jdbcType=VARCHAR},
+      </if>
+      <if test="nplDefectDesc != null">
+        npl_defect_desc = #{nplDefectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="nplCostCenter != null">
+        npl_cost_center = #{nplCostCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="nplCostCenterName != null">
+        npl_cost_center_name = #{nplCostCenterName,jdbcType=VARCHAR},
+      </if>
+      <if test="nplQty != null">
+        npl_qty = #{nplQty,jdbcType=INTEGER},
+      </if>
+      <if test="nplBatchStatus != null">
+        npl_batch_status = #{nplBatchStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="nplIsTestPart != null">
+        npl_is_test_part = #{nplIsTestPart,jdbcType=BIT},
+      </if>
+      <if test="nplDeviceCode != null">
+        npl_device_code = #{nplDeviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPersonNo != null">
+        create_person_no = #{createPersonNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createPersonName != null">
+        create_person_name = #{createPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="nplNote != null">
+        npl_note = #{nplNote,jdbcType=VARCHAR},
+      </if>
+      <if test="nplStatus != null">
+        npl_status = #{nplStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmPersonNo != null">
+        confirm_person_no = #{confirmPersonNo,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmPersonName != null">
+        confirm_person_name = #{confirmPersonName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where npl_id = #{nplId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductLogPO">
+    update nonconform_product_log
+    set npl_barcode = #{nplBarcode,jdbcType=VARCHAR},
+      fc_id = #{fcId,jdbcType=INTEGER},
+      fc_code = #{fcCode,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      shop_code = #{shopCode,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=INTEGER},
+      line_code = #{lineCode,jdbcType=VARCHAR},
+      prod_date = #{prodDate,jdbcType=TIMESTAMP},
+      shift_id = #{shiftId,jdbcType=INTEGER},
+      shift_code = #{shiftCode,jdbcType=VARCHAR},
+      prod_code = #{prodCode,jdbcType=VARCHAR},
+      prod_batch_code = #{prodBatchCode,jdbcType=VARCHAR},
+      prod_order_code = #{prodOrderCode,jdbcType=VARCHAR},
+      prod_barcode = #{prodBarcode,jdbcType=VARCHAR},
+      npl_find_op = #{nplFindOp,jdbcType=VARCHAR},
+      npl_find_op_name = #{nplFindOpName,jdbcType=VARCHAR},
+      npl_prod_op = #{nplProdOp,jdbcType=VARCHAR},
+      npl_prod_op_name = #{nplProdOpName,jdbcType=VARCHAR},
+      npl_workcenter = #{nplWorkcenter,jdbcType=VARCHAR},
+      npl_workcenter_name = #{nplWorkcenterName,jdbcType=VARCHAR},
+      npl_defect = #{nplDefect,jdbcType=VARCHAR},
+      npl_defect_desc = #{nplDefectDesc,jdbcType=VARCHAR},
+      npl_cost_center = #{nplCostCenter,jdbcType=VARCHAR},
+      npl_cost_center_name = #{nplCostCenterName,jdbcType=VARCHAR},
+      npl_qty = #{nplQty,jdbcType=INTEGER},
+      npl_batch_status = #{nplBatchStatus,jdbcType=VARCHAR},
+      npl_is_test_part = #{nplIsTestPart,jdbcType=BIT},
+      npl_device_code = #{nplDeviceCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_person_no = #{createPersonNo,jdbcType=VARCHAR},
+      create_person_name = #{createPersonName,jdbcType=VARCHAR},
+      npl_note = #{nplNote,jdbcType=VARCHAR},
+      npl_status = #{nplStatus,jdbcType=VARCHAR},
+      confirm_person_no = #{confirmPersonNo,jdbcType=VARCHAR},
+      confirm_person_name = #{confirmPersonName,jdbcType=VARCHAR}
+    where npl_id = #{nplId,jdbcType=INTEGER}
+  </update>
+</mapper>

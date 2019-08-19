@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.SysPrinterTmplDao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO">
+    <id column="ptmpl_id" jdbcType="INTEGER" property="ptmplId" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="ptmpl_size" jdbcType="INTEGER" property="ptmplSize" />
+    <result column="ptmpl_file_name" jdbcType="VARCHAR" property="ptmplFileName" />
+    <result column="pt_counter_min" jdbcType="INTEGER" property="ptCounterMin" />
+    <result column="pt_counter_max" jdbcType="INTEGER" property="ptCounterMax" />
+    <result column="pt_counter_value" jdbcType="INTEGER" property="ptCounterValue" />
+    <result column="pt_file_updatetime" jdbcType="TIMESTAMP" property="ptFileUpdatetime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO">
+    <result column="pt_file_binary" jdbcType="VARBINARY" property="ptFileBinary" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ptmpl_id, fc_id, prod_code, customer_code, ptmpl_size, ptmpl_file_name, pt_counter_min, 
+    pt_counter_max, pt_counter_value, pt_file_updatetime
+  </sql>
+  <sql id="Blob_Column_List">
+    pt_file_binary
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPOExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_printer_tmpl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_printer_tmpl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_printer_tmpl
+    where ptmpl_id = #{ptmplId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_printer_tmpl
+    where ptmpl_id = #{ptmplId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPOExample">
+    delete from sys_printer_tmpl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO">
+    insert into sys_printer_tmpl (ptmpl_id, fc_id, prod_code, 
+      customer_code, ptmpl_size, ptmpl_file_name, 
+      pt_counter_min, pt_counter_max, pt_counter_value, 
+      pt_file_updatetime, pt_file_binary)
+    values (#{ptmplId,jdbcType=INTEGER}, #{fcId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, 
+      #{customerCode,jdbcType=VARCHAR}, #{ptmplSize,jdbcType=INTEGER}, #{ptmplFileName,jdbcType=VARCHAR}, 
+      #{ptCounterMin,jdbcType=INTEGER}, #{ptCounterMax,jdbcType=INTEGER}, #{ptCounterValue,jdbcType=INTEGER}, 
+      #{ptFileUpdatetime,jdbcType=TIMESTAMP}, #{ptFileBinary,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO">
+    insert into sys_printer_tmpl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ptmplId != null">
+        ptmpl_id,
+      </if>
+      <if test="fcId != null">
+        fc_id,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="ptmplSize != null">
+        ptmpl_size,
+      </if>
+      <if test="ptmplFileName != null">
+        ptmpl_file_name,
+      </if>
+      <if test="ptCounterMin != null">
+        pt_counter_min,
+      </if>
+      <if test="ptCounterMax != null">
+        pt_counter_max,
+      </if>
+      <if test="ptCounterValue != null">
+        pt_counter_value,
+      </if>
+      <if test="ptFileUpdatetime != null">
+        pt_file_updatetime,
+      </if>
+      <if test="ptFileBinary != null">
+        pt_file_binary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ptmplId != null">
+        #{ptmplId,jdbcType=INTEGER},
+      </if>
+      <if test="fcId != null">
+        #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ptmplSize != null">
+        #{ptmplSize,jdbcType=INTEGER},
+      </if>
+      <if test="ptmplFileName != null">
+        #{ptmplFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="ptCounterMin != null">
+        #{ptCounterMin,jdbcType=INTEGER},
+      </if>
+      <if test="ptCounterMax != null">
+        #{ptCounterMax,jdbcType=INTEGER},
+      </if>
+      <if test="ptCounterValue != null">
+        #{ptCounterValue,jdbcType=INTEGER},
+      </if>
+      <if test="ptFileUpdatetime != null">
+        #{ptFileUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ptFileBinary != null">
+        #{ptFileBinary,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPOExample" resultType="java.lang.Long">
+    select count(*) from sys_printer_tmpl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_printer_tmpl
+    <set>
+      <if test="record.ptmplId != null">
+        ptmpl_id = #{record.ptmplId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcId != null">
+        fc_id = #{record.fcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptmplSize != null">
+        ptmpl_size = #{record.ptmplSize,jdbcType=INTEGER},
+      </if>
+      <if test="record.ptmplFileName != null">
+        ptmpl_file_name = #{record.ptmplFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptCounterMin != null">
+        pt_counter_min = #{record.ptCounterMin,jdbcType=INTEGER},
+      </if>
+      <if test="record.ptCounterMax != null">
+        pt_counter_max = #{record.ptCounterMax,jdbcType=INTEGER},
+      </if>
+      <if test="record.ptCounterValue != null">
+        pt_counter_value = #{record.ptCounterValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.ptFileUpdatetime != null">
+        pt_file_updatetime = #{record.ptFileUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ptFileBinary != null">
+        pt_file_binary = #{record.ptFileBinary,jdbcType=VARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update sys_printer_tmpl
+    set ptmpl_id = #{record.ptmplId,jdbcType=INTEGER},
+      fc_id = #{record.fcId,jdbcType=INTEGER},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      ptmpl_size = #{record.ptmplSize,jdbcType=INTEGER},
+      ptmpl_file_name = #{record.ptmplFileName,jdbcType=VARCHAR},
+      pt_counter_min = #{record.ptCounterMin,jdbcType=INTEGER},
+      pt_counter_max = #{record.ptCounterMax,jdbcType=INTEGER},
+      pt_counter_value = #{record.ptCounterValue,jdbcType=INTEGER},
+      pt_file_updatetime = #{record.ptFileUpdatetime,jdbcType=TIMESTAMP},
+      pt_file_binary = #{record.ptFileBinary,jdbcType=VARBINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_printer_tmpl
+    set ptmpl_id = #{record.ptmplId,jdbcType=INTEGER},
+      fc_id = #{record.fcId,jdbcType=INTEGER},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      ptmpl_size = #{record.ptmplSize,jdbcType=INTEGER},
+      ptmpl_file_name = #{record.ptmplFileName,jdbcType=VARCHAR},
+      pt_counter_min = #{record.ptCounterMin,jdbcType=INTEGER},
+      pt_counter_max = #{record.ptCounterMax,jdbcType=INTEGER},
+      pt_counter_value = #{record.ptCounterValue,jdbcType=INTEGER},
+      pt_file_updatetime = #{record.ptFileUpdatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO">
+    update sys_printer_tmpl
+    <set>
+      <if test="fcId != null">
+        fc_id = #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ptmplSize != null">
+        ptmpl_size = #{ptmplSize,jdbcType=INTEGER},
+      </if>
+      <if test="ptmplFileName != null">
+        ptmpl_file_name = #{ptmplFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="ptCounterMin != null">
+        pt_counter_min = #{ptCounterMin,jdbcType=INTEGER},
+      </if>
+      <if test="ptCounterMax != null">
+        pt_counter_max = #{ptCounterMax,jdbcType=INTEGER},
+      </if>
+      <if test="ptCounterValue != null">
+        pt_counter_value = #{ptCounterValue,jdbcType=INTEGER},
+      </if>
+      <if test="ptFileUpdatetime != null">
+        pt_file_updatetime = #{ptFileUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ptFileBinary != null">
+        pt_file_binary = #{ptFileBinary,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where ptmpl_id = #{ptmplId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO">
+    update sys_printer_tmpl
+    set fc_id = #{fcId,jdbcType=INTEGER},
+      prod_code = #{prodCode,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      ptmpl_size = #{ptmplSize,jdbcType=INTEGER},
+      ptmpl_file_name = #{ptmplFileName,jdbcType=VARCHAR},
+      pt_counter_min = #{ptCounterMin,jdbcType=INTEGER},
+      pt_counter_max = #{ptCounterMax,jdbcType=INTEGER},
+      pt_counter_value = #{ptCounterValue,jdbcType=INTEGER},
+      pt_file_updatetime = #{ptFileUpdatetime,jdbcType=TIMESTAMP},
+      pt_file_binary = #{ptFileBinary,jdbcType=VARBINARY}
+    where ptmpl_id = #{ptmplId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO">
+    update sys_printer_tmpl
+    set fc_id = #{fcId,jdbcType=INTEGER},
+      prod_code = #{prodCode,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      ptmpl_size = #{ptmplSize,jdbcType=INTEGER},
+      ptmpl_file_name = #{ptmplFileName,jdbcType=VARCHAR},
+      pt_counter_min = #{ptCounterMin,jdbcType=INTEGER},
+      pt_counter_max = #{ptCounterMax,jdbcType=INTEGER},
+      pt_counter_value = #{ptCounterValue,jdbcType=INTEGER},
+      pt_file_updatetime = #{ptFileUpdatetime,jdbcType=TIMESTAMP}
+    where ptmpl_id = #{ptmplId,jdbcType=INTEGER}
+  </update>
+</mapper>

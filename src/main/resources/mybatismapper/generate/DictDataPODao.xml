@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.DictDataPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.DictDataPO">
+    <id column="dd_id" jdbcType="INTEGER" property="ddId" />
+    <result column="dd_code" jdbcType="VARCHAR" property="ddCode" />
+    <result column="dt_code" jdbcType="VARCHAR" property="dtCode" />
+    <result column="dd_name" jdbcType="NVARCHAR" property="ddName" />
+    <result column="dd_seq" jdbcType="INTEGER" property="ddSeq" />
+    <result column="is_default" jdbcType="BIT" property="isDefault" />
+    <result column="is_fixed" jdbcType="BIT" property="isFixed" />
+    <result column="is_active" jdbcType="BIT" property="isActive" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    dd_id, dd_code, dt_code, dd_name, dd_seq, is_default, is_fixed, is_active, create_time, 
+    note
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.DictDataPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dict_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dict_data
+    where dd_id = #{ddId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dict_data
+    where dd_id = #{ddId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.DictDataPOExample">
+    delete from dict_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.DictDataPO">
+    insert into dict_data (dd_id, dd_code, dt_code, 
+      dd_name, dd_seq, is_default, 
+      is_fixed, is_active, create_time, 
+      note)
+    values (#{ddId,jdbcType=INTEGER}, #{ddCode,jdbcType=VARCHAR}, #{dtCode,jdbcType=VARCHAR}, 
+      #{ddName,jdbcType=NVARCHAR}, #{ddSeq,jdbcType=INTEGER}, #{isDefault,jdbcType=BIT}, 
+      #{isFixed,jdbcType=BIT}, #{isActive,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.DictDataPO">
+    insert into dict_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ddId != null">
+        dd_id,
+      </if>
+      <if test="ddCode != null">
+        dd_code,
+      </if>
+      <if test="dtCode != null">
+        dt_code,
+      </if>
+      <if test="ddName != null">
+        dd_name,
+      </if>
+      <if test="ddSeq != null">
+        dd_seq,
+      </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
+      <if test="isFixed != null">
+        is_fixed,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ddId != null">
+        #{ddId,jdbcType=INTEGER},
+      </if>
+      <if test="ddCode != null">
+        #{ddCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dtCode != null">
+        #{dtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ddName != null">
+        #{ddName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddSeq != null">
+        #{ddSeq,jdbcType=INTEGER},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=BIT},
+      </if>
+      <if test="isFixed != null">
+        #{isFixed,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.DictDataPOExample" resultType="java.lang.Long">
+    select count(*) from dict_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dict_data
+    <set>
+      <if test="record.ddId != null">
+        dd_id = #{record.ddId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ddCode != null">
+        dd_code = #{record.ddCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtCode != null">
+        dt_code = #{record.dtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ddName != null">
+        dd_name = #{record.ddName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ddSeq != null">
+        dd_seq = #{record.ddSeq,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDefault != null">
+        is_default = #{record.isDefault,jdbcType=BIT},
+      </if>
+      <if test="record.isFixed != null">
+        is_fixed = #{record.isFixed,jdbcType=BIT},
+      </if>
+      <if test="record.isActive != null">
+        is_active = #{record.isActive,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dict_data
+    set dd_id = #{record.ddId,jdbcType=INTEGER},
+      dd_code = #{record.ddCode,jdbcType=VARCHAR},
+      dt_code = #{record.dtCode,jdbcType=VARCHAR},
+      dd_name = #{record.ddName,jdbcType=NVARCHAR},
+      dd_seq = #{record.ddSeq,jdbcType=INTEGER},
+      is_default = #{record.isDefault,jdbcType=BIT},
+      is_fixed = #{record.isFixed,jdbcType=BIT},
+      is_active = #{record.isActive,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.DictDataPO">
+    update dict_data
+    <set>
+      <if test="ddCode != null">
+        dd_code = #{ddCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dtCode != null">
+        dt_code = #{dtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ddName != null">
+        dd_name = #{ddName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddSeq != null">
+        dd_seq = #{ddSeq,jdbcType=INTEGER},
+      </if>
+      <if test="isDefault != null">
+        is_default = #{isDefault,jdbcType=BIT},
+      </if>
+      <if test="isFixed != null">
+        is_fixed = #{isFixed,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dd_id = #{ddId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.DictDataPO">
+    update dict_data
+    set dd_code = #{ddCode,jdbcType=VARCHAR},
+      dt_code = #{dtCode,jdbcType=VARCHAR},
+      dd_name = #{ddName,jdbcType=NVARCHAR},
+      dd_seq = #{ddSeq,jdbcType=INTEGER},
+      is_default = #{isDefault,jdbcType=BIT},
+      is_fixed = #{isFixed,jdbcType=BIT},
+      is_active = #{isActive,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR}
+    where dd_id = #{ddId,jdbcType=INTEGER}
+  </update>
+</mapper>

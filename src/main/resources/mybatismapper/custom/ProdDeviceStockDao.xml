@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ProdDeviceStockDao">
+  <resultMap id="BaseResult" type="com.uspring.sdsmesplus.entity.po.ProdDeviceStockPO">
+    <id column="devb_id" jdbcType="INTEGER" property="devbId" />
+    <result column="po_code" jdbcType="VARCHAR" property="poCode" />
+    <result column="device_code" jdbcType="VARCHAR" property="deviceCode" />
+    <result column="mat_mandat" jdbcType="VARCHAR" property="matMandat" />
+    <result column="mat_warehouse_num" jdbcType="VARCHAR" property="matWarehouseNum" />
+    <result column="mat_entitled_part" jdbcType="VARCHAR" property="matEntitledPart" />
+    <result column="mat_huident" jdbcType="VARCHAR" property="matHuident" />
+    <result column="mat_number" jdbcType="VARCHAR" property="matNumber" />
+    <result column="mat_code" jdbcType="VARCHAR" property="matCode" />
+    <result column="mat_tuhao" jdbcType="VARCHAR" property="matTuhao" />
+    <result column="mat_name" jdbcType="VARCHAR" property="matName" />
+    <result column="mat_furnace_no" jdbcType="VARCHAR" property="matFurnaceNo" />
+    <result column="mat_glevel" jdbcType="VARCHAR" property="matGlevel" />
+    <result column="mat_version" jdbcType="VARCHAR" property="matVersion" />
+    <result column="mat_batch_no" jdbcType="VARCHAR" property="matBatchNo" />
+    <result column="box_quan" jdbcType="DECIMAL" property="boxQuan" />
+    <result column="box_barcode" jdbcType="VARCHAR" property="boxBarcode" />
+    <result column="box_inspector" jdbcType="VARCHAR" property="boxInspector" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_open" jdbcType="BIT" property="isOpen" />
+    <result column="box_quan_left" jdbcType="DECIMAL" property="boxQuanLeft" />
+    <result column="is_cleaned" jdbcType="BIT" property="isCleaned" />
+  </resultMap>
+  
+ <update id="updateListDev" parameterType="java.util.List">
+    update prod_device_stock
+    <trim prefix="set" suffixOverrides=",">
+            <trim prefix="po_code =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.poCode !=null and item.poCode != -1">
+                         when devb_id=#{item.devbId} then #{item.poCode}
+                     </if>
+                     <if test="item.poCode == null or item.poCode == -1">
+                         when id=#{item.devbId} then prod_device_stock.po_code
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="device_code =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.deviceCode !=null and item.deviceCode != -1">
+                         when devb_id=#{item.devbId} then #{item.poCode}
+                     </if>
+                     <if test="item.deviceCode == null or item.deviceCode == -1">
+                         when id=#{item.devbId} then prod_device_stock.device_code
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="mat_mandat =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matMandat !=null and item.matMandat != -1">
+                         when devb_id=#{item.mat_mandat} then #{item.mat_mandat}
+                     </if>
+                     <if test="item.matMandat == null or item.matMandat == -1">
+                         when id=#{item.mat_mandat} then prod_device_stock.mat_mandat
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="mat_warehouse_num =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matWarehouseNum !=null and item.matWarehouseNum != -1">
+                         when devb_id=#{item.devbId} then #{item.matWarehouseNum}
+                     </if>
+                     <if test="item.matWarehouseNum == null or item.matWarehouseNum == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_warehouse_num
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="mat_entitled_part =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matEntitledPart !=null and item.matEntitledPart != -1">
+                         when devb_id=#{item.devbId} then #{item.matEntitledPart}
+                     </if>
+                     <if test="item.matEntitledPart == null or item.matEntitledPart == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_entitled_part
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="mat_huident =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matHuident !=null and item.matHuident != -1">
+                         when devb_id=#{item.devbId} then #{item.matHuident}
+                     </if>
+                     <if test="item.matHuident == null or item.matHuident == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_huident
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="mat_number =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matNumber !=null and item.matNumber != -1">
+                         when devb_id=#{item.devbId} then #{item.matNumber}
+                     </if>
+                     <if test="item.matNumber == null or item.matNumber == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_number
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="mat_code =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matCode  !=null and item.matCode  != -1">
+                         when devb_id=#{item.devbId} then #{item.matCode }
+                     </if>
+                     <if test="item.matCode  == null or item.matCode  == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_code
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="mat_tuhao =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matTuhao !=null and item.matTuhao != -1">
+                         when devb_id=#{item.devbId} then #{item.matTuhao}
+                     </if>
+                     <if test="item.matTuhao == null or item.matTuhao == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_tuhao
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="mat_name =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matName !=null and item.matName != -1">
+                         when devb_id=#{item.devbId} then #{item.matName}
+                     </if>
+                     <if test="item.matName == null or item.matName == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_name
+                     </if>
+                 </foreach>
+            </trim>           
+            <trim prefix="mat_furnace_no =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matFurnaceNo !=null and item.matFurnaceNo != -1">
+                         when devb_id=#{item.devbId} then #{item.matFurnaceNo}
+                     </if>
+                     <if test="item.matFurnaceNo == null or item.matFurnaceNo == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_furnace_no
+                     </if>
+                 </foreach>
+            </trim>         
+            <trim prefix="mat_glevel =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matGlevel !=null and item.matGlevel != -1">
+                         when devb_id=#{item.devbId} then #{item.matGlevel}
+                     </if>
+                     <if test="item.matGlevel == null or item.matGlevel == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_glevel
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="mat_version =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matVersion !=null and item.matVersion != -1">
+                         when devb_id=#{item.devbId} then #{item.matVersion}
+                     </if>
+                     <if test="item.matVersion == null or item.matVersion == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_version
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="mat_batch_no =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.matBatchNo !=null and item.matBatchNo != -1">
+                         when devb_id=#{item.devbId} then #{item.matBatchNo}
+                     </if>
+                     <if test="item.matBatchNo == null or item.matBatchNo == -1">
+                         when id=#{item.devbId} then prod_device_stock.mat_batch_no
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="box_quan =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.boxQuan !=null and item.boxQuan != -1">
+                         when devb_id=#{item.devbId} then #{item.boxQuan}
+                     </if>
+                     <if test="item.boxQuan == null or item.boxQuan == -1">
+                         when id=#{item.devbId} then prod_device_stock.box_quan
+                     </if>
+                 </foreach>
+            </trim>   
+            <trim prefix="box_barcode =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.boxBarcode !=null and item.boxBarcode != -1">
+                         when devb_id=#{item.devbId} then #{item.boxBarcode}
+                     </if>
+                     <if test="item.boxBarcode == null or item.boxBarcode == -1">
+                         when id=#{item.devbId} then prod_device_stock.box_barcode
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="box_inspector =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.boxInspector !=null and item.boxInspector != -1">
+                         when devb_id=#{item.devbId} then #{item.boxInspector}
+                     </if>
+                     <if test="item.boxInspector == null or item.boxInspector == -1">
+                         when id=#{item.devbId} then prod_device_stock.box_inspector
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="create_time =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.createTime !=null and item.createTime != -1">
+                         when devb_id=#{item.devbId} then #{item.createTime}
+                     </if>
+                     <if test="item.createTime == null or item.createTime == -1">
+                         when id=#{item.devbId} then prod_device_stock.create_time
+                     </if>
+                 </foreach>
+            </trim>          
+            <trim prefix="update_time =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.updateTime !=null and item.updateTime != -1">
+                         when devb_id=#{item.devbId} then #{item.updateTime}
+                     </if>
+                     <if test="item.updateTime == null or item.updateTime == -1">
+                         when id=#{item.devbId} then prod_device_stock.update_time
+                     </if>
+                 </foreach>
+            </trim>        
+            <trim prefix="is_open =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.isOpen !=null and item.isOpen != -1">
+                         when devb_id=#{item.devbId} then #{item.isOpen}
+                     </if>
+                     <if test="item.isOpen == null or item.isOpen == -1">
+                         when id=#{item.devbId} then prod_device_stock.is_open
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="box_quan_left =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.boxQuanLeft !=null and item.boxQuanLeft != -1">
+                         when devb_id=#{item.devbId} then #{item.boxQuanLeft}
+                     </if>
+                     <if test="item.boxQuanLeft == null or item.boxQuanLeft == -1">
+                         when id=#{item.devbId} then prod_device_stock.box_quan_left
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="is_cleaned =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.isCleaned !=null and item.isCleaned != -1">
+                         when devb_id=#{item.devbId} then #{item.isCleaned}
+                     </if>
+                     <if test="item.isCleaned == null or item.isCleaned == -1">
+                         when id=#{item.devbId} then prod_device_stock.is_cleaned
+                     </if>
+                 </foreach>
+            </trim>
+        </trim>
+        where devb_id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.devbId,jdbcType=BIGINT}
+        </foreach>
+  </update>
+</mapper>

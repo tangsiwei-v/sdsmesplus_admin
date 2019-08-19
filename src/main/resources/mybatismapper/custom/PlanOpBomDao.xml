@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.PlanOpBomDao">
+  <resultMap id="BomMap" type="com.uspring.sdsmesplus.entity.po.PlanOpBomPO">
+    <id column="plbm_id" jdbcType="INTEGER" property="plbmId" />
+    <result column="plop_id" jdbcType="INTEGER" property="plopId" />
+    <result column="material_posnr" jdbcType="VARCHAR" property="materialPosnr" />
+    <result column="material_code" jdbcType="VARCHAR" property="materialCode" />
+    <result column="material_count" jdbcType="INTEGER" property="materialCount" />
+    <result column="material_unit" jdbcType="VARCHAR" property="materialUnit" />
+    <result column="material_stloc" jdbcType="VARCHAR" property="materialStloc" />
+    <result column="material_psa" jdbcType="VARCHAR" property="materialPsa" />
+  </resultMap>
+  
+  
+<!-- 通过订单号查询bom数据 -->
+	<select id="selectBomByOrdercode" parameterType="String" resultMap="BomMap">
+		select c.*
+		from plan_order a
+		  LEFT JOIN
+		  plan_order_process b ON a.po_code=b.po_code
+		LEFT JOIN plan_op_bom c
+		  ON
+		  b.plop_id=c.plop_id
+		where 1 = 1 and c.plop_id is not null
+		<if test="order_code != null">
+			and a.po_code = #{order_code}
+		</if>
+		order by a.create_time asc
+	</select>
+</mapper>

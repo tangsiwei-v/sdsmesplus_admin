@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.NonconformProductMaterialPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPO">
+    <id column="nplm_id" jdbcType="INTEGER" property="nplmId" />
+    <result column="npl_id" jdbcType="INTEGER" property="nplId" />
+    <result column="npl_barcode" jdbcType="VARCHAR" property="nplBarcode" />
+    <result column="material_code" jdbcType="VARCHAR" property="materialCode" />
+    <result column="material_box_code" jdbcType="VARCHAR" property="materialBoxCode" />
+    <result column="material_box_qrcode" jdbcType="VARCHAR" property="materialBoxQrcode" />
+    <result column="material_batch_code" jdbcType="VARCHAR" property="materialBatchCode" />
+    <result column="material_furnace_no" jdbcType="VARCHAR" property="materialFurnaceNo" />
+    <result column="material_glevel" jdbcType="VARCHAR" property="materialGlevel" />
+    <result column="material_qty" jdbcType="INTEGER" property="materialQty" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    nplm_id, npl_id, npl_barcode, material_code, material_box_code, material_box_qrcode, 
+    material_batch_code, material_furnace_no, material_glevel, material_qty, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from nonconform_product_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from nonconform_product_material
+    where nplm_id = #{nplmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from nonconform_product_material
+    where nplm_id = #{nplmId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPOExample">
+    delete from nonconform_product_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPO">
+    insert into nonconform_product_material (nplm_id, npl_id, npl_barcode, 
+      material_code, material_box_code, material_box_qrcode, 
+      material_batch_code, material_furnace_no, material_glevel, 
+      material_qty, create_time)
+    values (#{nplmId,jdbcType=INTEGER}, #{nplId,jdbcType=INTEGER}, #{nplBarcode,jdbcType=VARCHAR}, 
+      #{materialCode,jdbcType=VARCHAR}, #{materialBoxCode,jdbcType=VARCHAR}, #{materialBoxQrcode,jdbcType=VARCHAR}, 
+      #{materialBatchCode,jdbcType=VARCHAR}, #{materialFurnaceNo,jdbcType=VARCHAR}, #{materialGlevel,jdbcType=VARCHAR}, 
+      #{materialQty,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPO">
+    insert into nonconform_product_material
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nplmId != null">
+        nplm_id,
+      </if>
+      <if test="nplId != null">
+        npl_id,
+      </if>
+      <if test="nplBarcode != null">
+        npl_barcode,
+      </if>
+      <if test="materialCode != null">
+        material_code,
+      </if>
+      <if test="materialBoxCode != null">
+        material_box_code,
+      </if>
+      <if test="materialBoxQrcode != null">
+        material_box_qrcode,
+      </if>
+      <if test="materialBatchCode != null">
+        material_batch_code,
+      </if>
+      <if test="materialFurnaceNo != null">
+        material_furnace_no,
+      </if>
+      <if test="materialGlevel != null">
+        material_glevel,
+      </if>
+      <if test="materialQty != null">
+        material_qty,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nplmId != null">
+        #{nplmId,jdbcType=INTEGER},
+      </if>
+      <if test="nplId != null">
+        #{nplId,jdbcType=INTEGER},
+      </if>
+      <if test="nplBarcode != null">
+        #{nplBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCode != null">
+        #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialBoxCode != null">
+        #{materialBoxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialBoxQrcode != null">
+        #{materialBoxQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialBatchCode != null">
+        #{materialBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialFurnaceNo != null">
+        #{materialFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="materialGlevel != null">
+        #{materialGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="materialQty != null">
+        #{materialQty,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPOExample" resultType="java.lang.Long">
+    select count(*) from nonconform_product_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update nonconform_product_material
+    <set>
+      <if test="record.nplmId != null">
+        nplm_id = #{record.nplmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nplId != null">
+        npl_id = #{record.nplId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nplBarcode != null">
+        npl_barcode = #{record.nplBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialCode != null">
+        material_code = #{record.materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialBoxCode != null">
+        material_box_code = #{record.materialBoxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialBoxQrcode != null">
+        material_box_qrcode = #{record.materialBoxQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialBatchCode != null">
+        material_batch_code = #{record.materialBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialFurnaceNo != null">
+        material_furnace_no = #{record.materialFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialGlevel != null">
+        material_glevel = #{record.materialGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialQty != null">
+        material_qty = #{record.materialQty,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update nonconform_product_material
+    set nplm_id = #{record.nplmId,jdbcType=INTEGER},
+      npl_id = #{record.nplId,jdbcType=INTEGER},
+      npl_barcode = #{record.nplBarcode,jdbcType=VARCHAR},
+      material_code = #{record.materialCode,jdbcType=VARCHAR},
+      material_box_code = #{record.materialBoxCode,jdbcType=VARCHAR},
+      material_box_qrcode = #{record.materialBoxQrcode,jdbcType=VARCHAR},
+      material_batch_code = #{record.materialBatchCode,jdbcType=VARCHAR},
+      material_furnace_no = #{record.materialFurnaceNo,jdbcType=VARCHAR},
+      material_glevel = #{record.materialGlevel,jdbcType=VARCHAR},
+      material_qty = #{record.materialQty,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPO">
+    update nonconform_product_material
+    <set>
+      <if test="nplId != null">
+        npl_id = #{nplId,jdbcType=INTEGER},
+      </if>
+      <if test="nplBarcode != null">
+        npl_barcode = #{nplBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCode != null">
+        material_code = #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialBoxCode != null">
+        material_box_code = #{materialBoxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialBoxQrcode != null">
+        material_box_qrcode = #{materialBoxQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialBatchCode != null">
+        material_batch_code = #{materialBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialFurnaceNo != null">
+        material_furnace_no = #{materialFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="materialGlevel != null">
+        material_glevel = #{materialGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="materialQty != null">
+        material_qty = #{materialQty,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where nplm_id = #{nplmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPO">
+    update nonconform_product_material
+    set npl_id = #{nplId,jdbcType=INTEGER},
+      npl_barcode = #{nplBarcode,jdbcType=VARCHAR},
+      material_code = #{materialCode,jdbcType=VARCHAR},
+      material_box_code = #{materialBoxCode,jdbcType=VARCHAR},
+      material_box_qrcode = #{materialBoxQrcode,jdbcType=VARCHAR},
+      material_batch_code = #{materialBatchCode,jdbcType=VARCHAR},
+      material_furnace_no = #{materialFurnaceNo,jdbcType=VARCHAR},
+      material_glevel = #{materialGlevel,jdbcType=VARCHAR},
+      material_qty = #{materialQty,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where nplm_id = #{nplmId,jdbcType=INTEGER}
+  </update>
+</mapper>

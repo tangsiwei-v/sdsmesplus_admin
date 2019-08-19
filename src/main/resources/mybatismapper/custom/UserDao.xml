@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.UserDao">
+
+	<resultMap type="com.uspring.sdsmesplus.entity.vo.UserVO" id="userVOMap">
+		<id property="userId" column="user_id" />
+		<result property="userAccount" column="user_account" />
+		<result property="userPasswd" column="user_passwd" />
+		<result property="isActive" column="is_active" />
+		<result property="userName" column="user_name" />
+		<result property="userEmail" column="user_email" />
+		<result property="userPhone" column="user_phone" />
+		<result property="empNumber" column="emp_number" />
+		<collection property="roles" ofType="com.uspring.sdsmesplus.entity.vo.UserRoleVO">
+			<id property="syrId" column="syr_id" />
+			<result property="roleId" column="role_id"/>
+			<result property="roleLevel" column="role_level" />
+			<result property="roleName" column="role_name" />
+			<result property="factoryName" column="fc_name" />
+			<result property="workshopName" column="shop_name" />
+			<result property="vsmName" column="vsm_name" />
+			<result property="lineName" column="line_name" />
+			<result property="factoryId" column="factory_id" />
+			<result property="shopId" column="shop_id" />
+			<result property="vsmId" column="vsm_Id" />
+			<result property="lineId" column="line_id" />
+			<result property="isAdmin" column="is_Admin" />
+		</collection>
+	</resultMap>
+	
+	<sql id="selectUserRoleSql">
+		select 
+			su.user_id user_id,
+			su.user_account user_account,
+			su.user_passwd user_passwd,
+			su.user_name user_name,
+			su.user_email user_email,
+			su.user_phone user_phone,
+			su.emp_number emp_number,
+			su.is_active,
+			sur.syr_id,
+			sr.role_id role_id,
+			sr.role_level,
+			sr.role_name role_name
+		from sys_user su
+			left join sys_user_role sur on su.user_id =  sur.user_id
+			left join sys_role sr on sur.role_id = sr.role_id
+	</sql>
+
+	<select id="findUserVOById" parameterType="int" resultMap="userVOMap">
+		<include refid="selectUserRoleSql"></include>
+		where su.user_id = #{userId}
+	</select>
+	
+	<select id="findUserVOByLogin" resultMap="userVOMap">
+		<include refid="selectUserRoleSql"></include>
+		where su.user_account = #{account}
+			and su.user_passwd = #{password}
+	</select>
+	
+	<select id="findUserVOByAccount" resultMap="userVOMap">
+		<include refid="selectUserRoleSql"></include>
+		where su.user_account = #{account}
+	</select>
+	
+	<!-- 筛选条件查询 -->
+	<select id="queryUserVO"  parameterType="map" resultMap="userVOMap">
+		<include refid="selectUserRoleSql"></include>
+		where 1 = 1 
+			<if test="factoryId != null">
+			and sur.factory_id = #{factoryId}
+			</if>
+			<if test="shopId != null">
+			and sur.shop_id = #{shopId}
+			</if>
+			<if test="vsmId != null">
+			and sur.vsm_id = #{vsmId}
+			</if>
+			<if test="lineId != null">
+			and sur.line_id = #{lineId}
+			</if>
+			<if test="account != null">
+			and su.user_account like '%${account}%'
+			</if>
+			<if test="userName != null">
+			and su.user_name like '%${userName}%'
+			</if>	
+	</select>
+	
+</mapper>

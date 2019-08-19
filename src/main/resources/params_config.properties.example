@@ -1,0 +1,9 @@
+#文件上传存储地址
+image_up_load_file = D://
+
+#RabbitMQ
+rabbitmq_connect_string = amqp://mes:123456@10.50.52.152:5672
+
+#MPMLINK
+mpmlink_xml_dirt = ftp://192.168.180.88
+

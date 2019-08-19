@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.SysStoragebinPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SysStoragebinPO">
+    <id column="bin_id" jdbcType="INTEGER" property="binId" />
+    <result column="warehouse_num" jdbcType="VARCHAR" property="warehouseNum" />
+    <result column="warehouse_loc" jdbcType="VARCHAR" property="warehouseLoc" />
+    <result column="storage_type" jdbcType="VARCHAR" property="storageType" />
+    <result column="storage_type_desc" jdbcType="VARCHAR" property="storageTypeDesc" />
+    <result column="work_station" jdbcType="VARCHAR" property="workStation" />
+    <result column="work_station_desc" jdbcType="VARCHAR" property="workStationDesc" />
+    <result column="entitled_part" jdbcType="VARCHAR" property="entitledPart" />
+    <result column="bin_area" jdbcType="VARCHAR" property="binArea" />
+    <result column="is_active" jdbcType="BIT" property="isActive" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    bin_id, warehouse_num, warehouse_loc, storage_type, storage_type_desc, work_station, 
+    work_station_desc, entitled_part, bin_area, is_active, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysStoragebinPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_storagebin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_storagebin
+    where bin_id = #{binId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_storagebin
+    where bin_id = #{binId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysStoragebinPOExample">
+    delete from sys_storagebin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysStoragebinPO">
+    insert into sys_storagebin (bin_id, warehouse_num, warehouse_loc, 
+      storage_type, storage_type_desc, work_station, 
+      work_station_desc, entitled_part, bin_area, 
+      is_active, create_time, update_time
+      )
+    values (#{binId,jdbcType=INTEGER}, #{warehouseNum,jdbcType=VARCHAR}, #{warehouseLoc,jdbcType=VARCHAR}, 
+      #{storageType,jdbcType=VARCHAR}, #{storageTypeDesc,jdbcType=VARCHAR}, #{workStation,jdbcType=VARCHAR}, 
+      #{workStationDesc,jdbcType=VARCHAR}, #{entitledPart,jdbcType=VARCHAR}, #{binArea,jdbcType=VARCHAR}, 
+      #{isActive,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysStoragebinPO">
+    insert into sys_storagebin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="binId != null">
+        bin_id,
+      </if>
+      <if test="warehouseNum != null">
+        warehouse_num,
+      </if>
+      <if test="warehouseLoc != null">
+        warehouse_loc,
+      </if>
+      <if test="storageType != null">
+        storage_type,
+      </if>
+      <if test="storageTypeDesc != null">
+        storage_type_desc,
+      </if>
+      <if test="workStation != null">
+        work_station,
+      </if>
+      <if test="workStationDesc != null">
+        work_station_desc,
+      </if>
+      <if test="entitledPart != null">
+        entitled_part,
+      </if>
+      <if test="binArea != null">
+        bin_area,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="binId != null">
+        #{binId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseNum != null">
+        #{warehouseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseLoc != null">
+        #{warehouseLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="storageType != null">
+        #{storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="storageTypeDesc != null">
+        #{storageTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="workStation != null">
+        #{workStation,jdbcType=VARCHAR},
+      </if>
+      <if test="workStationDesc != null">
+        #{workStationDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="entitledPart != null">
+        #{entitledPart,jdbcType=VARCHAR},
+      </if>
+      <if test="binArea != null">
+        #{binArea,jdbcType=VARCHAR},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysStoragebinPOExample" resultType="java.lang.Long">
+    select count(*) from sys_storagebin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_storagebin
+    <set>
+      <if test="record.binId != null">
+        bin_id = #{record.binId,jdbcType=INTEGER},
+      </if>
+      <if test="record.warehouseNum != null">
+        warehouse_num = #{record.warehouseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warehouseLoc != null">
+        warehouse_loc = #{record.warehouseLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storageType != null">
+        storage_type = #{record.storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storageTypeDesc != null">
+        storage_type_desc = #{record.storageTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workStation != null">
+        work_station = #{record.workStation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workStationDesc != null">
+        work_station_desc = #{record.workStationDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entitledPart != null">
+        entitled_part = #{record.entitledPart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.binArea != null">
+        bin_area = #{record.binArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isActive != null">
+        is_active = #{record.isActive,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_storagebin
+    set bin_id = #{record.binId,jdbcType=INTEGER},
+      warehouse_num = #{record.warehouseNum,jdbcType=VARCHAR},
+      warehouse_loc = #{record.warehouseLoc,jdbcType=VARCHAR},
+      storage_type = #{record.storageType,jdbcType=VARCHAR},
+      storage_type_desc = #{record.storageTypeDesc,jdbcType=VARCHAR},
+      work_station = #{record.workStation,jdbcType=VARCHAR},
+      work_station_desc = #{record.workStationDesc,jdbcType=VARCHAR},
+      entitled_part = #{record.entitledPart,jdbcType=VARCHAR},
+      bin_area = #{record.binArea,jdbcType=VARCHAR},
+      is_active = #{record.isActive,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SysStoragebinPO">
+    update sys_storagebin
+    <set>
+      <if test="warehouseNum != null">
+        warehouse_num = #{warehouseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseLoc != null">
+        warehouse_loc = #{warehouseLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="storageType != null">
+        storage_type = #{storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="storageTypeDesc != null">
+        storage_type_desc = #{storageTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="workStation != null">
+        work_station = #{workStation,jdbcType=VARCHAR},
+      </if>
+      <if test="workStationDesc != null">
+        work_station_desc = #{workStationDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="entitledPart != null">
+        entitled_part = #{entitledPart,jdbcType=VARCHAR},
+      </if>
+      <if test="binArea != null">
+        bin_area = #{binArea,jdbcType=VARCHAR},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where bin_id = #{binId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SysStoragebinPO">
+    update sys_storagebin
+    set warehouse_num = #{warehouseNum,jdbcType=VARCHAR},
+      warehouse_loc = #{warehouseLoc,jdbcType=VARCHAR},
+      storage_type = #{storageType,jdbcType=VARCHAR},
+      storage_type_desc = #{storageTypeDesc,jdbcType=VARCHAR},
+      work_station = #{workStation,jdbcType=VARCHAR},
+      work_station_desc = #{workStationDesc,jdbcType=VARCHAR},
+      entitled_part = #{entitledPart,jdbcType=VARCHAR},
+      bin_area = #{binArea,jdbcType=VARCHAR},
+      is_active = #{isActive,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where bin_id = #{binId,jdbcType=INTEGER}
+  </update>
+</mapper>

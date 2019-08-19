@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.NonconformProductDao">
+  <resultMap id="NonconformProductMap" type="com.uspring.sdsmesplus.entity.vo.NonconformProductVO">
+    <id column="npl_id" jdbcType="INTEGER" property="nplId" />
+    <result column="npl_barcode" jdbcType="VARCHAR" property="nplBarcode" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="shop_code" jdbcType="VARCHAR" property="shopCode" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="line_code" jdbcType="VARCHAR" property="lineCode" />
+    <result column="prod_date" jdbcType="TIMESTAMP" property="prodDate" />
+    <result column="shift_id" jdbcType="INTEGER" property="shiftId" />
+    <result column="shift_code" jdbcType="VARCHAR" property="shiftCode" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="prod_batch_code" jdbcType="VARCHAR" property="prodBatchCode" />
+    <result column="prod_order_code" jdbcType="VARCHAR" property="prodOrderCode" />
+    <result column="prod_barcode" jdbcType="VARCHAR" property="prodBarcode" />
+    <result column="npl_find_op" jdbcType="VARCHAR" property="nplFindOp" />
+    <result column="npl_find_op_name" jdbcType="VARCHAR" property="nplFindOpName" />
+    <result column="npl_prod_op" jdbcType="VARCHAR" property="nplProdOp" />
+    <result column="npl_prod_op_name" jdbcType="VARCHAR" property="nplProdOpName" />
+    <result column="npl_workcenter" jdbcType="VARCHAR" property="nplWorkcenter" />
+    <result column="npl_workcenter_name" jdbcType="VARCHAR" property="nplWorkcenterName" />
+    <result column="npl_defect" jdbcType="VARCHAR" property="nplDefect" />
+    <result column="npl_defect_desc" jdbcType="VARCHAR" property="nplDefectDesc" />
+    <result column="npl_cost_center" jdbcType="VARCHAR" property="nplCostCenter" />
+    <result column="npl_cost_center_name" jdbcType="VARCHAR" property="nplCostCenterName" />
+    <result column="npl_qty" jdbcType="INTEGER" property="nplQty" />
+    <result column="npl_batch_status" jdbcType="VARCHAR" property="nplBatchStatus" />
+    <result column="npl_is_test_part" jdbcType="BIT" property="nplIsTestPart" />
+    <result column="npl_device_code" jdbcType="VARCHAR" property="nplDeviceCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_person_no" jdbcType="VARCHAR" property="createPersonNo" />
+    <result column="create_person_name" jdbcType="VARCHAR" property="createPersonName" />
+    <result column="npl_note" jdbcType="VARCHAR" property="nplNote" />
+    <result column="npl_status" jdbcType="VARCHAR" property="nplStatus" />
+    <result column="confirm_person_no" jdbcType="VARCHAR" property="confirmPersonNo" />
+    <result column="confirm_person_name" jdbcType="VARCHAR" property="confirmPersonName" />
+    <collection property="nonconformProductMaterialPOs" ofType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPO">
+         <id column="nplm_id" jdbcType="INTEGER" property="nplmId" />
+   		 <result column="p_npl_id" jdbcType="INTEGER" property="nplId" />
+   		 <result column="p_npl_barcode" jdbcType="VARCHAR" property="nplBarcode" />
+         <result column="material_code" jdbcType="VARCHAR" property="materialCode" />
+   		 <result column="material_box_code" jdbcType="VARCHAR" property="materialBoxCode" />
+   		 <result column="material_box_qrcode" jdbcType="VARCHAR" property="materialBoxQrcode" />
+  	     <result column="material_batch_code" jdbcType="VARCHAR" property="materialBatchCode" />
+    	 <result column="material_furnace_no" jdbcType="VARCHAR" property="materialFurnaceNo" />
+    	 <result column="material_glevel" jdbcType="VARCHAR" property="materialGlevel" />
+    	 <result column="material_qty" jdbcType="INTEGER" property="materialQty" />
+    	 <result column="p_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </collection>
+  </resultMap>
+  	<select id="record" parameterType="map" resultMap="NonconformProductMap">
+   		 select l.*,m.nplm_id,m.npl_barcode as nplbarcode,m.material_code,m.material_box_code,
+			m.material_box_qrcode,m.material_batch_code,m.material_furnace_no,
+			m.material_glevel,m.material_qty,m.create_time as createtime
+		from nonconform_product_log l left join nonconform_product_material m
+			on l.npl_id = m.npl_id
+		where 1 = 1
+			<if test="shopId != null">
+				and l.shop_id = #{shopId}
+			</if>
+			<if test="lineId != null">
+				and l.line_id = #{lineId}
+			</if>
+			<if test="shiftId != null">
+				and l.shift_id = #{shiftId}
+			</if>
+			<if test="status != null">
+				and l.npl_status = #{status}
+			</if>
+			<if test="start_time != null">
+				and l.create_time &gt;=#{start_time}
+			</if>
+			<if test="end_time != null">
+				and l.create_time &lt;= #{end_time}
+			</if>
+    </select>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.SysFactoryPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+    <id column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    <result column="fc_name" jdbcType="VARCHAR" property="fcName" />
+    <result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
+    <result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
+    <result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    fc_id, fc_code, fc_name, fc_address, fc_domain, fc_sds_id
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysFactoryPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_factory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_factory
+    where fc_id = #{fcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_factory
+    where fc_id = #{fcId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysFactoryPOExample">
+    delete from sys_factory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+    insert into sys_factory (fc_id, fc_code, fc_name, 
+      fc_address, fc_domain, fc_sds_id
+      )
+    values (#{fcId,jdbcType=INTEGER}, #{fcCode,jdbcType=VARCHAR}, #{fcName,jdbcType=VARCHAR}, 
+      #{fcAddress,jdbcType=VARCHAR}, #{fcDomain,jdbcType=VARCHAR}, #{fcSdsId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+    insert into sys_factory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fcId != null">
+        fc_id,
+      </if>
+      <if test="fcCode != null">
+        fc_code,
+      </if>
+      <if test="fcName != null">
+        fc_name,
+      </if>
+      <if test="fcAddress != null">
+        fc_address,
+      </if>
+      <if test="fcDomain != null">
+        fc_domain,
+      </if>
+      <if test="fcSdsId != null">
+        fc_sds_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fcId != null">
+        #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="fcCode != null">
+        #{fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcName != null">
+        #{fcName,jdbcType=VARCHAR},
+      </if>
+      <if test="fcAddress != null">
+        #{fcAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fcDomain != null">
+        #{fcDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="fcSdsId != null">
+        #{fcSdsId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysFactoryPOExample" resultType="java.lang.Long">
+    select count(*) from sys_factory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_factory
+    <set>
+      <if test="record.fcId != null">
+        fc_id = #{record.fcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcCode != null">
+        fc_code = #{record.fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcName != null">
+        fc_name = #{record.fcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcAddress != null">
+        fc_address = #{record.fcAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcDomain != null">
+        fc_domain = #{record.fcDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcSdsId != null">
+        fc_sds_id = #{record.fcSdsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_factory
+    set fc_id = #{record.fcId,jdbcType=INTEGER},
+      fc_code = #{record.fcCode,jdbcType=VARCHAR},
+      fc_name = #{record.fcName,jdbcType=VARCHAR},
+      fc_address = #{record.fcAddress,jdbcType=VARCHAR},
+      fc_domain = #{record.fcDomain,jdbcType=VARCHAR},
+      fc_sds_id = #{record.fcSdsId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+    update sys_factory
+    <set>
+      <if test="fcCode != null">
+        fc_code = #{fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcName != null">
+        fc_name = #{fcName,jdbcType=VARCHAR},
+      </if>
+      <if test="fcAddress != null">
+        fc_address = #{fcAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fcDomain != null">
+        fc_domain = #{fcDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="fcSdsId != null">
+        fc_sds_id = #{fcSdsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fc_id = #{fcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+    update sys_factory
+    set fc_code = #{fcCode,jdbcType=VARCHAR},
+      fc_name = #{fcName,jdbcType=VARCHAR},
+      fc_address = #{fcAddress,jdbcType=VARCHAR},
+      fc_domain = #{fcDomain,jdbcType=VARCHAR},
+      fc_sds_id = #{fcSdsId,jdbcType=VARCHAR}
+    where fc_id = #{fcId,jdbcType=INTEGER}
+  </update>
+</mapper>

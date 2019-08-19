@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.ProdFinishedProductPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.ProdFinishedProductPO">
+    <id column="fp_id" jdbcType="INTEGER" property="fpId" />
+    <result column="po_code" jdbcType="VARCHAR" property="poCode" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="fp_rfid" jdbcType="VARCHAR" property="fpRfid" />
+    <result column="fp_status" jdbcType="VARCHAR" property="fpStatus" />
+    <result column="box_barcode" jdbcType="VARCHAR" property="boxBarcode" />
+    <result column="fp_barcode" jdbcType="VARCHAR" property="fpBarcode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    fp_id, po_code, customer_code, line_id, prod_code, fp_rfid, fp_status, box_barcode, 
+    fp_barcode, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdFinishedProductPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prod_finished_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_finished_product
+    where fp_id = #{fpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prod_finished_product
+    where fp_id = #{fpId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdFinishedProductPOExample">
+    delete from prod_finished_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdFinishedProductPO">
+    insert into prod_finished_product (fp_id, po_code, customer_code, 
+      line_id, prod_code, fp_rfid, 
+      fp_status, box_barcode, fp_barcode, 
+      create_time)
+    values (#{fpId,jdbcType=INTEGER}, #{poCode,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, 
+      #{lineId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, #{fpRfid,jdbcType=VARCHAR}, 
+      #{fpStatus,jdbcType=VARCHAR}, #{boxBarcode,jdbcType=VARCHAR}, #{fpBarcode,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdFinishedProductPO">
+    insert into prod_finished_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fpId != null">
+        fp_id,
+      </if>
+      <if test="poCode != null">
+        po_code,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="fpRfid != null">
+        fp_rfid,
+      </if>
+      <if test="fpStatus != null">
+        fp_status,
+      </if>
+      <if test="boxBarcode != null">
+        box_barcode,
+      </if>
+      <if test="fpBarcode != null">
+        fp_barcode,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fpId != null">
+        #{fpId,jdbcType=INTEGER},
+      </if>
+      <if test="poCode != null">
+        #{poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fpRfid != null">
+        #{fpRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="fpStatus != null">
+        #{fpStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="boxBarcode != null">
+        #{boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="fpBarcode != null">
+        #{fpBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdFinishedProductPOExample" resultType="java.lang.Long">
+    select count(*) from prod_finished_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_finished_product
+    <set>
+      <if test="record.fpId != null">
+        fp_id = #{record.fpId,jdbcType=INTEGER},
+      </if>
+      <if test="record.poCode != null">
+        po_code = #{record.poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fpRfid != null">
+        fp_rfid = #{record.fpRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fpStatus != null">
+        fp_status = #{record.fpStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boxBarcode != null">
+        box_barcode = #{record.boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fpBarcode != null">
+        fp_barcode = #{record.fpBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_finished_product
+    set fp_id = #{record.fpId,jdbcType=INTEGER},
+      po_code = #{record.poCode,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      fp_rfid = #{record.fpRfid,jdbcType=VARCHAR},
+      fp_status = #{record.fpStatus,jdbcType=VARCHAR},
+      box_barcode = #{record.boxBarcode,jdbcType=VARCHAR},
+      fp_barcode = #{record.fpBarcode,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdFinishedProductPO">
+    update prod_finished_product
+    <set>
+      <if test="poCode != null">
+        po_code = #{poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fpRfid != null">
+        fp_rfid = #{fpRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="fpStatus != null">
+        fp_status = #{fpStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="boxBarcode != null">
+        box_barcode = #{boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="fpBarcode != null">
+        fp_barcode = #{fpBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fp_id = #{fpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.ProdFinishedProductPO">
+    update prod_finished_product
+    set po_code = #{poCode,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=INTEGER},
+      prod_code = #{prodCode,jdbcType=VARCHAR},
+      fp_rfid = #{fpRfid,jdbcType=VARCHAR},
+      fp_status = #{fpStatus,jdbcType=VARCHAR},
+      box_barcode = #{boxBarcode,jdbcType=VARCHAR},
+      fp_barcode = #{fpBarcode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where fp_id = #{fpId,jdbcType=INTEGER}
+  </update>
+</mapper>

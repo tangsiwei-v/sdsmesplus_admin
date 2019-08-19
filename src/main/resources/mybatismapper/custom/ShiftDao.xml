@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ShiftDao">
+
+	<select id="getShiftOfTime" resultMap="com.uspring.sdsmesplus.dao.generate.ShiftPODao.BaseResultMap">
+		SELECT 
+			* 
+		FROM sys_shift
+		WHERE 
+			(DATEADD(Minute, sf_start_minute, DATEADD(Hour, sf_start_hour, DATEADD(DAY, 0, DATEDIFF(DAY, 0, #{time})))) 
+				&lt;= #{time} 
+				and 
+			DATEADD(Day, sf_span_day, DATEADD(Minute, sf_end_minute, DATEADD(Hour, sf_end_hour, DATEADD(DAY, 0, DATEDIFF(DAY, 0, #{time})) ))) 
+				&gt;= #{time} 
+				and fc_id = #{factoryId})
+			OR
+			(DATEADD(Day, -sf_span_day, DATEADD(Minute, sf_start_minute, DATEADD(Hour, sf_start_hour, DATEADD(DAY, 0, DATEDIFF(DAY, 0, #{time})) ))) 
+				&lt;= #{time}
+				and
+			DATEADD(Day, 0, DATEADD(Minute, sf_end_minute, DATEADD(Hour, sf_end_hour, DATEADD(DAY, 0, DATEDIFF(DAY, 0, #{time})) ))) 
+				&gt;= #{time}
+				and fc_id = #{factoryId})
+	</select>
+</mapper>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.ProdBatchLogPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.ProdBatchLogPO">
+    <id column="batch_id" jdbcType="INTEGER" property="batchId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    <result column="supplier" jdbcType="VARCHAR" property="supplier" />
+    <result column="supplier_batch_code" jdbcType="VARCHAR" property="supplierBatchCode" />
+    <result column="product_date" jdbcType="VARCHAR" property="productDate" />
+    <result column="prod_furnace_no" jdbcType="VARCHAR" property="prodFurnaceNo" />
+    <result column="prod_glevel" jdbcType="VARCHAR" property="prodGlevel" />
+    <result column="material_version" jdbcType="VARCHAR" property="materialVersion" />
+    <result column="material_batch_code" jdbcType="VARCHAR" property="materialBatchCode" />
+    <result column="material_code" jdbcType="VARCHAR" property="materialCode" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="prod_batch_code" jdbcType="VARCHAR" property="prodBatchCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    batch_id, prod_code, fc_code, supplier, supplier_batch_code, product_date, prod_furnace_no, 
+    prod_glevel, material_version, material_batch_code, material_code, customer_code, 
+    prod_batch_code, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdBatchLogPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prod_batch_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_batch_log
+    where batch_id = #{batchId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prod_batch_log
+    where batch_id = #{batchId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdBatchLogPOExample">
+    delete from prod_batch_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdBatchLogPO">
+    insert into prod_batch_log (batch_id, prod_code, fc_code, 
+      supplier, supplier_batch_code, product_date, 
+      prod_furnace_no, prod_glevel, material_version, 
+      material_batch_code, material_code, customer_code, 
+      prod_batch_code, create_time)
+    values (#{batchId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, #{fcCode,jdbcType=VARCHAR}, 
+      #{supplier,jdbcType=VARCHAR}, #{supplierBatchCode,jdbcType=VARCHAR}, #{productDate,jdbcType=VARCHAR}, 
+      #{prodFurnaceNo,jdbcType=VARCHAR}, #{prodGlevel,jdbcType=VARCHAR}, #{materialVersion,jdbcType=VARCHAR}, 
+      #{materialBatchCode,jdbcType=VARCHAR}, #{materialCode,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, 
+      #{prodBatchCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdBatchLogPO">
+    insert into prod_batch_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="batchId != null">
+        batch_id,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="fcCode != null">
+        fc_code,
+      </if>
+      <if test="supplier != null">
+        supplier,
+      </if>
+      <if test="supplierBatchCode != null">
+        supplier_batch_code,
+      </if>
+      <if test="productDate != null">
+        product_date,
+      </if>
+      <if test="prodFurnaceNo != null">
+        prod_furnace_no,
+      </if>
+      <if test="prodGlevel != null">
+        prod_glevel,
+      </if>
+      <if test="materialVersion != null">
+        material_version,
+      </if>
+      <if test="materialBatchCode != null">
+        material_batch_code,
+      </if>
+      <if test="materialCode != null">
+        material_code,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="prodBatchCode != null">
+        prod_batch_code,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="batchId != null">
+        #{batchId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcCode != null">
+        #{fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBatchCode != null">
+        #{supplierBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productDate != null">
+        #{productDate,jdbcType=VARCHAR},
+      </if>
+      <if test="prodFurnaceNo != null">
+        #{prodFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodGlevel != null">
+        #{prodGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="materialVersion != null">
+        #{materialVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="materialBatchCode != null">
+        #{materialBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCode != null">
+        #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBatchCode != null">
+        #{prodBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdBatchLogPOExample" resultType="java.lang.Long">
+    select count(*) from prod_batch_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_batch_log
+    <set>
+      <if test="record.batchId != null">
+        batch_id = #{record.batchId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcCode != null">
+        fc_code = #{record.fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplier != null">
+        supplier = #{record.supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierBatchCode != null">
+        supplier_batch_code = #{record.supplierBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productDate != null">
+        product_date = #{record.productDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodFurnaceNo != null">
+        prod_furnace_no = #{record.prodFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodGlevel != null">
+        prod_glevel = #{record.prodGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialVersion != null">
+        material_version = #{record.materialVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialBatchCode != null">
+        material_batch_code = #{record.materialBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialCode != null">
+        material_code = #{record.materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodBatchCode != null">
+        prod_batch_code = #{record.prodBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_batch_log
+    set batch_id = #{record.batchId,jdbcType=INTEGER},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      fc_code = #{record.fcCode,jdbcType=VARCHAR},
+      supplier = #{record.supplier,jdbcType=VARCHAR},
+      supplier_batch_code = #{record.supplierBatchCode,jdbcType=VARCHAR},
+      product_date = #{record.productDate,jdbcType=VARCHAR},
+      prod_furnace_no = #{record.prodFurnaceNo,jdbcType=VARCHAR},
+      prod_glevel = #{record.prodGlevel,jdbcType=VARCHAR},
+      material_version = #{record.materialVersion,jdbcType=VARCHAR},
+      material_batch_code = #{record.materialBatchCode,jdbcType=VARCHAR},
+      material_code = #{record.materialCode,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      prod_batch_code = #{record.prodBatchCode,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdBatchLogPO">
+    update prod_batch_log
+    <set>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcCode != null">
+        fc_code = #{fcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBatchCode != null">
+        supplier_batch_code = #{supplierBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productDate != null">
+        product_date = #{productDate,jdbcType=VARCHAR},
+      </if>
+      <if test="prodFurnaceNo != null">
+        prod_furnace_no = #{prodFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodGlevel != null">
+        prod_glevel = #{prodGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="materialVersion != null">
+        material_version = #{materialVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="materialBatchCode != null">
+        material_batch_code = #{materialBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCode != null">
+        material_code = #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBatchCode != null">
+        prod_batch_code = #{prodBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where batch_id = #{batchId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.ProdBatchLogPO">
+    update prod_batch_log
+    set prod_code = #{prodCode,jdbcType=VARCHAR},
+      fc_code = #{fcCode,jdbcType=VARCHAR},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      supplier_batch_code = #{supplierBatchCode,jdbcType=VARCHAR},
+      product_date = #{productDate,jdbcType=VARCHAR},
+      prod_furnace_no = #{prodFurnaceNo,jdbcType=VARCHAR},
+      prod_glevel = #{prodGlevel,jdbcType=VARCHAR},
+      material_version = #{materialVersion,jdbcType=VARCHAR},
+      material_batch_code = #{materialBatchCode,jdbcType=VARCHAR},
+      material_code = #{materialCode,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      prod_batch_code = #{prodBatchCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where batch_id = #{batchId,jdbcType=INTEGER}
+  </update>
+</mapper>

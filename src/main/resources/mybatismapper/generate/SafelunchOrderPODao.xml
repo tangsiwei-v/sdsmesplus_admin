@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.SafelunchOrderPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SafelunchOrderPO">
+    <id column="safbox_id" jdbcType="INTEGER" property="safboxId" />
+    <result column="safelunch_order" jdbcType="VARCHAR" property="safelunchOrder" />
+    <result column="safline_id" jdbcType="INTEGER" property="saflineId" />
+    <result column="box_barcode" jdbcType="VARCHAR" property="boxBarcode" />
+    <result column="product_count" jdbcType="INTEGER" property="productCount" />
+    <result column="pass_count" jdbcType="INTEGER" property="passCount" />
+    <result column="failed_count" jdbcType="INTEGER" property="failedCount" />
+    <result column="is_pass" jdbcType="BIT" property="isPass" />
+    <result column="is_commit" jdbcType="BIT" property="isCommit" />
+    <result column="check_person_number" jdbcType="VARCHAR" property="checkPersonNumber" />
+    <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName" />
+    <result column="box_pass" jdbcType="VARCHAR" property="boxPass" />
+    <result column="box_failed" jdbcType="VARCHAR" property="boxFailed" />
+    <result column="box_confirmed" jdbcType="BIT" property="boxConfirmed" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    safbox_id, safelunch_order, safline_id, box_barcode, product_count, pass_count, failed_count, 
+    is_pass, is_commit, check_person_number, check_person_name, box_pass, box_failed, 
+    box_confirmed, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SafelunchOrderPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from safelunch_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safelunch_order
+    where safbox_id = #{safboxId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safelunch_order
+    where safbox_id = #{safboxId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SafelunchOrderPOExample">
+    delete from safelunch_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SafelunchOrderPO">
+    insert into safelunch_order (safbox_id, safelunch_order, safline_id, 
+      box_barcode, product_count, pass_count, 
+      failed_count, is_pass, is_commit, 
+      check_person_number, check_person_name, box_pass, 
+      box_failed, box_confirmed, create_time, 
+      update_time)
+    values (#{safboxId,jdbcType=INTEGER}, #{safelunchOrder,jdbcType=VARCHAR}, #{saflineId,jdbcType=INTEGER}, 
+      #{boxBarcode,jdbcType=VARCHAR}, #{productCount,jdbcType=INTEGER}, #{passCount,jdbcType=INTEGER}, 
+      #{failedCount,jdbcType=INTEGER}, #{isPass,jdbcType=BIT}, #{isCommit,jdbcType=BIT}, 
+      #{checkPersonNumber,jdbcType=VARCHAR}, #{checkPersonName,jdbcType=VARCHAR}, #{boxPass,jdbcType=VARCHAR}, 
+      #{boxFailed,jdbcType=VARCHAR}, #{boxConfirmed,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SafelunchOrderPO">
+    insert into safelunch_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="safboxId != null">
+        safbox_id,
+      </if>
+      <if test="safelunchOrder != null">
+        safelunch_order,
+      </if>
+      <if test="saflineId != null">
+        safline_id,
+      </if>
+      <if test="boxBarcode != null">
+        box_barcode,
+      </if>
+      <if test="productCount != null">
+        product_count,
+      </if>
+      <if test="passCount != null">
+        pass_count,
+      </if>
+      <if test="failedCount != null">
+        failed_count,
+      </if>
+      <if test="isPass != null">
+        is_pass,
+      </if>
+      <if test="isCommit != null">
+        is_commit,
+      </if>
+      <if test="checkPersonNumber != null">
+        check_person_number,
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name,
+      </if>
+      <if test="boxPass != null">
+        box_pass,
+      </if>
+      <if test="boxFailed != null">
+        box_failed,
+      </if>
+      <if test="boxConfirmed != null">
+        box_confirmed,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="safboxId != null">
+        #{safboxId,jdbcType=INTEGER},
+      </if>
+      <if test="safelunchOrder != null">
+        #{safelunchOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="saflineId != null">
+        #{saflineId,jdbcType=INTEGER},
+      </if>
+      <if test="boxBarcode != null">
+        #{boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="productCount != null">
+        #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="passCount != null">
+        #{passCount,jdbcType=INTEGER},
+      </if>
+      <if test="failedCount != null">
+        #{failedCount,jdbcType=INTEGER},
+      </if>
+      <if test="isPass != null">
+        #{isPass,jdbcType=BIT},
+      </if>
+      <if test="isCommit != null">
+        #{isCommit,jdbcType=BIT},
+      </if>
+      <if test="checkPersonNumber != null">
+        #{checkPersonNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPersonName != null">
+        #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="boxPass != null">
+        #{boxPass,jdbcType=VARCHAR},
+      </if>
+      <if test="boxFailed != null">
+        #{boxFailed,jdbcType=VARCHAR},
+      </if>
+      <if test="boxConfirmed != null">
+        #{boxConfirmed,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SafelunchOrderPOExample" resultType="java.lang.Long">
+    select count(*) from safelunch_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update safelunch_order
+    <set>
+      <if test="record.safboxId != null">
+        safbox_id = #{record.safboxId,jdbcType=INTEGER},
+      </if>
+      <if test="record.safelunchOrder != null">
+        safelunch_order = #{record.safelunchOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saflineId != null">
+        safline_id = #{record.saflineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.boxBarcode != null">
+        box_barcode = #{record.boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productCount != null">
+        product_count = #{record.productCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.passCount != null">
+        pass_count = #{record.passCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.failedCount != null">
+        failed_count = #{record.failedCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.isPass != null">
+        is_pass = #{record.isPass,jdbcType=BIT},
+      </if>
+      <if test="record.isCommit != null">
+        is_commit = #{record.isCommit,jdbcType=BIT},
+      </if>
+      <if test="record.checkPersonNumber != null">
+        check_person_number = #{record.checkPersonNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkPersonName != null">
+        check_person_name = #{record.checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boxPass != null">
+        box_pass = #{record.boxPass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boxFailed != null">
+        box_failed = #{record.boxFailed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boxConfirmed != null">
+        box_confirmed = #{record.boxConfirmed,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update safelunch_order
+    set safbox_id = #{record.safboxId,jdbcType=INTEGER},
+      safelunch_order = #{record.safelunchOrder,jdbcType=VARCHAR},
+      safline_id = #{record.saflineId,jdbcType=INTEGER},
+      box_barcode = #{record.boxBarcode,jdbcType=VARCHAR},
+      product_count = #{record.productCount,jdbcType=INTEGER},
+      pass_count = #{record.passCount,jdbcType=INTEGER},
+      failed_count = #{record.failedCount,jdbcType=INTEGER},
+      is_pass = #{record.isPass,jdbcType=BIT},
+      is_commit = #{record.isCommit,jdbcType=BIT},
+      check_person_number = #{record.checkPersonNumber,jdbcType=VARCHAR},
+      check_person_name = #{record.checkPersonName,jdbcType=VARCHAR},
+      box_pass = #{record.boxPass,jdbcType=VARCHAR},
+      box_failed = #{record.boxFailed,jdbcType=VARCHAR},
+      box_confirmed = #{record.boxConfirmed,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SafelunchOrderPO">
+    update safelunch_order
+    <set>
+      <if test="safelunchOrder != null">
+        safelunch_order = #{safelunchOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="saflineId != null">
+        safline_id = #{saflineId,jdbcType=INTEGER},
+      </if>
+      <if test="boxBarcode != null">
+        box_barcode = #{boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="productCount != null">
+        product_count = #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="passCount != null">
+        pass_count = #{passCount,jdbcType=INTEGER},
+      </if>
+      <if test="failedCount != null">
+        failed_count = #{failedCount,jdbcType=INTEGER},
+      </if>
+      <if test="isPass != null">
+        is_pass = #{isPass,jdbcType=BIT},
+      </if>
+      <if test="isCommit != null">
+        is_commit = #{isCommit,jdbcType=BIT},
+      </if>
+      <if test="checkPersonNumber != null">
+        check_person_number = #{checkPersonNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="boxPass != null">
+        box_pass = #{boxPass,jdbcType=VARCHAR},
+      </if>
+      <if test="boxFailed != null">
+        box_failed = #{boxFailed,jdbcType=VARCHAR},
+      </if>
+      <if test="boxConfirmed != null">
+        box_confirmed = #{boxConfirmed,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where safbox_id = #{safboxId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SafelunchOrderPO">
+    update safelunch_order
+    set safelunch_order = #{safelunchOrder,jdbcType=VARCHAR},
+      safline_id = #{saflineId,jdbcType=INTEGER},
+      box_barcode = #{boxBarcode,jdbcType=VARCHAR},
+      product_count = #{productCount,jdbcType=INTEGER},
+      pass_count = #{passCount,jdbcType=INTEGER},
+      failed_count = #{failedCount,jdbcType=INTEGER},
+      is_pass = #{isPass,jdbcType=BIT},
+      is_commit = #{isCommit,jdbcType=BIT},
+      check_person_number = #{checkPersonNumber,jdbcType=VARCHAR},
+      check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      box_pass = #{boxPass,jdbcType=VARCHAR},
+      box_failed = #{boxFailed,jdbcType=VARCHAR},
+      box_confirmed = #{boxConfirmed,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where safbox_id = #{safboxId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.ProdBoxLogPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.ProdBoxLogPO">
+    <id column="bl_id" jdbcType="INTEGER" property="blId" />
+    <result column="po_code" jdbcType="VARCHAR" property="poCode" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
+    <result column="prod_tuhao" jdbcType="VARCHAR" property="prodTuhao" />
+    <result column="prod_furnace_no" jdbcType="VARCHAR" property="prodFurnaceNo" />
+    <result column="prod_glevel" jdbcType="VARCHAR" property="prodGlevel" />
+    <result column="prod_batch_code" jdbcType="VARCHAR" property="prodBatchCode" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="box_barcode" jdbcType="VARCHAR" property="boxBarcode" />
+    <result column="box_quan" jdbcType="INTEGER" property="boxQuan" />
+    <result column="emp_number" jdbcType="VARCHAR" property="empNumber" />
+    <result column="is_wip" jdbcType="BIT" property="isWip" />
+    <result column="op_device" jdbcType="VARCHAR" property="opDevice" />
+    <result column="op_no" jdbcType="VARCHAR" property="opNo" />
+    <result column="op_desc" jdbcType="VARCHAR" property="opDesc" />
+    <result column="op_workstation" jdbcType="VARCHAR" property="opWorkstation" />
+    <result column="is_feeded" jdbcType="BIT" property="isFeeded" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    bl_id, po_code, line_id, prod_code, prod_name, prod_tuhao, prod_furnace_no, prod_glevel, 
+    prod_batch_code, customer_code, box_barcode, box_quan, emp_number, is_wip, op_device, 
+    op_no, op_desc, op_workstation, is_feeded, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdBoxLogPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prod_box_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_box_log
+    where bl_id = #{blId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prod_box_log
+    where bl_id = #{blId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdBoxLogPOExample">
+    delete from prod_box_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdBoxLogPO">
+    insert into prod_box_log (bl_id, po_code, line_id, 
+      prod_code, prod_name, prod_tuhao, 
+      prod_furnace_no, prod_glevel, prod_batch_code, 
+      customer_code, box_barcode, box_quan, 
+      emp_number, is_wip, op_device, 
+      op_no, op_desc, op_workstation, 
+      is_feeded, create_time)
+    values (#{blId,jdbcType=INTEGER}, #{poCode,jdbcType=VARCHAR}, #{lineId,jdbcType=INTEGER}, 
+      #{prodCode,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR}, #{prodTuhao,jdbcType=VARCHAR}, 
+      #{prodFurnaceNo,jdbcType=VARCHAR}, #{prodGlevel,jdbcType=VARCHAR}, #{prodBatchCode,jdbcType=VARCHAR}, 
+      #{customerCode,jdbcType=VARCHAR}, #{boxBarcode,jdbcType=VARCHAR}, #{boxQuan,jdbcType=INTEGER}, 
+      #{empNumber,jdbcType=VARCHAR}, #{isWip,jdbcType=BIT}, #{opDevice,jdbcType=VARCHAR}, 
+      #{opNo,jdbcType=VARCHAR}, #{opDesc,jdbcType=VARCHAR}, #{opWorkstation,jdbcType=VARCHAR}, 
+      #{isFeeded,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdBoxLogPO">
+    insert into prod_box_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blId != null">
+        bl_id,
+      </if>
+      <if test="poCode != null">
+        po_code,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="prodName != null">
+        prod_name,
+      </if>
+      <if test="prodTuhao != null">
+        prod_tuhao,
+      </if>
+      <if test="prodFurnaceNo != null">
+        prod_furnace_no,
+      </if>
+      <if test="prodGlevel != null">
+        prod_glevel,
+      </if>
+      <if test="prodBatchCode != null">
+        prod_batch_code,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="boxBarcode != null">
+        box_barcode,
+      </if>
+      <if test="boxQuan != null">
+        box_quan,
+      </if>
+      <if test="empNumber != null">
+        emp_number,
+      </if>
+      <if test="isWip != null">
+        is_wip,
+      </if>
+      <if test="opDevice != null">
+        op_device,
+      </if>
+      <if test="opNo != null">
+        op_no,
+      </if>
+      <if test="opDesc != null">
+        op_desc,
+      </if>
+      <if test="opWorkstation != null">
+        op_workstation,
+      </if>
+      <if test="isFeeded != null">
+        is_feeded,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blId != null">
+        #{blId,jdbcType=INTEGER},
+      </if>
+      <if test="poCode != null">
+        #{poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null">
+        #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="prodTuhao != null">
+        #{prodTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="prodFurnaceNo != null">
+        #{prodFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodGlevel != null">
+        #{prodGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBatchCode != null">
+        #{prodBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="boxBarcode != null">
+        #{boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="boxQuan != null">
+        #{boxQuan,jdbcType=INTEGER},
+      </if>
+      <if test="empNumber != null">
+        #{empNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isWip != null">
+        #{isWip,jdbcType=BIT},
+      </if>
+      <if test="opDevice != null">
+        #{opDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="opNo != null">
+        #{opNo,jdbcType=VARCHAR},
+      </if>
+      <if test="opDesc != null">
+        #{opDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="opWorkstation != null">
+        #{opWorkstation,jdbcType=VARCHAR},
+      </if>
+      <if test="isFeeded != null">
+        #{isFeeded,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdBoxLogPOExample" resultType="java.lang.Long">
+    select count(*) from prod_box_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_box_log
+    <set>
+      <if test="record.blId != null">
+        bl_id = #{record.blId,jdbcType=INTEGER},
+      </if>
+      <if test="record.poCode != null">
+        po_code = #{record.poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodName != null">
+        prod_name = #{record.prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodTuhao != null">
+        prod_tuhao = #{record.prodTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodFurnaceNo != null">
+        prod_furnace_no = #{record.prodFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodGlevel != null">
+        prod_glevel = #{record.prodGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodBatchCode != null">
+        prod_batch_code = #{record.prodBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boxBarcode != null">
+        box_barcode = #{record.boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boxQuan != null">
+        box_quan = #{record.boxQuan,jdbcType=INTEGER},
+      </if>
+      <if test="record.empNumber != null">
+        emp_number = #{record.empNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isWip != null">
+        is_wip = #{record.isWip,jdbcType=BIT},
+      </if>
+      <if test="record.opDevice != null">
+        op_device = #{record.opDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opNo != null">
+        op_no = #{record.opNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opDesc != null">
+        op_desc = #{record.opDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opWorkstation != null">
+        op_workstation = #{record.opWorkstation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFeeded != null">
+        is_feeded = #{record.isFeeded,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_box_log
+    set bl_id = #{record.blId,jdbcType=INTEGER},
+      po_code = #{record.poCode,jdbcType=VARCHAR},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      prod_name = #{record.prodName,jdbcType=VARCHAR},
+      prod_tuhao = #{record.prodTuhao,jdbcType=VARCHAR},
+      prod_furnace_no = #{record.prodFurnaceNo,jdbcType=VARCHAR},
+      prod_glevel = #{record.prodGlevel,jdbcType=VARCHAR},
+      prod_batch_code = #{record.prodBatchCode,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      box_barcode = #{record.boxBarcode,jdbcType=VARCHAR},
+      box_quan = #{record.boxQuan,jdbcType=INTEGER},
+      emp_number = #{record.empNumber,jdbcType=VARCHAR},
+      is_wip = #{record.isWip,jdbcType=BIT},
+      op_device = #{record.opDevice,jdbcType=VARCHAR},
+      op_no = #{record.opNo,jdbcType=VARCHAR},
+      op_desc = #{record.opDesc,jdbcType=VARCHAR},
+      op_workstation = #{record.opWorkstation,jdbcType=VARCHAR},
+      is_feeded = #{record.isFeeded,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdBoxLogPO">
+    update prod_box_log
+    <set>
+      <if test="poCode != null">
+        po_code = #{poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null">
+        prod_name = #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="prodTuhao != null">
+        prod_tuhao = #{prodTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="prodFurnaceNo != null">
+        prod_furnace_no = #{prodFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodGlevel != null">
+        prod_glevel = #{prodGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBatchCode != null">
+        prod_batch_code = #{prodBatchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="boxBarcode != null">
+        box_barcode = #{boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="boxQuan != null">
+        box_quan = #{boxQuan,jdbcType=INTEGER},
+      </if>
+      <if test="empNumber != null">
+        emp_number = #{empNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isWip != null">
+        is_wip = #{isWip,jdbcType=BIT},
+      </if>
+      <if test="opDevice != null">
+        op_device = #{opDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="opNo != null">
+        op_no = #{opNo,jdbcType=VARCHAR},
+      </if>
+      <if test="opDesc != null">
+        op_desc = #{opDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="opWorkstation != null">
+        op_workstation = #{opWorkstation,jdbcType=VARCHAR},
+      </if>
+      <if test="isFeeded != null">
+        is_feeded = #{isFeeded,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where bl_id = #{blId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.ProdBoxLogPO">
+    update prod_box_log
+    set po_code = #{poCode,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=INTEGER},
+      prod_code = #{prodCode,jdbcType=VARCHAR},
+      prod_name = #{prodName,jdbcType=VARCHAR},
+      prod_tuhao = #{prodTuhao,jdbcType=VARCHAR},
+      prod_furnace_no = #{prodFurnaceNo,jdbcType=VARCHAR},
+      prod_glevel = #{prodGlevel,jdbcType=VARCHAR},
+      prod_batch_code = #{prodBatchCode,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      box_barcode = #{boxBarcode,jdbcType=VARCHAR},
+      box_quan = #{boxQuan,jdbcType=INTEGER},
+      emp_number = #{empNumber,jdbcType=VARCHAR},
+      is_wip = #{isWip,jdbcType=BIT},
+      op_device = #{opDevice,jdbcType=VARCHAR},
+      op_no = #{opNo,jdbcType=VARCHAR},
+      op_desc = #{opDesc,jdbcType=VARCHAR},
+      op_workstation = #{opWorkstation,jdbcType=VARCHAR},
+      is_feeded = #{isFeeded,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where bl_id = #{blId,jdbcType=INTEGER}
+  </update>
+</mapper>
