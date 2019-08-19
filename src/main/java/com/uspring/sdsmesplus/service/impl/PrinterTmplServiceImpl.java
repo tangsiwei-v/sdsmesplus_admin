@@ -1,11 +1,9 @@
 package com.uspring.sdsmesplus.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -22,7 +20,7 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 	private SysPrinterTmplDao sysPrinterTmplDao;
 
 	//条码模板主数据
-	public PageInfo<SysPrinterTmplPO> printerTmpl(String prod_code, String customer_code, Integer fcId,
+	public PageInfo<SysPrinterTmplPO> printerTmpl(Integer prod_code, String customer_code, Integer fcId,
 			Integer page_size, Integer page_num) {
 		SysPrinterTmplPOExample sysPrinterTmplPOExample = new SysPrinterTmplPOExample();
 		Criteria createCriteria = sysPrinterTmplPOExample.createCriteria();
@@ -48,28 +46,6 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 		}
 		PageInfo<SysPrinterTmplPO> pageInfo = new PageInfo<SysPrinterTmplPO>(sysPrinterTmplPOs);
 		return pageInfo;
-	}
-
-	//添加产品条码模板规则
-	public void insertPrinterTmpl(SysPrinterTmplPO printerTmpl) {
-		sysPrinterTmplDao.insertSelective(printerTmpl);
-	}
-	
-	//条码模板上传
-	public void updatePrinterTmpl(String prod_code, String customer_code, MultipartFile file) throws Exception {
-		SysPrinterTmplPOExample tmplPOExample = new SysPrinterTmplPOExample();
-		tmplPOExample.createCriteria().andProdCodeEqualTo(prod_code).andCustomerCodeEqualTo(customer_code);
-		
-		SysPrinterTmplPO printerTmpl = new SysPrinterTmplPO();
-		byte[] imgBytes = file.getBytes();
-		printerTmpl.setPtFileBinary(imgBytes);
-		printerTmpl.setPtFileUpdatetime(new Date());
-		sysPrinterTmplDao.updateByExampleSelective(printerTmpl, tmplPOExample);
-	}
-
-	//删除产品条码模板规则
-	public void deletePrinterTmpl(Integer ptmplId) {
-		sysPrinterTmplDao.deleteByPrimaryKey(ptmplId);
 	}
 
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.BoxInfoPO;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
+import com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.enums.StatusCode;
 import com.uspring.sdsmesplus.service.PackBoxService;
@@ -90,7 +91,7 @@ public class PackBoxController extends BaseController {
 	public Result searchBoxInfo(HttpServletResponse response, @PathVariable("prod_code") String prod_code,
 			@RequestParam(value = "customer_code", required = true) String customer_code,
 			@RequestParam(value = "fc_id", required = false) Integer fc_id) {
-		BoxInfoPO queryboxLog = packBoxService.queryboxLog(prod_code, customer_code, fc_id);
+		BoxInfoPO queryboxLog = packBoxService.queryboxLog(prod_code,customer_code,fc_id);
 		return new Result("sucess", queryboxLog, StatusCode.SUCCESS);
 	}
 
@@ -128,19 +129,21 @@ public class PackBoxController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/item", method = RequestMethod.POST)
 	@ApiOperation(value = "添加装箱数主数据", notes = "添加装箱数主数据", response = Result.class)
-	public Result insertBoxInfo(HttpServletResponse response, @RequestBody BoxInfoPO boxInfo) {
+	public Result insertBoxInfo(HttpServletResponse response,
+			@RequestBody BoxInfoPO boxInfo) {
 		packBoxService.insertBoxInfo(boxInfo);
 		return new Result("添加成功", "success", StatusCode.SUCCESS);
 	}
-
+	
 	@ResponseBody
 	@RequestMapping(value = "/item", method = RequestMethod.PUT)
 	@ApiOperation(value = "修改装箱数主数据", notes = "修改装箱数主数据", response = Result.class)
-	public Result updateBoxInfo(HttpServletResponse response, @RequestBody BoxInfoPO boxInfo) {
+	public Result updateBoxInfo(HttpServletResponse response,
+			@RequestBody BoxInfoPO boxInfo) {
 		packBoxService.updateBoxInfo(boxInfo);
 		return new Result("修改成功", "success", StatusCode.SUCCESS);
 	}
-
+	
 	@ResponseBody
 	@RequestMapping(value = "/item/{bifId}", method = RequestMethod.DELETE)
 	@ApiOperation(value = "删除装箱数主数据", notes = "删除装箱数主数据", response = Result.class)
@@ -148,7 +151,7 @@ public class PackBoxController extends BaseController {
 		packBoxService.deleteBoxInfo(bifId);
 		return new Result("删除成功", "success", StatusCode.SUCCESS);
 	}
-
+	
 	// 主数据查询
 	@ResponseBody
 	@RequestMapping(value = "/standard", method = RequestMethod.GET)
@@ -159,8 +162,8 @@ public class PackBoxController extends BaseController {
 			@RequestParam(value = "fcId", required = false) Integer fcId,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
 			@RequestParam(value = "page_num", required = false) Integer page_num) {
-		PageInfo<BoxInfoPO> queryboxLog = packBoxService.standard(prod_code, customer_code, fcId, page_size, page_num);
+		PageInfo<BoxInfoPO> queryboxLog = packBoxService.standard(prod_code, customer_code, fcId,page_size,page_num);
 		return new Result("sucess", queryboxLog, StatusCode.SUCCESS);
 	}
-
+	
 }
