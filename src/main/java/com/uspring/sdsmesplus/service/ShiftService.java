@@ -93,4 +93,25 @@ public interface ShiftService {
 	* @return  班次实体类
 	*/
 	public PageInfo<ShiftPO> getShift(Integer fcId, Integer page_size, Integer page_num);
+
+	/**
+	 * @Title: insertShift
+	 * @Description:添加班次 
+	 * @param shift 班次实体类
+	 */
+	public void insertShift(ShiftPO shift);
+
+	/**
+	 * @Title: updateShift
+	 * @Description:修改班次 
+	 * @param shift 班次实体类
+	 */
+	public void updateShift(ShiftPO shift);
+
+	/**
+	 * @Title: deleteShift
+	 * @Description:删除班次
+	 * @param sfId 班次ID
+	 */
+	public void deleteShift(Integer sfId);
 }

@@ -30,7 +30,7 @@ public class DictDataServiceImpl implements DictDataService{
 	public PageInfo<DictDataPO> queryDictData(String dt_code, Integer page_size, Integer page_num) {
 		DictDataPOExample dictDataPOExample = new DictDataPOExample();
 		Criteria createCriteria = dictDataPOExample.createCriteria();
-		if(dt_code != null) {
+		if(dt_code != null && !dt_code.equals("")) {
 			createCriteria.andDtCodeEqualTo(dt_code);
 		}
 		if (page_num == null) {
@@ -43,6 +43,21 @@ public class DictDataServiceImpl implements DictDataService{
 		List<DictDataPO> dictDataPOs = dictDataPODao.selectByExample(dictDataPOExample);
 		PageInfo<DictDataPO> pageInfo = new PageInfo<DictDataPO>(dictDataPOs);
 		return pageInfo;
+	}
+
+	//添加字典主数据
+	public void insertDictData(DictDataPO dictDataPO) {
+		dictDataPODao.insertSelective(dictDataPO);
+	}
+
+	//修改字典主数据
+	public void updateDictData(DictDataPO dictDataPO) {
+		dictDataPODao.updateByPrimaryKey(dictDataPO);
+	}
+
+	//删除字典主数据
+	public void deleteDictData(Integer ddId) {
+		dictDataPODao.deleteByPrimaryKey(ddId);
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.BoxInfoPO;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
+import com.uspring.sdsmesplus.entity.vo.BoxInfoVO;
 import com.uspring.sdsmesplus.wms.entity.Package;
 
 /**
@@ -53,7 +54,7 @@ public interface PackBoxService {
 	void updateBoxInfo(BoxInfoPO boxInfo);
 	
 	//查询额定装箱数主数据
-	PageInfo<BoxInfoPO> standard(Integer prod_code, String customer_code, Integer fcId, Integer page_size,
+	PageInfo<BoxInfoVO> standard(Integer prod_code, String customer_code, Integer fcId, Integer page_size,
 			Integer page_num);
 	
 	//删除装箱数主数据

@@ -101,7 +101,7 @@ public class ShiftServiceImpl implements ShiftService{
 		return shiftOfTime;
 	}
 
-	@Override
+	//产线主数据
 	public PageInfo<ShiftPO> getShift(Integer fcId, Integer page_size, Integer page_num) {
 		ShiftPOExample shift = new ShiftPOExample();
 		Criteria createCriteria = shift.createCriteria();
@@ -117,6 +117,21 @@ public class ShiftServiceImpl implements ShiftService{
 		List<ShiftPO> shiftPOs = shiftPODao.selectByExample(shift);
 		PageInfo<ShiftPO> pageInfo = new PageInfo<ShiftPO>(shiftPOs);
 		return pageInfo;
+	}
+
+	//添加班次
+	public void insertShift(ShiftPO shift) {
+		shiftPODao.insertSelective(shift);
+	}
+
+	//修改班次
+	public void updateShift(ShiftPO shift) {
+		shiftPODao.updateByPrimaryKey(shift);
+	}
+
+	//删除班次
+	public void deleteShift(Integer sfId) {
+		shiftPODao.deleteByPrimaryKey(sfId);
 	}
 
 }

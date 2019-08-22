@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,6 +99,30 @@ public class DepartmentController extends BaseController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/line/item", method = RequestMethod.POST)
+	@ApiOperation(value = "添加产线主数据", notes = "添加产线主数据", response = Result.class)
+	public Result insertLine(HttpServletResponse response, @RequestBody SysLinePO linePO) {
+		sysLineService.insertLine(linePO);
+		return new Result("添加成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/line/item", method = RequestMethod.PUT)
+	@ApiOperation(value = "修改产线主数据", notes = "修改产线主数据", response = Result.class)
+	public Result updateLine(HttpServletResponse response, @RequestBody SysLinePO linePO) {
+		sysLineService.updateLine(linePO);
+		return new Result("修改成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/line/item/{lineId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除产线主数据", notes = "删除产线主数据", response = Result.class)
+	public Result deleteLine(HttpServletResponse response, @PathVariable("lineId") Integer lineId) {
+		sysLineService.deleteLine(lineId);
+		return new Result("删除成功", "success", StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/vsm", method = RequestMethod.GET)
 	@ApiOperation(value = "查询工段主数据", notes = "查询工段主数据", response = Result.class)
 	public Result queryVsm(HttpServletResponse response,
@@ -107,6 +132,30 @@ public class DepartmentController extends BaseController {
 			@RequestParam(value = "page_num", required = false) Integer page_num) {
 		PageInfo<SysVsmPO> vsms  = sysVsmServer.queryVsm(shopId, vsmId, page_size, page_num);
 		return new Result("查询成功", vsms, StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/vsm/item", method = RequestMethod.POST)
+	@ApiOperation(value = "添加工段主数据", notes = "添加工段主数据", response = Result.class)
+	public Result insertVsm(HttpServletResponse response, @RequestBody SysVsmPO vsm) {
+		sysVsmServer.insertVsm(vsm);
+		return new Result("添加成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/vsm/item", method = RequestMethod.PUT)
+	@ApiOperation(value = "修改工段主数据", notes = "修改工段主数据", response = Result.class)
+	public Result updateVsm(HttpServletResponse response, @RequestBody SysVsmPO vsm) {
+		sysVsmServer.updateVsm(vsm);
+		return new Result("修改成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/vsm/item/{vsmId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除工段主数据", notes = "删除工段主数据", response = Result.class)
+	public Result deleteVsm(HttpServletResponse response, @PathVariable("vsmId") Integer vsmId) {
+		sysVsmServer.deleteVsm(vsmId);
+		return new Result("删除成功", "success", StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
@@ -122,6 +171,30 @@ public class DepartmentController extends BaseController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/workshop/item", method = RequestMethod.POST)
+	@ApiOperation(value = "添加车间主数据", notes = "添加车间主数据", response = Result.class)
+	public Result insertWorkshop(HttpServletResponse response, @RequestBody SysWorkshopPO workshop) {
+		workShopServer.insertWorkshop(workshop);
+		return new Result("添加成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/workshop/item", method = RequestMethod.PUT)
+	@ApiOperation(value = "修改车间主数据", notes = "修改车间主数据", response = Result.class)
+	public Result updateWorkshop(HttpServletResponse response, @RequestBody SysWorkshopPO workshop) {
+		workShopServer.updateWorkshop(workshop);
+		return new Result("修改成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/workshop/item/{shopId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除车间主数据", notes = "删除车间主数据", response = Result.class)
+	public Result deleteWorkshop(HttpServletResponse response, @PathVariable("shopId") Integer shopId) {
+		workShopServer.deleteWorkshop(shopId);
+		return new Result("删除成功", "success", StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/factory", method = RequestMethod.GET)
 	@ApiOperation(value = "查询工厂主数据", notes = "查询工厂主数据", response = Result.class)
 	public Result queryFactorys(HttpServletResponse response,
@@ -131,4 +204,30 @@ public class DepartmentController extends BaseController {
 		PageInfo<SysFactoryPO> factorys  = sysFactoryService.queryFactorys(fcId, page_size, page_num);
 		return new Result("查询成功", factorys, StatusCode.SUCCESS);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/factory/item", method = RequestMethod.POST)
+	@ApiOperation(value = "添加工厂主数据", notes = "添加工厂主数据", response = Result.class)
+	public Result insertFactory(HttpServletResponse response, @RequestBody SysFactoryPO factory) {
+		sysFactoryService.insertFactory(factory);
+		return new Result("添加成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/factory/item", method = RequestMethod.PUT)
+	@ApiOperation(value = "修改工厂主数据", notes = "修改工厂主数据", response = Result.class)
+	public Result updateFactory(HttpServletResponse response, @RequestBody SysFactoryPO factory) {
+		sysFactoryService.updateFactory(factory);
+		return new Result("修改成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/factory/item/{fcId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除工厂主数据", notes = "删除工厂主数据", response = Result.class)
+	public Result deleteFactory(HttpServletResponse response, @PathVariable("fcId") Integer fcId) {
+		sysFactoryService.deleteFactory(fcId);
+		return new Result("删除成功", "success", StatusCode.SUCCESS);
+	}
+	
+	
 }

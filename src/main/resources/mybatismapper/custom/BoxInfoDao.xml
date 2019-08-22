@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.BoxInfoDao">
+  <resultMap id="BoxInfoMap" type="com.uspring.sdsmesplus.entity.vo.BoxInfoVO">
+    <id column="bif_id" jdbcType="INTEGER" property="bifId" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="bif_count" jdbcType="INTEGER" property="bifCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <collection property="factorys" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+        <id column="ffc_id" jdbcType="INTEGER" property="fcId" />
+    	<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    	<result column="fc_name" jdbcType="VARCHAR" property="fcName" />
+    	<result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
+    	<result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
+    	<result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
+    </collection>
+  </resultMap>
+  <select id="standard" resultMap="BoxInfoMap">
+  	 	select b.bif_id,b.fc_id,b.prod_code,b.customer_code,b.bif_count,b.create_time,
+				f.fc_id ff_id,f.fc_name
+ 	 	 from sys_box_info b left join sys_factory f 
+ 	  			on b.fc_id=f.fc_id
+ 	 	 where 1 = 1
+ 	 	<if test="prod_code != null">
+			and b.prod_code = #{prod_code}
+		</if>
+		<if test="customer_code != null">
+			and b.customer_code = #{customer_code}
+		</if>
+		<if test="fcId != null">
+			and b.fc_id = #{fcId}
+		</if>
+  </select>
+</mapper>

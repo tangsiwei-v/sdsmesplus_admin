@@ -65,4 +65,25 @@ public interface SafelunchService {
 	*/
 	PageInfo<SafelunchWorkLinePO> queryWorkLine(Integer fcId, Integer page_size, Integer page_num);
 
+	/**
+	 * @Title: queryWorkLine
+	 * @Description: 添加SafeLunch产线主数据
+	 * @param safelunchWorkLinePO safelunch实体类
+	 */
+	void insertSafeLunch(SafelunchWorkLinePO safelunchWorkLinePO);
+
+	/**
+	 * @Title: updateSafeLunch
+	 * @Description: 修改SafeLunch产线主数据
+	 * @param safelunchWorkLinePO safelunch实体类
+	 */
+	void updateSafeLunch(SafelunchWorkLinePO safelunchWorkLinePO);
+
+	/**
+	 * @Title: deleteSafeLunch
+	 * @Description: 删除SafeLunch产线主数据
+	 * @param saflineId
+	 */
+	void deleteSafeLunch(Integer saflineId);
+
 }

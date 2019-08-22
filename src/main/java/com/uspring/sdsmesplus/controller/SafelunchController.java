@@ -90,10 +90,34 @@ public class SafelunchController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/workline", method = RequestMethod.GET)
 	@ApiOperation(value = "查询SafeLunch产线主数据", notes = "查询SafeLunch产线主数据", response = Result.class)
-	public Result queryOrder(HttpServletResponse response, @RequestParam(value = "fcId", required = false) Integer fcId,
+	public Result querySafeLunch(HttpServletResponse response, @RequestParam(value = "fcId", required = false) Integer fcId,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
 			@RequestParam(value = "page_num", required = false) Integer page_num) {
 		PageInfo<SafelunchWorkLinePO> safelunchWorkLines = safelunchService.queryWorkLine(fcId, page_size, page_num);
 		return new Result("success", safelunchWorkLines, StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/workline/item", method = RequestMethod.POST)
+	@ApiOperation(value = "添加SafeLunch产线主数据", notes = "添加SafeLunch产线主数据", response = Result.class)
+	public Result insertSafeLunch(HttpServletResponse response, @RequestBody SafelunchWorkLinePO safelunchWorkLinePO) {
+		safelunchService.insertSafeLunch(safelunchWorkLinePO);
+		return new Result("添加成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/workline/item", method = RequestMethod.PUT)
+	@ApiOperation(value = "修改SafeLunch产线主数据", notes = "修改SafeLunch产线主数据", response = Result.class)
+	public Result updateSafeLunch(HttpServletResponse response, @RequestBody SafelunchWorkLinePO safelunchWorkLinePO) {
+		safelunchService.updateSafeLunch(safelunchWorkLinePO);
+		return new Result("修改成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/workline/item/{saflineId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除SafeLunch产线主数据", notes = "删除字SafeLunch产线主数据", response = Result.class)
+	public Result deleteSafeLunch(HttpServletResponse response, @PathVariable("saflineId") Integer saflineId) {
+		safelunchService.deleteSafeLunch(saflineId);
+		return new Result("删除成功", "success", StatusCode.SUCCESS);
 	}
 }

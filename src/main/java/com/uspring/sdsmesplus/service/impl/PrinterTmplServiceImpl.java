@@ -32,10 +32,10 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 		if (page_size == null) {
 			page_size = 1000;
 		}
-		if (prod_code != null) {
+		if (prod_code != null && !prod_code.equals("")) {
 			createCriteria.andProdCodeEqualTo(String.valueOf(prod_code));
 		}
-		if (customer_code != null) {
+		if (customer_code != null && !customer_code.equals("")) {
 			createCriteria.andCustomerCodeEqualTo(customer_code);
 		}
 		if (fcId != null) {
@@ -52,6 +52,7 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 
 	//添加产品条码模板规则
 	public void insertPrinterTmpl(SysPrinterTmplPO printerTmpl) {
+		printerTmpl.setPtmplId(null);
 		sysPrinterTmplDao.insertSelective(printerTmpl);
 	}
 	

@@ -194,4 +194,19 @@ public class SafelunchServiceImpl implements SafelunchService {
 		return pageInfo;
 	}
 
+	//添加SafeLunch产线主数据
+	public void insertSafeLunch(SafelunchWorkLinePO safelunchWorkLinePO) {
+		safelunchWorkLinePODao.insertSelective(safelunchWorkLinePO);
+	}
+
+	//修改SafeLunch产线主数据
+	public void updateSafeLunch(SafelunchWorkLinePO safelunchWorkLinePO) {
+		safelunchWorkLinePODao.updateByPrimaryKey(safelunchWorkLinePO);
+	}
+
+	//删除SafeLunch产线主数据
+	public void deleteSafeLunch(Integer saflineId) {
+		safelunchWorkLinePODao.deleteByPrimaryKey(saflineId);
+	}
+
 }

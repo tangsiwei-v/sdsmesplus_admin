@@ -35,13 +35,28 @@ public class DeviceServiceImpl implements DeviceService{
 		if(devId != null) {
 			createCriteria.andDevIdEqualTo(devId);
 		}
-		if(dev_code != null) {
+		if(dev_code != null && !dev_code.equals("")) {
 			createCriteria.andDevCodeEqualTo(dev_code);
 		}
 		PageHelper.startPage(page_num, page_size);
 		List<DevicePO> devicePOs = devicePODao.selectByExample(devicePOExample);
 		PageInfo<DevicePO> pageInfo = new PageInfo<DevicePO>(devicePOs);
 		return pageInfo;
+	}
+
+	//添加设备主数据
+	public void insertDevice(DevicePO devicePO) {
+		devicePODao.insertSelective(devicePO);
+	}
+
+	//修改设备主数据
+	public void updateDevice(DevicePO devicePO) {
+		devicePODao.updateByPrimaryKey(devicePO);
+	}
+
+	//删除设备主数据
+	public void deleteDevice(Integer devId) {
+		devicePODao.deleteByPrimaryKey(devId);
 	}
 
 }

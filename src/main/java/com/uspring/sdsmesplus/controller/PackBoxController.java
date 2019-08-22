@@ -1,11 +1,3 @@
-/**
- * @Title: OrderController.java
- * @Package com.uspring.sdsmesplus.controller
- * @Description: TODO(用一句话描述该文件做什么)
- * @author chengtengfei 
- * @date 2019年6月18日 上午11:40:41
- * @version V1.0
- */
 package com.uspring.sdsmesplus.controller;
 
 import java.util.List;
@@ -19,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.BoxInfoPO;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
+import com.uspring.sdsmesplus.entity.vo.BoxInfoVO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.enums.StatusCode;
 import com.uspring.sdsmesplus.service.PackBoxService;
@@ -149,7 +142,7 @@ public class PackBoxController extends BaseController {
 		return new Result("删除成功", "success", StatusCode.SUCCESS);
 	}
 
-	// 主数据查询
+	// 装箱数主数据查询
 	@ResponseBody
 	@RequestMapping(value = "/standard", method = RequestMethod.GET)
 	@ApiOperation(value = "查询产品装箱主数据", response = Result.class)
@@ -159,7 +152,7 @@ public class PackBoxController extends BaseController {
 			@RequestParam(value = "fcId", required = false) Integer fcId,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
 			@RequestParam(value = "page_num", required = false) Integer page_num) {
-		PageInfo<BoxInfoPO> queryboxLog = packBoxService.standard(prod_code, customer_code, fcId, page_size, page_num);
+		PageInfo<BoxInfoVO> queryboxLog = packBoxService.standard(prod_code, customer_code, fcId, page_size, page_num);
 		return new Result("sucess", queryboxLog, StatusCode.SUCCESS);
 	}
 
