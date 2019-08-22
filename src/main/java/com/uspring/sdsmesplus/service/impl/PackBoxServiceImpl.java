@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.common.UUIDUtil;
+import com.uspring.sdsmesplus.dao.BoxInfoDao;
 import com.uspring.sdsmesplus.dao.LineStoragebinDao;
 import com.uspring.sdsmesplus.dao.PlanOpBomDao;
 import com.uspring.sdsmesplus.dao.PlanOrderDao;
@@ -52,6 +53,7 @@ import com.uspring.sdsmesplus.entity.po.SysBinStockPOExample;
 import com.uspring.sdsmesplus.entity.po.SysLinePO;
 import com.uspring.sdsmesplus.entity.po.SysLinePOExample;
 import com.uspring.sdsmesplus.entity.po.SysStoragebinPO;
+import com.uspring.sdsmesplus.entity.vo.BoxInfoVO;
 import com.uspring.sdsmesplus.entity.vo.PlanOrderProVo;
 import com.uspring.sdsmesplus.entity.vo.PlanOrderVO;
 import com.uspring.sdsmesplus.enums.FinishedProductStatus;
@@ -130,6 +132,9 @@ public class PackBoxServiceImpl implements PackBoxService {
 
 	@Autowired
 	private SysLinePODao sysLineDao;
+	
+	@Autowired
+	private BoxInfoDao boxInfoDao;
 
 	private final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
@@ -239,7 +244,7 @@ public class PackBoxServiceImpl implements PackBoxService {
 		}
 		List<MaterialSubmitHelper> matBomHelps = new ArrayList<MaterialSubmitHelper>();
 		for (PlanOpBomPO orderBomMat : orderBom) {
-			
+
 			MaterialSubmitHelper matBomHelp = new MaterialSubmitHelper();
 			matBomHelp.setMatnr(orderBomMat.getMaterialCode());
 			matBomHelp.setMeins(orderBomMat.getMaterialUnit());
@@ -251,30 +256,28 @@ public class PackBoxServiceImpl implements PackBoxService {
 						StorageBinType.LineOil.getCode());
 				SysBinStockPOExample binexm = new SysBinStockPOExample();
 				binexm.createCriteria().andSapMatCodeEqualTo(orderBomMat.getMaterialCode())
-						.andTargetBinTypeEqualTo(binOil.getWarehouseLoc())
-						.andBoxQuanGreaterThan(new BigDecimal(0));
+						.andTargetBinTypeEqualTo(binOil.getWarehouseLoc()).andBoxQuanGreaterThan(new BigDecimal(0));
 				binexm.setOrderByClause("box_rcv_time DESC");
 				List<SysBinStockPO> sysBinStockPOs = sysBinStockPODao.selectByExample(binexm);
-				if(sysBinStockPOs.size() == 0) {
-					throw new ServiceException("物料"+ orderBomMat.getMaterialCode() +"未上料，无法报交");
+				if (sysBinStockPOs.size() == 0) {
+					throw new ServiceException("物料" + orderBomMat.getMaterialCode() + "未上料，无法报交");
 				}
 				matBomHelp.setCharg(sysBinStockPOs.get(0).getMatBatchNo());
 			} else {
 				ProdOrderStockPOExample stockExample = new ProdOrderStockPOExample();
 				stockExample.createCriteria().andPoCodeEqualTo(order.getPoCode())
-						.andMatCodeEqualTo(orderBomMat.getMaterialCode())
-						.andIsCleanedEqualTo(false);
+						.andMatCodeEqualTo(orderBomMat.getMaterialCode()).andIsCleanedEqualTo(false);
 				stockExample.setOrderByClause("update_time DESC");
 				List<ProdOrderStockPO> stocks = prodOrderStockPODao.selectByExample(stockExample);
-				
-				if(stocks.size() == 0)
-					throw new ServiceException("物料"+ orderBomMat.getMaterialCode() +"未上料，无法报交");
+
+				if (stocks.size() == 0)
+					throw new ServiceException("物料" + orderBomMat.getMaterialCode() + "未上料，无法报交");
 				ProdOrderStockPO stock = stocks.get(0);
 				matBomHelp.setCharg(stock.getMatBatchNo());
 			}
-			
+
 			double consume = orderBomMat.getMaterialCount() * boxLog.getBoxQuan();
-			
+
 			matBomHelp.setLgnum(orderBomMat.getMaterialStloc());
 			matBomHelp.setBdmng("" + consume);
 			matBomHelps.add(matBomHelp);
@@ -742,13 +745,7 @@ public class PackBoxServiceImpl implements PackBoxService {
 
 		BoxInfoPOExample boxinfo = new BoxInfoPOExample();
 		Criteria createCriteria = boxinfo.createCriteria();
-		createCriteria.andProdCodeEqualTo(prod_code);
-		if (customer_code != null) {
-			createCriteria.andCustomerCodeEqualTo(customer_code);
-		}
-		if (fc_id != null) {
-			createCriteria.andFcIdEqualTo(fc_id);
-		}
+		createCriteria.andProdCodeEqualTo(prod_code).andCustomerCodeEqualTo(customer_code).andFcIdEqualTo(fc_id);
 		List<BoxInfoPO> selectByExample = boxInfoPODao.selectByExample(boxinfo);
 		return selectByExample.get(0);
 	}
@@ -823,45 +820,34 @@ public class PackBoxServiceImpl implements PackBoxService {
 		printerService.printMatBoxBarcode(pkg, box.getLineId());
 	}
 
-	//添加装箱数主数据
+	// 添加装箱数主数据
 	public void insertBoxInfo(BoxInfoPO boxInfo) {
-		boxInfoPODao.insertSelective(boxInfo);
+		boxInfoDao.insertSelective(boxInfo);
 	}
 
-	//修改装箱数主数据
+	// 修改装箱数主数据
 	public void updateBoxInfo(BoxInfoPO boxInfo) {
-		boxInfoPODao.updateByPrimaryKey(boxInfo);
+		boxInfoDao.updateByPrimaryKey(boxInfo);
 	}
-	
-	//查询额定装箱数主数据
-	public PageInfo<BoxInfoPO> standard(Integer prod_code, String customer_code, Integer fcId, Integer page_size,
+
+	// 查询额定装箱数主数据
+	public PageInfo<BoxInfoVO> standard(Integer prod_code, String customer_code, Integer fcId, Integer page_size,
 			Integer page_num) {
-		BoxInfoPOExample boxInfoPOExample = new BoxInfoPOExample();
-		Criteria createCriteria = boxInfoPOExample.createCriteria();
 		if (page_num == null) {
 			page_num = 1;
 		}
 		if (page_size == null) {
 			page_size = 1000;
 		}
-		if (prod_code != null) {
-			createCriteria.andProdCodeEqualTo(String.valueOf(prod_code));
-		}
-		if (customer_code != null) {
-			createCriteria.andCustomerCodeEqualTo(customer_code);
-		}
-		if (fcId != null) {
-			createCriteria.andFcIdEqualTo(fcId);
-		}
 		PageHelper.startPage(page_num, page_size);
-		List<BoxInfoPO> boxInfoPOs = boxInfoPODao.selectByExample(boxInfoPOExample);
-		PageInfo<BoxInfoPO> pageInfo = new PageInfo<BoxInfoPO>(boxInfoPOs);
+		List<BoxInfoVO> standard = boxInfoDao.standard(prod_code, customer_code, fcId, page_size, page_num);
+		PageInfo<BoxInfoVO> pageInfo = new PageInfo<BoxInfoVO>(standard);
 		return pageInfo;
 	}
 
-	//删除装箱数主数据
+	// 删除装箱数主数据
 	public void deleteBoxInfo(Integer bifId) {
-		boxInfoPODao.deleteByPrimaryKey(bifId);
+		boxInfoDao.deleteByPrimaryKey(bifId);
 	}
 
 }

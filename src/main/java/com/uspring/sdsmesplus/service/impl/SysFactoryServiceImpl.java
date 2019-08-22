@@ -53,4 +53,19 @@ public class SysFactoryServiceImpl implements SysFactoryService{
 		return pageInfo;
 	}
 
+	//添加工厂主数据
+	public void insertFactory(SysFactoryPO factory) {
+		sysFactoryPODao.insertSelective(factory);
+	}
+
+	//删除工厂主数据
+	public void deleteFactory(Integer fcId) {
+		sysFactoryPODao.deleteByPrimaryKey(fcId);
+	}
+
+	//修改工厂主数据
+	public void updateFactory(SysFactoryPO factory) {
+		sysFactoryPODao.updateByPrimaryKey(factory);
+	}
+
 }

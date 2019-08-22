@@ -20,4 +20,25 @@ public interface SysVsmServer {
 	* @return  工段实体类
 	*/
 	PageInfo<SysVsmPO> queryVsm(Integer shopId, Integer vsmId, Integer page_size, Integer page_num);
+
+	/**
+	 * @Title: insertVsm
+	 * @Description:添加工段主数据
+	 * @param vsm 工段实体类
+	 */
+	void insertVsm(SysVsmPO vsm);
+
+	/**
+	 * @Title: updateVsm
+	 * @Description:修改工段主数据
+	 * @param vsm 工段实体类
+	 */
+	void updateVsm(SysVsmPO vsm);
+
+	/**
+	 * @Title: deleteVsm
+	 * @Description:删除工段主数据
+	 * @param vsmId 工段ID
+	 */
+	void deleteVsm(Integer vsmId);
 }

@@ -38,5 +38,26 @@ public interface SysFactoryService {
 	* @return 工厂实体类
 	*/
 	PageInfo<SysFactoryPO> queryFactorys(Integer fcId, Integer page_size, Integer page_num);
+
+	/**
+	 * @Title: insertFactory
+	 * @Description:添加工厂主数据
+	 * @param factory 工厂实体类
+	 */
+	void insertFactory(SysFactoryPO factory);
+	
+	/**
+	 * @Title: deleteFactory
+	 * @Description:删除工厂主数据
+	 * @param fcId 工厂ID
+	 */
+	void deleteFactory(Integer fcId);
+
+	/**
+	 * @Title: updateFactory
+	 * @Description:修改工厂主数据
+	 * @param factory
+	 */
+	void updateFactory(SysFactoryPO factory);
 	
 }

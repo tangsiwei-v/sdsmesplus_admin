@@ -45,4 +45,20 @@ public class SysVsmServerImpl implements SysVsmServer{
 		PageInfo<SysVsmPO> pageInfo = new PageInfo<SysVsmPO>(sysVsmPOs);
 		return pageInfo;
 	}
+
+	
+	//添加工段主数据
+	public void insertVsm(SysVsmPO vsm) {
+		sysVsmPODao.insertSelective(vsm);
+	}
+	
+	//修改工段主数据
+	public void updateVsm(SysVsmPO vsm) {
+		sysVsmPODao.updateByPrimaryKey(vsm);
+	}
+
+	//删除工段主数据
+	public void deleteVsm(Integer vsmId) {
+		sysVsmPODao.deleteByPrimaryKey(vsmId);
+	}
 }

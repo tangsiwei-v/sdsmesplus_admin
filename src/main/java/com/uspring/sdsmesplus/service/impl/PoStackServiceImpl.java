@@ -12,7 +12,6 @@ import com.uspring.sdsmesplus.dao.generate.ProdBoxLogPODao;
 import com.uspring.sdsmesplus.dao.generate.ProdCleanLogPODao;
 import com.uspring.sdsmesplus.dao.generate.ProdFinishedProductPODao;
 import com.uspring.sdsmesplus.dao.generate.ProdOrderStockPODao;
-import com.uspring.sdsmesplus.dao.generate.SysLinePODao;
 import com.uspring.sdsmesplus.entity.po.PlanOpBomPO;
 import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
 import com.uspring.sdsmesplus.entity.po.PlanOrderPOExample;
@@ -25,8 +24,6 @@ import com.uspring.sdsmesplus.entity.po.ProdFinishedProductPO;
 import com.uspring.sdsmesplus.entity.po.ProdFinishedProductPOExample;
 import com.uspring.sdsmesplus.entity.po.ProdOrderStockPO;
 import com.uspring.sdsmesplus.entity.po.ProdOrderStockPOExample;
-import com.uspring.sdsmesplus.entity.po.SysLinePO;
-import com.uspring.sdsmesplus.entity.po.SysLinePOExample;
 import com.uspring.sdsmesplus.entity.po.SysStoragebinPO;
 import com.uspring.sdsmesplus.entity.vo.OrderStockBomVO;
 import com.uspring.sdsmesplus.entity.vo.PlanOrderVO;
@@ -38,8 +35,6 @@ import com.uspring.sdsmesplus.wms.WMSService;
 import com.uspring.sdsmesplus.wms.entity.CleanType;
 import com.uspring.sdsmesplus.wms.entity.MoveStockHelpDo;
 import com.uspring.sdsmesplus.wms.entity.Package;
-
-import springfox.documentation.spring.web.json.Json;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -373,18 +368,18 @@ public class PoStackServiceImpl implements PoStackService {
 		}
 		ProdCleanLogPOExample prodcleanlog = new ProdCleanLogPOExample();
 		Criteria criteria = prodcleanlog.createCriteria();
-		if (order_code != null) {
+		if (order_code != null && !order_code.equals("")) {
 			criteria.andPoCodeEqualTo(order_code);
 		}
 		if (is_confirmed != null) {
 			criteria.andIsConfirmedEqualTo(is_confirmed);
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		if (start_time != null) {
+		if (start_time != null && !start_time.equals("")) {
 			Date startTime = sdf.parse(start_time);
 			criteria.andCreateTimeGreaterThan(startTime);
 		}
-		if (end_time != null) {
+		if (end_time != null && !end_time.equals("")) {
 			Date endTime = sdf.parse(end_time);
 			criteria.andCreateTimeLessThan(endTime);
 		}

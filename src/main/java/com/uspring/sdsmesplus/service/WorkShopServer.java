@@ -1,6 +1,7 @@
 package com.uspring.sdsmesplus.service;
 
 import com.github.pagehelper.PageInfo;
+import com.uspring.sdsmesplus.entity.po.SysVsmPO;
 import com.uspring.sdsmesplus.entity.po.SysWorkshopPO;
 
 /**   
@@ -19,5 +20,26 @@ public interface WorkShopServer {
 	* @return  车间实体类
 	*/
 	PageInfo<SysWorkshopPO> queryWorkShop(Integer fcId, Integer shopId, Integer page_size, Integer page_num);
-	
+
+	/**
+	 * @Title: insertWorkshop
+	 * @Description: 添加车间主数据
+	 * @param workshop 车间实体类
+	 */
+	void insertWorkshop(SysWorkshopPO workshop);
+
+	/**
+	 * @Title: updateWorkshop
+	 * @Description: 修改车间主数据
+	 * @param workshop 车间实体类
+	 */
+	void updateWorkshop(SysWorkshopPO workshop);
+
+	/**
+	 * @Title: deleteWorkshop
+	 * @Description: 删除车间主数据
+	 * @param shopId 车间ID
+	 */
+	void deleteWorkshop(Integer shopId);
+
 }

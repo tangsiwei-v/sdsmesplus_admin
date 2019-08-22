@@ -47,4 +47,19 @@ public class WorkShopServerImpl implements WorkShopServer{
 		return pageInfo;
 	}
 
+	//添加车间主数据
+	public void insertWorkshop(SysWorkshopPO workshop) {
+		sysWorkshopPODao.insertSelective(workshop);
+	}
+
+	//修改车间主数据
+	public void updateWorkshop(SysWorkshopPO workshop) {
+		sysWorkshopPODao.updateByPrimaryKey(workshop);
+	}
+
+	//删除车间主数据
+	public void deleteWorkshop(Integer shopId) {
+		sysWorkshopPODao.deleteByPrimaryKey(shopId);
+	}
+
 }

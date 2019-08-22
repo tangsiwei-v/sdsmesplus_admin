@@ -69,7 +69,7 @@ public class ProductInfoController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/item/{ptmplId}", method = RequestMethod.DELETE)
-	@ApiOperation(value = "删除装箱数主数据", notes = "删除装箱数主数据", response = Result.class)
+	@ApiOperation(value = "删除条码模板上传", notes = "删除条码模板上传", response = Result.class)
 	public Result deletePrinterTmpl(HttpServletResponse response, @PathVariable("ptmplId") Integer ptmplId) {
 		printerTmplService.deletePrinterTmpl(ptmplId);
 		return new Result("删除成功", "success", StatusCode.SUCCESS);

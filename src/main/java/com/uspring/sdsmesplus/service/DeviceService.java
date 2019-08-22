@@ -20,4 +20,25 @@ public interface DeviceService {
 	*/
 	PageInfo<DevicePO> queryDevice(Integer lineId, Integer devId, String dev_code, Integer page_size, Integer page_num);
 
+	/**
+	 * @Title: insertDevice
+	 * @Description: 添加设备主数据
+	 * @param devicePO 设备实体类
+	 */
+	void insertDevice(DevicePO devicePO);
+
+	/**
+	 * @Title: updateDevice
+	 * @Description: 修改设备主数据
+	 * @param devicePO 设备实体类
+	 */
+	void updateDevice(DevicePO devicePO);
+
+	/**
+	 * @Title: deleteDevice
+	 * @Description: 删除设备主数据
+	 * @param devId 设备ID
+	 */
+	void deleteDevice(Integer devId);
+
 }

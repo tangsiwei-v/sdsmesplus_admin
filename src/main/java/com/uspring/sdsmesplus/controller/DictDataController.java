@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,5 +53,29 @@ public class DictDataController {
 			@RequestParam(value = "page_num", required = false) Integer page_num) {
 		PageInfo<DictDataPO> dictDatas = dictDataService.queryDictData(dt_code, page_size, page_num);
 		return new Result("查询成功", dictDatas, StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/item", method = RequestMethod.POST)
+	@ApiOperation(value = "添加字典主数据", notes = "添加字典主数据", response = Result.class)
+	public Result insertDictData(HttpServletResponse response, @RequestBody DictDataPO dictDataPO) {
+		dictDataService.insertDictData(dictDataPO);
+		return new Result("添加成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/item", method = RequestMethod.PUT)
+	@ApiOperation(value = "修改字典主数据", notes = "修改字典主数据", response = Result.class)
+	public Result updateDictData(HttpServletResponse response, @RequestBody DictDataPO dictDataPO) {
+		dictDataService.updateDictData(dictDataPO);
+		return new Result("修改成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/item/{ddId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除字典主数据", notes = "删除字典主数据", response = Result.class)
+	public Result deleteDictData(HttpServletResponse response, @PathVariable("ddId") Integer ddId) {
+		dictDataService.deleteDictData(ddId);
+		return new Result("删除成功", "success", StatusCode.SUCCESS);
 	}
 }

@@ -74,4 +74,20 @@ public class SysLineServiceImpl implements SysLineService{
 		return pageInfo;
 	}
 
+	//添加产线主数据
+	public void insertLine(SysLinePO linePO) {
+		sysLinePODao.insertSelective(linePO);
+		
+	}
+
+	//修改产线主数据
+	public void updateLine(SysLinePO linePO) {
+		sysLinePODao.updateByPrimaryKey(linePO);
+	}
+
+	//删除产线主数据
+	public void deleteLine(Integer lineId) {
+		sysLinePODao.deleteByPrimaryKey(lineId);
+	}
+
 }
