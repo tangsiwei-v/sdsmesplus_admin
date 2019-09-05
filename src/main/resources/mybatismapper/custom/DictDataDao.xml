@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.DictDataDao">
+  <resultMap id="DictDataMap" type="com.uspring.sdsmesplus.entity.vo.DictDataVO">
+    <id column="dd_id" jdbcType="INTEGER" property="ddId" />
+    <result column="dd_code" jdbcType="VARCHAR" property="ddCode" />
+    <result column="dt_code" jdbcType="VARCHAR" property="dtCode" />
+    <result column="dd_name" jdbcType="NVARCHAR" property="ddName" />
+    <result column="dd_seq" jdbcType="INTEGER" property="ddSeq" />
+    <result column="is_default" jdbcType="BIT" property="isDefault" />
+    <result column="is_fixed" jdbcType="BIT" property="isFixed" />
+    <result column="is_active" jdbcType="BIT" property="isActive" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <collection property="dictTypes" ofType="com.uspring.sdsmesplus.entity.po.DictTypePO">
+        <id column="dt_code" jdbcType="VARCHAR" property="dtCode" />
+    	<result column="dt_name" jdbcType="NVARCHAR" property="dtName" />
+    	<result column="has_child" jdbcType="BIT" property="hasChild" />
+    	<result column="parent_code" jdbcType="VARCHAR" property="parentCode" />
+    </collection>
+  </resultMap>
+  <select id="queryDictData" resultMap="DictDataMap">
+	select d.*,t.dt_name from dict_data d 
+	left join dict_type t 
+		on d.dt_code=t.dt_code
+	where 1=1
+	<if test="dt_code != '' and dt_code != null" >
+		and d.dt_code = #{dt_code}
+	</if>	
+  </select>
+  <select id="queryDtCode" resultType="String">
+  	 select distinct dt_code from dict_data
+  </select>
+</mapper>

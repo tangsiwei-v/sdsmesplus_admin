@@ -285,6 +285,76 @@ public class SysLineStoragebinPOExample {
             return (Criteria) this;
         }
 
+        public Criteria andBinCodeIsNull() {
+            addCriterion("bin_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeIsNotNull() {
+            addCriterion("bin_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeEqualTo(String value) {
+            addCriterion("bin_code =", value, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeNotEqualTo(String value) {
+            addCriterion("bin_code <>", value, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeGreaterThan(String value) {
+            addCriterion("bin_code >", value, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("bin_code >=", value, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeLessThan(String value) {
+            addCriterion("bin_code <", value, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeLessThanOrEqualTo(String value) {
+            addCriterion("bin_code <=", value, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeLike(String value) {
+            addCriterion("bin_code like", value, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeNotLike(String value) {
+            addCriterion("bin_code not like", value, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeIn(List<String> values) {
+            addCriterion("bin_code in", values, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeNotIn(List<String> values) {
+            addCriterion("bin_code not in", values, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeBetween(String value1, String value2) {
+            addCriterion("bin_code between", value1, value2, "binCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBinCodeNotBetween(String value1, String value2) {
+            addCriterion("bin_code not between", value1, value2, "binCode");
+            return (Criteria) this;
+        }
+
         public Criteria andStorageTypeIsNull() {
             addCriterion("storage_type is null");
             return (Criteria) this;

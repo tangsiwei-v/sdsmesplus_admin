@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.WorkShopDao">
+  <resultMap id="WorkShopMap" type="com.uspring.sdsmesplus.entity.vo.WorkshopVO">
+    <id column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="shop_sds_id" jdbcType="VARCHAR" property="shopSdsId" />
+    <collection property="sysFactoryPOs" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+        <id column="ffc_id" jdbcType="INTEGER" property="fcId" />
+    	<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    	<result column="fc_name" jdbcType="VARCHAR" property="fcName" />
+    	<result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
+    	<result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
+    	<result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
+    </collection>
+  </resultMap>
+  <select id="queryWorkShop" resultMap="WorkShopMap">
+  	 	select w.shop_id,w.fc_id,w.shop_name,w.shop_sds_id,
+			f.fc_name 
+		from sys_workshop w left join sys_factory f 
+			on w.fc_id=f.fc_id
+ 	 	where 1 = 1
+		<if test="fcId !='' and fcId != null">
+			and w.fc_id = #{fcId}
+		</if>
+		<if test="shopId !='' and shopId != null">
+			and w.shop_id = #{shopId}
+		</if>
+  </select>
+</mapper>

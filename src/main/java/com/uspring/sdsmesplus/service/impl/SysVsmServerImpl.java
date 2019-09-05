@@ -7,10 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.uspring.sdsmesplus.dao.generate.SysVsmPODao;
+import com.uspring.sdsmesplus.dao.SysVsmDao;
 import com.uspring.sdsmesplus.entity.po.SysVsmPO;
-import com.uspring.sdsmesplus.entity.po.SysVsmPOExample;
-import com.uspring.sdsmesplus.entity.po.SysVsmPOExample.Criteria;
+import com.uspring.sdsmesplus.entity.vo.VsmVO;
 import com.uspring.sdsmesplus.service.SysVsmServer;
 
 /**   
@@ -22,18 +21,10 @@ import com.uspring.sdsmesplus.service.SysVsmServer;
 @Service
 public class SysVsmServerImpl implements SysVsmServer{
 	@Autowired
-	private SysVsmPODao sysVsmPODao;
+	private SysVsmDao sysVsmDao;
 	
 	//查找工段主数据
-	public PageInfo<SysVsmPO> queryVsm(Integer shopId, Integer vsmId, Integer page_size, Integer page_num) {
-		SysVsmPOExample sysVsmPOExample = new SysVsmPOExample();
-		Criteria createCriteria = sysVsmPOExample.createCriteria();
-		if(shopId != null) {
-			createCriteria.andShopIdEqualTo(shopId);
-		}
-		if(vsmId != null) {
-			createCriteria.andVsmIdEqualTo(vsmId);
-		}
+	public PageInfo<VsmVO> queryVsm(Integer shopId, Integer vsmId, Integer page_size, Integer page_num) {
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -41,24 +32,24 @@ public class SysVsmServerImpl implements SysVsmServer{
 			page_size = 1000;
 		}
 		PageHelper.startPage(page_num, page_size);
-		List<SysVsmPO> sysVsmPOs = sysVsmPODao.selectByExample(sysVsmPOExample);
-		PageInfo<SysVsmPO> pageInfo = new PageInfo<SysVsmPO>(sysVsmPOs);
+		List<VsmVO> vsms = sysVsmDao.queryVsm(shopId, vsmId, page_size, page_num);
+		PageInfo<VsmVO> pageInfo = new PageInfo<VsmVO>(vsms);
 		return pageInfo;
 	}
 
 	
 	//添加工段主数据
 	public void insertVsm(SysVsmPO vsm) {
-		sysVsmPODao.insertSelective(vsm);
+		sysVsmDao.insertSelective(vsm);
 	}
 	
 	//修改工段主数据
 	public void updateVsm(SysVsmPO vsm) {
-		sysVsmPODao.updateByPrimaryKey(vsm);
+		sysVsmDao.updateByPrimaryKey(vsm);
 	}
 
 	//删除工段主数据
 	public void deleteVsm(Integer vsmId) {
-		sysVsmPODao.deleteByPrimaryKey(vsmId);
+		sysVsmDao.deleteByPrimaryKey(vsmId);
 	}
 }

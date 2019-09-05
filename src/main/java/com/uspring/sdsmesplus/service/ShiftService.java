@@ -12,6 +12,7 @@ import java.util.Date;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.ShiftPO;
+import com.uspring.sdsmesplus.entity.vo.ShiftVO;
 
 /** 
  * @ClassName: ShiftService 
@@ -92,7 +93,7 @@ public interface ShiftService {
 	* @param page_size 
 	* @return  班次实体类
 	*/
-	public PageInfo<ShiftPO> getShift(Integer fcId, Integer page_size, Integer page_num);
+	public PageInfo<ShiftVO> getShift(Integer fcId, Integer page_size, Integer page_num);
 
 	/**
 	 * @Title: insertShift

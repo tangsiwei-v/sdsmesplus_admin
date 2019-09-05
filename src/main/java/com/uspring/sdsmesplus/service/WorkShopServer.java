@@ -1,8 +1,8 @@
 package com.uspring.sdsmesplus.service;
 
 import com.github.pagehelper.PageInfo;
-import com.uspring.sdsmesplus.entity.po.SysVsmPO;
 import com.uspring.sdsmesplus.entity.po.SysWorkshopPO;
+import com.uspring.sdsmesplus.entity.vo.WorkshopVO;
 
 /**   
  * @ClassName: WorkShopServer
@@ -19,7 +19,7 @@ public interface WorkShopServer {
 	* page_size page_num
 	* @return  车间实体类
 	*/
-	PageInfo<SysWorkshopPO> queryWorkShop(Integer fcId, Integer shopId, Integer page_size, Integer page_num);
+	PageInfo<WorkshopVO> queryWorkShop(Integer fcId, Integer shopId, Integer page_size, Integer page_num);
 
 	/**
 	 * @Title: insertWorkshop

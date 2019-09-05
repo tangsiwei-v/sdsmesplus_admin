@@ -2,6 +2,7 @@ package com.uspring.sdsmesplus.service;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.DevicePO;
+import com.uspring.sdsmesplus.entity.vo.DeviceVO;
 
 /** 
  * @ClassName: DeviceService 
@@ -18,7 +19,7 @@ public interface DeviceService {
 	* page_num, page_size
 	* @return 设备实体类
 	*/
-	PageInfo<DevicePO> queryDevice(Integer lineId, Integer devId, String dev_code, Integer page_size, Integer page_num);
+	PageInfo<DeviceVO> queryDevice(Integer lineId, Integer devId, String dev_code, Integer page_size, Integer page_num);
 
 	/**
 	 * @Title: insertDevice

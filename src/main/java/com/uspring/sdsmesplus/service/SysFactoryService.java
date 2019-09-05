@@ -1,5 +1,6 @@
 package com.uspring.sdsmesplus.service;
 
+import java.rmi.ServerException;
 import java.util.List;
 
 import com.github.pagehelper.PageInfo;
@@ -43,8 +44,9 @@ public interface SysFactoryService {
 	 * @Title: insertFactory
 	 * @Description:添加工厂主数据
 	 * @param factory 工厂实体类
+	 * @throws ServerException 
 	 */
-	void insertFactory(SysFactoryPO factory);
+	void insertFactory(SysFactoryPO factory) throws ServerException;
 	
 	/**
 	 * @Title: deleteFactory
@@ -59,5 +61,12 @@ public interface SysFactoryService {
 	 * @param factory
 	 */
 	void updateFactory(SysFactoryPO factory);
+	
+	/** 
+	* @Title: selectFactorys
+	* @Description: 查询工厂主数据
+	* @return 工厂实体类
+	*/
+	List<SysFactoryPO> selectFactorys();
 	
 }

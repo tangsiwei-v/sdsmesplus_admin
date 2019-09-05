@@ -22,15 +22,6 @@ public interface SafelunchService {
 	void save(SafeLunchOrderVO safeLunchOrder);
 	
 	/** 
-	* @Title: commit
-	* @Description:结果提交
-	* @param safeLunchOrder 对象
-	* @return SafelunchOrder实体类
-	 * @throws Exception 
-	*/
-	SafeLunchOrderVO commit(SafeLunchOrderVO safeLunchOrder) throws Exception;
-	
-	/** 
 	* @Title: reprint
 	* @Description:箱合格证补打
 	* @param old_box_barcode 旧箱合格证,new_box_barcode 新箱合格证,box_type 合格证类型

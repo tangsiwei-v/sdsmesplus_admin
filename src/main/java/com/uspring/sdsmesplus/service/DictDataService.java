@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.DictDataPO;
+import com.uspring.sdsmesplus.entity.vo.DictDataVO;
 
 /** 
  * @ClassName: DictDataService 
@@ -28,7 +29,7 @@ public interface DictDataService {
 	 * page_num 数据页编号
 	 * @return 字典实体类 
 	 */
-	PageInfo<DictDataPO> queryDictData(String dt_code, Integer page_size, Integer page_num);
+	PageInfo<DictDataVO> queryDictData(String dt_code, Integer page_size, Integer page_num);
 
 	/**
 	 * @Title: insertDictData
@@ -50,5 +51,12 @@ public interface DictDataService {
 	 * @param ddId 字典ID
 	 */
 	void deleteDictData(Integer ddId);
+
+	/**
+	 * @Title: queryDtCode
+	 * @Description 查询字典类型
+	 * @return 字典实体类 
+	 */
+	List<DictDataPO> queryDtCode();
 
 }

@@ -1,6 +1,5 @@
 package com.uspring.sdsmesplus.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +14,6 @@ import com.uspring.sdsmesplus.entity.vo.BoxInfoVO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.enums.StatusCode;
 import com.uspring.sdsmesplus.service.PackBoxService;
-import com.uspring.sdsmesplus.wms.entity.Package;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -33,15 +31,6 @@ public class PackBoxController extends BaseController {
 
 	@Autowired
 	private PackBoxService packBoxService;
-
-	@ResponseBody
-	@RequestMapping(value = "/{box_barcode}", method = RequestMethod.GET)
-	@ApiOperation(value = "HU信息查询", response = Result.class)
-	public Result findHUInfo(HttpServletResponse response, @PathVariable("box_barcode") String boxCode)
-			throws Exception {
-		List<Package> packag = packBoxService.queryMaterialBoxInfo(boxCode);
-		return new Result("success", packag, StatusCode.SUCCESS);
-	}
 
 	// 请求箱合格证
 	@ResponseBody
@@ -147,7 +136,7 @@ public class PackBoxController extends BaseController {
 	@RequestMapping(value = "/standard", method = RequestMethod.GET)
 	@ApiOperation(value = "查询产品装箱主数据", response = Result.class)
 	public Result standard(HttpServletResponse response,
-			@RequestParam(value = "prod_code", required = false) Integer prod_code,
+			@RequestParam(value = "prod_code", required = false) String prod_code,
 			@RequestParam(value = "customer_code", required = false) String customer_code,
 			@RequestParam(value = "fcId", required = false) Integer fcId,
 			@RequestParam(value = "page_size", required = false) Integer page_size,

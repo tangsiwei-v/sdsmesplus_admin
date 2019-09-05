@@ -8,10 +8,13 @@
  */
 package com.uspring.sdsmesplus.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.uspring.sdsmesplus.dao.generate.SysStoragebinPODao;
 import com.uspring.sdsmesplus.entity.po.SysStoragebinPO;
+import com.uspring.sdsmesplus.entity.vo.LineStoragebinVO;
 
 /** 
  * @ClassName: LineBinDao 
@@ -23,4 +26,13 @@ import com.uspring.sdsmesplus.entity.po.SysStoragebinPO;
 public interface LineStoragebinDao extends SysStoragebinPODao {
 
 	SysStoragebinPO findBinByType(@Param("line_id")Integer lineId, @Param("storage_type")String binType);
+	
+	/** 
+	* @Title: selectLineStoragebins
+	* @Description: 查找产线库位主数据
+	* @param lineId 产线ID
+	* page_num, page_size
+	* @return 产线库位实体类
+	*/
+	List<LineStoragebinVO> selectLineStoragebins(@Param("lineId") Integer lineId, Integer page_size, Integer page_num);
 }

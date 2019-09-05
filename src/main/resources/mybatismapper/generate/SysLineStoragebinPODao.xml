@@ -5,6 +5,7 @@
     <id column="linbin_id" jdbcType="INTEGER" property="linbinId" />
     <result column="line_id" jdbcType="INTEGER" property="lineId" />
     <result column="bin_id" jdbcType="INTEGER" property="binId" />
+    <result column="bin_code" jdbcType="VARCHAR" property="binCode" />
     <result column="storage_type" jdbcType="VARCHAR" property="storageType" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    linbin_id, line_id, bin_id, storage_type, create_time
+    linbin_id, line_id, bin_id, bin_code, storage_type, create_time
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysLineStoragebinPOExample" resultMap="BaseResultMap">
     select
@@ -101,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysLineStoragebinPO">
     insert into sys_line_storagebin (linbin_id, line_id, bin_id, 
-      storage_type, create_time)
+      bin_code, storage_type, create_time
+      )
     values (#{linbinId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{binId,jdbcType=INTEGER}, 
-      #{storageType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+      #{binCode,jdbcType=VARCHAR}, #{storageType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysLineStoragebinPO">
     insert into sys_line_storagebin
@@ -116,6 +119,9 @@
       </if>
       <if test="binId != null">
         bin_id,
+      </if>
+      <if test="binCode != null">
+        bin_code,
       </if>
       <if test="storageType != null">
         storage_type,
@@ -133,6 +139,9 @@
       </if>
       <if test="binId != null">
         #{binId,jdbcType=INTEGER},
+      </if>
+      <if test="binCode != null">
+        #{binCode,jdbcType=VARCHAR},
       </if>
       <if test="storageType != null">
         #{storageType,jdbcType=VARCHAR},
@@ -160,6 +169,9 @@
       <if test="record.binId != null">
         bin_id = #{record.binId,jdbcType=INTEGER},
       </if>
+      <if test="record.binCode != null">
+        bin_code = #{record.binCode,jdbcType=VARCHAR},
+      </if>
       <if test="record.storageType != null">
         storage_type = #{record.storageType,jdbcType=VARCHAR},
       </if>
@@ -176,6 +188,7 @@
     set linbin_id = #{record.linbinId,jdbcType=INTEGER},
       line_id = #{record.lineId,jdbcType=INTEGER},
       bin_id = #{record.binId,jdbcType=INTEGER},
+      bin_code = #{record.binCode,jdbcType=VARCHAR},
       storage_type = #{record.storageType,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -191,6 +204,9 @@
       <if test="binId != null">
         bin_id = #{binId,jdbcType=INTEGER},
       </if>
+      <if test="binCode != null">
+        bin_code = #{binCode,jdbcType=VARCHAR},
+      </if>
       <if test="storageType != null">
         storage_type = #{storageType,jdbcType=VARCHAR},
       </if>
@@ -204,6 +220,7 @@
     update sys_line_storagebin
     set line_id = #{lineId,jdbcType=INTEGER},
       bin_id = #{binId,jdbcType=INTEGER},
+      bin_code = #{binCode,jdbcType=VARCHAR},
       storage_type = #{storageType,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where linbin_id = #{linbinId,jdbcType=INTEGER}

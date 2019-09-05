@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.DeviceDao">
+  <resultMap id="DeviceMap" type="com.uspring.sdsmesplus.entity.vo.DeviceVO">
+    <id column="dev_id" jdbcType="INTEGER" property="devId" />
+    <result column="dev_code" jdbcType="VARCHAR" property="devCode" />
+    <result column="dev_name" jdbcType="VARCHAR" property="devName" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="dev_size" jdbcType="NVARCHAR" property="devSize" />
+    <result column="dev_procedure" jdbcType="NVARCHAR" property="devProcedure" />
+    <result column="note" jdbcType="NVARCHAR" property="note" />
+    <result column="dev_loc_img" jdbcType="NVARCHAR" property="devLocImg" />
+    <result column="dev_barcode_img" jdbcType="NVARCHAR" property="devBarcodeImg" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <collection property="factorys" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+        <id column="fc_id" jdbcType="INTEGER" property="fcId" />
+    	<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    	<result column="fc_name" jdbcType="VARCHAR" property="fcName" />
+    	<result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
+    	<result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
+    	<result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
+    </collection>
+    <collection property="workshops" ofType="com.uspring.sdsmesplus.entity.po.SysWorkshopPO">
+        <id column="shop_id" jdbcType="INTEGER" property="shopId" />
+   	    <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+    	<result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    	<result column="shop_sds_id" jdbcType="VARCHAR" property="shopSdsId" />
+    </collection>
+    <collection property="vsms" ofType="com.uspring.sdsmesplus.entity.po.SysVsmPO">
+        <id column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+    	<result column="vsm_name" jdbcType="VARCHAR" property="vsmName" />
+    	<result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    	<result column="vsm_sds_id" jdbcType="VARCHAR" property="vsmSdsId" />
+    </collection>
+    <collection property="lines" ofType="com.uspring.sdsmesplus.entity.po.SysLinePO">
+        <id column="line_id" jdbcType="INTEGER" property="lineId" />
+    	<result column="line_name" jdbcType="VARCHAR" property="lineName" />
+    	<result column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+    	<result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    	<result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    	<result column="line_type" jdbcType="VARCHAR" property="lineType" />
+    	<result column="line_barcode_id" jdbcType="VARCHAR" property="lineBarcodeId" />
+    	<result column="line_barcode_code" jdbcType="VARCHAR" property="lineBarcodeCode" />
+    	<result column="line_sap_code" jdbcType="VARCHAR" property="lineSapCode" />
+    	<result column="line_mpmlink_code" jdbcType="VARCHAR" property="lineMpmlinkCode" />
+    	<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    	<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </collection>
+  </resultMap>
+  	<select id="queryDevice" resultMap="DeviceMap">
+  		select d.dev_id,d.dev_code,d.dev_name,d.fc_id,d.shop_id,d.vsm_id,d.line_id,
+  			d.dev_size,d.dev_procedure,d.note,d.dev_loc_img,d.dev_barcode_img,d.is_virtual,
+  			d.parent_dev_code,d.is_merged,d.create_time,
+			f.fc_name,w.shop_name,v.vsm_name,l.line_name
+		from sys_device d 
+			left join sys_factory f 
+		on d.fc_id=f.fc_id 
+			left join sys_workshop w 
+		on d.shop_id=w.shop_id 
+			left join sys_vsm v 
+		on d.vsm_id=v.vsm_id 
+			left join sys_line l 
+		on d.line_id=l.line_id
+			where 1=1
+		<if test="lineId !='' and lineId != null">
+			and d.line_id = #{lineId}
+		</if>
+		<if test="devId !='' and devId != null">
+			and d.dev_id = #{devId}
+		</if>
+		<if test="dev_code !='' and dev_code != null">
+			and d.dev_code = #{dev_code}
+		</if>
+  	</select>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.PrinterTmplDao">
+  <resultMap id="PrinterTmplMap" type="com.uspring.sdsmesplus.entity.vo.PrinterTmplVO">
+    <id column="ptmpl_id" jdbcType="INTEGER" property="ptmplId" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="ptmpl_size" jdbcType="INTEGER" property="ptmplSize" />
+    <result column="ptmpl_file_name" jdbcType="VARCHAR" property="ptmplFileName" />
+    <result column="pt_counter_min" jdbcType="INTEGER" property="ptCounterMin" />
+    <result column="pt_counter_max" jdbcType="INTEGER" property="ptCounterMax" />
+    <result column="pt_counter_value" jdbcType="INTEGER" property="ptCounterValue" />
+    <result column="pt_file_updatetime" jdbcType="TIMESTAMP" property="ptFileUpdatetime" />
+    <collection property="factorys" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+        <id column="fc_id" jdbcType="INTEGER" property="fcId" />
+    	<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    	<result column="fc_name" jdbcType="VARCHAR" property="fcName" />
+    	<result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
+    	<result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
+    	<result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
+    </collection>
+  </resultMap>
+  <select id="printerTmpl" resultMap="PrinterTmplMap">
+  	 	select p.ptmpl_id,p.fc_id,p.prod_code,p.customer_code,p.ptmpl_size,
+			p.ptmpl_file_name,p.pt_counter_min,p.pt_counter_max,p.pt_counter_value,
+			p.pt_file_updatetime,f.fc_name
+		from sys_printer_tmpl p left join sys_factory f 
+			on p.fc_id=f.fc_id
+ 	 	where 1 = 1
+ 	 	<if test="prod_code != '' and prod_code != null" >
+			and p.prod_code like #{prod_code} 
+		</if>
+		<if test="customer_code != '' and customer_code != null">
+			and p.customer_code = #{customer_code}
+		</if>
+		<if test="fcId !='' and fcId != null">
+			and p.fc_id = #{fcId}
+		</if>
+  </select>
+  <select id="queryTemplate"  resultType="map" >
+	select top 1 pt_file_binary as Template from sys_printer_tmpl where ptmpl_id=#{tmplId}
+  </select>
+</mapper>

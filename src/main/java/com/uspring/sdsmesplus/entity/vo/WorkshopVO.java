@@ -2,6 +2,7 @@ package com.uspring.sdsmesplus.entity.vo;
 
 import java.util.List;
 
+import com.uspring.sdsmesplus.entity.po.SysFactoryPO;
 import com.uspring.sdsmesplus.entity.po.SysLinePO;
 import com.uspring.sdsmesplus.entity.po.SysWorkshopPO;
 /** 
@@ -16,6 +17,8 @@ public class WorkshopVO extends SysWorkshopPO{
 	private List<VsmVO> vsmVOs;
 	
 	private List<SysLinePO> sysLinePOs;
+	
+	private List<SysFactoryPO> sysFactoryPOs;
 
 	public List<VsmVO> getVsmVOs() {
 		return vsmVOs;
@@ -32,4 +35,13 @@ public class WorkshopVO extends SysWorkshopPO{
 	public void setSysLinePOs(List<SysLinePO> sysLinePOs) {
 		this.sysLinePOs = sysLinePOs;
 	}
+
+	public List<SysFactoryPO> getSysFactoryPOs() {
+		return sysFactoryPOs;
+	}
+
+	public void setSysFactoryPOs(List<SysFactoryPO> sysFactoryPOs) {
+		this.sysFactoryPOs = sysFactoryPOs;
+	}
+	
 }

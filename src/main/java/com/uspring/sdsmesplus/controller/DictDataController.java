@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.DictDataPO;
+import com.uspring.sdsmesplus.entity.vo.DictDataVO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.enums.StatusCode;
 import com.uspring.sdsmesplus.service.DictDataService;
@@ -51,7 +52,7 @@ public class DictDataController {
 			@RequestParam(value = "dt_code", required = false) String dt_code,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
 			@RequestParam(value = "page_num", required = false) Integer page_num) {
-		PageInfo<DictDataPO> dictDatas = dictDataService.queryDictData(dt_code, page_size, page_num);
+		PageInfo<DictDataVO> dictDatas = dictDataService.queryDictData(dt_code, page_size, page_num);
 		return new Result("查询成功", dictDatas, StatusCode.SUCCESS);
 	}
 	
@@ -77,5 +78,13 @@ public class DictDataController {
 	public Result deleteDictData(HttpServletResponse response, @PathVariable("ddId") Integer ddId) {
 		dictDataService.deleteDictData(ddId);
 		return new Result("删除成功", "success", StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/dictionary_type", method = RequestMethod.GET)
+	@ApiOperation(value = "查询字典类型", notes = "查询字典类型", response = Result.class)
+	public Result queryDtCode(HttpServletResponse response) {
+		List<DictDataPO> queryDtCode = dictDataService.queryDtCode();
+		return new Result("查询成功", queryDtCode, StatusCode.SUCCESS);
 	}
 }

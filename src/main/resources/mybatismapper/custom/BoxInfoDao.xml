@@ -23,14 +23,17 @@
  	 	 from sys_box_info b left join sys_factory f 
  	  			on b.fc_id=f.fc_id
  	 	 where 1 = 1
- 	 	<if test="prod_code != null">
-			and b.prod_code = #{prod_code}
+ 	 	<if test="prod_code != '' and prod_code != null" >
+			and b.prod_code like #{prod_code}
 		</if>
-		<if test="customer_code != null">
+		<if test="customer_code != '' and customer_code != null">
 			and b.customer_code = #{customer_code}
 		</if>
-		<if test="fcId != null">
+		<if test="fcId !='' and fcId != null">
 			and b.fc_id = #{fcId}
 		</if>
+  </select>
+  <select id="repeat" resultType="com.uspring.sdsmesplus.entity.po.SysBoxInfoPO">
+  	select * from sys_box_info where fc_id = #{fcId} and prod_code = #{prod_code}  and customer_code = #{customer_code}
   </select>
 </mapper>

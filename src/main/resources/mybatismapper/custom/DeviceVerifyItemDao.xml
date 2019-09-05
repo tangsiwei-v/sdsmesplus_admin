@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.DeviceVerifyItemDao">
+  <resultMap id="DeviceVerifyItemMap" type="com.uspring.sdsmesplus.entity.vo.DeviceVerifyItemVO">
+    <id column="dvi_id" jdbcType="INTEGER" property="dviId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="dev_code" jdbcType="VARCHAR" property="devCode" />
+    <result column="dvi_item" jdbcType="VARCHAR" property="dviItem" />
+    <result column="dvi_req" jdbcType="VARCHAR" property="dviReq" />
+    <result column="dvi_time" jdbcType="VARCHAR" property="dviTime" />
+    <result column="is_switch_active" jdbcType="BIT" property="isSwitchActive" />
+    <result column="is_active" jdbcType="BIT" property="isActive" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <collection property="lines" ofType="com.uspring.sdsmesplus.entity.po.SysLinePO">
+        <id column="line_id" jdbcType="INTEGER" property="lineId" />
+    	<result column="line_name" jdbcType="VARCHAR" property="lineName" />
+    	<result column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+    	<result column="shop_id" jdbcType="INTEGER" property="shopId" />
+   	 	<result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    	<result column="line_type" jdbcType="VARCHAR" property="lineType" />
+    	<result column="line_barcode_id" jdbcType="VARCHAR" property="lineBarcodeId" />
+    	<result column="line_barcode_code" jdbcType="VARCHAR" property="lineBarcodeCode" />
+    	<result column="line_sap_code" jdbcType="VARCHAR" property="lineSapCode" />
+    	<result column="line_mpmlink_code" jdbcType="VARCHAR" property="lineMpmlinkCode" />
+    	<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    	<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </collection>
+  </resultMap>
+  <select id="queryDeviceVerifyItem" resultMap="DeviceVerifyItemMap">
+  	select d.dvi_id,d.line_id,d.dev_code,d.dvi_item,d.dvi_req,
+  		d.is_switch_active,d.is_active,d.create_time,
+		l.line_name from sys_device_verify_item d 
+	left join sys_line l 
+		on d.line_id=l.line_id
+	where 1=1
+	<if test="lineId !='' and lineId != null">
+			and d.line_id = #{lineId}
+	</if>
+  </select>
+</mapper>

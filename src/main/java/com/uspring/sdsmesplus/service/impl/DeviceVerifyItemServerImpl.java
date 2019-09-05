@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.uspring.sdsmesplus.dao.generate.SysDeviceVerifyItemPODao;
+import com.uspring.sdsmesplus.dao.DeviceVerifyItemDao;
 import com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPO;
-import com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPOExample;
+import com.uspring.sdsmesplus.entity.vo.DeviceVerifyItemVO;
 import com.uspring.sdsmesplus.service.DeviceVerifyItemServer;
 
 /**   
@@ -22,30 +22,25 @@ import com.uspring.sdsmesplus.service.DeviceVerifyItemServer;
 @Service
 public class DeviceVerifyItemServerImpl implements DeviceVerifyItemServer{
 	@Autowired
-	private SysDeviceVerifyItemPODao sysDeviceVerifyItemPODao;
+	private DeviceVerifyItemDao deviceVerifyItemDao;
 	
 	//添加设备防错要求
-	public void insertDeviceVerify(SysDeviceVerifyItemPO deviceVerifyItem) {
-		sysDeviceVerifyItemPODao.insertSelective(deviceVerifyItem);
+	public void insertDeviceVerifyItem(SysDeviceVerifyItemPO deviceVerifyItem) {
+		deviceVerifyItemDao.insertSelective(deviceVerifyItem);
 	}
 	
 	//修改设备防错要求
-	public void updateDeviceVerify(SysDeviceVerifyItemPO deviceVerifyItem) {
-		sysDeviceVerifyItemPODao.updateByPrimaryKey(deviceVerifyItem);
+	public void updateDeviceVerifyItem(SysDeviceVerifyItemPO deviceVerifyItem) {
+		deviceVerifyItemDao.updateByPrimaryKey(deviceVerifyItem);
 	}
 	
 	//删除设备防错要求
-	public void deleteDeviceVerify(Integer dviId) {
-		sysDeviceVerifyItemPODao.deleteByPrimaryKey(dviId);
+	public void deleteDeviceVerifyItem(Integer dviId) {
+		deviceVerifyItemDao.deleteByPrimaryKey(dviId);
 	}		
 	
 	//查询设备防错要求
-	public PageInfo<SysDeviceVerifyItemPO> queryDeviceVerifyLog(Integer lineId, Integer page_size, Integer page_num) {
-		SysDeviceVerifyItemPOExample deviceVerifyItemPOExample = new SysDeviceVerifyItemPOExample();
-		com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPOExample.Criteria createCriteria = deviceVerifyItemPOExample.createCriteria();
-		if(lineId != null) {
-			createCriteria.andLineIdEqualTo(lineId);
-		}
+	public PageInfo<DeviceVerifyItemVO> queryDeviceVerifyItem(Integer lineId, Integer page_size, Integer page_num) {
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -53,8 +48,8 @@ public class DeviceVerifyItemServerImpl implements DeviceVerifyItemServer{
 			page_size = 1000;
 		}
 		PageHelper.startPage(page_num, page_size);
-		List<SysDeviceVerifyItemPO> sysDeviceVerifyItems = sysDeviceVerifyItemPODao.selectByExample(deviceVerifyItemPOExample);
-		PageInfo<SysDeviceVerifyItemPO> pageInfo = new PageInfo<SysDeviceVerifyItemPO>(sysDeviceVerifyItems);
+		List<DeviceVerifyItemVO> deviceVerifyItems = deviceVerifyItemDao.queryDeviceVerifyItem(lineId, page_size, page_num);
+		PageInfo<DeviceVerifyItemVO> pageInfo = new PageInfo<DeviceVerifyItemVO>(deviceVerifyItems);
 		return pageInfo;
 	}
 	

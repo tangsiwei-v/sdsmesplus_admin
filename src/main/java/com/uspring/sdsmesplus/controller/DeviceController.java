@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.DevicePO;
+import com.uspring.sdsmesplus.entity.vo.DeviceVO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.enums.StatusCode;
 import com.uspring.sdsmesplus.service.DeviceService;
@@ -42,7 +43,7 @@ public class DeviceController extends BaseController {
 			@RequestParam(value = "dev_code", required = false) String dev_code,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
 			@RequestParam(value = "page_num", required = false) Integer page_num) {
-		PageInfo<DevicePO> queryDevice = deviceService.queryDevice(lineId, devId, dev_code, page_size, page_num);
+		PageInfo<DeviceVO> queryDevice = deviceService.queryDevice(lineId, devId, dev_code, page_size, page_num);
 		return new Result("查询成功", queryDevice, StatusCode.SUCCESS);
 	}
 	

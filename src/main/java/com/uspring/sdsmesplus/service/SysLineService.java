@@ -4,6 +4,7 @@ import java.rmi.ServerException;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.SysLinePO;
+import com.uspring.sdsmesplus.entity.vo.LineVO;
 
 /** 
  * @ClassName: SysLineService 
@@ -38,7 +39,7 @@ public interface SysLineService {
 	* page_size page_num
 	* @return  产线实体类
 	*/
-	PageInfo<SysLinePO> queryLine(Integer shopId, Integer vsmId, Integer lineId, Integer page_size, Integer page_num);
+	PageInfo<LineVO> queryLine(Integer shopId, Integer vsmId, Integer lineId, Integer page_size, Integer page_num);
 
 	/**
 	 * @Title: insertLine

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.ShiftPO;
 import com.uspring.sdsmesplus.entity.vo.Result;
+import com.uspring.sdsmesplus.entity.vo.ShiftVO;
 import com.uspring.sdsmesplus.enums.StatusCode;
 import com.uspring.sdsmesplus.service.ShiftService;
 
@@ -47,7 +48,7 @@ public class WorkShiftController extends BaseController {
 	public Result queryShift(HttpServletResponse response, @RequestParam(value = "fcId", required = false) Integer fcId,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
 			@RequestParam(value = "page_num", required = false) Integer page_num) {
-		PageInfo<ShiftPO> shiftClasses = shiftService.getShift(fcId, page_size, page_num);
+		PageInfo<ShiftVO> shiftClasses = shiftService.getShift(fcId, page_size, page_num);
 		return new Result("success", shiftClasses, StatusCode.SUCCESS);
 	}
 

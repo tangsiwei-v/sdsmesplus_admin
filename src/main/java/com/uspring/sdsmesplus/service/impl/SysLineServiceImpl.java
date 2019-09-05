@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.uspring.sdsmesplus.dao.LineDao;
 import com.uspring.sdsmesplus.dao.generate.SysLinePODao;
 import com.uspring.sdsmesplus.entity.po.SysLinePO;
 import com.uspring.sdsmesplus.entity.po.SysLinePOExample;
-import com.uspring.sdsmesplus.entity.po.SysLinePOExample.Criteria;
+import com.uspring.sdsmesplus.entity.vo.LineVO;
 import com.uspring.sdsmesplus.service.SysLineService;
 @Service
 public class SysLineServiceImpl implements SysLineService{
+	
+	@Autowired
+	private LineDao lineDao;
 	
 	@Autowired
 	private SysLinePODao sysLinePODao;
@@ -49,19 +53,8 @@ public class SysLineServiceImpl implements SysLineService{
 	}
 
 	//查询产线主数据
-	public PageInfo<SysLinePO> queryLine(Integer shopId, Integer vsmId, Integer lineId, Integer page_size,
+	public PageInfo<LineVO> queryLine(Integer shopId, Integer vsmId, Integer lineId, Integer page_size,
 			Integer page_num) {
-		SysLinePOExample sysLinePOExample = new SysLinePOExample();
-		Criteria createCriteria = sysLinePOExample.createCriteria();
-		if(shopId != null) {
-			createCriteria.andShopIdEqualTo(shopId);
-		}
-		if(vsmId != null) {
-			createCriteria.andVsmIdEqualTo(vsmId);
-		}
-		if(lineId != null) {
-			createCriteria.andLineIdEqualTo(lineId);
-		}
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -69,25 +62,25 @@ public class SysLineServiceImpl implements SysLineService{
 			page_size = 1000;
 		}
 		PageHelper.startPage(page_num, page_size);
-		List<SysLinePO> sysLinePOs = sysLinePODao.selectByExample(sysLinePOExample);
-		PageInfo<SysLinePO> pageInfo = new PageInfo<SysLinePO>(sysLinePOs);
+		List<LineVO> lines = lineDao.queryLine(shopId, vsmId, lineId, page_size, page_num);
+		PageInfo<LineVO> pageInfo = new PageInfo<LineVO>(lines);
 		return pageInfo;
 	}
 
 	//添加产线主数据
 	public void insertLine(SysLinePO linePO) {
-		sysLinePODao.insertSelective(linePO);
+		lineDao.insertSelective(linePO);
 		
 	}
 
 	//修改产线主数据
 	public void updateLine(SysLinePO linePO) {
-		sysLinePODao.updateByPrimaryKey(linePO);
+		lineDao.updateByPrimaryKey(linePO);
 	}
 
 	//删除产线主数据
 	public void deleteLine(Integer lineId) {
-		sysLinePODao.deleteByPrimaryKey(lineId);
+		lineDao.deleteByPrimaryKey(lineId);
 	}
 
 }

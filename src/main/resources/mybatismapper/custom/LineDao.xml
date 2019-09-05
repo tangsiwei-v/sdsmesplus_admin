@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.LineDao">
+  <resultMap id="LineMap" type="com.uspring.sdsmesplus.entity.vo.LineVO">
+  	<id column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="line_name" jdbcType="VARCHAR" property="lineName" />
+    <result column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+   	<result column="fc_id" jdbcType="INTEGER" property="fcId" />
+   	<result column="line_type" jdbcType="VARCHAR" property="lineType" />
+    <result column="line_barcode_id" jdbcType="VARCHAR" property="lineBarcodeId" />
+    <result column="line_barcode_code" jdbcType="VARCHAR" property="lineBarcodeCode" />
+    <result column="line_sap_code" jdbcType="VARCHAR" property="lineSapCode" />
+    <result column="line_mpmlink_code" jdbcType="VARCHAR" property="lineMpmlinkCode" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />				
+  	<collection property="vsms" ofType="com.uspring.sdsmesplus.entity.vo.VsmVO">
+		<id column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+   		<result column="vsm_name" jdbcType="VARCHAR" property="vsmName" />
+    	<result column="shop_id" jdbcType="INTEGER" property="shopId" />
+   		<result column="vsm_sds_id" jdbcType="VARCHAR" property="vsmSdsId" />
+   		<collection property="workshopPOs" ofType="com.uspring.sdsmesplus.entity.vo.WorkshopVO">
+			<id column="shop_id" jdbcType="INTEGER" property="shopId" />
+    		<result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+    		<result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    		<result column="shop_sds_id" jdbcType="VARCHAR" property="shopSdsId" />
+    		<collection property="sysFactoryPOs" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+    			<id column="fc_id" jdbcType="INTEGER" property="fcId" />
+    			<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    			<result column="fc_name" jdbcType="VARCHAR" property="fcName" />
+   				<result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
+    			<result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
+    			<result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
+    		</collection>
+    	</collection>
+   </collection>
+  </resultMap>
+  	<select id="queryLine" resultMap="LineMap">
+	select l.line_id,l.line_name,l.vsm_id,l.shop_id,l.fc_id,l.line_type,
+  		l.line_barcode_id,l.line_barcode_code,l.line_sap_code,l.line_mpmlink_code,
+  		l.update_time,l.create_time,v.vsm_name,w.shop_name,f.fc_name 
+  	from sys_line l left join sys_vsm v 
+		on l.vsm_id=v.vsm_id 
+	left join sys_workshop w 
+		on l.shop_id=w.shop_id
+	left join sys_factory f
+		on l.fc_id=f.fc_id
+	where 1 = 1
+	<if test="shopId != '' and shopId != null">
+		and l.shop_id = #{shopId}
+	</if>
+	<if test="vsmId !='' and vsmId != null">
+		and l.vsm_id = #{vsmId}
+	</if>
+	<if test="lineId !='' and lineId != null">
+		and v.line_id = #{lineId}
+	</if>
+  	</select>
+</mapper>

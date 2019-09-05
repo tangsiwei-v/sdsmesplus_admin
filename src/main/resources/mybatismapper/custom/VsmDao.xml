@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.SysVsmDao">
+  <resultMap id="VsmMap" type="com.uspring.sdsmesplus.entity.vo.VsmVO">
+    <id column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+    <result column="vsm_name" jdbcType="VARCHAR" property="vsmName" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="vsm_sds_id" jdbcType="VARCHAR" property="vsmSdsId" />
+    <collection property="workshopPOs" ofType="com.uspring.sdsmesplus.entity.po.SysWorkshopPO">
+     	<id column="shop_id" jdbcType="INTEGER" property="shopId" />
+    	<result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+    	<result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    	<result column="shop_sds_id" jdbcType="VARCHAR" property="shopSdsId" />
+    	<!-- <collection property="workshopVOs" ofType="com.uspring.sdsmesplus.entity.vo.WorkshopVO">
+    	 	<id column="fc_id" jdbcType="INTEGER" property="fcId" />
+    		<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    		<result column="fc_name" jdbcType="VARCHAR" property="fcName" />
+    		<result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
+   		    <result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
+    		<result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
+    	 </collection> -->
+    </collection>
+  </resultMap>
+  	<select id="queryVsm" resultMap="VsmMap">
+  		select v.vsm_id,v.vsm_name,v.shop_id,v.vsm_sds_id,
+  			w.shop_name,f.fc_id,fc_name
+		from sys_vsm v left join sys_workshop w
+			on v.shop_id=w.shop_id
+		left join sys_factory f
+			on w.fc_id=f.fc_id
+		where 1 = 1
+		<if test="shopId != '' and shopId != null">
+			and v.shop_id = #{shopId}
+		</if>
+		<if test="vsmId !='' and vsmId != null">
+			and v.vsm_id = #{vsmId}
+		</if>
+  	</select>
+</mapper>

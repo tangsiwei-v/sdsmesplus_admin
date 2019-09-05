@@ -16,13 +16,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.common.DateUtils;
 import com.uspring.sdsmesplus.dao.ShiftDao;
 import com.uspring.sdsmesplus.dao.generate.ShiftPODao;
 import com.uspring.sdsmesplus.entity.po.ShiftPO;
-import com.uspring.sdsmesplus.entity.po.ShiftPOExample;
-import com.uspring.sdsmesplus.entity.po.ShiftPOExample.Criteria;
+import com.uspring.sdsmesplus.entity.vo.ShiftVO;
 import com.uspring.sdsmesplus.service.ShiftService;
 
 /** 
@@ -101,21 +101,17 @@ public class ShiftServiceImpl implements ShiftService{
 		return shiftOfTime;
 	}
 
-	//产线主数据
-	public PageInfo<ShiftPO> getShift(Integer fcId, Integer page_size, Integer page_num) {
-		ShiftPOExample shift = new ShiftPOExample();
-		Criteria createCriteria = shift.createCriteria();
+	//班次主数据
+	public PageInfo<ShiftVO> getShift(Integer fcId, Integer page_size, Integer page_num) {
 		if (page_num == null) {
 			page_num = 1;
 		}
 		if (page_size == null) {
 			page_size = 1000;
 		}
-		if(fcId != null) {
-			createCriteria.andFcIdEqualTo(fcId);
-		}			
-		List<ShiftPO> shiftPOs = shiftPODao.selectByExample(shift);
-		PageInfo<ShiftPO> pageInfo = new PageInfo<ShiftPO>(shiftPOs);
+		PageHelper.startPage(page_num, page_size);
+		List<ShiftVO> shifts = shiftDao.getShift(fcId, page_size, page_num);
+		PageInfo<ShiftVO> pageInfo = new PageInfo<ShiftVO>(shifts);
 		return pageInfo;
 	}
 

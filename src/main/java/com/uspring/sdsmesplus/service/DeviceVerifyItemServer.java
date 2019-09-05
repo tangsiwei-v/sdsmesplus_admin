@@ -2,6 +2,7 @@ package com.uspring.sdsmesplus.service;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPO;
+import com.uspring.sdsmesplus.entity.vo.DeviceVerifyItemVO;
 
 /**   
  * @ClassName: DeviceVerifyItemServer
@@ -17,14 +18,14 @@ public interface DeviceVerifyItemServer {
 	* @Description: 添加设备防错要求
 	* @return 设备防错项目实体类
 	*/
-	void insertDeviceVerify(SysDeviceVerifyItemPO deviceVerifyItem);
+	void insertDeviceVerifyItem(SysDeviceVerifyItemPO deviceVerifyItem);
 	
 	/** 
 	* @Title: insertDeviceVerify 
 	* @Description: 修改添加设备防错要求
 	* @return 设备防错项目实体类
 	*/
-	void updateDeviceVerify(SysDeviceVerifyItemPO deviceVerifyItem);
+	void updateDeviceVerifyItem(SysDeviceVerifyItemPO deviceVerifyItem);
 	
 	/** 
 	* @Title: deleteDeviceVerify 
@@ -32,7 +33,7 @@ public interface DeviceVerifyItemServer {
 	* @param dviId防错项目主键ID
 	* @return 设备防错项目实体类
 	*/
-	void deleteDeviceVerify(Integer dviId);
+	void deleteDeviceVerifyItem(Integer dviId);
 	
 	/** 
 	* @Title: queryDeviceVerifyLog 
@@ -41,6 +42,6 @@ public interface DeviceVerifyItemServer {
 	*  page_size page_num
 	* @return 设备防错实体类
 	*/
-	PageInfo<SysDeviceVerifyItemPO> queryDeviceVerifyLog(Integer lineId, Integer page_size, Integer page_num);
+	PageInfo<DeviceVerifyItemVO> queryDeviceVerifyItem(Integer lineId, Integer page_size, Integer page_num);
 	
 }

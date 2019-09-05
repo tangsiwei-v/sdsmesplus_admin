@@ -1,5 +1,6 @@
 package com.uspring.sdsmesplus.service.impl;
 
+import java.rmi.ServerException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,19 @@ public class SysFactoryServiceImpl implements SysFactoryService{
 	}
 
 	//添加工厂主数据
-	public void insertFactory(SysFactoryPO factory) {
+	public void insertFactory(SysFactoryPO factory) throws ServerException {
+		if(factory == null)
+			throw new ServerException("工厂数据不能为空");
+		if(factory.getFcCode()==null || factory.getFcCode().equals("")) 
+			throw new ServerException("工厂简码不能为空");
+		if(factory.getFcName()==null || factory.getFcName().equals("")) 
+			throw new ServerException("工厂名称不能为空");
+		if(factory.getFcAddress()==null || factory.getFcAddress().equals("")) 
+			throw new ServerException("工厂地址不能为空");
+		if(factory.getFcDomain()==null || factory.getFcDomain().equals("")) 
+			throw new ServerException("工厂域不能为空");
+		if(factory.getFcSdsId()==null || factory.getFcSdsId().equals("")) 
+			throw new ServerException("纳铁福工厂ID不能为空");
 		sysFactoryPODao.insertSelective(factory);
 	}
 
@@ -66,6 +79,12 @@ public class SysFactoryServiceImpl implements SysFactoryService{
 	//修改工厂主数据
 	public void updateFactory(SysFactoryPO factory) {
 		sysFactoryPODao.updateByPrimaryKey(factory);
+	}
+
+	//查询工厂主数据
+	public List<SysFactoryPO> selectFactorys() {
+		List<SysFactoryPO> factorys = sysFactoryPODao.selectByExample(null);
+		return factorys;
 	}
 
 }

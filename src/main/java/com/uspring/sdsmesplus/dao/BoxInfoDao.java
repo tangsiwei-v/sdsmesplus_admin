@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.uspring.sdsmesplus.dao.generate.BoxInfoPODao;
+import com.uspring.sdsmesplus.entity.po.BoxInfoPO;
 import com.uspring.sdsmesplus.entity.vo.BoxInfoVO;
 
 /**
@@ -22,6 +23,14 @@ public interface BoxInfoDao extends BoxInfoPODao {
 	 * @param prod_code 产品简码, customer_code 客户号, fcId 工厂ID
 	 * @return BoxInfoPO实体类
 	 */
-	List<BoxInfoVO> standard(@Param("prod_code") Integer prod_code, @Param("customer_code") String customer_code,
+	List<BoxInfoVO> standard(@Param("prod_code") String prod_code, @Param("customer_code") String customer_code,
 			@Param("fcId") Integer fcId, Integer page_size, Integer page_num);
+	
+	/**
+	 * @Title: repeat
+	 * @Description: 查询额定装箱数主数据是否存在
+	 * @param prod_code 产品简码, customer_code 客户号, fcId 工厂ID
+	 * @return BoxInfoPO实体类
+	 */
+	List<BoxInfoPO> repeat(@Param("fcId") Integer fcId,@Param("prod_code") String prod_code,@Param("customer_code")String customer_code);
 }

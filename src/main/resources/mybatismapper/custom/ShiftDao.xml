@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.uspring.sdsmesplus.dao.ShiftDao">
-
+  <resultMap id="ShiftMap" type="com.uspring.sdsmesplus.entity.vo.ShiftVO">
+    <id column="sf_id" jdbcType="INTEGER" property="sfId" />
+    <result column="sf_code" jdbcType="VARCHAR" property="sfCode" />
+    <result column="sf_name" jdbcType="VARCHAR" property="sfName" />
+    <result column="sf_start_hour" jdbcType="INTEGER" property="sfStartHour" />
+    <result column="sf_start_minute" jdbcType="INTEGER" property="sfStartMinute" />
+    <result column="sf_end_hour" jdbcType="INTEGER" property="sfEndHour" />
+    <result column="sf_end_minute" jdbcType="INTEGER" property="sfEndMinute" />
+    <result column="sf_hour" jdbcType="DECIMAL" property="sfHour" />
+    <result column="sf_span_day" jdbcType="INTEGER" property="sfSpanDay" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <collection property="factorys" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+        <id column="ffc_id" jdbcType="INTEGER" property="fcId" />
+    	<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    	<result column="fc_name" jdbcType="VARCHAR" property="fcName" />
+    	<result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
+    	<result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
+    	<result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
+    </collection>
+  </resultMap>
 	<select id="getShiftOfTime" resultMap="com.uspring.sdsmesplus.dao.generate.ShiftPODao.BaseResultMap">
 		SELECT 
 			* 
@@ -20,5 +39,17 @@
 			DATEADD(Day, 0, DATEADD(Minute, sf_end_minute, DATEADD(Hour, sf_end_hour, DATEADD(DAY, 0, DATEDIFF(DAY, 0, #{time})) ))) 
 				&gt;= #{time}
 				and fc_id = #{factoryId})
+	</select>
+	
+	<select id="getShift" resultMap="ShiftMap">
+		select s.sf_id,s.sf_code,s.sf_name,s.sf_start_hour,
+			s.sf_start_minute,s.sf_end_hour,s.sf_end_minute,
+			s.sf_hour,s.sf_span_day,s.fc_id,f.fc_name
+		from sys_shift s left join sys_factory f 
+			on s.fc_id=f.fc_id
+		where 1=1
+		<if test="fcId !='' and fcId != null">
+			and s.fc_id = #{fcId}
+		</if>
 	</select>
 </mapper>

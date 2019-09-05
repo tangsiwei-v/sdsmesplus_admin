@@ -9,6 +9,8 @@ public class SysLineStoragebinPO {
 
     private Integer binId;
 
+    private String binCode;
+
     private String storageType;
 
     private Date createTime;
@@ -35,6 +37,14 @@ public class SysLineStoragebinPO {
 
     public void setBinId(Integer binId) {
         this.binId = binId;
+    }
+
+    public String getBinCode() {
+        return binCode;
+    }
+
+    public void setBinCode(String binCode) {
+        this.binCode = binCode == null ? null : binCode.trim();
     }
 
     public String getStorageType() {

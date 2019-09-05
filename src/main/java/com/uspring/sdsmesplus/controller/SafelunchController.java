@@ -44,14 +44,6 @@ public class SafelunchController extends BaseController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/order/commit", method = RequestMethod.POST)
-	@ApiOperation(value = "结果提交", notes = "结果提交", response = Result.class)
-	public Result commit(HttpServletResponse response, @RequestBody SafeLunchOrderVO safeLunchOrder) throws Exception {
-		SafeLunchOrderVO safeLunchOrderVO = safelunchService.commit(safeLunchOrder);
-		return new Result("保存成功", safeLunchOrderVO, StatusCode.SUCCESS);
-	}
-
-	@ResponseBody
 	@RequestMapping(value = "/box/reprint", method = RequestMethod.POST)
 	@ApiOperation(value = "SafeLunch箱合格证补打", notes = "SafeLunch箱合格证补打", response = Result.class)
 	public Result reprint(HttpServletResponse response,

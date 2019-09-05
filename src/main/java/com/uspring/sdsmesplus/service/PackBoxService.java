@@ -1,13 +1,11 @@
 package com.uspring.sdsmesplus.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.BoxInfoPO;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 import com.uspring.sdsmesplus.entity.vo.BoxInfoVO;
-import com.uspring.sdsmesplus.wms.entity.Package;
 
 /**
  * * @author 作者 E-mail:chengtenfgei
@@ -18,8 +16,6 @@ import com.uspring.sdsmesplus.wms.entity.Package;
  * @return
  */
 public interface PackBoxService {
-	//获取hu信息
-	List<Package> queryMaterialBoxInfo(String boxCode) throws Exception;
 	// 请求箱合格证
 	ProdBoxLogPO requestBoxCode(String order_code, Integer boxQuan) throws Exception;
 
@@ -54,7 +50,7 @@ public interface PackBoxService {
 	void updateBoxInfo(BoxInfoPO boxInfo);
 	
 	//查询额定装箱数主数据
-	PageInfo<BoxInfoVO> standard(Integer prod_code, String customer_code, Integer fcId, Integer page_size,
+	PageInfo<BoxInfoVO> standard(String prod_code, String customer_code, Integer fcId, Integer page_size,
 			Integer page_num);
 	
 	//删除装箱数主数据

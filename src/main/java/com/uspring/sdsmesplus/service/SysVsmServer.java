@@ -2,6 +2,7 @@ package com.uspring.sdsmesplus.service;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.SysVsmPO;
+import com.uspring.sdsmesplus.entity.vo.VsmVO;
 
 /**   
  * @ClassName: SysVsmServer
@@ -19,7 +20,7 @@ public interface SysVsmServer {
 	* page_size page_num
 	* @return  工段实体类
 	*/
-	PageInfo<SysVsmPO> queryVsm(Integer shopId, Integer vsmId, Integer page_size, Integer page_num);
+	PageInfo<VsmVO> queryVsm(Integer shopId, Integer vsmId, Integer page_size, Integer page_num);
 
 	/**
 	 * @Title: insertVsm
