@@ -81,7 +81,7 @@ public class DepartmentController extends BaseController {
 		List<FactoryVO> queryFactory = sysFactoryService.querytreenovsm(fc_id, fc_code);
 		return new Result("查询成功", queryFactory, StatusCode.SUCCESS);
 	}
-
+	
 	@ResponseBody
 	@RequestMapping(value = "/line", method = RequestMethod.GET)
 	@ApiOperation(value = "查询产线主数据", notes = "查询产线主数据", response = Result.class)

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.DictDataPO;
+import com.uspring.sdsmesplus.entity.po.DictTypePO;
 import com.uspring.sdsmesplus.entity.vo.DictDataVO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.enums.StatusCode;
@@ -36,14 +37,6 @@ public class DictDataController {
 
 	@Autowired
 	private DictDataService dictDataService;
-
-	@ResponseBody
-	@RequestMapping(value = "/freeze_reason", method = RequestMethod.GET)
-	@ApiOperation(value = "查询工单冻结原因", notes = "查询工单冻结原因", response = Result.class)
-	public Result freezeReason(HttpServletResponse response) {
-		List<DictDataPO> dictDatas = dictDataService.queryReason();
-		return new Result("查询成功", dictDatas, StatusCode.SUCCESS);
-	}
 
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -84,7 +77,7 @@ public class DictDataController {
 	@RequestMapping(value = "/dictionary_type", method = RequestMethod.GET)
 	@ApiOperation(value = "查询字典类型", notes = "查询字典类型", response = Result.class)
 	public Result queryDtCode(HttpServletResponse response) {
-		List<DictDataPO> queryDtCode = dictDataService.queryDtCode();
+		List<DictTypePO> queryDtCode = dictDataService.queryDtCode();
 		return new Result("查询成功", queryDtCode, StatusCode.SUCCESS);
 	}
 }

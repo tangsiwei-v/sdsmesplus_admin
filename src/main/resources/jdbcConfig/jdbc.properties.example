@@ -3,11 +3,6 @@ jdbc.url=jdbc:sqlserver://47.100.161.175:1433;databaseName=sds_mesplus
 jdbc.username=sa
 jdbc.password=uspring1234USPRING
 
-jdbc_mpmlink.driverClassName=oracle.jdbc.driver.OracleDriver
-jdbc_mpmlink.url=jdbc:oracle:thin:@192.168.180.30:1521/opdm1prd.sds.driveline.com
-jdbc_mpmlink.username=wc11_sdspdmdevp
-jdbc_mpmlink.password=sdswc101
-
 
 filters:stat
    

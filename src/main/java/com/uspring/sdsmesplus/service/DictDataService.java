@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.DictDataPO;
+import com.uspring.sdsmesplus.entity.po.DictTypePO;
 import com.uspring.sdsmesplus.entity.vo.DictDataVO;
 
 /** 
@@ -15,12 +16,6 @@ import com.uspring.sdsmesplus.entity.vo.DictDataVO;
  */
 
 public interface DictDataService {
-	/** 
-	* @Title: queryReason
-	* @Description 查询工单冻结原因
-	* @return  字典实体类
-	*/
-	List<DictDataPO> queryReason();
 
 	/**
 	 * @Title: queryDictData
@@ -57,6 +52,6 @@ public interface DictDataService {
 	 * @Description 查询字典类型
 	 * @return 字典实体类 
 	 */
-	List<DictDataPO> queryDtCode();
+	List<DictTypePO> queryDtCode();
 
 }

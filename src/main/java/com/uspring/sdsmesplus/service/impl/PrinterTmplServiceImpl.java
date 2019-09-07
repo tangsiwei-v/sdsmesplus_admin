@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,12 +23,14 @@ import com.uspring.sdsmesplus.service.PrinterTmplService;
 @Service
 public class PrinterTmplServiceImpl implements PrinterTmplService {
 
+	private static Logger logger = LoggerFactory.getLogger(PrinterTmplServiceImpl.class);
+	
 	@Autowired
 	private PrinterTmplDao printerTmplDao;
 
 	// 条码模板主数据
-	public PageInfo<PrinterTmplVO> printerTmpl(String prod_code, String customer_code, Integer fcId,
-			Integer page_size, Integer page_num) {
+	public PageInfo<PrinterTmplVO> printerTmpl(String prod_code, String customer_code, Integer fcId, Integer page_size,
+			Integer page_num) {
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -56,22 +60,16 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 	public void uploadingPrinterTmpl(String prod_code, String customer_code, MultipartFile file) throws Exception {
 		SysPrinterTmplPOExample tmplPOExample = new SysPrinterTmplPOExample();
 		tmplPOExample.createCriteria().andProdCodeEqualTo(prod_code).andCustomerCodeEqualTo(customer_code);
-		System.out.println("fileName:" + file.getOriginalFilename());
+		logger.info("fileName:" + file.getOriginalFilename());
 		int index = file.getOriginalFilename().lastIndexOf(".");
 		String substring = file.getOriginalFilename().substring(index);
-		System.out.println(substring);
+		logger.info(substring);
 		if (substring.equals(".lab")) {
 			if (!file.isEmpty()) {
-				try {
-					// 拿到上传文件的输入流
-					FileInputStream in = (FileInputStream) file.getInputStream();
-					// 以写字节的方式写文件
-					in.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("上传出错");
-				}
-
+				// 拿到上传文件的输入流
+				FileInputStream in = (FileInputStream) file.getInputStream();
+				// 以写字节的方式写文件
+				in.close();
 			}
 			SysPrinterTmplPO printerTmpl = new SysPrinterTmplPO();
 			byte[] imgBytes = file.getBytes();

@@ -27,12 +27,12 @@
     </collection>
   </resultMap>
   <select id="queryDeviceVerifyItem" resultMap="DeviceVerifyItemMap">
-  	select d.dvi_id,d.line_id,d.dev_code,d.dvi_item,d.dvi_req,
-  		d.is_switch_active,d.is_active,d.create_time,
-		l.line_name from sys_device_verify_item d 
-	left join sys_line l 
-		on d.line_id=l.line_id
-	where 1=1
+  		select d.dvi_id,d.line_id,d.dev_code,d.dvi_item,d.dvi_req,
+  			d.is_switch_active,d.is_active,d.create_time,d.dvi_time,
+			l.line_name from sys_device_verify_item d 
+		left join sys_line l 
+			on d.line_id=l.line_id
+		where 1=1
 	<if test="lineId !='' and lineId != null">
 			and d.line_id = #{lineId}
 	</if>

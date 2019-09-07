@@ -6,19 +6,19 @@
     <result column="vsm_name" jdbcType="VARCHAR" property="vsmName" />
     <result column="shop_id" jdbcType="INTEGER" property="shopId" />
     <result column="vsm_sds_id" jdbcType="VARCHAR" property="vsmSdsId" />
-    <collection property="workshopPOs" ofType="com.uspring.sdsmesplus.entity.po.SysWorkshopPO">
+    <collection property="workshopVOs" ofType="com.uspring.sdsmesplus.entity.vo.WorkshopVO">
      	<id column="shop_id" jdbcType="INTEGER" property="shopId" />
     	<result column="shop_name" jdbcType="VARCHAR" property="shopName" />
     	<result column="fc_id" jdbcType="INTEGER" property="fcId" />
     	<result column="shop_sds_id" jdbcType="VARCHAR" property="shopSdsId" />
-    	<!-- <collection property="workshopVOs" ofType="com.uspring.sdsmesplus.entity.vo.WorkshopVO">
+    	<collection property="sysFactoryPOs" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
     	 	<id column="fc_id" jdbcType="INTEGER" property="fcId" />
     		<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
     		<result column="fc_name" jdbcType="VARCHAR" property="fcName" />
     		<result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
    		    <result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
     		<result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
-    	 </collection> -->
+    	 </collection> 
     </collection>
   </resultMap>
   	<select id="queryVsm" resultMap="VsmMap">

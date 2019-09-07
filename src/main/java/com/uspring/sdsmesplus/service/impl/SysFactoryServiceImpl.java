@@ -21,20 +21,21 @@ public class SysFactoryServiceImpl implements SysFactoryService{
 	
 	@Autowired
 	private SysFactoryDao sysFactoryDao;
-	
 	@Autowired
 	private SysFactoryPODao sysFactoryPODao;
 	
 	@Override
 	public List<FactoryVO> queryFactory(Integer fc_id, String fc_code) {
+		// TODO Auto-generated method stub
 		return sysFactoryDao.queryFactory(fc_id, fc_code);
 	}
 
 	@Override
 	public List<FactoryVO> querytreenovsm(Integer fc_id, String fc_code) {
+		// TODO Auto-generated method stub
 		return sysFactoryDao.querytreenovsm(fc_id, fc_code);
 	}
-
+	
 	//查询工厂主数据
 	public PageInfo<SysFactoryPO> queryFactorys(Integer fcId, Integer page_size, Integer page_num) {
 		SysFactoryPOExample sysFactoryPOExample = new SysFactoryPOExample();

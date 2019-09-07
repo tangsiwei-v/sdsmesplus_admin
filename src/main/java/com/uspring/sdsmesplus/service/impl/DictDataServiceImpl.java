@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.dao.DictDataDao;
+import com.uspring.sdsmesplus.dao.generate.DictTypePODao;
 import com.uspring.sdsmesplus.entity.po.DictDataPO;
-import com.uspring.sdsmesplus.entity.po.DictDataPOExample;
+import com.uspring.sdsmesplus.entity.po.DictTypePO;
+import com.uspring.sdsmesplus.entity.po.DictTypePOExample;
 import com.uspring.sdsmesplus.entity.vo.DictDataVO;
 import com.uspring.sdsmesplus.service.DictDataService;
 @Service
@@ -18,14 +20,9 @@ public class DictDataServiceImpl implements DictDataService{
 	@Autowired
 	private DictDataDao dictDataDao;
 	
-	//查询工单冻结原因
-	public List<DictDataPO> queryReason() {
-		DictDataPOExample dictDataPOExample = new DictDataPOExample();
-		dictDataPOExample.createCriteria().andDtCodeEqualTo("FrozeReason");
-		List<DictDataPO> list = dictDataDao.selectByExample(dictDataPOExample);
-		return list;
-	}
-
+	@Autowired
+	private DictTypePODao dictTypePODao;
+	
 	//字典主数据
 	public PageInfo<DictDataVO> queryDictData(String dt_code, Integer page_size, Integer page_num) {
 		if (page_num == null) {
@@ -56,9 +53,11 @@ public class DictDataServiceImpl implements DictDataService{
 	}
 
 	//查询字典类型
-	public List<DictDataPO> queryDtCode() {
-		List<DictDataPO> queryDtCode = dictDataDao.queryDtCode();
-		return queryDtCode;
+	public List<DictTypePO> queryDtCode() {
+		DictTypePOExample dictTypePOExample = new DictTypePOExample();
+		dictTypePOExample.createCriteria();
+		List<DictTypePO> dictTypes = dictTypePODao.selectByExample(dictTypePOExample);
+		return dictTypes;
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.uspring.sdsmesplus.controller;
 
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.BoxInfoPO;
-import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 import com.uspring.sdsmesplus.entity.vo.BoxInfoVO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.enums.StatusCode;
@@ -32,39 +30,6 @@ public class PackBoxController extends BaseController {
 	@Autowired
 	private PackBoxService packBoxService;
 
-	// 请求箱合格证
-	@ResponseBody
-	@RequestMapping(value = "/{order_code}/request", method = RequestMethod.GET)
-	@ApiOperation(value = "请求装箱合格证，并打印合格证", response = Result.class)
-	public Result requestBoxCode(HttpServletResponse response, @PathVariable("order_code") String order_code,
-			@RequestParam(value = "box_quan", required = true) Integer boxQuan,
-			@RequestParam(value = "glevel", required = false) String glevel) throws Exception {
-		ProdBoxLogPO boxlog = packBoxService.requestBoxCode(order_code, boxQuan);
-		return new Result("sucess", boxlog, StatusCode.SUCCESS);
-	}
-
-	// 下线装箱
-	@ResponseBody
-	@RequestMapping(value = "/{order_code}", method = RequestMethod.POST)
-	@ApiOperation(value = "当生产到一箱，或者手动触发装箱时，调用本接口", response = Result.class)
-	public Result createMachBox(HttpServletResponse response, @PathVariable("order_code") String order_code,
-			@RequestBody(required = true) ProdBoxLogPO boxLog,
-			@RequestParam(value = "mat_substract", required = false, defaultValue = "1") Boolean matSubstract)
-			throws Exception {
-		packBoxService.createMachBox(order_code, boxLog, matSubstract);
-		return new Result("sucess", "", StatusCode.SUCCESS);
-	}
-
-	// 箱合格证补打
-	@ResponseBody
-	@RequestMapping(value = "/{order_code}/reprint", method = RequestMethod.POST)
-	@ApiOperation(value = "向打印机发送该箱的打印指令", response = Result.class)
-	public Result reprint(HttpServletResponse response, @PathVariable("order_code") String order_code,
-			@RequestBody(required = true) ProdBoxLogPO boxLog) throws Exception {
-		packBoxService.reprint(order_code, boxLog);
-		return new Result("sucess", "", StatusCode.SUCCESS);
-	}
-
 	// 主数据查询
 	@ResponseBody
 	@RequestMapping(value = "/standard/{prod_code}", method = RequestMethod.GET)
@@ -74,37 +39,6 @@ public class PackBoxController extends BaseController {
 			@RequestParam(value = "fc_id", required = false) Integer fc_id) {
 		BoxInfoPO queryboxLog = packBoxService.queryboxLog(prod_code, customer_code, fc_id);
 		return new Result("sucess", queryboxLog, StatusCode.SUCCESS);
-	}
-
-	// 请求过程码
-	@ResponseBody
-	@RequestMapping(value = "/wip/{dev_code}/request", method = RequestMethod.GET)
-	@ApiOperation(value = "请求过程码", response = Result.class)
-	public Result request(HttpServletResponse response, @PathVariable("dev_code") String dev_code,
-			@RequestParam(value = "box_quan", required = true) Integer boxQuan,
-			@RequestParam(value = "glevel", required = false) String glevel,
-			@RequestParam(value = "furnace_no", required = false) String furnace_no) throws Exception {
-		ProdBoxLogPO boxLog = packBoxService.request(dev_code, boxQuan, glevel, furnace_no);
-		return new Result("sucess", boxLog, StatusCode.SUCCESS);
-	}
-
-	// 装箱查询
-	@ResponseBody
-	@RequestMapping(value = "boxlog", method = RequestMethod.GET)
-	@ApiOperation(value = "多条件装箱查询", response = Result.class)
-	public Result searchBoxLog(HttpServletResponse response, @RequestParam Map<String, Object> map) throws Exception {
-		PageInfo<ProdBoxLogPO> boxLog = packBoxService.searchBoxLog(map);
-		return new Result("sucess", boxLog, StatusCode.SUCCESS);
-	}
-
-	// 过程装箱
-	@ResponseBody
-	@RequestMapping(value = "/wip/{dev_code}", method = RequestMethod.POST)
-	@ApiOperation(value = "过程装箱", response = Result.class)
-	public Result wipBoxInfo(HttpServletResponse response, @PathVariable("dev_code") String dev_code,
-			@RequestBody(required = true) ProdBoxLogPO boxLog) throws Exception {
-		packBoxService.wipBoxInfo(dev_code, boxLog);
-		return new Result("sucess", "", StatusCode.SUCCESS);
 	}
 
 	@ResponseBody

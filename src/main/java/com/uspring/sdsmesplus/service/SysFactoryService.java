@@ -30,7 +30,7 @@ public interface SysFactoryService {
 	* @return 工厂实体类
 	*/
 	List<FactoryVO> querytreenovsm(Integer fc_id, String fc_code);
-
+	
 	/** 
 	* @Title: queryFactorys
 	* @Description: 根据fc_id 查询工厂主数据

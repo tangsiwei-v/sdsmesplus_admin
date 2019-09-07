@@ -3,7 +3,6 @@ package com.uspring.sdsmesplus.dao;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import com.uspring.sdsmesplus.dao.generate.DictDataPODao;
-import com.uspring.sdsmesplus.entity.po.DictDataPO;
 import com.uspring.sdsmesplus.entity.vo.DictDataVO;
 
 /** 
@@ -22,11 +21,4 @@ public interface DictDataDao extends DictDataPODao{
 	 * @return 字典实体类 
 	 */
 	List<DictDataVO> queryDictData(@Param("dt_code") String dt_code, Integer page_size, Integer page_num);
-	
-	/**
-	 * @Title: queryDtCode
-	 * @Description 查询字典类型
-	 * @return 字典实体类 
-	 */
-	List<DictDataPO> queryDtCode();
 }
