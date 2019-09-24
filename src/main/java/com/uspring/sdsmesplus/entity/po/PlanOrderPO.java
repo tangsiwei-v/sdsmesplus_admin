@@ -11,7 +11,21 @@ public class PlanOrderPO {
 
     private String prodCode;
 
+    private String prodNumber;
+
+    private String prodName;
+
+    private String prodTuhao;
+
     private String customerCode;
+
+    private String poCustMatcode;
+
+    private String poCustMatdesc;
+
+    private String poCustMatdesc2;
+
+    private String poProdVersion;
 
     private Date poStartDate;
 
@@ -28,10 +42,6 @@ public class PlanOrderPO {
     private Integer poCount;
 
     private String poCountUnit;
-
-    private String poCustMatcode;
-
-    private String poProdVersion;
 
     private Integer lineId;
 
@@ -75,12 +85,68 @@ public class PlanOrderPO {
         this.prodCode = prodCode == null ? null : prodCode.trim();
     }
 
+    public String getProdNumber() {
+        return prodNumber;
+    }
+
+    public void setProdNumber(String prodNumber) {
+        this.prodNumber = prodNumber == null ? null : prodNumber.trim();
+    }
+
+    public String getProdName() {
+        return prodName;
+    }
+
+    public void setProdName(String prodName) {
+        this.prodName = prodName == null ? null : prodName.trim();
+    }
+
+    public String getProdTuhao() {
+        return prodTuhao;
+    }
+
+    public void setProdTuhao(String prodTuhao) {
+        this.prodTuhao = prodTuhao == null ? null : prodTuhao.trim();
+    }
+
     public String getCustomerCode() {
         return customerCode;
     }
 
     public void setCustomerCode(String customerCode) {
         this.customerCode = customerCode == null ? null : customerCode.trim();
+    }
+
+    public String getPoCustMatcode() {
+        return poCustMatcode;
+    }
+
+    public void setPoCustMatcode(String poCustMatcode) {
+        this.poCustMatcode = poCustMatcode == null ? null : poCustMatcode.trim();
+    }
+
+    public String getPoCustMatdesc() {
+        return poCustMatdesc;
+    }
+
+    public void setPoCustMatdesc(String poCustMatdesc) {
+        this.poCustMatdesc = poCustMatdesc == null ? null : poCustMatdesc.trim();
+    }
+
+    public String getPoCustMatdesc2() {
+        return poCustMatdesc2;
+    }
+
+    public void setPoCustMatdesc2(String poCustMatdesc2) {
+        this.poCustMatdesc2 = poCustMatdesc2 == null ? null : poCustMatdesc2.trim();
+    }
+
+    public String getPoProdVersion() {
+        return poProdVersion;
+    }
+
+    public void setPoProdVersion(String poProdVersion) {
+        this.poProdVersion = poProdVersion == null ? null : poProdVersion.trim();
     }
 
     public Date getPoStartDate() {
@@ -145,22 +211,6 @@ public class PlanOrderPO {
 
     public void setPoCountUnit(String poCountUnit) {
         this.poCountUnit = poCountUnit == null ? null : poCountUnit.trim();
-    }
-
-    public String getPoCustMatcode() {
-        return poCustMatcode;
-    }
-
-    public void setPoCustMatcode(String poCustMatcode) {
-        this.poCustMatcode = poCustMatcode == null ? null : poCustMatcode.trim();
-    }
-
-    public String getPoProdVersion() {
-        return poProdVersion;
-    }
-
-    public void setPoProdVersion(String poProdVersion) {
-        this.poProdVersion = poProdVersion == null ? null : poProdVersion.trim();
     }
 
     public Integer getLineId() {

@@ -11,11 +11,8 @@ package com.uspring.sdsmesplus.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.uspring.sdsmesplus.dao.generate.PlanOrderPODao;
 import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
-import com.uspring.sdsmesplus.entity.vo.PlanOrderVO;
 
 /** 
  * @ClassName: PlanOrderVODao 
@@ -25,20 +22,11 @@ import com.uspring.sdsmesplus.entity.vo.PlanOrderVO;
  *  
  */
 public interface PlanOrderDao extends PlanOrderPODao {
-
-	/** 
-	* @Title: findPlanVOByOrderCode 
-	* @Description: 根据订单号查找订单
-	* @param orderCode 订单ID
-	* @return  订单实体类
-	*/
-	PlanOrderVO findPlanVOByOrderCode(@Param("order_code") String orderCode);
-
 	
 	/** 
 	* @Title: queryPlanVO 
 	* @Description: 根据时间，状态，产线等获取订单
 	* @return  订单实体类
 	*/
-	List<PlanOrderVO> queryPlanVO(Map<String,Object> map);
+	List<PlanOrderPO> queryPlanVO(Map<String,Object> map);
 }

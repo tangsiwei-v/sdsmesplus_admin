@@ -9,6 +9,8 @@ public class SysLineProdmodelPO {
 
     private String prodModel;
 
+    private String opNo;
+
     private Date createTime;
 
     public Integer getLinemodId() {
@@ -33,6 +35,14 @@ public class SysLineProdmodelPO {
 
     public void setProdModel(String prodModel) {
         this.prodModel = prodModel == null ? null : prodModel.trim();
+    }
+
+    public String getOpNo() {
+        return opNo;
+    }
+
+    public void setOpNo(String opNo) {
+        this.opNo = opNo == null ? null : opNo.trim();
     }
 
     public Date getCreateTime() {

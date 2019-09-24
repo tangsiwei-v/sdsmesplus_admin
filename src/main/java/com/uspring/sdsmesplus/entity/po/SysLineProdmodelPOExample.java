@@ -295,6 +295,76 @@ public class SysLineProdmodelPOExample {
             return (Criteria) this;
         }
 
+        public Criteria andOpNoIsNull() {
+            addCriterion("op_no is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoIsNotNull() {
+            addCriterion("op_no is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoEqualTo(String value) {
+            addCriterion("op_no =", value, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoNotEqualTo(String value) {
+            addCriterion("op_no <>", value, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoGreaterThan(String value) {
+            addCriterion("op_no >", value, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoGreaterThanOrEqualTo(String value) {
+            addCriterion("op_no >=", value, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoLessThan(String value) {
+            addCriterion("op_no <", value, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoLessThanOrEqualTo(String value) {
+            addCriterion("op_no <=", value, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoLike(String value) {
+            addCriterion("op_no like", value, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoNotLike(String value) {
+            addCriterion("op_no not like", value, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoIn(List<String> values) {
+            addCriterion("op_no in", values, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoNotIn(List<String> values) {
+            addCriterion("op_no not in", values, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoBetween(String value1, String value2) {
+            addCriterion("op_no between", value1, value2, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNoNotBetween(String value1, String value2) {
+            addCriterion("op_no not between", value1, value2, "opNo");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

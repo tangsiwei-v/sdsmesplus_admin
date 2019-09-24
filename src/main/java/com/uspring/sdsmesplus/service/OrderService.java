@@ -1,0 +1,21 @@
+package com.uspring.sdsmesplus.service;
+
+import java.util.Map;
+
+import com.github.pagehelper.PageInfo;
+import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
+
+/**
+ * @ClassName: OrderService
+ * @Description: 订单服务
+ * @author chengtengfei chengtengfei@uspring.cn
+ * @param <PlanOrderPO>
+ * @date 2019年6月18日 下午 13:16:04
+ *
+ */
+public interface OrderService {
+
+	// 查询工单
+	public PageInfo<PlanOrderPO> selectOrder(Map<String, Object> map);
+
+}

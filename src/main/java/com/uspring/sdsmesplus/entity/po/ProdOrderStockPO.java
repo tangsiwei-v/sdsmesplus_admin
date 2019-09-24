@@ -3,8 +3,6 @@ package com.uspring.sdsmesplus.entity.po;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.dozer.Mapping;
-
 public class ProdOrderStockPO {
     private Integer pobId;
 

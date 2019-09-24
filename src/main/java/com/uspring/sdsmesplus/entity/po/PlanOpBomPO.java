@@ -1,5 +1,7 @@
 package com.uspring.sdsmesplus.entity.po;
 
+import java.math.BigDecimal;
+
 public class PlanOpBomPO {
     private Integer plbmId;
 
@@ -9,7 +11,13 @@ public class PlanOpBomPO {
 
     private String materialCode;
 
-    private Double materialCount;
+    private String materialName;
+
+    private String materialTuhao;
+
+    private String materialNumber;
+
+    private BigDecimal materialCount;
 
     private String materialUnit;
 
@@ -49,7 +57,38 @@ public class PlanOpBomPO {
         this.materialCode = materialCode == null ? null : materialCode.trim();
     }
 
-  
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName == null ? null : materialName.trim();
+    }
+
+    public String getMaterialTuhao() {
+        return materialTuhao;
+    }
+
+    public void setMaterialTuhao(String materialTuhao) {
+        this.materialTuhao = materialTuhao == null ? null : materialTuhao.trim();
+    }
+
+    public String getMaterialNumber() {
+        return materialNumber;
+    }
+
+    public void setMaterialNumber(String materialNumber) {
+        this.materialNumber = materialNumber == null ? null : materialNumber.trim();
+    }
+
+    public BigDecimal getMaterialCount() {
+        return materialCount;
+    }
+
+    public void setMaterialCount(BigDecimal materialCount) {
+        this.materialCount = materialCount;
+    }
+
     public String getMaterialUnit() {
         return materialUnit;
     }
@@ -73,12 +112,4 @@ public class PlanOpBomPO {
     public void setMaterialPsa(String materialPsa) {
         this.materialPsa = materialPsa == null ? null : materialPsa.trim();
     }
-
-	public Double getMaterialCount() {
-		return materialCount;
-	}
-
-	public void setMaterialCount(Double materialCount) {
-		this.materialCount = materialCount;
-	}
 }

@@ -53,6 +53,7 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 	// 添加产品条码模板规则
 	public void insertPrinterTmpl(SysPrinterTmplPO printerTmpl) {
 		printerTmpl.setPtmplId(null);
+		printerTmpl.setPtmplFileName(printerTmpl.getProdCode()+".lab");
 		printerTmplDao.insertSelective(printerTmpl);
 	}
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.PlanOrderDao">
+	<resultMap id="BaseResultMapTwo" type="com.uspring.sdsmesplus.entity.po.PlanOrderPO">
+		<id column="po_id" jdbcType="INTEGER" property="poId" />
+		<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+		<result column="po_code" jdbcType="VARCHAR" property="poCode" />
+		<result column="prod_number" jdbcType="VARCHAR" property="prodNumber" />
+        <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
+        <result column="prod_tuhao" jdbcType="VARCHAR" property="prodTuhao" />
+		<result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+		<result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+		<result column="po_start_date" jdbcType="DATE" property="poStartDate" />
+		<result column="po_start_time" jdbcType="TIME" property="poStartTime" />
+		<result column="po_end_date" jdbcType="DATE" property="poEndDate" />
+		<result column="po_end_time" jdbcType="TIME" property="poEndTime" />
+		<result column="po_start_datetime" jdbcType="TIMESTAMP"
+			property="poStartDatetime" />
+		<result column="po_end_datetime" jdbcType="TIMESTAMP" property="poEndDatetime" />
+		<result column="po_count" jdbcType="INTEGER" property="poCount" />
+		<result column="po_count_unit" jdbcType="VARCHAR" property="poCountUnit" />
+		<result column="po_cust_matcode" jdbcType="VARCHAR" property="poCustMatcode" />
+		<result column="po_cust_matdesc" jdbcType="VARCHAR" property="poCustMatdesc" />
+        <result column="po_cust_matdesc2" jdbcType="VARCHAR" property="poCustMatdesc2" />
+		<result column="po_prod_version" jdbcType="VARCHAR" property="poProdVersion" />
+		<result column="line_id" jdbcType="INTEGER" property="lineId" />
+		<result column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+		<result column="po_status" jdbcType="VARCHAR" property="poStatus" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+
+	<!-- 筛选条件查询 -->
+	<select id="queryPlanVO" parameterType="map" resultMap="BaseResultMapTwo">
+		select * from plan_order 
+		where 1 = 1
+		<if test="line_id !='' and line_id != null ">
+			and line_id = #{line_id}
+		</if>
+		<if test="order_code != null and order_code !='' ">
+			and po_code = #{order_code}
+		</if>
+		<if test="starDate != null and starDate !='' ">
+			and po_start_datetime &gt;= #{starDate}
+		</if>
+		<if test="endDate != null and endDate !='' ">
+			and po_end_datetime &lt;= #{endDate}
+		</if>
+		<if test="status != null and status !='' ">
+			and po_status in
+			<foreach collection="statusList" item="sta" index="index"
+				open="(" close=")" separator=",">
+				#{sta}
+			</foreach>
+		</if>
+	</select>
+
+</mapper>

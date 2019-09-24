@@ -5,6 +5,7 @@
     <id column="linemod_id" jdbcType="INTEGER" property="linemodId" />
     <result column="line_id" jdbcType="INTEGER" property="lineId" />
     <result column="prod_model" jdbcType="VARCHAR" property="prodModel" />
+    <result column="op_no" jdbcType="VARCHAR" property="opNo" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    linemod_id, line_id, prod_model, create_time
+    linemod_id, line_id, prod_model, op_no, create_time
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysLineProdmodelPOExample" resultMap="BaseResultMap">
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysLineProdmodelPO">
     insert into sys_line_prodmodel (linemod_id, line_id, prod_model, 
-      create_time)
+      op_no, create_time)
     values (#{linemodId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{prodModel,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      #{opNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysLineProdmodelPO">
     insert into sys_line_prodmodel
@@ -115,6 +116,9 @@
       </if>
       <if test="prodModel != null">
         prod_model,
+      </if>
+      <if test="opNo != null">
+        op_no,
       </if>
       <if test="createTime != null">
         create_time,
@@ -129,6 +133,9 @@
       </if>
       <if test="prodModel != null">
         #{prodModel,jdbcType=VARCHAR},
+      </if>
+      <if test="opNo != null">
+        #{opNo,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -153,6 +160,9 @@
       <if test="record.prodModel != null">
         prod_model = #{record.prodModel,jdbcType=VARCHAR},
       </if>
+      <if test="record.opNo != null">
+        op_no = #{record.opNo,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -166,6 +176,7 @@
     set linemod_id = #{record.linemodId,jdbcType=INTEGER},
       line_id = #{record.lineId,jdbcType=INTEGER},
       prod_model = #{record.prodModel,jdbcType=VARCHAR},
+      op_no = #{record.opNo,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -180,6 +191,9 @@
       <if test="prodModel != null">
         prod_model = #{prodModel,jdbcType=VARCHAR},
       </if>
+      <if test="opNo != null">
+        op_no = #{opNo,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -190,6 +204,7 @@
     update sys_line_prodmodel
     set line_id = #{lineId,jdbcType=INTEGER},
       prod_model = #{prodModel,jdbcType=VARCHAR},
+      op_no = #{opNo,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where linemod_id = #{linemodId,jdbcType=INTEGER}
   </update>
