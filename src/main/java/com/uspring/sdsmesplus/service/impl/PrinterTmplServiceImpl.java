@@ -66,12 +66,12 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 		String substring = file.getOriginalFilename().substring(index);
 		logger.info(substring);
 		if (substring.equals(".lab")) {
-			if (!file.isEmpty()) {
-				// 拿到上传文件的输入流
-				FileInputStream in = (FileInputStream) file.getInputStream();
-				// 以写字节的方式写文件
-				in.close();
-			}
+//			if (!file.isEmpty()) {
+//				// 拿到上传文件的输入流
+//				FileInputStream in = (FileInputStream) file.getInputStream();
+//				// 以写字节的方式写文件
+//				in.close();
+//			}
 			SysPrinterTmplPO printerTmpl = new SysPrinterTmplPO();
 			byte[] imgBytes = file.getBytes();
 			printerTmpl.setPtFileBinary(imgBytes);
