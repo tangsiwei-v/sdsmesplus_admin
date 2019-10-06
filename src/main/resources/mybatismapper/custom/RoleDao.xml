@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.RoleDao">
+	<resultMap id="BaseMapRole" type="com.uspring.sdsmesplus.entity.vo.RoleVO">
+		<id column="role_id" jdbcType="INTEGER" property="roleId" />
+		<result column="role_name" jdbcType="NVARCHAR" property="roleName" />
+		<result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+		<result column="role_level" jdbcType="VARCHAR" property="roleLevel" />
+		<result column="is_active" jdbcType="BIT" property="isActive" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<collection property="authorList" column="role_id" ofType="com.uspring.sdsmesplus.entity.po.SysAuthorityPO"
+			javaType="java.util.List" select="getAuthByAuthId">
+			<id column="auth_id" jdbcType="INTEGER" property="authId" />
+			<result column="auth_name" jdbcType="NVARCHAR" property="authName" />
+			<result column="auth_code" jdbcType="VARCHAR" property="authCode" />
+			<result column="auth_view" jdbcType="VARCHAR" property="authView" />
+			<result column="auth_system" jdbcType="VARCHAR" property="authSystem" />
+			<result column="parent_id" jdbcType="INTEGER" property="parentId" />
+			<result column="note" jdbcType="VARCHAR" property="note" />
+		</collection>
+	</resultMap>
+
+
+	<select id="queryRole" resultMap="BaseMapRole">
+		SELECT s.* from sys_role s,sys_user_role t
+		  where 1 = 1
+		   <if test="role_level !='' and role_level != null">
+			and role_level = #{role_level}
+		  </if>
+		   <if test="user_account !='' and user_account != null">
+			t.user_account = #{user_account} and s.role_id = t.role_id 
+		  </if>
+	</select>
+	
+	<select id="getAuthByAuthId" resultMap="com.uspring.sdsmesplus.entity.po.SysAuthorityPO">
+		SELECT * from sys_authority
+		where auth_id in (select auth_id from sys_role_auth
+          where 1 = 1 
+		<if test="role_id !='' and role_id != null">
+			and role_id = #{role_id}
+		</if>
+		)
+	</select>
+
+
+
+</mapper>

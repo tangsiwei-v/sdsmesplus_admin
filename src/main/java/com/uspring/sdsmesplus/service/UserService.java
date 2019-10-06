@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.UserPO;
 import com.uspring.sdsmesplus.entity.vo.UserVO;
 
@@ -51,4 +52,13 @@ public interface UserService extends UserDetailsService{
 	* @return  用户对象
 	*/
 	public UserVO cardLogin(String cardId);
+
+	//修改用户角色权限
+	public abstract void putUser(UserVO user);
+	//增加用户角色权限
+	public abstract void addUserVO(UserVO userVO);
+	//删除用户角色权限
+	public abstract void delUserVO(Integer userId);
+	//查询用户角色权限
+	public abstract PageInfo<UserVO> queryUserVO(Map<String, Object> map);
 }

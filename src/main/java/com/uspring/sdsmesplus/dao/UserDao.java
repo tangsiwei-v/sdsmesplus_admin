@@ -57,4 +57,7 @@ public interface UserDao extends UserPODao {
 	* @return  用户实体类列表
 	*/
 	List<UserVO> queryUserVO(Map<String, Object> queryMap);
+	
+	//分页查询 用户角色
+	List<UserVO> queryUserVOPage(Map<String, Object> map);
 }
