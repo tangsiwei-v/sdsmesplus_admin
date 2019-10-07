@@ -1,6 +1,7 @@
 package com.uspring.sdsmesplus.entity.vo;
 
-import com.sun.tools.javac.util.List;
+import java.util.List;
+
 import com.uspring.sdsmesplus.entity.po.SysAuthorityPO;
 import com.uspring.sdsmesplus.entity.po.SysRolePO;
 
