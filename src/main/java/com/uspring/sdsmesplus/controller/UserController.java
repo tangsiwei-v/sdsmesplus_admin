@@ -134,9 +134,9 @@ public class UserController extends BaseController{
 	}
 	
 	@ResponseBody
-	@RequestMapping(value ="/userVO" , method = RequestMethod.GET)
+	@RequestMapping(value ="/queryUser" , method = RequestMethod.GET)
 	@ApiOperation(value="查询用户角色权限" , notes="可选参数有分页，关键字",  response = Result.class)
-	public Result getAllUserVO(HttpServletResponse response,  
+	public Result getUser(HttpServletResponse response,  
 			@RequestParam Map<String, Object> map) {
 		PageInfo<UserVO> users = userService.queryUserVO(map);
 		return new Result("查询成功" , users , StatusCode.SUCCESS);

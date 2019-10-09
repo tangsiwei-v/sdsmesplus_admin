@@ -255,12 +255,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public PageInfo<UserVO> queryUserVO(Map<String, Object> map) {
+		int	page_num = 1;
+		int	page_size = 1000;
 		if (map != null) {
-			int pageNum = Integer.parseInt(map.get("page_num").toString());
-			int pageSize = Integer.parseInt(map.get("page_size").toString());
-			PageHelper.startPage(pageNum, pageSize);
-
+			if(map.containsKey("page_num")){
+				 page_num = Integer.parseInt(map.get("page_num").toString());
+			}
+			if(map.containsKey("page_size")){
+				 page_size = Integer.parseInt(map.get("page_size").toString());
+			}
 		}
+		PageHelper.startPage(page_num, page_size);
 
 		List<UserVO> list = userDao.queryUserVOPage(map);
 		PageInfo<UserVO> pageInfo = new PageInfo<UserVO>(list);

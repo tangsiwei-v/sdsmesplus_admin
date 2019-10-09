@@ -32,7 +32,7 @@
 		  </if>
 	</select>
 	
-	<select id="getAuthByAuthId" resultMap="com.uspring.sdsmesplus.entity.po.SysAuthorityPO">
+	<select id="getAuthByAuthId" resultMap="com.uspring.sdsmesplus.dao.generate.SysAuthorityPODao.BaseResultMap">
 		SELECT * from sys_authority
 		where auth_id in (select auth_id from sys_role_auth
           where 1 = 1 

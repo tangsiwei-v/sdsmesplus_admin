@@ -124,38 +124,30 @@
 
 
 	<select id="getRoleByUserAccount" resultMap="userVOPage">
-		SELECT s.* from sys_user s
+		SELECT ro.role_id,ro.role_name,r.syr_id,r.role_id,r.factory_id,r.shop_id,r.vsm_Id,r.line_id from sys_role ro 
+		left join sys_user_role r
 		where 1 = 1
-		<if test="factoryId != null">
-			and sur.factory_id = #{factoryId}
-		</if>
-		<if test="shopId != null">
-			and sur.shop_id = #{shopId}
-		</if>
-		<if test="vsmId != null">
-			and sur.vsm_id = #{vsmId}
-		</if>
-		<if test="lineId != null">
-			and sur.line_id = #{lineId}
-		</if>
-		<if test="account != null">
-			and su.user_account like '%${account}%'
-		</if>
-		<if test="userName != null">
-			and su.user_name like '%${userName}%'
+		<if test="user_account !='' and user_account != null">
+			and s.user_account = #{user_account}
 		</if>
 	</select>
 
 
-	<select id="queryUserVOPage" resultMap="com.uspring.sdsmesplus.entity.vo.UserRoleVO">
-		SELECT * from sys_role
-		where role_id in (select role_id from
-		sys_user_role
+	<select id="queryUserVOPage" resultType="com.uspring.sdsmesplus.entity.vo.UserRoleVO">
+		SELECT * from sys_user
 		where 1 = 1
-		<if test="user_account !='' and user_account != null">
-			and user_account = #{user_account}
+		<if test="factoryId != null">
+			and factory_id = #{factoryId}
 		</if>
-		)
+		<if test="shopId != null">
+			and shop_id = #{shopId}
+		</if>
+		<if test="vsmId != null">
+			and vsm_id = #{vsmId}
+		</if>
+		<if test="lineId != null">
+			and line_id = #{lineId}
+		</if>
 	</select>
 
 </mapper>
