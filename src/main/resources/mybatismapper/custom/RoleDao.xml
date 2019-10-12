@@ -8,7 +8,7 @@
 		<result column="role_level" jdbcType="VARCHAR" property="roleLevel" />
 		<result column="is_active" jdbcType="BIT" property="isActive" />
 		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-		<collection property="authorList" column="role_id" ofType="com.uspring.sdsmesplus.entity.po.SysAuthorityPO"
+		<collection property="sysAuthorityPOs" column="role_id" ofType="com.uspring.sdsmesplus.entity.po.SysAuthorityPO"
 			javaType="java.util.List" select="getAuthByAuthId">
 			<id column="auth_id" jdbcType="INTEGER" property="authId" />
 			<result column="auth_name" jdbcType="NVARCHAR" property="authName" />
@@ -22,7 +22,7 @@
 
 
 	<select id="queryRole" resultMap="BaseMapRole">
-		SELECT s.* from sys_role s,sys_user_role t
+		SELECT DISTINCT s.* from sys_role s,sys_user_role t
 		  where 1 = 1
 		   <if test="role_level !='' and role_level != null">
 			and role_level = #{role_level}
@@ -41,7 +41,47 @@
 		</if>
 		)
 	</select>
+	
+	<insert id="addRole" parameterType="com.uspring.sdsmesplus.entity.po.SysRolePO"
+	 useGeneratedKeys="true" keyProperty="roleId">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
 
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleCode != null">
+        role_code,
+      </if>
+      <if test="roleLevel != null">
+        role_level,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    
+      <if test="roleName != null">
+        #{roleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleLevel != null">
+        #{roleLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
 
 
 </mapper>

@@ -1,6 +1,10 @@
 package com.uspring.sdsmesplus.service.impl;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +40,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public PageInfo<RoleVO> queryRole(String user_account, String role_level, Integer page_size, Integer page_num) {
+		
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -48,6 +53,7 @@ public class RoleServiceImpl implements RoleService {
 			roleDao.queryRole(user_account, role_level);
 
 		List<RoleVO> roleVOs = roleDao.queryRole(user_account, role_level);
+		
 		PageInfo<RoleVO> pageInfo = new PageInfo<RoleVO>(roleVOs);
 		return pageInfo;
 	}
@@ -83,7 +89,7 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	@Transactional(isolation = Isolation.REPEATABLE_READ)
 	public void addRole(RoleVO roleVO) {
-		roleDao.insertSelective(roleVO);
+		roleDao.addRole(roleVO);
 		List<SysAuthorityPO> sysAuthorityPOs = roleVO.getSysAuthorityPOs();
 		for (SysAuthorityPO sysAuthorityPO : sysAuthorityPOs) {
 			SysRoleAuthPO roleAuth = new SysRoleAuthPO();

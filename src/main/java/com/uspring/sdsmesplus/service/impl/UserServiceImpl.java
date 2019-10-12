@@ -142,7 +142,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO userLogin(String userName, String password) {
 
-		UserVO user = userDao.findUserVOByLogin(userName, Encrypt.md5(password));
+		UserVO user = userDao.findAuth(userName, Encrypt.md5(password));
 
 		if (user == null || user.getUserId() == null)
 			throw new ServiceException(StatusCode.WRONGPASS);

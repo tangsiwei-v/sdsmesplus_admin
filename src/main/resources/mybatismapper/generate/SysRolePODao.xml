@@ -108,7 +108,8 @@
       #{roleLevel,jdbcType=VARCHAR}, #{isActive,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysRolePO">
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysRolePO"
+  useGeneratedKeys="true" keyProperty="role_id">
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleId != null">

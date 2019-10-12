@@ -51,6 +51,15 @@ public interface UserDao extends UserPODao {
 	UserVO findUserVOByLogin(@Param("account")String account, @Param("password")String password);
 	
 	/** 
+	 * @Title: findUserVOByLogin 
+	 * @Description: 权限等级
+	 * @param account 账号
+	 * @param password 密码
+	 * @return  用户实体类
+	 */
+	UserVO findAuth(@Param("account")String account, @Param("password")String password);
+	
+	/** 
 	* @Title: queryUserVO 
 	* @Description: 用户多条件查询
 	* @param queryMap 查询条件MAP

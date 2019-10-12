@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.UserPO;
 import com.uspring.sdsmesplus.entity.vo.Result;
-import com.uspring.sdsmesplus.entity.vo.RoleVO;
 import com.uspring.sdsmesplus.entity.vo.UserVO;
 import com.uspring.sdsmesplus.enums.StatusCode;
 import com.uspring.sdsmesplus.service.UserService;

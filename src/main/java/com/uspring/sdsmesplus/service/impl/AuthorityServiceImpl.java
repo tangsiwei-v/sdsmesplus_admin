@@ -41,7 +41,13 @@ public class AuthorityServiceImpl implements AuthorityService {
 		}
 		PageHelper.startPage(page_num, page_size);
 		
-		List<SysAuthorityPO> sysAuthorityPOs = sysAuthorityDao.queryAuth(roleId);
+		List<SysAuthorityPO> sysAuthorityPOs = null;
+		if(roleId == null) {
+			sysAuthorityPOs = sysAuthorityDao.queryAllauth();
+		}else {
+			sysAuthorityPOs=sysAuthorityDao.queryAuth(roleId);
+		}
+		
 		PageInfo<SysAuthorityPO> pageInfo = new PageInfo<SysAuthorityPO>(sysAuthorityPOs);
 		return pageInfo;
 	}

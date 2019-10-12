@@ -10,8 +10,7 @@
 		<result property="userEmail" column="user_email" />
 		<result property="userPhone" column="user_phone" />
 		<result property="empNumber" column="emp_number" />
-		<collection property="roles"
-			ofType="com.uspring.sdsmesplus.entity.vo.UserRoleVO">
+		<collection property="roles" ofType="com.uspring.sdsmesplus.entity.vo.UserRoleVO">
 			<id property="syrId" column="syr_id" />
 			<result property="roleId" column="role_id" />
 			<result property="roleLevel" column="role_level" />
@@ -27,6 +26,21 @@
 			<result property="isAdmin" column="is_Admin" />
 		</collection>
 	</resultMap>
+	
+	<resultMap type="com.uspring.sdsmesplus.entity.vo.UserVO" id="SerchUserAuth">
+		<id property="userId" column="user_id" />
+		<result property="userAccount" column="user_account" />
+		<result property="userPasswd" column="user_passwd" />
+		<result property="isActive" column="is_active" />
+		<result property="userName" column="user_name" />
+		<result property="userEmail" column="user_email" />
+		<result property="userPhone" column="user_phone" />
+		<result property="empNumber" column="emp_number" />
+		<collection property="authorities"
+			ofType="string">
+			<id property="authCode" column="auth_code" />
+		</collection>
+	</resultMap>
 
 	<resultMap type="com.uspring.sdsmesplus.entity.vo.UserVO" id="userVOPage">
 		<id property="userId" column="user_id" />
@@ -37,7 +51,7 @@
 		<result property="userEmail" column="user_email" />
 		<result property="userPhone" column="user_phone" />
 		<result property="empNumber" column="emp_number" />
-		<collection property="roleList" column="user_account"
+		<collection property="roles" column="user_account"
 			ofType="com.uspring.sdsmesplus.entity.vo.UserRoleVO" javaType="java.util.List"
 			select="getRoleByUserAccount">
 			<id property="syrId" column="syr_id" />
@@ -56,6 +70,22 @@
 		</collection>
 	</resultMap>
 
+
+ <resultMap type="com.uspring.sdsmesplus.entity.vo.UserVO" id="userRoleVO">
+			<id property="syrId" column="syr_id" />
+			<result property="roleId" column="role_id" />
+			<result property="roleLevel" column="role_level" />
+			<result property="roleName" column="role_name" />
+			<result property="factoryName" column="fc_name" />
+			<result property="workshopName" column="shop_name" />
+			<result property="vsmName" column="vsm_name" />
+			<result property="lineName" column="line_name" />
+			<result property="factoryId" column="factory_id" />
+			<result property="shopId" column="shop_id" />
+			<result property="vsmId" column="vsm_Id" />
+			<result property="lineId" column="line_id" />
+			<result property="isAdmin" column="is_Admin" />
+	</resultMap>
 
 	<sql id="selectUserRoleSql">
 		select
@@ -78,6 +108,31 @@
 		sur.user_id
 		left join sys_role sr on sur.role_id = sr.role_id
 	</sql>
+	
+	<sql id="selectUserAuthSql">
+		select
+		su.user_id user_id, 
+		su.user_account user_account,
+		su.user_passwd user_passwd,
+		su.user_name user_name,
+		su.user_email
+		user_email,
+		su.user_phone user_phone,
+		su.emp_number emp_number,
+		su.is_active,
+        aut.auth_code
+		from sys_user su 
+       left join sys_user_role sur on su.user_account = sur.user_account
+       left join sys_role sr on sur.role_id = sr.role_id
+       left join sys_role_auth sra on sr.role_id = sra.role_id
+      left join sys_authority aut on aut.auth_id = sra.auth_id
+	</sql>
+	
+	<select id="findAuth" resultMap="SerchUserAuth">
+		<include refid="selectUserAuthSql"></include>
+		where su.user_account = #{account}
+		and su.user_passwd = #{password}
+	</select>
 
 	<select id="findUserVOById" parameterType="int" resultMap="userVOMap">
 		<include refid="selectUserRoleSql"></include>
@@ -122,19 +177,19 @@
 		</if>
 	</select>
 
-
-	<select id="getRoleByUserAccount" resultMap="userVOPage">
-		SELECT ro.role_id,ro.role_name,r.syr_id,r.role_id,r.factory_id,r.shop_id,r.vsm_Id,r.line_id from sys_role ro 
+	<select id="getRoleByUserAccount" resultMap="com.uspring.sdsmesplus.entity.vo.UserRoleVO">
+		SELECT ro.role_id,ro.role_name,r.syr_id,r.role_id,r.factory_id,r.shop_id,r.vsm_Id,r.line_id 
+		from sys_role ro 
 		left join sys_user_role r
+	     on  ro.role_id = r.role_id
 		where 1 = 1
 		<if test="user_account !='' and user_account != null">
-			and s.user_account = #{user_account}
+			and r.user_account = #{user_account}
 		</if>
 	</select>
 
-
-	<select id="queryUserVOPage" resultType="com.uspring.sdsmesplus.entity.vo.UserRoleVO">
-		SELECT * from sys_user
+	<select id="queryUserVOPage" resultMap="userVOPage">
+		SELECT  * from sys_user
 		where 1 = 1
 		<if test="factoryId != null">
 			and factory_id = #{factoryId}
