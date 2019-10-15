@@ -114,7 +114,8 @@
       #{empNumber,jdbcType=NVARCHAR}, #{isActive,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.UserPO">
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.UserPO"
+    useGeneratedKeys="true" keyProperty="userId">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">

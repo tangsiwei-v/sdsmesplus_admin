@@ -226,6 +226,8 @@ public class UserServiceImpl implements UserService {
 		List<UserRoleVO> UserRoles = user.getRoles();
 		for (UserRoleVO userRoleVO : UserRoles) {
 			SysUserRolePO userRole = dozerMapper.map(userRoleVO, SysUserRolePO.class);
+			userRole.setUserId(user.getUserId());
+			userRole.setUserAccount(user.getUserAccount());
 			sysUserRolePODao.insertSelective(userRole);
 		}
 
@@ -238,6 +240,8 @@ public class UserServiceImpl implements UserService {
 		List<UserRoleVO> UserRoles = userVO.getRoles();
 		for (UserRoleVO userRoleVO : UserRoles) {
 			SysUserRolePO userRole = dozerMapper.map(userRoleVO, SysUserRolePO.class);
+			userRole.setUserId(userVO.getUserId());
+			userRole.setUserAccount(userVO.getUserAccount());
 			sysUserRolePODao.insertSelective(userRole);
 		}
 	}
@@ -255,11 +259,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public PageInfo<UserVO> queryUserVO(Map<String, Object> map) {
-		int	page_num = 1;
-		int	page_size = 1000;
+		Integer	page_num = 1;
+		Integer	page_size = 1000;
 		if (map != null) {
 			if(map.containsKey("page_num")){
-				 page_num = Integer.parseInt(map.get("page_num").toString());
+				page_num = Integer.parseInt(map.get("page_num").toString().trim());
 			}
 			if(map.containsKey("page_size")){
 				 page_size = Integer.parseInt(map.get("page_size").toString());

@@ -165,7 +165,7 @@ public class UserController extends BaseController{
 	public Result addUserVO(HttpServletResponse response,
 			@RequestBody UserVO userVO) {
 		userService.addUserVO(userVO);
-		return new Result("添加角色权限成功", "", StatusCode.SUCCESS);
+		return new Result("添加用户权限成功", "", StatusCode.SUCCESS);
 	}
 	
 }

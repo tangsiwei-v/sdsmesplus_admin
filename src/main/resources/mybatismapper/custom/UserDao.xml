@@ -177,8 +177,8 @@
 		</if>
 	</select>
 
-	<select id="getRoleByUserAccount" resultMap="com.uspring.sdsmesplus.entity.vo.UserRoleVO">
-		SELECT ro.role_id,ro.role_name,r.syr_id,r.role_id,r.factory_id,r.shop_id,r.vsm_Id,r.line_id 
+	<select id="getRoleByUserAccount" resultType="map">
+		SELECT ro.role_id,ro.role_name,r.syr_id,r.factory_id,r.shop_id,r.vsm_Id,r.line_id 
 		from sys_role ro 
 		left join sys_user_role r
 	     on  ro.role_id = r.role_id
@@ -189,19 +189,29 @@
 	</select>
 
 	<select id="queryUserVOPage" resultMap="userVOPage">
-		SELECT  * from sys_user
+		SELECT  u.user_id,u.user_account,u.user_passwd,u.is_active,u.user_name,u.user_email
+		,u.user_phone,u.emp_number
+		 from sys_user u
+		left join sys_user_role r
+		 on  u.user_account = r.user_account
 		where 1 = 1
-		<if test="factoryId != null">
-			and factory_id = #{factoryId}
+		<if test="factoryId != '' and factoryId != null">
+			and r.factory_id = #{factoryId}
 		</if>
-		<if test="shopId != null">
-			and shop_id = #{shopId}
+		<if test="shopId !='' and shopId != null">
+			and r.shop_id = #{shopId}
 		</if>
-		<if test="vsmId != null">
-			and vsm_id = #{vsmId}
+		<if test="vsmId != '' and vsmId != null ">
+			and r.vsm_id = #{vsmId}
 		</if>
-		<if test="lineId != null">
-			and line_id = #{lineId}
+		<if test="userAccount != ''and userAccount != null ">
+			and u.user_account = #{userAccount}
+		</if>
+		<if test="lineId != ''and lineId != null ">
+			and r.line_id = #{lineId}
+		</if>
+		<if test="userName != ''and userName != null ">
+			and u.user_name = #{userName}
 		</if>
 	</select>
 

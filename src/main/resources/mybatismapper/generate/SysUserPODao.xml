@@ -115,10 +115,12 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysUserPO"
-     useGeneratedKeys="true" keyProperty="role_id">
+     useGeneratedKeys="true" keyProperty="user_id">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
- 
+       <if test="userId != null">
+        user_id,
+      </if>
       <if test="userAccount != null">
         user_account,
       </if>
@@ -145,7 +147,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-
+      <if test="userId != null">
+         #{userId,jdbcType=jdbcType=INTEGER},
+      </if>
       <if test="userAccount != null">
         #{userAccount,jdbcType=NVARCHAR},
       </if>

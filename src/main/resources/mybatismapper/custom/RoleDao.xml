@@ -22,14 +22,14 @@
 
 
 	<select id="queryRole" resultMap="BaseMapRole">
-		SELECT DISTINCT s.* from sys_role s,sys_user_role t
+		SELECT DISTINCT s.* from sys_role s
 		  where 1 = 1
 		   <if test="role_level !='' and role_level != null">
 			and role_level = #{role_level}
 		  </if>
 		   <if test="user_account !='' and user_account != null">
-			t.user_account = #{user_account} and s.role_id = t.role_id 
-		  </if>
+			and t.user_account = #{user_account} 
+		  </if> 
 	</select>
 	
 	<select id="getAuthByAuthId" resultMap="com.uspring.sdsmesplus.dao.generate.SysAuthorityPODao.BaseResultMap">
