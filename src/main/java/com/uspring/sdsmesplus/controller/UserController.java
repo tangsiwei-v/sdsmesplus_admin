@@ -16,11 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.UserPO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.entity.vo.UserVO;
@@ -129,4 +131,41 @@ public class UserController extends BaseController{
 		UserVO user = userService.cardLogin(cardId);
 		return new Result("登录成功" , user , StatusCode.SUCCESS); 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value ="/queryUser" , method = RequestMethod.GET)
+	@ApiOperation(value="查询用户角色权限" , notes="可选参数有分页，关键字",  response = Result.class)
+	public Result getUser(HttpServletResponse response,  
+			@RequestParam Map<String, Object> map) {
+		PageInfo<UserVO> users = userService.queryUserVO(map);
+		return new Result("查询成功" , users , StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/userVO", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除用户角色权限", notes = "删除用户角色权限", response = Result.class)
+	public Result delUserVO(HttpServletResponse response,
+			@RequestParam(value = "userId", required = true ) Integer userId) {
+		userService.delUserVO(userId);
+		return new Result("删除成功", "", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/userVO", method = RequestMethod.PUT)
+	@ApiOperation(value = "修改用户角色权限", notes = "修改用户角色权限", response = Result.class)
+	public Result putUser(HttpServletResponse response,
+			@RequestBody UserVO user) {
+		userService.putUser(user);
+		return new Result("修改成功", "", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/userVO", method = RequestMethod.POST)
+	@ApiOperation(value = "添加用户角色", notes = "添加用户角色", response = Result.class)
+	public Result addUserVO(HttpServletResponse response,
+			@RequestBody UserVO userVO) {
+		userService.addUserVO(userVO);
+		return new Result("添加用户权限成功", "", StatusCode.SUCCESS);
+	}
+	
 }

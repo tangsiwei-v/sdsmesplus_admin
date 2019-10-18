@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.SysAuthorityDao">
+	<resultMap id="BaseMap"
+		type="com.uspring.sdsmesplus.entity.po.SysAuthorityPO">
+		<id column="auth_id" jdbcType="INTEGER" property="authId" />
+		<result column="auth_name" jdbcType="NVARCHAR" property="authName" />
+		<result column="auth_code" jdbcType="VARCHAR" property="authCode" />
+		<result column="auth_view" jdbcType="VARCHAR" property="authView" />
+		<result column="auth_system" jdbcType="VARCHAR" property="authSystem" />
+		<result column="parent_id" jdbcType="INTEGER" property="parentId" />
+		<result column="note" jdbcType="VARCHAR" property="note" />
+	</resultMap>
+
+	<resultMap id="TreeMap" type="com.uspring.sdsmesplus.entity.vo.AuthorityVO">
+		<result column="auth_system" jdbcType="VARCHAR" property="authSystem" />
+		<collection property="authViews"
+			ofType="com.uspring.sdsmesplus.entity.vo.AuthView">
+			<result column="auth_view" jdbcType="VARCHAR" property="authSystem" />
+			<collection property="authViews"
+				ofType="com.uspring.sdsmesplus.entity.vo.AuthCode">
+				<id column="auth_id" jdbcType="INTEGER" property="authId" />
+				<result column="auth_name" jdbcType="NVARCHAR" property="authName" />
+				<result column="auth_code" jdbcType="VARCHAR" property="authSystem" />
+				<result column="parent_id" jdbcType="INTEGER" property="parentId" />
+				<result column="note" jdbcType="VARCHAR" property="note" />
+			</collection>
+		</collection>
+	</resultMap>
+
+	<select id="queryAuth" resultMap="BaseMap">
+		SELECT * from sys_authority
+		where auth_id in
+		(select auth_id from
+		sys_role_auth
+		where 1 = 1
+		<if test="role_id !='' and role_id != null">
+			and role_id = #{role_id}
+		</if>
+		)
+	</select>
+	
+		<select id="queryTreeAuth" resultMap="TreeMap">
+		SELECT * from sys_authority
+		where 1= 1
+	</select>
+
+	<select id="queryAllauth" resultMap="BaseMap">
+		SELECT * from sys_authority
+		where 1 = 1
+
+	</select>
+
+
+</mapper>
