@@ -7,6 +7,7 @@
 		<result column="role_code" jdbcType="VARCHAR" property="roleCode" />
 		<result column="role_level" jdbcType="VARCHAR" property="roleLevel" />
 		<result column="is_active" jdbcType="BIT" property="isActive" />
+		 <result column="is_system" jdbcType="BIT" property="isSystem" />
 		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 		<collection property="sysAuthorityPOs" column="role_id" ofType="com.uspring.sdsmesplus.entity.po.SysAuthorityPO"
 			javaType="java.util.List" select="getAuthByAuthId">

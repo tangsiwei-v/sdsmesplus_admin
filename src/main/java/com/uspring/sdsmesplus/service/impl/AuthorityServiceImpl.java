@@ -14,6 +14,7 @@ import com.uspring.sdsmesplus.dao.generate.SysRoleAuthPODao;
 import com.uspring.sdsmesplus.entity.po.SysAuthorityPO;
 import com.uspring.sdsmesplus.entity.po.SysAuthorityPOExample;
 import com.uspring.sdsmesplus.entity.po.SysAuthorityPOExample.Criteria;
+import com.uspring.sdsmesplus.entity.vo.AuthorityVO;
 import com.uspring.sdsmesplus.entity.vo.DeviceVO;
 import com.uspring.sdsmesplus.service.AuthorityService;
 
@@ -82,4 +83,10 @@ public class AuthorityServiceImpl implements AuthorityService {
 
 	}
 
+	@Override
+	public List<AuthorityVO> queryTreeAuth() {
+		List<AuthorityVO> treeAuths = sysAuthorityDao.queryTreeAuth();
+       return treeAuths;
+	}
+	
 }

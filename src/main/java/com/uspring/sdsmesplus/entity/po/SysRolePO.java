@@ -13,6 +13,8 @@ public class SysRolePO {
 
     private Boolean isActive;
 
+    private Boolean isSystem;
+
     private Date createTime;
 
     public Integer getRoleId() {
@@ -53,6 +55,14 @@ public class SysRolePO {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public Boolean getIsSystem() {
+        return isSystem;
+    }
+
+    public void setIsSystem(Boolean isSystem) {
+        this.isSystem = isSystem;
     }
 
     public Date getCreateTime() {

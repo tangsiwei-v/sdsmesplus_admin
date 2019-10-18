@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.SysAuthorityPO;
+import com.uspring.sdsmesplus.entity.vo.AuthorityVO;
 
 /** * @author  作者 E-mail:
  * @date 创建时间：2019年10月6日 上午11:31:41 
@@ -20,5 +21,7 @@ public interface AuthorityService {
 	void putAuth(List<SysAuthorityPO> authorityPOs);
 
 	void addAuth(SysAuthorityPO authorityPO);
+
+	List<AuthorityVO> queryTreeAuth();
 
 }

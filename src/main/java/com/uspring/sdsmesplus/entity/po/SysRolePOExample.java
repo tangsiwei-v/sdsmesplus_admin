@@ -435,6 +435,66 @@ public class SysRolePOExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsSystemIsNull() {
+            addCriterion("is_system is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemIsNotNull() {
+            addCriterion("is_system is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemEqualTo(Boolean value) {
+            addCriterion("is_system =", value, "isSystem");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemNotEqualTo(Boolean value) {
+            addCriterion("is_system <>", value, "isSystem");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemGreaterThan(Boolean value) {
+            addCriterion("is_system >", value, "isSystem");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_system >=", value, "isSystem");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemLessThan(Boolean value) {
+            addCriterion("is_system <", value, "isSystem");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_system <=", value, "isSystem");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemIn(List<Boolean> values) {
+            addCriterion("is_system in", values, "isSystem");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemNotIn(List<Boolean> values) {
+            addCriterion("is_system not in", values, "isSystem");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_system between", value1, value2, "isSystem");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSystemNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_system not between", value1, value2, "isSystem");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
