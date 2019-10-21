@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.dao.PlanOrderDao;
+import com.uspring.sdsmesplus.dao.SysFactoryDao;
 import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
+import com.uspring.sdsmesplus.entity.po.SysFactoryPO;
 import com.uspring.sdsmesplus.service.OrderService;
 
 /**
@@ -22,8 +24,12 @@ import com.uspring.sdsmesplus.service.OrderService;
  */
 @Service
 public class OrderServiceImpl implements OrderService {
+	
 	@Autowired
 	private PlanOrderDao planDao;
+	
+	@Autowired
+	private SysFactoryDao sysFactoryDao;
 
 	@Override
 	public PageInfo<PlanOrderPO> selectOrder(Map<String, Object> map) {
@@ -55,6 +61,20 @@ public class OrderServiceImpl implements OrderService {
 		List<PlanOrderPO> list = planDao.queryPlanVO(map);
 		PageInfo<PlanOrderPO> pageInfo = new PageInfo<PlanOrderPO>(list);
 		return pageInfo;
+	}
+
+	@Override
+	public List<PlanOrderPO> selectPrinterByFactory(Integer fcId) {
+		
+    SysFactoryPO factory = sysFactoryDao.selectByPrimaryKey(fcId);
+    
+    List<PlanOrderPO> listPO1s = planDao.queryByFcCode(factory.getFcCode()); 
+    
+	List<PlanOrderPO> listPOs = planDao.queryPrintVO(factory.getFcCode());
+	
+	
+	 listPO1s.removeAll(listPOs);
+	return listPO1s;
 	}
 
 }

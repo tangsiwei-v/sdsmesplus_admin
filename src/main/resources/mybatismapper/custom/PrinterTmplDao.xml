@@ -12,6 +12,9 @@
     <result column="pt_counter_max" jdbcType="INTEGER" property="ptCounterMax" />
     <result column="pt_counter_value" jdbcType="INTEGER" property="ptCounterValue" />
     <result column="pt_file_updatetime" jdbcType="TIMESTAMP" property="ptFileUpdatetime" />
+    <result column="check_person" jdbcType="VARCHAR" property="checkPerson" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <collection property="factorys" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
         <id column="fc_id" jdbcType="INTEGER" property="fcId" />
     	<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />

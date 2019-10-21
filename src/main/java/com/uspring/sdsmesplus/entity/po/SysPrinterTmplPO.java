@@ -23,6 +23,12 @@ public class SysPrinterTmplPO {
 
     private Date ptFileUpdatetime;
 
+    private String checkPerson;
+
+    private Date checkTime;
+
+    private Date createTime;
+
     private byte[] ptFileBinary;
 
     public Integer getPtmplId() {
@@ -103,6 +109,30 @@ public class SysPrinterTmplPO {
 
     public void setPtFileUpdatetime(Date ptFileUpdatetime) {
         this.ptFileUpdatetime = ptFileUpdatetime;
+    }
+
+    public String getCheckPerson() {
+        return checkPerson;
+    }
+
+    public void setCheckPerson(String checkPerson) {
+        this.checkPerson = checkPerson == null ? null : checkPerson.trim();
+    }
+
+    public Date getCheckTime() {
+        return checkTime;
+    }
+
+    public void setCheckTime(Date checkTime) {
+        this.checkTime = checkTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public byte[] getPtFileBinary() {
