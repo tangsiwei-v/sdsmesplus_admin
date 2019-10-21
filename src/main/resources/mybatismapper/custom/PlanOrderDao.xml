@@ -57,17 +57,26 @@
 	
 		<!-- 筛选条件查询 -->
 	<select id="queryPrintVO"  resultMap="BaseResultMapTwo">
-		select  p.*  from  plan_order p LEFT JOIN 
-              (select * from  sys_printer_tmpl t  where  t.customer_code = ''  ) t1    
-                 ON p.prod_code = t1.prod_code and p.customer_code = t1.customer_code
+        select  p.*,t1.ptmpl_id  from  plan_order p 
+              INNER    JOIN 
+              (select * from  sys_printer_tmpl t    ) t1    
+                 ON p.prod_code = t1.prod_code and p.customer_code = t1.customer_code 
            where  p.po_status != 'Completed'  and fc_code = #{factory_code}
 	</select>
 	
 
+	<select id="queryNullVO"  resultMap="BaseResultMapTwo">
+     select  p.*,t1.ptmpl_id  from  plan_order p 
+              INNER    JOIN 
+              (select * from  sys_printer_tmpl t where t.customer_code=''  ) t1    
+                 ON p.prod_code = t1.prod_code 
+           where  p.po_status != 'Completed'  and fc_code = #{factory_code}
+	</select>
+	
 			<!-- 筛选条件查询 -->
 	<select id="queryByFcCode"  resultMap="BaseResultMapTwo">
 		select *  from  plan_order 	
-           where fc_code = #{factory_code}
+           where fc_code = #{factory_code} and po_status != 'Completed'
 	</select>
 
 </mapper>

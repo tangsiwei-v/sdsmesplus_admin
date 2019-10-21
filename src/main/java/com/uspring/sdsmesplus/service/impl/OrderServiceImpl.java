@@ -1,6 +1,7 @@
 package com.uspring.sdsmesplus.service.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -68,12 +69,15 @@ public class OrderServiceImpl implements OrderService {
 		
     SysFactoryPO factory = sysFactoryDao.selectByPrimaryKey(fcId);
     
-    List<PlanOrderPO> listPO1s = planDao.queryByFcCode(factory.getFcCode()); 
+    List<PlanOrderPO> listPO1s = planDao.queryByFcCode(factory.getFcCode());   
+    
+    List<PlanOrderPO> listPO2s = planDao.queryNullVO(factory.getFcCode());    
     
 	List<PlanOrderPO> listPOs = planDao.queryPrintVO(factory.getFcCode());
+
+	listPO1s.removeAll(listPOs);
+	listPO1s.removeAll(listPO2s);
 	
-	
-	 listPO1s.removeAll(listPOs);
 	return listPO1s;
 	}
 

@@ -48,4 +48,11 @@ public interface PlanOrderDao extends PlanOrderPODao {
 	* @return  订单实体类
 	*/
 	List<PlanOrderPO> queryByFcCode(@Param("factory_code") String fcCode);
+	
+	/** 
+	* @Title: queryNullVO 
+	* @Description: 
+	* @return  订单实体类
+	*/
+	List<PlanOrderPO> queryNullVO(@Param("factory_code") String fcCode);
 }
