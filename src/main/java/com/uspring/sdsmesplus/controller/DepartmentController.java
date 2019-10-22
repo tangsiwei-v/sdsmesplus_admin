@@ -2,9 +2,7 @@ package com.uspring.sdsmesplus.controller;
 
 import java.rmi.ServerException;
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,26 +11,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.SysFactoryPO;
 import com.uspring.sdsmesplus.entity.po.SysLinePO;
+import com.uspring.sdsmesplus.entity.po.SysLineProdmodelPO;
 import com.uspring.sdsmesplus.entity.po.SysLineStoragebinPO;
 import com.uspring.sdsmesplus.entity.po.SysVsmPO;
 import com.uspring.sdsmesplus.entity.po.SysWorkshopPO;
 import com.uspring.sdsmesplus.entity.vo.FactoryVO;
+import com.uspring.sdsmesplus.entity.vo.LineProdmodelVO;
 import com.uspring.sdsmesplus.entity.vo.LineStoragebinVO;
 import com.uspring.sdsmesplus.entity.vo.LineVO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.entity.vo.VsmVO;
 import com.uspring.sdsmesplus.entity.vo.WorkshopVO;
 import com.uspring.sdsmesplus.enums.StatusCode;
+import com.uspring.sdsmesplus.service.LineProdModelServer;
 import com.uspring.sdsmesplus.service.LineStoragebinService;
 import com.uspring.sdsmesplus.service.SysFactoryService;
 import com.uspring.sdsmesplus.service.SysLineService;
 import com.uspring.sdsmesplus.service.SysVsmServer;
 import com.uspring.sdsmesplus.service.WorkShopServer;
-
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -61,6 +60,9 @@ public class DepartmentController extends BaseController {
 	
 	@Autowired
 	private LineStoragebinService lineStoragebinService;
+	
+	@Autowired
+	private LineProdModelServer lineProdModelServer;
 
 	@ResponseBody
 	@RequestMapping(value = "/workline/fulltree", method = RequestMethod.GET)
@@ -271,4 +273,40 @@ public class DepartmentController extends BaseController {
 		return new Result("删除成功", "success", StatusCode.SUCCESS);
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/line_prodmodel", method = RequestMethod.GET)
+	@ApiOperation(value = "查询产线模式主数据", notes = "查询产线库位主数据", response = Result.class)
+	public Result selectLineProdmodel(HttpServletResponse response,
+			@RequestParam(value = "lineId", required = false) Integer lineId,
+			@RequestParam(value = "fcId", required = false) Integer fcId,
+			@RequestParam(value = "page_size", required = false) Integer page_size,
+			@RequestParam(value = "page_num", required = false) Integer page_num) {
+		PageInfo<LineProdmodelVO> lineStoragebins = lineProdModelServer.queryLineProdmodel(lineId,fcId,page_size,page_num);
+		return new Result("查询成功", lineStoragebins, StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/line_prodmodel/item", method = RequestMethod.POST)
+	@ApiOperation(value = "添加产线模式主数据", notes = "添加产线模式主数据", response = Result.class)
+	public Result insertLineProdmodel(HttpServletResponse response, @RequestBody SysLineProdmodelPO lineProdmodel) {
+		lineProdModelServer.insertLineProdmodel(lineProdmodel);
+		return new Result("添加成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/line_prodmodel/item", method = RequestMethod.PUT)
+	@ApiOperation(value = "修改产线模式主数据", notes = "修改产线模式主数据", response = Result.class)
+	public Result updateLineProdmodel(HttpServletResponse response, @RequestBody SysLineProdmodelPO lineProdmodel) {
+		lineProdModelServer.updateLineProdmodel(lineProdmodel);
+		return new Result("修改成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/line_prodmodel/item/{linemodId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除产线模式主数据", notes = "删除产线模式主数据", response = Result.class)
+	public Result deleteLineProdmodel(HttpServletResponse response, @PathVariable("linemodId") Integer linemodId) {
+		lineProdModelServer.deleteLineProdmodel(linemodId);
+		return new Result("删除成功", "success", StatusCode.SUCCESS);
+	}
+	
 }

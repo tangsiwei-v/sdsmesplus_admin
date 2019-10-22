@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.AgvConfigKqPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.AgvConfigKqPO">
+    <id column="agvcfg_id" jdbcType="INTEGER" property="agvcfgId" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="fp_qty_before" jdbcType="INTEGER" property="fpQtyBefore" />
+    <result column="first_box_qty" jdbcType="INTEGER" property="firstBoxQty" />
+    <result column="call_gap_qty" jdbcType="INTEGER" property="callGapQty" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    agvcfg_id, fc_id, line_id, prod_code, customer_code, fp_qty_before, first_box_qty, 
+    call_gap_qty, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.AgvConfigKqPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from agv_config_kq
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from agv_config_kq
+    where agvcfg_id = #{agvcfgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from agv_config_kq
+    where agvcfg_id = #{agvcfgId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.AgvConfigKqPOExample">
+    delete from agv_config_kq
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.AgvConfigKqPO">
+    insert into agv_config_kq (agvcfg_id, fc_id, line_id, 
+      prod_code, customer_code, fp_qty_before, 
+      first_box_qty, call_gap_qty, create_time, 
+      update_time)
+    values (#{agvcfgId,jdbcType=INTEGER}, #{fcId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, 
+      #{prodCode,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, #{fpQtyBefore,jdbcType=INTEGER}, 
+      #{firstBoxQty,jdbcType=INTEGER}, #{callGapQty,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.AgvConfigKqPO">
+    insert into agv_config_kq
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="agvcfgId != null">
+        agvcfg_id,
+      </if>
+      <if test="fcId != null">
+        fc_id,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="fpQtyBefore != null">
+        fp_qty_before,
+      </if>
+      <if test="firstBoxQty != null">
+        first_box_qty,
+      </if>
+      <if test="callGapQty != null">
+        call_gap_qty,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="agvcfgId != null">
+        #{agvcfgId,jdbcType=INTEGER},
+      </if>
+      <if test="fcId != null">
+        #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fpQtyBefore != null">
+        #{fpQtyBefore,jdbcType=INTEGER},
+      </if>
+      <if test="firstBoxQty != null">
+        #{firstBoxQty,jdbcType=INTEGER},
+      </if>
+      <if test="callGapQty != null">
+        #{callGapQty,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.AgvConfigKqPOExample" resultType="java.lang.Long">
+    select count(*) from agv_config_kq
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update agv_config_kq
+    <set>
+      <if test="record.agvcfgId != null">
+        agvcfg_id = #{record.agvcfgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcId != null">
+        fc_id = #{record.fcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fpQtyBefore != null">
+        fp_qty_before = #{record.fpQtyBefore,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstBoxQty != null">
+        first_box_qty = #{record.firstBoxQty,jdbcType=INTEGER},
+      </if>
+      <if test="record.callGapQty != null">
+        call_gap_qty = #{record.callGapQty,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update agv_config_kq
+    set agvcfg_id = #{record.agvcfgId,jdbcType=INTEGER},
+      fc_id = #{record.fcId,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      fp_qty_before = #{record.fpQtyBefore,jdbcType=INTEGER},
+      first_box_qty = #{record.firstBoxQty,jdbcType=INTEGER},
+      call_gap_qty = #{record.callGapQty,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.AgvConfigKqPO">
+    update agv_config_kq
+    <set>
+      <if test="fcId != null">
+        fc_id = #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fpQtyBefore != null">
+        fp_qty_before = #{fpQtyBefore,jdbcType=INTEGER},
+      </if>
+      <if test="firstBoxQty != null">
+        first_box_qty = #{firstBoxQty,jdbcType=INTEGER},
+      </if>
+      <if test="callGapQty != null">
+        call_gap_qty = #{callGapQty,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where agvcfg_id = #{agvcfgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.AgvConfigKqPO">
+    update agv_config_kq
+    set fc_id = #{fcId,jdbcType=INTEGER},
+      line_id = #{lineId,jdbcType=INTEGER},
+      prod_code = #{prodCode,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      fp_qty_before = #{fpQtyBefore,jdbcType=INTEGER},
+      first_box_qty = #{firstBoxQty,jdbcType=INTEGER},
+      call_gap_qty = #{callGapQty,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where agvcfg_id = #{agvcfgId,jdbcType=INTEGER}
+  </update>
+</mapper>

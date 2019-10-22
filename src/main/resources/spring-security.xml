@@ -11,17 +11,6 @@
 	<security:http auto-config="false" entry-point-ref="unauthorizedEntryPoint"
 		create-session="stateless">
 		
-		<!-- 自定义认证拦截器 -->
-		<security:custom-filter ref="authenticationTokenProcessingFilter"
-			position="FORM_LOGIN_FILTER" />
-		<!-- 登录接口开放 -->
-		<security:intercept-url pattern="/api/user/user_login" access="permitAll" />
-		<!-- 跨域接口开放 -->
-		<security:intercept-url pattern="/api/**" access="permitAll" method="OPTIONS"/>
-		<!-- 文件访问接口开放 -->
-		<security:intercept-url pattern="/api/file/**" access="permitAll" method="GET"/>
-		<!-- 其他接口接受权限认证 -->
-		<!--  <security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER')" /> -->
 		
 		<security:csrf disabled="true"/>
 	</security:http>
