@@ -3,6 +3,7 @@ package com.uspring.sdsmesplus.controller;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageInfo;
+import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
 import com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO;
 import com.uspring.sdsmesplus.entity.vo.PrinterTmplVO;
 import com.uspring.sdsmesplus.entity.vo.Result;
@@ -107,4 +109,5 @@ public class ProductInfoController extends BaseController {
 		printerTmplService.deletePrinterTmpl(ptmplId);
 		return new Result("删除成功", "success", StatusCode.SUCCESS);
 	}
+	
 }

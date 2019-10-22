@@ -1,5 +1,6 @@
 package com.uspring.sdsmesplus.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
@@ -17,5 +18,8 @@ public interface OrderService {
 
 	// 查询工单
 	public PageInfo<PlanOrderPO> selectOrder(Map<String, Object> map);
+
+	//查询没有配置打印程序的工单
+	public List<PlanOrderPO> selectPrinterByFactory(Integer fcId);
 
 }

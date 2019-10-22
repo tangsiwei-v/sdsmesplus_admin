@@ -7,6 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +17,7 @@ import com.uspring.sdsmesplus.dao.PrinterTmplDao;
 import com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO;
 import com.uspring.sdsmesplus.entity.po.SysPrinterTmplPOExample;
 import com.uspring.sdsmesplus.entity.vo.PrinterTmplVO;
+import com.uspring.sdsmesplus.entity.vo.UserVO;
 import com.uspring.sdsmesplus.exception.ServiceException;
 import com.uspring.sdsmesplus.service.PrinterTmplService;
 
@@ -53,6 +55,9 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 	public void insertPrinterTmpl(SysPrinterTmplPO printerTmpl) {
 		printerTmpl.setPtmplId(null);
 		printerTmpl.setPtmplFileName(printerTmpl.getProdCode()+".lab");
+		UserVO user = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		printerTmpl.setCheckPerson(user.getUserName());
+		printerTmpl.setCheckTime(new Date());
 		printerTmplDao.insertSelective(printerTmpl);
 	}
 

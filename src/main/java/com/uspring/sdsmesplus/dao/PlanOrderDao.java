@@ -11,8 +11,11 @@ package com.uspring.sdsmesplus.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.uspring.sdsmesplus.dao.generate.PlanOrderPODao;
 import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
+import com.uspring.sdsmesplus.entity.po.SysFactoryPO;
 
 /** 
  * @ClassName: PlanOrderVODao 
@@ -29,4 +32,27 @@ public interface PlanOrderDao extends PlanOrderPODao {
 	* @return  订单实体类
 	*/
 	List<PlanOrderPO> queryPlanVO(Map<String,Object> map);
+
+	
+	/** 
+	* @Title: queryPrintVO 
+	* @Description: 
+	* @return  有客户号的有打印模板的工单
+	*/
+	List<PlanOrderPO> queryPrintVO(@Param("factory_code") String factoryCode);
+
+
+	/** 
+	* @Title: queryByFcCode 
+	* @Description: 
+	* @return  订单实体类
+	*/
+	List<PlanOrderPO> queryByFcCode(@Param("factory_code") String fcCode);
+	
+	/** 
+	* @Title: queryNullVO 
+	* @Description: 
+	* @return  无客户号有打印模板的工单
+	*/
+	List<PlanOrderPO> queryNullVO(@Param("factory_code") String fcCode);
 }
