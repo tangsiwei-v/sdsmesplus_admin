@@ -69,7 +69,7 @@ public class ProductInfoController extends BaseController {
 	@ApiOperation(value = "修改产品条码模板规则", notes = "修改产品条码模板规则", response = Result.class)
 	public Result updatePrinterTmpl(HttpServletResponse response, @RequestBody SysPrinterTmplPO printerTmpl) {
 		printerTmplService.updatePrinterTmpl(printerTmpl);
-		return new Result("添加成功", "success", StatusCode.SUCCESS);
+		return new Result("修改成功", "success", StatusCode.SUCCESS);
 	}
 
 	@ResponseBody
@@ -104,7 +104,7 @@ public class ProductInfoController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/item/{ptmplId}", method = RequestMethod.DELETE)
-	@ApiOperation(value = "删除条码模板上传", notes = "删除条码模板上传", response = Result.class)
+	@ApiOperation(value = "删除条码模板", notes = "删除条码模板", response = Result.class)
 	public Result deletePrinterTmpl(HttpServletResponse response, @PathVariable("ptmplId") Integer ptmplId) {
 		printerTmplService.deletePrinterTmpl(ptmplId);
 		return new Result("删除成功", "success", StatusCode.SUCCESS);
