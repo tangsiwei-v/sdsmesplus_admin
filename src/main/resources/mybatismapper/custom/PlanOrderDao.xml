@@ -76,7 +76,7 @@
 			<!-- 筛选条件查询 -->
 	<select id="queryByFcCode"  resultMap="BaseResultMapTwo">
 		select *  from  plan_order 	
-           where fc_code = #{factory_code} and po_status != 'Completed'
+           where fc_code = #{factory_code} and po_status != 'Completed' and customer_code != ''
 	</select>
 
 </mapper>
