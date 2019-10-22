@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
-import com.uspring.sdsmesplus.dao.generate.SysPrinterTmplPODao;
+
+import com.uspring.sdsmesplus.dao.generate.SysPrinterTmplDao;
 import com.uspring.sdsmesplus.entity.vo.PrinterTmplVO;
 
 /**
@@ -14,7 +15,7 @@ import com.uspring.sdsmesplus.entity.vo.PrinterTmplVO;
  * @date: 2019年8月22日 下午15:36:32
  */
 
-public interface PrinterTmplDao extends SysPrinterTmplPODao {
+public interface PrinterTmplDao extends SysPrinterTmplDao {
 	/** 
 	* @Title: printerTmpl 
 	* @Description: 根据产品简码，客户号，查询产品条码模板规则

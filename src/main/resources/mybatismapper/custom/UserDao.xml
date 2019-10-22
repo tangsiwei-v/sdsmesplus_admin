@@ -51,6 +51,7 @@
 		<result property="userEmail" column="user_email" />
 		<result property="userPhone" column="user_phone" />
 		<result property="empNumber" column="emp_number" />
+		<result property="createTime" column="create_time" />
 		<collection property="roles" column="user_account"
 			ofType="com.uspring.sdsmesplus.entity.vo.UserRoleVO" javaType="java.util.List"
 			select="getRoleByUserAccount">
@@ -190,7 +191,7 @@
 
 	<select id="queryUserVOPage" resultMap="userVOPage">
 		SELECT  u.user_id,u.user_account,u.user_passwd,u.is_active,u.user_name,u.user_email
-		,u.user_phone,u.emp_number
+		,u.user_phone,u.emp_number,u.create_time
 		 from sys_user u
 		left join sys_user_role r
 		 on  u.user_account = r.user_account
