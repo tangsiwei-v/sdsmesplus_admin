@@ -37,13 +37,13 @@ public interface PlanOrderDao extends PlanOrderPODao {
 	/** 
 	* @Title: queryPrintVO 
 	* @Description: 
-	* @return  订单实体类
+	* @return  有客户号的有打印模板的工单
 	*/
 	List<PlanOrderPO> queryPrintVO(@Param("factory_code") String factoryCode);
 
 
 	/** 
-	* @Title: queryPrintVO 
+	* @Title: queryByFcCode 
 	* @Description: 
 	* @return  订单实体类
 	*/
@@ -52,7 +52,7 @@ public interface PlanOrderDao extends PlanOrderPODao {
 	/** 
 	* @Title: queryNullVO 
 	* @Description: 
-	* @return  订单实体类
+	* @return  无客户号有打印模板的工单
 	*/
 	List<PlanOrderPO> queryNullVO(@Param("factory_code") String fcCode);
 }
