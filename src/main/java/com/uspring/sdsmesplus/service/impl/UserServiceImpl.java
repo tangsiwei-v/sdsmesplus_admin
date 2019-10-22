@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
 		if (!Encrypt.md5(oldPassword).equals(user.getUserPasswd()))
 			return false;
 		user.setUserPasswd(Encrypt.md5(newPassword));
-		userDao.updateByPrimaryKey(user);
+		userDao.updateByPrimaryKeySelective(user);
 		return true;
 	}
 
