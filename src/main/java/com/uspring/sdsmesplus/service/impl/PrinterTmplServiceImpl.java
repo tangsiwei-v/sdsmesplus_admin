@@ -1,6 +1,5 @@
 package com.uspring.sdsmesplus.service.impl;
 
-import java.io.FileInputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +17,7 @@ import com.uspring.sdsmesplus.dao.PrinterTmplDao;
 import com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO;
 import com.uspring.sdsmesplus.entity.po.SysPrinterTmplPOExample;
 import com.uspring.sdsmesplus.entity.vo.PrinterTmplVO;
+import com.uspring.sdsmesplus.entity.vo.UserVO;
 import com.uspring.sdsmesplus.exception.ServiceException;
 import com.uspring.sdsmesplus.service.PrinterTmplService;
 
@@ -54,6 +55,9 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 	public void insertPrinterTmpl(SysPrinterTmplPO printerTmpl) {
 		printerTmpl.setPtmplId(null);
 		printerTmpl.setPtmplFileName(printerTmpl.getProdCode()+".lab");
+		UserVO user = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		printerTmpl.setCheckPerson(user.getUserName());
+		printerTmpl.setCheckTime(new Date());
 		printerTmplDao.insertSelective(printerTmpl);
 	}
 
@@ -66,12 +70,6 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 		String substring = file.getOriginalFilename().substring(index);
 		logger.info(substring);
 		if (substring.equals(".lab")) {
-//			if (!file.isEmpty()) {
-//				// 拿到上传文件的输入流
-//				FileInputStream in = (FileInputStream) file.getInputStream();
-//				// 以写字节的方式写文件
-//				in.close();
-//			}
 			SysPrinterTmplPO printerTmpl = new SysPrinterTmplPO();
 			byte[] imgBytes = file.getBytes();
 			printerTmpl.setPtFileBinary(imgBytes);

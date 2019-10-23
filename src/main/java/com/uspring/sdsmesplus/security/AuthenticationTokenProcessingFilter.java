@@ -52,10 +52,9 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 		//token验证
 		try
 		{
-			Algorithm algorithm = Algorithm.HMAC256("baan_monitor");
+			Algorithm algorithm = Algorithm.HMAC256("backtemplate");
 			JWTVerifier verifier = JWT.require(algorithm)
-					
-			        .withIssuer("baan_monitor_font")
+			        .withIssuer("front")
 			        .build(); 
 			DecodedJWT jwt = verifier.verify(authToken);
 			

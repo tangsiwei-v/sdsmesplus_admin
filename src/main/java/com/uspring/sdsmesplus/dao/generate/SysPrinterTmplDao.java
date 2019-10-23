@@ -5,7 +5,7 @@ import com.uspring.sdsmesplus.entity.po.SysPrinterTmplPOExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface SysPrinterTmplPODao {
+public interface SysPrinterTmplDao {
     long countByExample(SysPrinterTmplPOExample example);
 
     int deleteByExample(SysPrinterTmplPOExample example);

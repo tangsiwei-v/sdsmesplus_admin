@@ -12,6 +12,9 @@
     <result column="pt_counter_max" jdbcType="INTEGER" property="ptCounterMax" />
     <result column="pt_counter_value" jdbcType="INTEGER" property="ptCounterValue" />
     <result column="pt_file_updatetime" jdbcType="TIMESTAMP" property="ptFileUpdatetime" />
+    <result column="check_person" jdbcType="VARCHAR" property="checkPerson" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <collection property="factorys" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
         <id column="fc_id" jdbcType="INTEGER" property="fcId" />
     	<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
@@ -24,7 +27,7 @@
   <select id="printerTmpl" resultMap="PrinterTmplMap">
   	 	select p.ptmpl_id,p.fc_id,p.prod_code,p.customer_code,p.ptmpl_size,
 			p.ptmpl_file_name,p.pt_counter_min,p.pt_counter_max,p.pt_counter_value,
-			p.pt_file_updatetime,f.fc_name
+			p.pt_file_updatetime,p.check_person,p.check_time,p.create_time,f.fc_name
 		from sys_printer_tmpl p left join sys_factory f 
 			on p.fc_id=f.fc_id
  	 	where 1 = 1

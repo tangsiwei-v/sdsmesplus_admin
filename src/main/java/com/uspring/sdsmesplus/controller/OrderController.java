@@ -8,6 +8,7 @@
  */
 package com.uspring.sdsmesplus.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -47,4 +48,11 @@ public class OrderController extends BaseController {
 		return new Result("success", plans, StatusCode.SUCCESS);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/non_print_tmpl", method = RequestMethod.GET)
+	@ApiOperation(value = "查询某工厂无条码打印模板的工单", response = Result.class)
+	public Result selectOrder(HttpServletResponse response, @RequestParam(value = "fc_id", required = false) Integer fcId) throws Exception {
+		List<PlanOrderPO> plans = orderService.selectPrinterByFactory(fcId);
+		return new Result("success", plans, StatusCode.SUCCESS);
+	}
 }
