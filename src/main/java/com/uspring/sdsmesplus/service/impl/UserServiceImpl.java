@@ -236,6 +236,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(isolation = Isolation.REPEATABLE_READ)
 	public void addUserVO(UserVO userVO) {
+		userVO.setUserPasswd(Encrypt.md5("123456"));
+		userVO.setUserId(null);
 		userDao.insertSelective(userVO);
 		List<UserRoleVO> UserRoles = userVO.getRoles();
 		for (UserRoleVO userRoleVO : UserRoles) {
