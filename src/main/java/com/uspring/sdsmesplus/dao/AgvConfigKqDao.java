@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.uspring.sdsmesplus.dao.generate.AgvConfigKqPODao;
 import com.uspring.sdsmesplus.entity.vo.AgvConfigKqVO;
 /** 
  * @ClassName: AgvConfigKqDao 
@@ -11,7 +12,7 @@ import com.uspring.sdsmesplus.entity.vo.AgvConfigKqVO;
  * @author shangyanbing shangyanbing@uspring.cn
  * @date 2019年10月22日 下午1:08:17  
  */
-public interface AgvConfigKqDao {
+public interface AgvConfigKqDao extends AgvConfigKqPODao{
 	
 	/** 
 	* @Title: queryAgvConfig
