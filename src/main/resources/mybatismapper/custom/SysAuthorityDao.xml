@@ -20,8 +20,8 @@
 			<collection property="authViews"
 				ofType="com.uspring.sdsmesplus.entity.vo.AuthCode">
 				<id column="auth_id" jdbcType="INTEGER" property="authId" />
-				<result column="auth_name" jdbcType="NVARCHAR" property="authName" />
-				<result column="auth_code" jdbcType="VARCHAR" property="authSystem" />
+				<result column="auth_name" jdbcType="NVARCHAR" property="authSystem" />
+				<result column="auth_code" jdbcType="VARCHAR" property="authName" />
 				<result column="parent_id" jdbcType="INTEGER" property="parentId" />
 				<result column="note" jdbcType="VARCHAR" property="note" />
 			</collection>
