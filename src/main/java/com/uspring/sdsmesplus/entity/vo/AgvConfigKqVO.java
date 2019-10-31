@@ -13,7 +13,7 @@ import com.uspring.sdsmesplus.entity.po.AgvConfigKqPO;
 public class AgvConfigKqVO extends AgvConfigKqPO{
 
 	private List<LineVO> lines;
-
+	
 	public List<LineVO> getLines() {
 		return lines;
 	}

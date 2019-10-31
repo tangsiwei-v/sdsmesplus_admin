@@ -33,7 +33,7 @@ public class AgvConfigKqController extends BaseController {
 	private AgvConfigKqServer ageConfigKqServer;
 
 	@ResponseBody
-	@RequestMapping(value = "queryAgvs", method = RequestMethod.GET)
+	@RequestMapping(value = "/queryAgvs", method = RequestMethod.GET)
 	@ApiOperation(value = "查询Agv配置主数据", notes = "查询Agv配置主数据", response = Result.class)
 	public Result queryAgvConfig(HttpServletResponse response,
 			@RequestParam(value = "fcId", required = false) Integer fcId,

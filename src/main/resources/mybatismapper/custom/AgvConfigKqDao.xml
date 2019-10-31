@@ -36,12 +36,12 @@
     </collection>
   </resultMap>
    <select id="queryAgvConfig" resultMap="AgvConfigKqMap">
-	select a.*,l.line_name,f.fc_name from agv_config_kq a
-		left join sys_line l
-	on l.line_id=a.line_id
-		left join sys_factory f
-	on l.fc_id=f.fc_id
-	where 1 = 1
+		select a.*,l.line_name,f.fc_name from agv_config_kq a
+			left join sys_line l
+		on l.line_id=a.line_id
+			left join sys_factory f
+		on a.fc_id=f.fc_id	
+			where 1 = 1
 	<if test="lineId != '' and lineId != null">
 		and l.line_id = #{lineId}
 	</if>
