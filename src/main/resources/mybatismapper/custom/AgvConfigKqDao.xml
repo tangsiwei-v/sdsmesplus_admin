@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.AgvConfigKqDao">
+  <resultMap id="AgvConfigKqMap" type="com.uspring.sdsmesplus.entity.vo.AgvConfigKqVO">
+    <id column="agvcfg_id" jdbcType="INTEGER" property="agvcfgId" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="fp_qty_before" jdbcType="INTEGER" property="fpQtyBefore" />
+    <result column="first_box_qty" jdbcType="INTEGER" property="firstBoxQty" />
+    <result column="call_gap_qty" jdbcType="INTEGER" property="callGapQty" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <collection property="lines" ofType="com.uspring.sdsmesplus.entity.vo.LineVO">
+		<id column="line_id" jdbcType="INTEGER" property="lineId" />
+    	<result column="line_name" jdbcType="VARCHAR" property="lineName" />
+    	<result column="vsm_id" jdbcType="INTEGER" property="vsmId" />
+    	<result column="shop_id" jdbcType="INTEGER" property="shopId" />
+   		<result column="fc_id" jdbcType="INTEGER" property="fcId" />
+   		<result column="line_type" jdbcType="VARCHAR" property="lineType" />
+    	<result column="line_barcode_id" jdbcType="VARCHAR" property="lineBarcodeId" />
+    	<result column="line_barcode_code" jdbcType="VARCHAR" property="lineBarcodeCode" />
+    	<result column="line_sap_code" jdbcType="VARCHAR" property="lineSapCode" />
+    	<result column="line_mpmlink_code" jdbcType="VARCHAR" property="lineMpmlinkCode" />
+    	<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    	<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    	<collection property="factorys" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
+    		<id column="fc_id" jdbcType="INTEGER" property="fcId" />
+    		<result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
+    		<result column="fc_name" jdbcType="VARCHAR" property="fcName" />
+   			<result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
+    		<result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
+    		<result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />	
+    	</collection>
+    </collection>
+  </resultMap>
+   <select id="queryAgvConfig" resultMap="AgvConfigKqMap">
+		select a.*,l.line_name,f.fc_name from agv_config_kq a
+			left join sys_line l
+		on l.line_id=a.line_id
+			left join sys_factory f
+		on a.fc_id=f.fc_id	
+			where 1 = 1
+	<if test="lineId != '' and lineId != null">
+		and l.line_id = #{lineId}
+	</if>
+	<if test="fcId !='' and fcId != null">
+		and f.fc_id = #{fcId}
+	</if>
+  	</select>
+</mapper>

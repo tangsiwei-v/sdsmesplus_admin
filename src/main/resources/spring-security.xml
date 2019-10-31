@@ -16,12 +16,18 @@
 			position="FORM_LOGIN_FILTER" />
 		<!-- 登录接口开放 -->
 		<security:intercept-url pattern="/api/user/user_login" access="permitAll" />
+		<security:intercept-url pattern="/api/user/card_login" access="permitAll" />
 		<!-- 跨域接口开放 -->
 		<security:intercept-url pattern="/api/**" access="permitAll" method="OPTIONS"/>
 		<!-- 文件访问接口开放 -->
 		<security:intercept-url pattern="/api/file/**" access="permitAll" method="GET"/>
+		<!-- 产线信息查询 -->
+		<security:intercept-url pattern="/api/department/workline/tree_novsm" access="permitAll" />
+        <security:intercept-url pattern="/api/work_shift" access="permitAll" />
+        <security:intercept-url pattern="/api/safelunch/workline" access="permitAll" />
+        <security:intercept-url pattern="/api/department/workline/prodmodel/**" access="permitAll" />
 		<!-- 其他接口接受权限认证 -->
-		<!--  <security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER')" /> -->
+		<security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER')" />
 		
 		<security:csrf disabled="true"/>
 	</security:http>

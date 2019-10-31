@@ -13,6 +13,7 @@ import com.uspring.sdsmesplus.entity.po.SysFactoryPO;
  */
 
 public class BoxInfoVO extends BoxInfoPO{
+	
 	private List<SysFactoryPO> factorys;
  
 	public List<SysFactoryPO> getFactorys() {
