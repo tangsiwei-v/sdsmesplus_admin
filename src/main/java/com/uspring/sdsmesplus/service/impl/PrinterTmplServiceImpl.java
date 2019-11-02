@@ -87,7 +87,8 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 
 	// 修改条码模板
 	public void updatePrinterTmpl(SysPrinterTmplPO printerTmpl) {
-		printerTmplDao.updateByPrimaryKey(printerTmpl);
+		printerTmpl.setPtCounterValue(null);
+		printerTmplDao.updateByPrimaryKeySelective(printerTmpl);
 	}
 
 	// 下载产品条码模板
