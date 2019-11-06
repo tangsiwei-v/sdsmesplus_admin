@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ProdProductMaterialDao">
+
+	<select id="costMaterialInfo" resultType="map">
+	   select DISTINCT a.*,b.pt_desc1 mat_name from prod_product_material a
+		left join [DBSAP].[SAP].[dbo].[pt_mstr] b on a.mat_code = b.pt_part
+		where fp_id = #{fpId}
+	</select>
+
+</mapper>

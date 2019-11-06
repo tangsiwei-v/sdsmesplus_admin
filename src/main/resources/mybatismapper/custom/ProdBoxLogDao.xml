@@ -11,5 +11,35 @@
 	<select id="queryBoxCounts" resultType="Integer">
 		select COUNT(bl_id) from prod_box_log where po_code=#{poCode}
 	</select>
+	
+	<select id="getBoxList" resultType="map">
+	    select a.*,b.line_name,c.shop_id,c.shop_name,d.fc_id,d.fc_name from prod_box_log a
+		left join sys_line b on a.line_id = b.line_id
+		left join sys_workshop c on b.shop_id = c.shop_id
+		left join sys_factory d on c.fc_id = d.fc_id
+		where 1=1
+	    <if test="lineId != null and lineId > 0">
+	      and a.line_id = #{lineId}
+	    </if>
+	    <if test="prodCode != null and prodCode != ''">
+	      and prod_code like '%'+#{prodCode}+'%'
+	    </if>
+	    <if test="prodNumber != null and prodNumber != ''">
+	      and prod_number like '%'+#{prodNumber}+'%'
+	    </if>
+	    <if test="tuhao != null and tuhao != ''">
+	      and prod_tuhao like '%'+#{tuhao}+'%'
+	    </if>
+	    <if test="boxCode1 != null and boxCode1 != ''">
+	      and box_barcode = #{boxCode1}
+	    </if>
+	    <if test="poCode != null and poCode != ''">
+	      and po_code = #{poCode}
+	    </if>
+	    <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+	      and a.create_time between #{beginTime} and #{endTime}
+	    </if>
+	    order by a.create_time desc
+	</select>
 
 </mapper>

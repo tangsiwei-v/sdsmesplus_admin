@@ -6,6 +6,7 @@
              xmlns:mvc="http://www.springframework.org/schema/mvc"
              xmlns:tx="http://www.springframework.org/schema/tx"
              xmlns:task="http://www.springframework.org/schema/task"
+             xmlns:mongo="http://www.springframework.org/schema/data/mongo"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
                      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                      http://www.springframework.org/schema/context
@@ -17,7 +18,9 @@
                      http://www.springframework.org/schema/tx					 
                      http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
                      http://www.springframework.org/schema/task
-                     http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+                     http://www.springframework.org/schema/task/spring-task-3.0.xsd
+                     http://www.springframework.org/schema/data/mongo 
+                     http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 	
 	<!-- <mvc:annotation-driven /> -->
 	<mvc:default-servlet-handler />
@@ -35,6 +38,13 @@
 	        </array>  
 	    </property>  
 	</bean> 
+	
+	<!-- MongoDB 设置 -->
+    <mongo:mongo-client id="mongoClient" host="10.50.52.118" port="27017"/>
+    <mongo:db-factory id="mgFactory" dbname="sds_mes_trace" mongo-ref="mongoClient"/>
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+  		<constructor-arg name="mongoDbFactory" ref="mgFactory"/>
+	</bean>
     
 	<!-- json 配置 -->
     <import resource="/jsonConfig/json_config.xml"/>

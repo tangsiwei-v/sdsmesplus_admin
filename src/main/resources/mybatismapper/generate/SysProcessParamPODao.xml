@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.SysProcessParamPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SysProcessParamPO">
+    <id column="pp_id" jdbcType="INTEGER" property="ppId" />
+    <result column="pp_code" jdbcType="VARCHAR" property="ppCode" />
+    <result column="pp_name" jdbcType="VARCHAR" property="ppName" />
+    <result column="pp_order" jdbcType="INTEGER" property="ppOrder" />
+    <result column="pp_show" jdbcType="BIT" property="ppShow" />
+    <result column="pp_type" jdbcType="VARCHAR" property="ppType" />
+    <result column="pp_is_ok" jdbcType="BIT" property="ppIsOk" />
+    <result column="sp_id" jdbcType="INTEGER" property="spId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pp_id, pp_code, pp_name, pp_order, pp_show, pp_type, pp_is_ok, sp_id, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysProcessParamPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_process_param
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_process_param
+    where pp_id = #{ppId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_process_param
+    where pp_id = #{ppId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysProcessParamPOExample">
+    delete from sys_process_param
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysProcessParamPO">
+    insert into sys_process_param (pp_id, pp_code, pp_name, 
+      pp_order, pp_show, pp_type, 
+      pp_is_ok, sp_id, create_time
+      )
+    values (#{ppId,jdbcType=INTEGER}, #{ppCode,jdbcType=VARCHAR}, #{ppName,jdbcType=VARCHAR}, 
+      #{ppOrder,jdbcType=INTEGER}, #{ppShow,jdbcType=BIT}, #{ppType,jdbcType=VARCHAR}, 
+      #{ppIsOk,jdbcType=BIT}, #{spId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysProcessParamPO">
+    insert into sys_process_param
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ppId != null">
+        pp_id,
+      </if>
+      <if test="ppCode != null">
+        pp_code,
+      </if>
+      <if test="ppName != null">
+        pp_name,
+      </if>
+      <if test="ppOrder != null">
+        pp_order,
+      </if>
+      <if test="ppShow != null">
+        pp_show,
+      </if>
+      <if test="ppType != null">
+        pp_type,
+      </if>
+      <if test="ppIsOk != null">
+        pp_is_ok,
+      </if>
+      <if test="spId != null">
+        sp_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ppId != null">
+        #{ppId,jdbcType=INTEGER},
+      </if>
+      <if test="ppCode != null">
+        #{ppCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ppName != null">
+        #{ppName,jdbcType=VARCHAR},
+      </if>
+      <if test="ppOrder != null">
+        #{ppOrder,jdbcType=INTEGER},
+      </if>
+      <if test="ppShow != null">
+        #{ppShow,jdbcType=BIT},
+      </if>
+      <if test="ppType != null">
+        #{ppType,jdbcType=VARCHAR},
+      </if>
+      <if test="ppIsOk != null">
+        #{ppIsOk,jdbcType=BIT},
+      </if>
+      <if test="spId != null">
+        #{spId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysProcessParamPOExample" resultType="java.lang.Long">
+    select count(*) from sys_process_param
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_process_param
+    <set>
+      <if test="record.ppId != null">
+        pp_id = #{record.ppId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ppCode != null">
+        pp_code = #{record.ppCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ppName != null">
+        pp_name = #{record.ppName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ppOrder != null">
+        pp_order = #{record.ppOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.ppShow != null">
+        pp_show = #{record.ppShow,jdbcType=BIT},
+      </if>
+      <if test="record.ppType != null">
+        pp_type = #{record.ppType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ppIsOk != null">
+        pp_is_ok = #{record.ppIsOk,jdbcType=BIT},
+      </if>
+      <if test="record.spId != null">
+        sp_id = #{record.spId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_process_param
+    set pp_id = #{record.ppId,jdbcType=INTEGER},
+      pp_code = #{record.ppCode,jdbcType=VARCHAR},
+      pp_name = #{record.ppName,jdbcType=VARCHAR},
+      pp_order = #{record.ppOrder,jdbcType=INTEGER},
+      pp_show = #{record.ppShow,jdbcType=BIT},
+      pp_type = #{record.ppType,jdbcType=VARCHAR},
+      pp_is_ok = #{record.ppIsOk,jdbcType=BIT},
+      sp_id = #{record.spId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SysProcessParamPO">
+    update sys_process_param
+    <set>
+      <if test="ppCode != null">
+        pp_code = #{ppCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ppName != null">
+        pp_name = #{ppName,jdbcType=VARCHAR},
+      </if>
+      <if test="ppOrder != null">
+        pp_order = #{ppOrder,jdbcType=INTEGER},
+      </if>
+      <if test="ppShow != null">
+        pp_show = #{ppShow,jdbcType=BIT},
+      </if>
+      <if test="ppType != null">
+        pp_type = #{ppType,jdbcType=VARCHAR},
+      </if>
+      <if test="ppIsOk != null">
+        pp_is_ok = #{ppIsOk,jdbcType=BIT},
+      </if>
+      <if test="spId != null">
+        sp_id = #{spId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pp_id = #{ppId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SysProcessParamPO">
+    update sys_process_param
+    set pp_code = #{ppCode,jdbcType=VARCHAR},
+      pp_name = #{ppName,jdbcType=VARCHAR},
+      pp_order = #{ppOrder,jdbcType=INTEGER},
+      pp_show = #{ppShow,jdbcType=BIT},
+      pp_type = #{ppType,jdbcType=VARCHAR},
+      pp_is_ok = #{ppIsOk,jdbcType=BIT},
+      sp_id = #{spId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where pp_id = #{ppId,jdbcType=INTEGER}
+  </update>
+</mapper>
