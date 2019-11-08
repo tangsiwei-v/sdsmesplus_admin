@@ -49,14 +49,14 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/barcode", method = RequestMethod.GET)
-	@ApiOperation(value = "查询字典类型", notes = "查询字典类型", response = Result.class)
+	@ApiOperation(value = "查询产品总成信息", notes = "查询产品总成信息", response = Result.class)
 	public Result getBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String beginTime,String endTime,Integer pageNum,Integer pageSize) {
 		return new Result("查询成功", this.reportService.getProductList(lineId, boxCode, barcode, tuhao, prodCode, prodNumber, beginTime, endTime, pageNum, pageSize), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/barcode/info", method = RequestMethod.GET)
-	@ApiOperation(value = "查询字典类型", notes = "查询字典类型", response = Result.class)
+	@ApiOperation(value = "查询产品的基本信息", notes = "查询产品的基本信息", response = Result.class)
 	public Result getBarcodeInfo(HttpServletResponse response,String barcode) {
 		barcode = URLDecoder.decode(barcode);
 		return new Result("查询成功", this.reportService.getProductInfo(barcode), StatusCode.SUCCESS);
@@ -64,15 +64,30 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/barcode/material", method = RequestMethod.GET)
-	@ApiOperation(value = "查询字典类型", notes = "查询字典类型", response = Result.class)
+	@ApiOperation(value = "查询产品的物料信息", notes = "查询产品的物料信息", response = Result.class)
 	public Result getBarcodeMaterial(HttpServletResponse response,Integer fpId) {
 		return new Result("查询成功", this.reportService.costMaterial(fpId), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/barcode/process", method = RequestMethod.GET)
-	@ApiOperation(value = "查询字典类型", notes = "查询字典类型", response = Result.class)
+	@ApiOperation(value = "查询产品的工序", notes = "查询产品的工序", response = Result.class)
 	public Result getBarcodeProcess(HttpServletResponse response,String rfid,Integer lineId) {
 		return new Result("查询成功", this.reportService.getProcessInfo(rfid, lineId), StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/material", method = RequestMethod.GET)
+	@ApiOperation(value = "查询物料使用", notes = "查询物料使用", response = Result.class)
+	public Result getMaterialList(HttpServletResponse response,String fpBarcode,String boxCode,String materialCode,String batchNo,String furnaceNo,String prodCode,String materialBoxCode,
+			String beginTime,String endTime,Integer pageNum,Integer pageSize) {
+		return new Result("查询成功", this.reportService.useMaterialInfo(fpBarcode, boxCode, materialCode, batchNo, furnaceNo, prodCode, materialBoxCode, beginTime, endTime, pageNum, pageSize), StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/inverseQuery", method = RequestMethod.GET)
+	@ApiOperation(value = "三大件反查", notes = "查询物料使用", response = Result.class)
+	public Result getInverseQuery(HttpServletResponse response,Integer type,String value,Integer fcId) {
+		return new Result("查询成功", this.reportService.getInverseQuery(type, value, fcId), StatusCode.SUCCESS);
 	}
 }

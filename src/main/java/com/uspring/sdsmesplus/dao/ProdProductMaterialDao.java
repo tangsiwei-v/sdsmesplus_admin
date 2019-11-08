@@ -17,8 +17,8 @@ import com.uspring.sdsmesplus.dao.generate.ProdProductMaterialPODao;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 
 /** 
- * @ClassName: ProdBoxLogDao
- * @Description: 产品装箱记录
+ * @ClassName: ProdProductMaterialDao
+ * @Description: 产品物料消耗
  * @author liuwenchao liuwenchao@uspring.cn
  * @date 2019年7月13日 下午15:09:39
  *  
@@ -26,4 +26,6 @@ import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 public interface ProdProductMaterialDao extends ProdProductMaterialPODao {
 
 	List<Map<String,Object>> costMaterialInfo(@Param("fpId")Integer fpId);
+	
+	List<Map<String,Object>> useMaterialInfo(@Param("fpBarcode")String fpBarcode, @Param("materialCode")String materialCode,@Param("batchNo")String batchNo,@Param("furnaceNo")String furnaceNo,@Param("prodCode")String prodCode,@Param("materialBoxCode")String materialBoxCode,@Param("beginTime")String beginTime,@Param("endTime")String endTime);
 }

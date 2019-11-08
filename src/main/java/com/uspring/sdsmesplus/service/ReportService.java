@@ -76,5 +76,32 @@ public interface ReportService {
 	 */
 	Map<String,Object> getProductList(Integer lineId, String boxCode, String barcode, String tuhao,String prodCode,String prodNumber, String beginTime, String endTime, Integer pageNum, Integer pageSize);
 	
+	
+	/**
+	 * @Title: useMaterialInfo 
+	 * @Description: 查询物料的使用情况
+	 * @param fpBarcode  产品总成号
+	 * @param boxCode  箱号
+	 * @param materialCode 物料号
+	 * @param batchNo 批次号
+	 * @param furnaceNo 炉号
+	 * @param prodCode 产品简码
+	 * @param materialBoxCode物料合格证
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param pageNum 
+	 * @param pageSize
+	 * @return
+	 */
+	Map<String,Object> useMaterialInfo(String fpBarcode,String boxCode, String materialCode,String batchNo,String furnaceNo,String prodCode,String materialBoxCode,String beginTime,String endTime,Integer pageNum, Integer pageSize);
+	
+	/**
+	 * 三大件反查
+	 * @param type  1:轴， 2：外星轮，3：轴叉
+	 * @param value  二维码编号
+	 * @param factoryCode 工厂编号
+	 * @return
+	 */
+	List<Map<String,Object>> getInverseQuery(Integer type,String value,Integer fcId);
 		
 }

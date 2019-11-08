@@ -525,17 +525,17 @@ public class MongoDBServiceImpl implements MongoDBService {
 	}
 
 	@Override
-	public Map<String, Object> dataReverSearch(Integer type, String value, Integer factory) {
+	public Map<String, Object> dataReverSearch(Integer type, String value, Integer fcId) {
 		// type 1:轴， 2：外星轮，3：轴叉
 		Map<String, Object> resultMap = null;
 		if (type == 0)
 			return null;
 		String[] params = new String[] {};
-		if (factory == 4) {
+		if (fcId == 3) {
 			params = new String[] { "gudingjieyaji.SN1", "gudingjieyaji.SN2", "houjia.SN1" };
-		} else if (factory == 5) {
+		} else if (fcId == 2) {
 			params = new String[] { "guDingJieYaRu.gdj_axisCode", "guDingJieYaRu.gdj_forCode", "houjia.tulip_code" };
-		} else if (factory == 1) {
+		} else if (fcId == 1) {
 			params = new String[] { "gudingjieyaji.QR_Code" };
 		}
 

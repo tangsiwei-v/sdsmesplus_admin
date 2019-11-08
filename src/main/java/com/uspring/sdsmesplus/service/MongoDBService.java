@@ -75,7 +75,7 @@ public interface MongoDBService {
 	LineRFID getProductStatus(String rfid, Integer lineId);
 	
 	//三大件反查
-	Map<String,Object> dataReverSearch(Integer type,String value,Integer factoryId);
+	Map<String,Object> dataReverSearch(Integer type,String value,Integer fcId);
 	
 	//查询所有工序数据
 	List<Map<String,Object>> getProcessData(String rfid,Integer lineId);

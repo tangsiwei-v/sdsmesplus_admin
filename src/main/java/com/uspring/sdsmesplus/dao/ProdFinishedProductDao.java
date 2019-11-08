@@ -15,5 +15,8 @@ public interface ProdFinishedProductDao extends ProdFinishedProductPODao {
 			@Param("tuhao")String tuhao,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber, @Param("beginTime")String beginTime, @Param("endTime")String endTime);
 	
 	//获取产品的基本信息
-	Map<String,Object> getProductInfo(String barcode);
+	Map<String,Object> getProductInfo(@Param("barcode")String barcode);
+	
+	//
+	List<Map<String,Object>> getProductData(@Param("lineId")Integer lineId,@Param("rfid")String rfid);
 }
