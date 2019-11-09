@@ -48,13 +48,15 @@ public class OrderServiceImpl implements OrderService {
 			}
 			// 切割传入status
 			if (map.containsKey("status")) {
-				String stri = map.get("status").toString().replace("\"", "");
-				List<String> status = new ArrayList<String>();
-				String[] b = stri.substring(1, stri.length() - 1).split(",", 0);
-				for (int i = 0; i < b.length; i++) {
-					status.add(b[i]);
+				if(!map.get("status").equals("")){
+					String stri = map.get("status").toString().replace("\"", "");
+					List<String> status = new ArrayList<String>();
+					String[] b = stri.substring(1, stri.length() - 1).split(",", 0);
+					for (int i = 0; i < b.length; i++) {
+						status.add(b[i]);
+					}
+					map.put("statusList", status);
 				}
-				map.put("statusList", status);
 			}
 		}
 		

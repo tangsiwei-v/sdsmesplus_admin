@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.ProdProductMaterialPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.ProdProductMaterialPO">
+    <id column="pmb_id" jdbcType="INTEGER" property="pmbId" />
+    <result column="fp_id" jdbcType="INTEGER" property="fpId" />
+    <result column="fp_barcode" jdbcType="VARCHAR" property="fpBarcode" />
+    <result column="mat_code" jdbcType="VARCHAR" property="matCode" />
+    <result column="mat_tuhao" jdbcType="VARCHAR" property="matTuhao" />
+    <result column="mat_batch_no" jdbcType="VARCHAR" property="matBatchNo" />
+    <result column="mat_furnace_no" jdbcType="VARCHAR" property="matFurnaceNo" />
+    <result column="mat_glevel" jdbcType="VARCHAR" property="matGlevel" />
+    <result column="mat_barcode" jdbcType="VARCHAR" property="matBarcode" />
+    <result column="mat_box_barcode" jdbcType="VARCHAR" property="matBoxBarcode" />
+    <result column="mat_count" jdbcType="DECIMAL" property="matCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pmb_id, fp_id, fp_barcode, mat_code, mat_tuhao, mat_batch_no, mat_furnace_no, mat_glevel, 
+    mat_barcode, mat_box_barcode, mat_count, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProductMaterialPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prod_product_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_product_material
+    where pmb_id = #{pmbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prod_product_material
+    where pmb_id = #{pmbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProductMaterialPOExample">
+    delete from prod_product_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdProductMaterialPO">
+    insert into prod_product_material (pmb_id, fp_id, fp_barcode, 
+      mat_code, mat_tuhao, mat_batch_no, 
+      mat_furnace_no, mat_glevel, mat_barcode, 
+      mat_box_barcode, mat_count, create_time
+      )
+    values (#{pmbId,jdbcType=INTEGER}, #{fpId,jdbcType=INTEGER}, #{fpBarcode,jdbcType=VARCHAR}, 
+      #{matCode,jdbcType=VARCHAR}, #{matTuhao,jdbcType=VARCHAR}, #{matBatchNo,jdbcType=VARCHAR}, 
+      #{matFurnaceNo,jdbcType=VARCHAR}, #{matGlevel,jdbcType=VARCHAR}, #{matBarcode,jdbcType=VARCHAR}, 
+      #{matBoxBarcode,jdbcType=VARCHAR}, #{matCount,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdProductMaterialPO">
+    insert into prod_product_material
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pmbId != null">
+        pmb_id,
+      </if>
+      <if test="fpId != null">
+        fp_id,
+      </if>
+      <if test="fpBarcode != null">
+        fp_barcode,
+      </if>
+      <if test="matCode != null">
+        mat_code,
+      </if>
+      <if test="matTuhao != null">
+        mat_tuhao,
+      </if>
+      <if test="matBatchNo != null">
+        mat_batch_no,
+      </if>
+      <if test="matFurnaceNo != null">
+        mat_furnace_no,
+      </if>
+      <if test="matGlevel != null">
+        mat_glevel,
+      </if>
+      <if test="matBarcode != null">
+        mat_barcode,
+      </if>
+      <if test="matBoxBarcode != null">
+        mat_box_barcode,
+      </if>
+      <if test="matCount != null">
+        mat_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pmbId != null">
+        #{pmbId,jdbcType=INTEGER},
+      </if>
+      <if test="fpId != null">
+        #{fpId,jdbcType=INTEGER},
+      </if>
+      <if test="fpBarcode != null">
+        #{fpBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="matCode != null">
+        #{matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="matTuhao != null">
+        #{matTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="matBatchNo != null">
+        #{matBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="matFurnaceNo != null">
+        #{matFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="matGlevel != null">
+        #{matGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="matBarcode != null">
+        #{matBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="matBoxBarcode != null">
+        #{matBoxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="matCount != null">
+        #{matCount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProductMaterialPOExample" resultType="java.lang.Long">
+    select count(*) from prod_product_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_product_material
+    <set>
+      <if test="record.pmbId != null">
+        pmb_id = #{record.pmbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpId != null">
+        fp_id = #{record.fpId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpBarcode != null">
+        fp_barcode = #{record.fpBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matCode != null">
+        mat_code = #{record.matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matTuhao != null">
+        mat_tuhao = #{record.matTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matBatchNo != null">
+        mat_batch_no = #{record.matBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matFurnaceNo != null">
+        mat_furnace_no = #{record.matFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matGlevel != null">
+        mat_glevel = #{record.matGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matBarcode != null">
+        mat_barcode = #{record.matBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matBoxBarcode != null">
+        mat_box_barcode = #{record.matBoxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matCount != null">
+        mat_count = #{record.matCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_product_material
+    set pmb_id = #{record.pmbId,jdbcType=INTEGER},
+      fp_id = #{record.fpId,jdbcType=INTEGER},
+      fp_barcode = #{record.fpBarcode,jdbcType=VARCHAR},
+      mat_code = #{record.matCode,jdbcType=VARCHAR},
+      mat_tuhao = #{record.matTuhao,jdbcType=VARCHAR},
+      mat_batch_no = #{record.matBatchNo,jdbcType=VARCHAR},
+      mat_furnace_no = #{record.matFurnaceNo,jdbcType=VARCHAR},
+      mat_glevel = #{record.matGlevel,jdbcType=VARCHAR},
+      mat_barcode = #{record.matBarcode,jdbcType=VARCHAR},
+      mat_box_barcode = #{record.matBoxBarcode,jdbcType=VARCHAR},
+      mat_count = #{record.matCount,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdProductMaterialPO">
+    update prod_product_material
+    <set>
+      <if test="fpId != null">
+        fp_id = #{fpId,jdbcType=INTEGER},
+      </if>
+      <if test="fpBarcode != null">
+        fp_barcode = #{fpBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="matCode != null">
+        mat_code = #{matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="matTuhao != null">
+        mat_tuhao = #{matTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="matBatchNo != null">
+        mat_batch_no = #{matBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="matFurnaceNo != null">
+        mat_furnace_no = #{matFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="matGlevel != null">
+        mat_glevel = #{matGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="matBarcode != null">
+        mat_barcode = #{matBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="matBoxBarcode != null">
+        mat_box_barcode = #{matBoxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="matCount != null">
+        mat_count = #{matCount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pmb_id = #{pmbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.ProdProductMaterialPO">
+    update prod_product_material
+    set fp_id = #{fpId,jdbcType=INTEGER},
+      fp_barcode = #{fpBarcode,jdbcType=VARCHAR},
+      mat_code = #{matCode,jdbcType=VARCHAR},
+      mat_tuhao = #{matTuhao,jdbcType=VARCHAR},
+      mat_batch_no = #{matBatchNo,jdbcType=VARCHAR},
+      mat_furnace_no = #{matFurnaceNo,jdbcType=VARCHAR},
+      mat_glevel = #{matGlevel,jdbcType=VARCHAR},
+      mat_barcode = #{matBarcode,jdbcType=VARCHAR},
+      mat_box_barcode = #{matBoxBarcode,jdbcType=VARCHAR},
+      mat_count = #{matCount,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where pmb_id = #{pmbId,jdbcType=INTEGER}
+  </update>
+</mapper>

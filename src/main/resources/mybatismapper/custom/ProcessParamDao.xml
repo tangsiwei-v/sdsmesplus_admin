@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ProcessParamDao">
+
+	<select id="getCheckParam" resultType="com.uspring.sdsmesplus.entity.vo.ProdProcessParam">
+	    select a.sp_code processCode,a.sp_name processName,pp_code paramCode,pp_name paramName from sys_process a 
+		left join sys_process_param b on a.sp_id = b.sp_id
+		where a.line_id = #{lineId} and pp_is_ok = 1
+	</select>
+</mapper>

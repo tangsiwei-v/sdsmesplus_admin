@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ProdFinishedProductDao">
+
+	<select id="getProductList" resultType="map">
+	    select a.*,b.line_name,c.shop_id,c.shop_name,d.fc_id,d.fc_name,e.prod_number,e.prod_tuhao,e.prod_name from prod_finished_product a 
+		left join sys_line b on a.line_id = b.line_id
+		left join sys_workshop c on b.shop_id = c.shop_id
+		left join sys_factory d on c.fc_id = d.fc_id
+		left join plan_order e on a.po_code = e.po_code
+		where 1=1
+	    <if test="lineId != null and lineId > 0">
+	      and a.line_id = #{lineId}
+	    </if>
+	    <if test="prodCode != null and prodCode != ''">
+	      and a.prod_code like '%'+#{prodCode}+'%'
+	    </if>
+	    <if test="prodNumber != null and prodNumber != ''">
+	      and e.prod_number like '%'+#{prodNumber}+'%'
+	    </if>
+	    <if test="tuhao != null and tuhao != ''">
+	      and e.prod_tuhao like '%'+#{tuhao}+'%'
+	    </if>
+	    <if test="boxCode1 != null and boxCode1 != ''">
+	      and box_barcode = #{boxCode1}
+	    </if>
+	    <if test="barcode != null and barcode != ''">
+	      and fp_barcode like '%'+#{barcode}+'%'
+	    </if>
+	    <if test="poCode != null and poCode != ''">
+	      and a.po_code like '%'+#{poCode}+'%'
+	    </if>
+	    <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+	      and a.create_time between #{beginTime} and #{endTime}
+	    </if>
+	    order by a.create_time desc
+	</select>
+	
+	<select id="getProductInfo" resultType="map">
+	    select top 1 a.*,b.line_name,c.shop_id,c.shop_name,d.fc_id,d.fc_name,e.pt_draw prod_tuhao from prod_finished_product a
+		left join sys_line b on a.line_id = b.line_id
+		left join sys_workshop c on b.shop_id = c.shop_id
+		left join sys_factory d on c.fc_id = d.fc_id
+		left join [DBSAP].[SAP].[dbo].[pt_mstr] e on a.prod_code = e.pt_part
+		where 1=1
+		<if test="barcode != null and barcode != ''">
+		  and a.fp_barcode = #{barcode}
+		</if>
+		
+	</select>
+	
+	<select id="getProductData" resultType="map">
+	    select top 1 a.*,b.line_name,c.shop_id,c.shop_name,d.fc_id,d.fc_name,e.prod_tuhao,e.prod_name from prod_finished_product a
+		left join sys_line b on a.line_id = b.line_id
+		left join sys_workshop c on b.shop_id = c.shop_id
+		left join sys_factory d on c.fc_id = d.fc_id
+		left join plan_order e on a.po_code = e.po_code
+		where 1=1
+		<if test="lineId != null and lineId != ''">
+		  and a.line_id = #{lineId}
+		</if>
+		<if test="rfid != null and rfid != ''">
+		  and a.fp_rfid = #{rfid}
+		</if>
+		
+	</select>
+
+</mapper>

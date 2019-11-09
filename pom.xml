@@ -17,6 +17,7 @@
 		<swagger.version>2.2.2</swagger.version>
 		<mybatis.generator.configurationFile>${basedir}/src/main/resources/generatorConfig.xml</mybatis.generator.configurationFile>
 		<mybatis.generator.overwrite>true</mybatis.generator.overwrite>
+		<spring.mongo.version>1.10.14.RELEASE</spring.mongo.version>
 	</properties>
 
 	<dependencies>
@@ -206,6 +207,12 @@
 			<artifactId>mssql-jdbc</artifactId>
 			<version>6.4.0.jre7</version>
 		</dependency>
+		<!-- MongoDB -->
+		<dependency>
+        	<groupId>org.springframework.data</groupId>
+        	<artifactId>spring-data-mongodb</artifactId>
+        	<version>${spring.mongo.version}</version>
+    	</dependency>
 		<!-- JWT -->
 		<dependency>
 			<groupId>com.auth0</groupId>

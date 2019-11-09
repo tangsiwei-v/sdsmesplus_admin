@@ -8,7 +8,12 @@
  */
 package com.uspring.sdsmesplus.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
+
+import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 
 /** 
  * @ClassName: ProdBoxLogDao
@@ -32,5 +37,20 @@ public interface ProdBoxLogDao {
 	 * @return
 	 */
 	Integer queryBoxCounts(@Param("poCode") String poCode);
+	
+	/**
+	 * @Title: getBoxList 
+	 * @Description: 查询箱的信息
+	 * @param lineId 产线编号
+	 * @param boxCode 箱编号
+	 * @param barcode 产品条码
+	 * @param tuhao 图号
+	 * @param prodCode 产品简码
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @return
+	 */
+	List<Map<String,Object>> getBoxList(@Param("lineId")Integer lineId,@Param("boxCode1")String boxCode,
+	@Param("tuhao")String tuhao,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("poCode")String poCode);
 
 }
