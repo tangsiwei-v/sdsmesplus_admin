@@ -50,8 +50,8 @@ public class ReportController {
 	@ResponseBody
 	@RequestMapping(value = "/barcode", method = RequestMethod.GET)
 	@ApiOperation(value = "查询产品总成信息", notes = "查询产品总成信息", response = Result.class)
-	public Result getBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String beginTime,String endTime,Integer pageNum,Integer pageSize) {
-		return new Result("查询成功", this.reportService.getProductList(lineId, boxCode, barcode, tuhao, prodCode, prodNumber, beginTime, endTime, pageNum, pageSize), StatusCode.SUCCESS);
+	public Result getBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,Integer pageNum,Integer pageSize) {
+		return new Result("查询成功", this.reportService.getProductList(lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody

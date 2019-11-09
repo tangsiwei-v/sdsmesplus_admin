@@ -74,7 +74,7 @@ public interface ReportService {
 	 * @param endTime 结束时间
 	 * @return
 	 */
-	Map<String,Object> getProductList(Integer lineId, String boxCode, String barcode, String tuhao,String prodCode,String prodNumber, String beginTime, String endTime, Integer pageNum, Integer pageSize);
+	Map<String,Object> getProductList(Integer lineId, String boxCode, String barcode, String tuhao,String prodCode,String prodNumber,String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize);
 	
 	
 	/**

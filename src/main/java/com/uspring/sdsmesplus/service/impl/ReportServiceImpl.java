@@ -70,7 +70,7 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public Map<String,Object> getProductList(Integer lineId, String boxCode, String barcode, String tuhao,
-			String prodCode,String prodNumber, String beginTime, String endTime, Integer pageNum, Integer pageSize) {
+			String prodCode,String prodNumber,String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize) {
 		// TODO Auto-generated method stub
 		ProdFinishedProductPOExample prodExample = new ProdFinishedProductPOExample();
 		ProdFinishedProductPOExample.Criteria criteria = prodExample.createCriteria(); 
@@ -78,7 +78,7 @@ public class ReportServiceImpl implements ReportService {
 		
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		List<Map<String,Object>> resultList = this.prodFinishDao.getProductList(lineId, boxCode, barcode, tuhao, prodCode, prodNumber, beginTime, endTime);
+		List<Map<String,Object>> resultList = this.prodFinishDao.getProductList(lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime);
 		
 		PageInfo info = new PageInfo(resultList);
 		
