@@ -1,5 +1,7 @@
 package com.uspring.sdsmesplus.controller;
 
+import static org.junit.Assert.fail;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
@@ -75,10 +77,10 @@ public class ProductInfoController extends BaseController {
 	@ApiOperation(value = "条码模板上传", notes = "上传条码模板", response = Result.class)
 	public Result uploadingPrinterTmpl(HttpServletResponse response,
 			@RequestParam(value = "prod_code", required = true) String prod_code,
-			@RequestParam(value = "customer_code", required = true) String customer_code,
+			@RequestParam(value = "customer_code", required = false) String customer_code,
 			@RequestParam(value = "file", required = true) MultipartFile file) throws Exception {
 		printerTmplService.uploadingPrinterTmpl(prod_code, customer_code, file);
-		return new Result("修改成功", "success", StatusCode.SUCCESS);
+		return new Result("上传成功", "success", StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
