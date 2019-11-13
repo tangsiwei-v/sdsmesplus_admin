@@ -78,4 +78,52 @@
 				and l.create_time &lt;= #{end_time}
 			</if>
     </select>
+    
+    
+    <select id="getWasteProd" resultType="map">
+       select a.* from nonconform_product_log a
+      left join plan_order b on a.po_code = b.po_code
+      where 1=1
+      <if test="lineId != null and lineId != ''">
+         and a.line_id = #{lineId}
+      </if>
+      <if test="prodCode != null and prodCode != ''">
+         and b.prod_code  = #{prodCode}
+      </if>
+      <if test="prodNumber != null and prodNumber != ''">
+         and b.prod_number = #{prodNumber}
+      </if>
+      <if test="status != null and status != ''">
+         and a.npl_status = #{status}
+      </if>
+      <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+         and a.create_time between #{beginTime} and #{endTime}
+      </if>
+      order by a.create_time desc
+    </select>
+    
+    <select id="getWasteProdMaterial" resultType="map">
+        select * from  nonconform_product_material a
+		left join nonconform_product_log b on a.npl_id = b.npl_id
+		where 1=1
+		<if test="lineId != null and lineId != ''">
+           and a.line_id = #{lineId}
+        </if>
+        <if test="nplBarcode != null and nplBarcode != ''">
+           and a.npl_barcode = #{nplBarcode}
+        </if>
+        <if test="matProdCode != null and matProdCode != ''">
+           and a.material_code = #{matProdCode}
+        </if>
+        <if test="matProdNumber != null and matProdNumber != ''">
+           and a.material_number = #{matProdNumber}
+        </if>
+        <if test="prodCode != null and prodCode != ''">
+           and b.prod_code = #{prodCode}
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+           and a.create_time between #{beginTime} and #{endTime}
+        </if>
+        order by a.create_time desc
+    </select>
 </mapper>

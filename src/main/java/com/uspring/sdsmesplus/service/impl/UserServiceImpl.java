@@ -39,6 +39,7 @@ import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
 import com.uspring.sdsmesplus.entity.po.SysAuthorityPO;
 import com.uspring.sdsmesplus.entity.po.SysRoleAuthPO;
 import com.uspring.sdsmesplus.entity.po.SysRoleAuthPOExample;
+import com.uspring.sdsmesplus.entity.po.SysRolePOExample;
 import com.uspring.sdsmesplus.entity.po.SysUserRolePO;
 import com.uspring.sdsmesplus.entity.po.SysUserRolePOExample;
 import com.uspring.sdsmesplus.entity.po.UserPO;
@@ -155,6 +156,24 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			throw new ServiceException(StatusCode.RUNERROR);
 		}
+		
+		//获取用户权限
+		SysUserRolePOExample userRoleExample = new SysUserRolePOExample();
+		userRoleExample.createCriteria().andUserIdEqualTo(user.getUserId());
+		
+		List<SysUserRolePO> userRoleList = this.sysUserRolePODao.selectByExample(userRoleExample);
+		
+		
+		List<UserRoleVO> userRoleVOList = new ArrayList<UserRoleVO>();
+		for(SysUserRolePO userRole:userRoleList){
+			UserRoleVO userRoleVO = new UserRoleVO();
+			
+			userRoleVO.setFactoryId(userRole.getFactoryId());
+			
+			userRoleVOList.add(userRoleVO);
+		}
+		
+		user.setRoles(userRoleVOList);
 
 		// 返回信息
 		return user;

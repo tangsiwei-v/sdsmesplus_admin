@@ -5,13 +5,18 @@
     <id column="nplm_id" jdbcType="INTEGER" property="nplmId" />
     <result column="npl_id" jdbcType="INTEGER" property="nplId" />
     <result column="npl_barcode" jdbcType="VARCHAR" property="nplBarcode" />
+    <result column="nplm_barcode" jdbcType="VARCHAR" property="nplmBarcode" />
     <result column="material_code" jdbcType="VARCHAR" property="materialCode" />
+    <result column="material_number" jdbcType="VARCHAR" property="materialNumber" />
+    <result column="material_name" jdbcType="VARCHAR" property="materialName" />
+    <result column="material_tuhao" jdbcType="VARCHAR" property="materialTuhao" />
     <result column="material_box_code" jdbcType="VARCHAR" property="materialBoxCode" />
     <result column="material_box_qrcode" jdbcType="VARCHAR" property="materialBoxQrcode" />
     <result column="material_batch_code" jdbcType="VARCHAR" property="materialBatchCode" />
     <result column="material_furnace_no" jdbcType="VARCHAR" property="materialFurnaceNo" />
     <result column="material_glevel" jdbcType="VARCHAR" property="materialGlevel" />
-    <result column="material_qty" jdbcType="INTEGER" property="materialQty" />
+    <result column="material_qty" jdbcType="DECIMAL" property="materialQty" />
+    <result column="material_unit" jdbcType="VARCHAR" property="materialUnit" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -73,8 +78,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    nplm_id, npl_id, npl_barcode, material_code, material_box_code, material_box_qrcode, 
-    material_batch_code, material_furnace_no, material_glevel, material_qty, create_time
+    nplm_id, npl_id, npl_barcode, nplm_barcode, material_code, material_number, material_name, 
+    material_tuhao, material_box_code, material_box_qrcode, material_batch_code, material_furnace_no, 
+    material_glevel, material_qty, material_unit, create_time
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPOExample" resultMap="BaseResultMap">
     select
@@ -108,13 +114,17 @@
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPO">
     insert into nonconform_product_material (nplm_id, npl_id, npl_barcode, 
-      material_code, material_box_code, material_box_qrcode, 
-      material_batch_code, material_furnace_no, material_glevel, 
-      material_qty, create_time)
+      nplm_barcode, material_code, material_number, 
+      material_name, material_tuhao, material_box_code, 
+      material_box_qrcode, material_batch_code, material_furnace_no, 
+      material_glevel, material_qty, material_unit, 
+      create_time)
     values (#{nplmId,jdbcType=INTEGER}, #{nplId,jdbcType=INTEGER}, #{nplBarcode,jdbcType=VARCHAR}, 
-      #{materialCode,jdbcType=VARCHAR}, #{materialBoxCode,jdbcType=VARCHAR}, #{materialBoxQrcode,jdbcType=VARCHAR}, 
-      #{materialBatchCode,jdbcType=VARCHAR}, #{materialFurnaceNo,jdbcType=VARCHAR}, #{materialGlevel,jdbcType=VARCHAR}, 
-      #{materialQty,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+      #{nplmBarcode,jdbcType=VARCHAR}, #{materialCode,jdbcType=VARCHAR}, #{materialNumber,jdbcType=VARCHAR}, 
+      #{materialName,jdbcType=VARCHAR}, #{materialTuhao,jdbcType=VARCHAR}, #{materialBoxCode,jdbcType=VARCHAR}, 
+      #{materialBoxQrcode,jdbcType=VARCHAR}, #{materialBatchCode,jdbcType=VARCHAR}, #{materialFurnaceNo,jdbcType=VARCHAR}, 
+      #{materialGlevel,jdbcType=VARCHAR}, #{materialQty,jdbcType=DECIMAL}, #{materialUnit,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductMaterialPO">
     insert into nonconform_product_material
@@ -128,8 +138,20 @@
       <if test="nplBarcode != null">
         npl_barcode,
       </if>
+      <if test="nplmBarcode != null">
+        nplm_barcode,
+      </if>
       <if test="materialCode != null">
         material_code,
+      </if>
+      <if test="materialNumber != null">
+        material_number,
+      </if>
+      <if test="materialName != null">
+        material_name,
+      </if>
+      <if test="materialTuhao != null">
+        material_tuhao,
       </if>
       <if test="materialBoxCode != null">
         material_box_code,
@@ -149,6 +171,9 @@
       <if test="materialQty != null">
         material_qty,
       </if>
+      <if test="materialUnit != null">
+        material_unit,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -163,8 +188,20 @@
       <if test="nplBarcode != null">
         #{nplBarcode,jdbcType=VARCHAR},
       </if>
+      <if test="nplmBarcode != null">
+        #{nplmBarcode,jdbcType=VARCHAR},
+      </if>
       <if test="materialCode != null">
         #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialNumber != null">
+        #{materialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null">
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialTuhao != null">
+        #{materialTuhao,jdbcType=VARCHAR},
       </if>
       <if test="materialBoxCode != null">
         #{materialBoxCode,jdbcType=VARCHAR},
@@ -182,7 +219,10 @@
         #{materialGlevel,jdbcType=VARCHAR},
       </if>
       <if test="materialQty != null">
-        #{materialQty,jdbcType=INTEGER},
+        #{materialQty,jdbcType=DECIMAL},
+      </if>
+      <if test="materialUnit != null">
+        #{materialUnit,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -207,8 +247,20 @@
       <if test="record.nplBarcode != null">
         npl_barcode = #{record.nplBarcode,jdbcType=VARCHAR},
       </if>
+      <if test="record.nplmBarcode != null">
+        nplm_barcode = #{record.nplmBarcode,jdbcType=VARCHAR},
+      </if>
       <if test="record.materialCode != null">
         material_code = #{record.materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialNumber != null">
+        material_number = #{record.materialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null">
+        material_name = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialTuhao != null">
+        material_tuhao = #{record.materialTuhao,jdbcType=VARCHAR},
       </if>
       <if test="record.materialBoxCode != null">
         material_box_code = #{record.materialBoxCode,jdbcType=VARCHAR},
@@ -226,7 +278,10 @@
         material_glevel = #{record.materialGlevel,jdbcType=VARCHAR},
       </if>
       <if test="record.materialQty != null">
-        material_qty = #{record.materialQty,jdbcType=INTEGER},
+        material_qty = #{record.materialQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.materialUnit != null">
+        material_unit = #{record.materialUnit,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -241,13 +296,18 @@
     set nplm_id = #{record.nplmId,jdbcType=INTEGER},
       npl_id = #{record.nplId,jdbcType=INTEGER},
       npl_barcode = #{record.nplBarcode,jdbcType=VARCHAR},
+      nplm_barcode = #{record.nplmBarcode,jdbcType=VARCHAR},
       material_code = #{record.materialCode,jdbcType=VARCHAR},
+      material_number = #{record.materialNumber,jdbcType=VARCHAR},
+      material_name = #{record.materialName,jdbcType=VARCHAR},
+      material_tuhao = #{record.materialTuhao,jdbcType=VARCHAR},
       material_box_code = #{record.materialBoxCode,jdbcType=VARCHAR},
       material_box_qrcode = #{record.materialBoxQrcode,jdbcType=VARCHAR},
       material_batch_code = #{record.materialBatchCode,jdbcType=VARCHAR},
       material_furnace_no = #{record.materialFurnaceNo,jdbcType=VARCHAR},
       material_glevel = #{record.materialGlevel,jdbcType=VARCHAR},
-      material_qty = #{record.materialQty,jdbcType=INTEGER},
+      material_qty = #{record.materialQty,jdbcType=DECIMAL},
+      material_unit = #{record.materialUnit,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -262,8 +322,20 @@
       <if test="nplBarcode != null">
         npl_barcode = #{nplBarcode,jdbcType=VARCHAR},
       </if>
+      <if test="nplmBarcode != null">
+        nplm_barcode = #{nplmBarcode,jdbcType=VARCHAR},
+      </if>
       <if test="materialCode != null">
         material_code = #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialNumber != null">
+        material_number = #{materialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null">
+        material_name = #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialTuhao != null">
+        material_tuhao = #{materialTuhao,jdbcType=VARCHAR},
       </if>
       <if test="materialBoxCode != null">
         material_box_code = #{materialBoxCode,jdbcType=VARCHAR},
@@ -281,7 +353,10 @@
         material_glevel = #{materialGlevel,jdbcType=VARCHAR},
       </if>
       <if test="materialQty != null">
-        material_qty = #{materialQty,jdbcType=INTEGER},
+        material_qty = #{materialQty,jdbcType=DECIMAL},
+      </if>
+      <if test="materialUnit != null">
+        material_unit = #{materialUnit,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -293,13 +368,18 @@
     update nonconform_product_material
     set npl_id = #{nplId,jdbcType=INTEGER},
       npl_barcode = #{nplBarcode,jdbcType=VARCHAR},
+      nplm_barcode = #{nplmBarcode,jdbcType=VARCHAR},
       material_code = #{materialCode,jdbcType=VARCHAR},
+      material_number = #{materialNumber,jdbcType=VARCHAR},
+      material_name = #{materialName,jdbcType=VARCHAR},
+      material_tuhao = #{materialTuhao,jdbcType=VARCHAR},
       material_box_code = #{materialBoxCode,jdbcType=VARCHAR},
       material_box_qrcode = #{materialBoxQrcode,jdbcType=VARCHAR},
       material_batch_code = #{materialBatchCode,jdbcType=VARCHAR},
       material_furnace_no = #{materialFurnaceNo,jdbcType=VARCHAR},
       material_glevel = #{materialGlevel,jdbcType=VARCHAR},
-      material_qty = #{materialQty,jdbcType=INTEGER},
+      material_qty = #{materialQty,jdbcType=DECIMAL},
+      material_unit = #{materialUnit,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where nplm_id = #{nplmId,jdbcType=INTEGER}
   </update>

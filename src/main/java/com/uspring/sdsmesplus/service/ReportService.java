@@ -103,5 +103,48 @@ public interface ReportService {
 	 * @return
 	 */
 	List<Map<String,Object>> getInverseQuery(Integer type,String value,Integer fcId);
+	
+	/**
+	 * 获取线边库存数据
+	 * @param orderCode 工单编号
+	 * @param prodCode 产品简码
+	 * @param beginTime
+	 * @param endTime
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	Map<String,Object> getOrderStock(String orderCode, String prodCode, String beginTime, String endTime,
+			Integer pageNum, Integer pageSize, Integer lineId, String prodNumber,String matProdCode,String matProdNumber,String boxCode);
+	
+	/**
+	 * 获取不合格品记录
+	 * @param lineId 产线编号
+	 * @param prodCode SAP号
+	 * @param prodNumber 产品简码
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param pageNum
+	 * @param pageSize
+	 * @param status 状态
+	 * @return
+	 */
+	Map<String,Object> getWasteProd(Integer lineId,String prodCode,String prodNumber,String beginTime,String endTime,Integer pageNum,Integer pageSize,String matProdCode,String matProdNumber,String status);
+	
+	/**
+	 * 
+	 * @param lineId
+	 * @param nplBarcode  不合格品编号
+	 * @param beginTime
+	 * @param endTime
+	 * @param prodCode  sap号
+	 * @param prodNumber  产品简码
+	 * @param matProdCode  物料sap号
+	 * @param matProdNumber 物料简码
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	Map<String,Object> getWasteProdMaterial(Integer lineId,String nplBarcode,String beginTime,String endTime,String prodCode,String prodNumber,String matProdCode,String matProdNumber,Integer pageNum,Integer pageSize);
 		
 }

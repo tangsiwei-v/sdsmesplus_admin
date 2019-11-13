@@ -1,5 +1,6 @@
 package com.uspring.sdsmesplus.entity.po;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class NonconformProductMaterialPO {
@@ -9,7 +10,15 @@ public class NonconformProductMaterialPO {
 
     private String nplBarcode;
 
+    private String nplmBarcode;
+
     private String materialCode;
+
+    private String materialNumber;
+
+    private String materialName;
+
+    private String materialTuhao;
 
     private String materialBoxCode;
 
@@ -21,7 +30,9 @@ public class NonconformProductMaterialPO {
 
     private String materialGlevel;
 
-    private Integer materialQty;
+    private BigDecimal materialQty;
+
+    private String materialUnit;
 
     private Date createTime;
 
@@ -49,12 +60,44 @@ public class NonconformProductMaterialPO {
         this.nplBarcode = nplBarcode == null ? null : nplBarcode.trim();
     }
 
+    public String getNplmBarcode() {
+        return nplmBarcode;
+    }
+
+    public void setNplmBarcode(String nplmBarcode) {
+        this.nplmBarcode = nplmBarcode == null ? null : nplmBarcode.trim();
+    }
+
     public String getMaterialCode() {
         return materialCode;
     }
 
     public void setMaterialCode(String materialCode) {
         this.materialCode = materialCode == null ? null : materialCode.trim();
+    }
+
+    public String getMaterialNumber() {
+        return materialNumber;
+    }
+
+    public void setMaterialNumber(String materialNumber) {
+        this.materialNumber = materialNumber == null ? null : materialNumber.trim();
+    }
+
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName == null ? null : materialName.trim();
+    }
+
+    public String getMaterialTuhao() {
+        return materialTuhao;
+    }
+
+    public void setMaterialTuhao(String materialTuhao) {
+        this.materialTuhao = materialTuhao == null ? null : materialTuhao.trim();
     }
 
     public String getMaterialBoxCode() {
@@ -97,12 +140,20 @@ public class NonconformProductMaterialPO {
         this.materialGlevel = materialGlevel == null ? null : materialGlevel.trim();
     }
 
-    public Integer getMaterialQty() {
+    public BigDecimal getMaterialQty() {
         return materialQty;
     }
 
-    public void setMaterialQty(Integer materialQty) {
+    public void setMaterialQty(BigDecimal materialQty) {
         this.materialQty = materialQty;
+    }
+
+    public String getMaterialUnit() {
+        return materialUnit;
+    }
+
+    public void setMaterialUnit(String materialUnit) {
+        this.materialUnit = materialUnit == null ? null : materialUnit.trim();
     }
 
     public Date getCreateTime() {

@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.NonconformProductLogPO">
     <id column="npl_id" jdbcType="INTEGER" property="nplId" />
     <result column="npl_barcode" jdbcType="VARCHAR" property="nplBarcode" />
+    <result column="po_code" jdbcType="VARCHAR" property="poCode" />
     <result column="fc_id" jdbcType="INTEGER" property="fcId" />
     <result column="fc_code" jdbcType="VARCHAR" property="fcCode" />
     <result column="shop_id" jdbcType="INTEGER" property="shopId" />
@@ -14,6 +15,8 @@
     <result column="shift_id" jdbcType="INTEGER" property="shiftId" />
     <result column="shift_code" jdbcType="VARCHAR" property="shiftCode" />
     <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="prod_tuhao" jdbcType="VARCHAR" property="prodTuhao" />
+    <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
     <result column="prod_batch_code" jdbcType="VARCHAR" property="prodBatchCode" />
     <result column="prod_order_code" jdbcType="VARCHAR" property="prodOrderCode" />
     <result column="prod_barcode" jdbcType="VARCHAR" property="prodBarcode" />
@@ -31,6 +34,9 @@
     <result column="npl_batch_status" jdbcType="VARCHAR" property="nplBatchStatus" />
     <result column="npl_is_test_part" jdbcType="BIT" property="nplIsTestPart" />
     <result column="npl_device_code" jdbcType="VARCHAR" property="nplDeviceCode" />
+    <result column="npl_duty_type" jdbcType="VARCHAR" property="nplDutyType" />
+    <result column="npl_review_result" jdbcType="VARCHAR" property="nplReviewResult" />
+    <result column="npl_is_assembly" jdbcType="BIT" property="nplIsAssembly" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_person_no" jdbcType="VARCHAR" property="createPersonNo" />
     <result column="create_person_name" jdbcType="VARCHAR" property="createPersonName" />
@@ -98,12 +104,13 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    npl_id, npl_barcode, fc_id, fc_code, shop_id, shop_code, line_id, line_code, prod_date, 
-    shift_id, shift_code, prod_code, prod_batch_code, prod_order_code, prod_barcode, 
-    npl_find_op, npl_find_op_name, npl_prod_op, npl_prod_op_name, npl_workcenter, npl_workcenter_name, 
-    npl_defect, npl_defect_desc, npl_cost_center, npl_cost_center_name, npl_qty, npl_batch_status, 
-    npl_is_test_part, npl_device_code, create_time, create_person_no, create_person_name, 
-    npl_note, npl_status, confirm_person_no, confirm_person_name
+    npl_id, npl_barcode, po_code, fc_id, fc_code, shop_id, shop_code, line_id, line_code, 
+    prod_date, shift_id, shift_code, prod_code, prod_tuhao, prod_name, prod_batch_code, 
+    prod_order_code, prod_barcode, npl_find_op, npl_find_op_name, npl_prod_op, npl_prod_op_name, 
+    npl_workcenter, npl_workcenter_name, npl_defect, npl_defect_desc, npl_cost_center, 
+    npl_cost_center_name, npl_qty, npl_batch_status, npl_is_test_part, npl_device_code, 
+    npl_duty_type, npl_review_result, npl_is_assembly, create_time, create_person_no, 
+    create_person_name, npl_note, npl_status, confirm_person_no, confirm_person_name
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductLogPOExample" resultMap="BaseResultMap">
     select
@@ -136,29 +143,33 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductLogPO">
-    insert into nonconform_product_log (npl_id, npl_barcode, fc_id, 
-      fc_code, shop_id, shop_code, 
-      line_id, line_code, prod_date, 
-      shift_id, shift_code, prod_code, 
+    insert into nonconform_product_log (npl_id, npl_barcode, po_code, 
+      fc_id, fc_code, shop_id, 
+      shop_code, line_id, line_code, 
+      prod_date, shift_id, shift_code, 
+      prod_code, prod_tuhao, prod_name, 
       prod_batch_code, prod_order_code, prod_barcode, 
       npl_find_op, npl_find_op_name, npl_prod_op, 
       npl_prod_op_name, npl_workcenter, npl_workcenter_name, 
       npl_defect, npl_defect_desc, npl_cost_center, 
       npl_cost_center_name, npl_qty, npl_batch_status, 
-      npl_is_test_part, npl_device_code, create_time, 
+      npl_is_test_part, npl_device_code, npl_duty_type, 
+      npl_review_result, npl_is_assembly, create_time, 
       create_person_no, create_person_name, npl_note, 
       npl_status, confirm_person_no, confirm_person_name
       )
-    values (#{nplId,jdbcType=INTEGER}, #{nplBarcode,jdbcType=VARCHAR}, #{fcId,jdbcType=INTEGER}, 
-      #{fcCode,jdbcType=VARCHAR}, #{shopId,jdbcType=INTEGER}, #{shopCode,jdbcType=VARCHAR}, 
-      #{lineId,jdbcType=INTEGER}, #{lineCode,jdbcType=VARCHAR}, #{prodDate,jdbcType=TIMESTAMP}, 
-      #{shiftId,jdbcType=INTEGER}, #{shiftCode,jdbcType=VARCHAR}, #{prodCode,jdbcType=VARCHAR}, 
+    values (#{nplId,jdbcType=INTEGER}, #{nplBarcode,jdbcType=VARCHAR}, #{poCode,jdbcType=VARCHAR}, 
+      #{fcId,jdbcType=INTEGER}, #{fcCode,jdbcType=VARCHAR}, #{shopId,jdbcType=INTEGER}, 
+      #{shopCode,jdbcType=VARCHAR}, #{lineId,jdbcType=INTEGER}, #{lineCode,jdbcType=VARCHAR}, 
+      #{prodDate,jdbcType=TIMESTAMP}, #{shiftId,jdbcType=INTEGER}, #{shiftCode,jdbcType=VARCHAR}, 
+      #{prodCode,jdbcType=VARCHAR}, #{prodTuhao,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR}, 
       #{prodBatchCode,jdbcType=VARCHAR}, #{prodOrderCode,jdbcType=VARCHAR}, #{prodBarcode,jdbcType=VARCHAR}, 
       #{nplFindOp,jdbcType=VARCHAR}, #{nplFindOpName,jdbcType=VARCHAR}, #{nplProdOp,jdbcType=VARCHAR}, 
       #{nplProdOpName,jdbcType=VARCHAR}, #{nplWorkcenter,jdbcType=VARCHAR}, #{nplWorkcenterName,jdbcType=VARCHAR}, 
       #{nplDefect,jdbcType=VARCHAR}, #{nplDefectDesc,jdbcType=VARCHAR}, #{nplCostCenter,jdbcType=VARCHAR}, 
       #{nplCostCenterName,jdbcType=VARCHAR}, #{nplQty,jdbcType=INTEGER}, #{nplBatchStatus,jdbcType=VARCHAR}, 
-      #{nplIsTestPart,jdbcType=BIT}, #{nplDeviceCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{nplIsTestPart,jdbcType=BIT}, #{nplDeviceCode,jdbcType=VARCHAR}, #{nplDutyType,jdbcType=VARCHAR}, 
+      #{nplReviewResult,jdbcType=VARCHAR}, #{nplIsAssembly,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{createPersonNo,jdbcType=VARCHAR}, #{createPersonName,jdbcType=VARCHAR}, #{nplNote,jdbcType=VARCHAR}, 
       #{nplStatus,jdbcType=VARCHAR}, #{confirmPersonNo,jdbcType=VARCHAR}, #{confirmPersonName,jdbcType=VARCHAR}
       )
@@ -171,6 +182,9 @@
       </if>
       <if test="nplBarcode != null">
         npl_barcode,
+      </if>
+      <if test="poCode != null">
+        po_code,
       </if>
       <if test="fcId != null">
         fc_id,
@@ -201,6 +215,12 @@
       </if>
       <if test="prodCode != null">
         prod_code,
+      </if>
+      <if test="prodTuhao != null">
+        prod_tuhao,
+      </if>
+      <if test="prodName != null">
+        prod_name,
       </if>
       <if test="prodBatchCode != null">
         prod_batch_code,
@@ -253,6 +273,15 @@
       <if test="nplDeviceCode != null">
         npl_device_code,
       </if>
+      <if test="nplDutyType != null">
+        npl_duty_type,
+      </if>
+      <if test="nplReviewResult != null">
+        npl_review_result,
+      </if>
+      <if test="nplIsAssembly != null">
+        npl_is_assembly,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -281,6 +310,9 @@
       </if>
       <if test="nplBarcode != null">
         #{nplBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="poCode != null">
+        #{poCode,jdbcType=VARCHAR},
       </if>
       <if test="fcId != null">
         #{fcId,jdbcType=INTEGER},
@@ -311,6 +343,12 @@
       </if>
       <if test="prodCode != null">
         #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodTuhao != null">
+        #{prodTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null">
+        #{prodName,jdbcType=VARCHAR},
       </if>
       <if test="prodBatchCode != null">
         #{prodBatchCode,jdbcType=VARCHAR},
@@ -363,6 +401,15 @@
       <if test="nplDeviceCode != null">
         #{nplDeviceCode,jdbcType=VARCHAR},
       </if>
+      <if test="nplDutyType != null">
+        #{nplDutyType,jdbcType=VARCHAR},
+      </if>
+      <if test="nplReviewResult != null">
+        #{nplReviewResult,jdbcType=VARCHAR},
+      </if>
+      <if test="nplIsAssembly != null">
+        #{nplIsAssembly,jdbcType=BIT},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -401,6 +448,9 @@
       <if test="record.nplBarcode != null">
         npl_barcode = #{record.nplBarcode,jdbcType=VARCHAR},
       </if>
+      <if test="record.poCode != null">
+        po_code = #{record.poCode,jdbcType=VARCHAR},
+      </if>
       <if test="record.fcId != null">
         fc_id = #{record.fcId,jdbcType=INTEGER},
       </if>
@@ -430,6 +480,12 @@
       </if>
       <if test="record.prodCode != null">
         prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodTuhao != null">
+        prod_tuhao = #{record.prodTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodName != null">
+        prod_name = #{record.prodName,jdbcType=VARCHAR},
       </if>
       <if test="record.prodBatchCode != null">
         prod_batch_code = #{record.prodBatchCode,jdbcType=VARCHAR},
@@ -482,6 +538,15 @@
       <if test="record.nplDeviceCode != null">
         npl_device_code = #{record.nplDeviceCode,jdbcType=VARCHAR},
       </if>
+      <if test="record.nplDutyType != null">
+        npl_duty_type = #{record.nplDutyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplReviewResult != null">
+        npl_review_result = #{record.nplReviewResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nplIsAssembly != null">
+        npl_is_assembly = #{record.nplIsAssembly,jdbcType=BIT},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -512,6 +577,7 @@
     update nonconform_product_log
     set npl_id = #{record.nplId,jdbcType=INTEGER},
       npl_barcode = #{record.nplBarcode,jdbcType=VARCHAR},
+      po_code = #{record.poCode,jdbcType=VARCHAR},
       fc_id = #{record.fcId,jdbcType=INTEGER},
       fc_code = #{record.fcCode,jdbcType=VARCHAR},
       shop_id = #{record.shopId,jdbcType=INTEGER},
@@ -522,6 +588,8 @@
       shift_id = #{record.shiftId,jdbcType=INTEGER},
       shift_code = #{record.shiftCode,jdbcType=VARCHAR},
       prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      prod_tuhao = #{record.prodTuhao,jdbcType=VARCHAR},
+      prod_name = #{record.prodName,jdbcType=VARCHAR},
       prod_batch_code = #{record.prodBatchCode,jdbcType=VARCHAR},
       prod_order_code = #{record.prodOrderCode,jdbcType=VARCHAR},
       prod_barcode = #{record.prodBarcode,jdbcType=VARCHAR},
@@ -539,6 +607,9 @@
       npl_batch_status = #{record.nplBatchStatus,jdbcType=VARCHAR},
       npl_is_test_part = #{record.nplIsTestPart,jdbcType=BIT},
       npl_device_code = #{record.nplDeviceCode,jdbcType=VARCHAR},
+      npl_duty_type = #{record.nplDutyType,jdbcType=VARCHAR},
+      npl_review_result = #{record.nplReviewResult,jdbcType=VARCHAR},
+      npl_is_assembly = #{record.nplIsAssembly,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_person_no = #{record.createPersonNo,jdbcType=VARCHAR},
       create_person_name = #{record.createPersonName,jdbcType=VARCHAR},
@@ -555,6 +626,9 @@
     <set>
       <if test="nplBarcode != null">
         npl_barcode = #{nplBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="poCode != null">
+        po_code = #{poCode,jdbcType=VARCHAR},
       </if>
       <if test="fcId != null">
         fc_id = #{fcId,jdbcType=INTEGER},
@@ -585,6 +659,12 @@
       </if>
       <if test="prodCode != null">
         prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prodTuhao != null">
+        prod_tuhao = #{prodTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null">
+        prod_name = #{prodName,jdbcType=VARCHAR},
       </if>
       <if test="prodBatchCode != null">
         prod_batch_code = #{prodBatchCode,jdbcType=VARCHAR},
@@ -637,6 +717,15 @@
       <if test="nplDeviceCode != null">
         npl_device_code = #{nplDeviceCode,jdbcType=VARCHAR},
       </if>
+      <if test="nplDutyType != null">
+        npl_duty_type = #{nplDutyType,jdbcType=VARCHAR},
+      </if>
+      <if test="nplReviewResult != null">
+        npl_review_result = #{nplReviewResult,jdbcType=VARCHAR},
+      </if>
+      <if test="nplIsAssembly != null">
+        npl_is_assembly = #{nplIsAssembly,jdbcType=BIT},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -664,6 +753,7 @@
   <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.NonconformProductLogPO">
     update nonconform_product_log
     set npl_barcode = #{nplBarcode,jdbcType=VARCHAR},
+      po_code = #{poCode,jdbcType=VARCHAR},
       fc_id = #{fcId,jdbcType=INTEGER},
       fc_code = #{fcCode,jdbcType=VARCHAR},
       shop_id = #{shopId,jdbcType=INTEGER},
@@ -674,6 +764,8 @@
       shift_id = #{shiftId,jdbcType=INTEGER},
       shift_code = #{shiftCode,jdbcType=VARCHAR},
       prod_code = #{prodCode,jdbcType=VARCHAR},
+      prod_tuhao = #{prodTuhao,jdbcType=VARCHAR},
+      prod_name = #{prodName,jdbcType=VARCHAR},
       prod_batch_code = #{prodBatchCode,jdbcType=VARCHAR},
       prod_order_code = #{prodOrderCode,jdbcType=VARCHAR},
       prod_barcode = #{prodBarcode,jdbcType=VARCHAR},
@@ -691,6 +783,9 @@
       npl_batch_status = #{nplBatchStatus,jdbcType=VARCHAR},
       npl_is_test_part = #{nplIsTestPart,jdbcType=BIT},
       npl_device_code = #{nplDeviceCode,jdbcType=VARCHAR},
+      npl_duty_type = #{nplDutyType,jdbcType=VARCHAR},
+      npl_review_result = #{nplReviewResult,jdbcType=VARCHAR},
+      npl_is_assembly = #{nplIsAssembly,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_person_no = #{createPersonNo,jdbcType=VARCHAR},
       create_person_name = #{createPersonName,jdbcType=VARCHAR},

@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
 				if(!map.get("status").equals("")){
 					String stri = map.get("status").toString().replace("\"", "");
 					List<String> status = new ArrayList<String>();
-					String[] b = stri.substring(1, stri.length() - 1).split(",", 0);
+					String[] b = stri.split(",");
 					for (int i = 0; i < b.length; i++) {
 						status.add(b[i]);
 					}
