@@ -148,13 +148,13 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public Map<String, Object> getWasteProd(Integer lineId, String prodCode, String prodNumber, String beginTime,
 			String endTime, Integer pageNum, Integer pageSize, String matProdCode, String matProdNumber,
-			String status) {
+			String status,String poCode) {
 		// TODO Auto-generated method stub noConformProductDao
 		
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
 		
-		List<Map<String,Object>> dataList = this.noConformProductDao.getWasteProd(lineId, prodCode, prodNumber, beginTime, endTime, matProdCode, matProdNumber, status);
+		List<Map<String,Object>> dataList = this.noConformProductDao.getWasteProd(lineId, prodCode, prodNumber, beginTime, endTime, matProdCode, matProdNumber, status, poCode);
 		
         PageInfo info = new PageInfo(dataList);
 		
@@ -166,13 +166,13 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public Map<String, Object> getWasteProdMaterial(Integer lineId, String nplBarcode, String beginTime, String endTime,
-			String prodCode, String prodNumber, String matProdCode, String matProdNumber, Integer pageNum,
+			 String matProdCode, String matProdNumber, Integer pageNum,
 			Integer pageSize) {
 		// TODO Auto-generated method stub
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
 		
-		List<Map<String,Object>> dataList = this.noConformProductDao.getWasteProdMaterial(lineId, nplBarcode, beginTime, endTime, prodCode, prodNumber, matProdCode, matProdNumber);
+		List<Map<String,Object>> dataList = this.noConformProductDao.getWasteProdMaterial(lineId, nplBarcode, beginTime, endTime, matProdCode, matProdNumber);
 		
         PageInfo info = new PageInfo(dataList);
 		

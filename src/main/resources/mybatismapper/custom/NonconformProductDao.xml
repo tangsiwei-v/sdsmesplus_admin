@@ -87,6 +87,9 @@
       <if test="lineId != null and lineId != ''">
          and a.line_id = #{lineId}
       </if>
+      <if test="poCode != null and poCode != ''">
+         and a.poCode  = #{poCode}
+      </if>
       <if test="prodCode != null and prodCode != ''">
          and b.prod_code  = #{prodCode}
       </if>
@@ -103,11 +106,11 @@
     </select>
     
     <select id="getWasteProdMaterial" resultType="map">
-        select * from  nonconform_product_material a
+        select a.*,prod_code,b.prod_name,b.prod_tuhao from  nonconform_product_material a
 		left join nonconform_product_log b on a.npl_id = b.npl_id
 		where 1=1
 		<if test="lineId != null and lineId != ''">
-           and a.line_id = #{lineId}
+           and b.line_id = #{lineId}
         </if>
         <if test="nplBarcode != null and nplBarcode != ''">
            and a.npl_barcode = #{nplBarcode}
@@ -117,9 +120,6 @@
         </if>
         <if test="matProdNumber != null and matProdNumber != ''">
            and a.material_number = #{matProdNumber}
-        </if>
-        <if test="prodCode != null and prodCode != ''">
-           and b.prod_code = #{prodCode}
         </if>
         <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
            and a.create_time between #{beginTime} and #{endTime}
