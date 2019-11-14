@@ -235,6 +235,76 @@ public class NonconformProductLogPOExample {
             return (Criteria) this;
         }
 
+        public Criteria andPoCodeIsNull() {
+            addCriterion("po_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeIsNotNull() {
+            addCriterion("po_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeEqualTo(String value) {
+            addCriterion("po_code =", value, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeNotEqualTo(String value) {
+            addCriterion("po_code <>", value, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeGreaterThan(String value) {
+            addCriterion("po_code >", value, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("po_code >=", value, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeLessThan(String value) {
+            addCriterion("po_code <", value, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeLessThanOrEqualTo(String value) {
+            addCriterion("po_code <=", value, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeLike(String value) {
+            addCriterion("po_code like", value, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeNotLike(String value) {
+            addCriterion("po_code not like", value, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeIn(List<String> values) {
+            addCriterion("po_code in", values, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeNotIn(List<String> values) {
+            addCriterion("po_code not in", values, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeBetween(String value1, String value2) {
+            addCriterion("po_code between", value1, value2, "poCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPoCodeNotBetween(String value1, String value2) {
+            addCriterion("po_code not between", value1, value2, "poCode");
+            return (Criteria) this;
+        }
+
         public Criteria andFcIdIsNull() {
             addCriterion("fc_id is null");
             return (Criteria) this;
@@ -882,6 +952,146 @@ public class NonconformProductLogPOExample {
 
         public Criteria andProdCodeNotBetween(String value1, String value2) {
             addCriterion("prod_code not between", value1, value2, "prodCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoIsNull() {
+            addCriterion("prod_tuhao is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoIsNotNull() {
+            addCriterion("prod_tuhao is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoEqualTo(String value) {
+            addCriterion("prod_tuhao =", value, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoNotEqualTo(String value) {
+            addCriterion("prod_tuhao <>", value, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoGreaterThan(String value) {
+            addCriterion("prod_tuhao >", value, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoGreaterThanOrEqualTo(String value) {
+            addCriterion("prod_tuhao >=", value, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoLessThan(String value) {
+            addCriterion("prod_tuhao <", value, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoLessThanOrEqualTo(String value) {
+            addCriterion("prod_tuhao <=", value, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoLike(String value) {
+            addCriterion("prod_tuhao like", value, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoNotLike(String value) {
+            addCriterion("prod_tuhao not like", value, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoIn(List<String> values) {
+            addCriterion("prod_tuhao in", values, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoNotIn(List<String> values) {
+            addCriterion("prod_tuhao not in", values, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoBetween(String value1, String value2) {
+            addCriterion("prod_tuhao between", value1, value2, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdTuhaoNotBetween(String value1, String value2) {
+            addCriterion("prod_tuhao not between", value1, value2, "prodTuhao");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameIsNull() {
+            addCriterion("prod_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameIsNotNull() {
+            addCriterion("prod_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameEqualTo(String value) {
+            addCriterion("prod_name =", value, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameNotEqualTo(String value) {
+            addCriterion("prod_name <>", value, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameGreaterThan(String value) {
+            addCriterion("prod_name >", value, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameGreaterThanOrEqualTo(String value) {
+            addCriterion("prod_name >=", value, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameLessThan(String value) {
+            addCriterion("prod_name <", value, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameLessThanOrEqualTo(String value) {
+            addCriterion("prod_name <=", value, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameLike(String value) {
+            addCriterion("prod_name like", value, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameNotLike(String value) {
+            addCriterion("prod_name not like", value, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameIn(List<String> values) {
+            addCriterion("prod_name in", values, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameNotIn(List<String> values) {
+            addCriterion("prod_name not in", values, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameBetween(String value1, String value2) {
+            addCriterion("prod_name between", value1, value2, "prodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdNameNotBetween(String value1, String value2) {
+            addCriterion("prod_name not between", value1, value2, "prodName");
             return (Criteria) this;
         }
 
@@ -2052,6 +2262,206 @@ public class NonconformProductLogPOExample {
 
         public Criteria andNplDeviceCodeNotBetween(String value1, String value2) {
             addCriterion("npl_device_code not between", value1, value2, "nplDeviceCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeIsNull() {
+            addCriterion("npl_duty_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeIsNotNull() {
+            addCriterion("npl_duty_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeEqualTo(String value) {
+            addCriterion("npl_duty_type =", value, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeNotEqualTo(String value) {
+            addCriterion("npl_duty_type <>", value, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeGreaterThan(String value) {
+            addCriterion("npl_duty_type >", value, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("npl_duty_type >=", value, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeLessThan(String value) {
+            addCriterion("npl_duty_type <", value, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeLessThanOrEqualTo(String value) {
+            addCriterion("npl_duty_type <=", value, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeLike(String value) {
+            addCriterion("npl_duty_type like", value, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeNotLike(String value) {
+            addCriterion("npl_duty_type not like", value, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeIn(List<String> values) {
+            addCriterion("npl_duty_type in", values, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeNotIn(List<String> values) {
+            addCriterion("npl_duty_type not in", values, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeBetween(String value1, String value2) {
+            addCriterion("npl_duty_type between", value1, value2, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplDutyTypeNotBetween(String value1, String value2) {
+            addCriterion("npl_duty_type not between", value1, value2, "nplDutyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultIsNull() {
+            addCriterion("npl_review_result is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultIsNotNull() {
+            addCriterion("npl_review_result is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultEqualTo(String value) {
+            addCriterion("npl_review_result =", value, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultNotEqualTo(String value) {
+            addCriterion("npl_review_result <>", value, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultGreaterThan(String value) {
+            addCriterion("npl_review_result >", value, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultGreaterThanOrEqualTo(String value) {
+            addCriterion("npl_review_result >=", value, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultLessThan(String value) {
+            addCriterion("npl_review_result <", value, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultLessThanOrEqualTo(String value) {
+            addCriterion("npl_review_result <=", value, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultLike(String value) {
+            addCriterion("npl_review_result like", value, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultNotLike(String value) {
+            addCriterion("npl_review_result not like", value, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultIn(List<String> values) {
+            addCriterion("npl_review_result in", values, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultNotIn(List<String> values) {
+            addCriterion("npl_review_result not in", values, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultBetween(String value1, String value2) {
+            addCriterion("npl_review_result between", value1, value2, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplReviewResultNotBetween(String value1, String value2) {
+            addCriterion("npl_review_result not between", value1, value2, "nplReviewResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyIsNull() {
+            addCriterion("npl_is_assembly is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyIsNotNull() {
+            addCriterion("npl_is_assembly is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyEqualTo(Boolean value) {
+            addCriterion("npl_is_assembly =", value, "nplIsAssembly");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyNotEqualTo(Boolean value) {
+            addCriterion("npl_is_assembly <>", value, "nplIsAssembly");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyGreaterThan(Boolean value) {
+            addCriterion("npl_is_assembly >", value, "nplIsAssembly");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("npl_is_assembly >=", value, "nplIsAssembly");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyLessThan(Boolean value) {
+            addCriterion("npl_is_assembly <", value, "nplIsAssembly");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyLessThanOrEqualTo(Boolean value) {
+            addCriterion("npl_is_assembly <=", value, "nplIsAssembly");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyIn(List<Boolean> values) {
+            addCriterion("npl_is_assembly in", values, "nplIsAssembly");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyNotIn(List<Boolean> values) {
+            addCriterion("npl_is_assembly not in", values, "nplIsAssembly");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyBetween(Boolean value1, Boolean value2) {
+            addCriterion("npl_is_assembly between", value1, value2, "nplIsAssembly");
+            return (Criteria) this;
+        }
+
+        public Criteria andNplIsAssemblyNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("npl_is_assembly not between", value1, value2, "nplIsAssembly");
             return (Criteria) this;
         }
 

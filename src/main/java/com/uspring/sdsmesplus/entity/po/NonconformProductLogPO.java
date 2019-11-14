@@ -7,6 +7,8 @@ public class NonconformProductLogPO {
 
     private String nplBarcode;
 
+    private String poCode;
+
     private Integer fcId;
 
     private String fcCode;
@@ -26,6 +28,10 @@ public class NonconformProductLogPO {
     private String shiftCode;
 
     private String prodCode;
+
+    private String prodTuhao;
+
+    private String prodName;
 
     private String prodBatchCode;
 
@@ -61,6 +67,12 @@ public class NonconformProductLogPO {
 
     private String nplDeviceCode;
 
+    private String nplDutyType;
+
+    private String nplReviewResult;
+
+    private Boolean nplIsAssembly;
+
     private Date createTime;
 
     private String createPersonNo;
@@ -89,6 +101,14 @@ public class NonconformProductLogPO {
 
     public void setNplBarcode(String nplBarcode) {
         this.nplBarcode = nplBarcode == null ? null : nplBarcode.trim();
+    }
+
+    public String getPoCode() {
+        return poCode;
+    }
+
+    public void setPoCode(String poCode) {
+        this.poCode = poCode == null ? null : poCode.trim();
     }
 
     public Integer getFcId() {
@@ -169,6 +189,22 @@ public class NonconformProductLogPO {
 
     public void setProdCode(String prodCode) {
         this.prodCode = prodCode == null ? null : prodCode.trim();
+    }
+
+    public String getProdTuhao() {
+        return prodTuhao;
+    }
+
+    public void setProdTuhao(String prodTuhao) {
+        this.prodTuhao = prodTuhao == null ? null : prodTuhao.trim();
+    }
+
+    public String getProdName() {
+        return prodName;
+    }
+
+    public void setProdName(String prodName) {
+        this.prodName = prodName == null ? null : prodName.trim();
     }
 
     public String getProdBatchCode() {
@@ -305,6 +341,30 @@ public class NonconformProductLogPO {
 
     public void setNplDeviceCode(String nplDeviceCode) {
         this.nplDeviceCode = nplDeviceCode == null ? null : nplDeviceCode.trim();
+    }
+
+    public String getNplDutyType() {
+        return nplDutyType;
+    }
+
+    public void setNplDutyType(String nplDutyType) {
+        this.nplDutyType = nplDutyType == null ? null : nplDutyType.trim();
+    }
+
+    public String getNplReviewResult() {
+        return nplReviewResult;
+    }
+
+    public void setNplReviewResult(String nplReviewResult) {
+        this.nplReviewResult = nplReviewResult == null ? null : nplReviewResult.trim();
+    }
+
+    public Boolean getNplIsAssembly() {
+        return nplIsAssembly;
+    }
+
+    public void setNplIsAssembly(Boolean nplIsAssembly) {
+        this.nplIsAssembly = nplIsAssembly;
     }
 
     public Date getCreateTime() {

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ProdOrderStockDao">
+
+	<select id="getOrderStock" resultType="map">
+	    select a.*,b.prod_code,b.prod_number from prod_order_stock a
+		left join plan_order b on a.po_code = b.po_code
+		where 1=1
+		<if test="prodCode != null and prodCode != ''">
+		  and b.prod_code like '%'+#{prodCode}+'%'
+		</if>
+		<if test="lineId != null and lineId != ''">
+		  and b.line_id = #{lineId}
+		</if>
+		<if test="poCode != null and poCode != ''">
+		  and a.po_code = #{poCode}
+		</if>
+		<if test="prodNumber != null and prodNumber != ''">
+		  and b.prod_number like '%'+#{prodNumber}+'%'
+		</if>
+		<if test="matProdCode != null and matProdCode != ''">
+		  and a.mat_code like '%'+#{matProdCode}+'%'
+		</if>
+		<if test="matProdNumber != null and matProdNumber != ''">
+		  and a.mat_number like '%'+#{matProdNumber}+'%'
+		</if>
+		<if test="boxCode != null and boxCode != ''">
+		  and a.box_barcode like '%'+#{boxCode}+'%'
+		</if>
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+		  and a.create_time between #{beginTime} and #{endTime}
+		</if>
+		order by a.update_time desc
+	</select>
+
+</mapper>

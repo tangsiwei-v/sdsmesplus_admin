@@ -90,4 +90,25 @@ public class ReportController {
 	public Result getInverseQuery(HttpServletResponse response,Integer type,String value,Integer fcId) {
 		return new Result("查询成功", this.reportService.getInverseQuery(type, value, fcId), StatusCode.SUCCESS);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/orderStock", method = RequestMethod.GET)
+	@ApiOperation(value = "线边库存查询", notes = "查询线边库存记录", response = Result.class)
+	public Result getOrderStock(HttpServletResponse response,String poCode,String prodCode,String beginTime,String endTime,Integer pageNum,Integer pageSize,Integer lineId,String prodNumber,String matProdCode,String matProdNumber,String boxCode) {
+		return new Result("查询成功", this.reportService.getOrderStock(poCode, prodCode, beginTime, endTime, pageNum, pageSize, lineId,prodNumber,matProdCode,matProdNumber,boxCode), StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/waste", method = RequestMethod.GET)
+	@ApiOperation(value = "三大件反查", notes = "查询物料使用", response = Result.class)
+	public Result getProductWaste(HttpServletResponse response,Integer lineId,String prodCode,String prodNumber,String beginTime,String endTime,Integer pageNum,Integer pageSize,String matProdCode,String matProdNumber,String status) {
+		return new Result("查询成功", this.reportService.getWasteProd(lineId, prodCode, prodNumber, beginTime, endTime, pageNum, pageSize, matProdCode, matProdNumber, status), StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/waste/material", method = RequestMethod.GET)
+	@ApiOperation(value = "线边库存查询", notes = "查询线边库存记录", response = Result.class)
+	public Result getProductWasteMaterial(HttpServletResponse response,Integer lineId,String nplBarcode,String beginTime,String endTime,String prodCode,String prodNumber,String matProdCode,String matProdNumber,Integer pageNum,Integer pageSize) {
+		return new Result("查询成功", this.reportService.getWasteProdMaterial(lineId, nplBarcode, beginTime, endTime, prodCode, prodNumber, matProdCode, matProdNumber, pageNum, pageSize), StatusCode.SUCCESS);
+	}
 }

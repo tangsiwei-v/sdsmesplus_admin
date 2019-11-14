@@ -10,10 +10,14 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.uspring.sdsmesplus.dao.NonconformProductDao;
 import com.uspring.sdsmesplus.dao.ProdBoxLogDao;
 import com.uspring.sdsmesplus.dao.ProdFinishedProductDao;
+import com.uspring.sdsmesplus.dao.ProdOrderStockDao;
 import com.uspring.sdsmesplus.dao.ProdProductMaterialDao;
+import com.uspring.sdsmesplus.dao.generate.ProdOrderStockPODao;
 import com.uspring.sdsmesplus.entity.po.ProdFinishedProductPOExample;
+import com.uspring.sdsmesplus.entity.po.ProdOrderStockPOExample;
 import com.uspring.sdsmesplus.service.MongoDBService;
 import com.uspring.sdsmesplus.service.ReportService;
 
@@ -31,6 +35,12 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	private ProdProductMaterialDao productMaterialDao;
+	
+	@Autowired
+	private ProdOrderStockDao prodOrderStockDao;
+	
+	@Autowired
+	private NonconformProductDao noConformProductDao;
 
 	@Override
 	public Map<String, Object> getProductInfo(String barcode) {
@@ -117,5 +127,60 @@ public class ReportServiceImpl implements ReportService {
 	    
 		return resulList;
 	}
+
+	@Override
+	public Map<String, Object> getOrderStock(String orderCode, String prodCode, String beginTime, String endTime,
+			Integer pageNum, Integer pageSize, Integer lineId, String prodNumber,String matProdCode,String matProdNumber,String boxCode) {
+		// TODO Auto-generated method stub
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		List<Map<String,Object>> dataList = this.prodOrderStockDao.getOrderStock(orderCode, prodCode, prodNumber, matProdCode, matProdNumber,boxCode, beginTime, endTime, lineId);
+		
+        PageInfo info = new PageInfo(dataList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getWasteProd(Integer lineId, String prodCode, String prodNumber, String beginTime,
+			String endTime, Integer pageNum, Integer pageSize, String matProdCode, String matProdNumber,
+			String status) {
+		// TODO Auto-generated method stub noConformProductDao
+		
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		List<Map<String,Object>> dataList = this.noConformProductDao.getWasteProd(lineId, prodCode, prodNumber, beginTime, endTime, matProdCode, matProdNumber, status);
+		
+        PageInfo info = new PageInfo(dataList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getWasteProdMaterial(Integer lineId, String nplBarcode, String beginTime, String endTime,
+			String prodCode, String prodNumber, String matProdCode, String matProdNumber, Integer pageNum,
+			Integer pageSize) {
+		// TODO Auto-generated method stub
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		List<Map<String,Object>> dataList = this.noConformProductDao.getWasteProdMaterial(lineId, nplBarcode, beginTime, endTime, prodCode, prodNumber, matProdCode, matProdNumber);
+		
+        PageInfo info = new PageInfo(dataList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
 
 }

@@ -9,8 +9,9 @@ package com.uspring.sdsmesplus.enums;
 
 public enum NonconformProductStatus {
 	
-	Entering("entering","录入"),
-	Insulate("Insulate","隔离");
+	Entering("Entering","录入"),
+	Isolation("Isolation","隔离"),
+	Cancel("Cancel","作废");
 
     //代码
     private String code;
