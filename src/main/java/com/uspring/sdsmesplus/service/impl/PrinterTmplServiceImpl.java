@@ -69,7 +69,8 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 		int index = file.getOriginalFilename().lastIndexOf(".");
 		String substring = file.getOriginalFilename().substring(index);
 		logger.info(substring);
-		if (substring.equals(".lab")) {
+		String genre =substring.toLowerCase();
+		if (genre.equals(".lab")) {
 			SysPrinterTmplPO printerTmpl = new SysPrinterTmplPO();
 			byte[] imgBytes = file.getBytes();
 			printerTmpl.setPtFileBinary(imgBytes);
