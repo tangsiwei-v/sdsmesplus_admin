@@ -129,7 +129,7 @@ public interface ReportService {
 	 * @param status 状态
 	 * @return
 	 */
-	Map<String,Object> getWasteProd(Integer lineId,String prodCode,String prodNumber,String beginTime,String endTime,Integer pageNum,Integer pageSize,String matProdCode,String matProdNumber,String status);
+	Map<String,Object> getWasteProd(Integer lineId,String prodCode,String prodNumber,String beginTime,String endTime,Integer pageNum,Integer pageSize,String matProdCode,String matProdNumber,String status,String poCode);
 	
 	/**
 	 * 
@@ -145,6 +145,6 @@ public interface ReportService {
 	 * @param pageSize
 	 * @return
 	 */
-	Map<String,Object> getWasteProdMaterial(Integer lineId,String nplBarcode,String beginTime,String endTime,String prodCode,String prodNumber,String matProdCode,String matProdNumber,Integer pageNum,Integer pageSize);
+	Map<String,Object> getWasteProdMaterial(Integer lineId,String nplBarcode,String beginTime,String endTime,String matProdCode,String matProdNumber,Integer pageNum,Integer pageSize);
 		
 }
