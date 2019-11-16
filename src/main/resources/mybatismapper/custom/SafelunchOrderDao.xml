@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.SafelunchOrderDao">
+    
+    <select id="getSafeLunch" resultType="map">
+        select a.*,c.safline_name,b.prod_code,b.prod_number,b.prod_name,b.prod_tuhao,b.po_code from safelunch_order a
+		left join prod_box_log b on a.box_barcode = b.box_barcode
+		left join safelunch_workline c on a.safline_id = c.safline_id
+		where 1=1
+		<if test="lineId != null and lineId != ''">
+		  and b.line_id = #{lineId}
+		</if>
+		<if test="poCode != null and poCode != ''">
+		  and b.po_code = #{poCode}
+		</if>
+		<if test="prodCode != null and prodCode != ''">
+		  and b.prod_code = #{prodCode}
+		</if>
+		<if test="prodNumber != null and prodNumber != ''">
+		  and b.prod_number = #{prodNumber}
+		</if>
+		<if test="boxCode != null and boxCode != ''">
+		  and a.box_barcode = #{boxCode}
+		</if>
+		<if test="safelineId != null and safelineId != ''">
+		  and b.safline_id = #{safelineId}
+		</if>
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+		  and a.create_time between #{beginTime} and #{endTime}
+		</if>
+    </select>
+    
+    
+    
+    <select id="getSafeLunchDetail" resultType="map">
+        select a.*,c.prod_code,c.prod_number,c.prod_name,c.po_code from safelunch_product_log a
+		left join safelunch_order b on a.safelunch_order = b.safelunch_order
+		left join prod_box_log c on b.box_barcode = c.box_barcode
+		where 1=1
+		<if test="lineId != null and lineId != ''">
+		  and c.line_id = #{lineId}
+		</if>
+		<if test="poCode != null and poCode != ''">
+		  and c.po_code = #{poCode}
+		</if>
+		<if test="prodCode != null and prodCode != ''">
+		  and c.prod_code = #{prodCode}
+		</if>
+		<if test="prodNumber != null and prodNumber != ''">
+		  and c.prod_number = #{prodNumber}
+		</if>
+		<if test="boxCode != null and boxCode != ''">
+		  and b.box_barcode = #{boxCode}
+		</if>
+		<if test="safelineId != null and safelineId != ''">
+		  and b.safline_id = #{safelineId}
+		</if>
+		<if test="fpBarcode != null and fpBarcode != ''">
+		  and a.fp_barcode = #{fpBarcode}
+		</if>
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+		  and a.create_time between #{beginTime} and #{endTime}
+		</if>
+		
+    </select>
+</mapper>

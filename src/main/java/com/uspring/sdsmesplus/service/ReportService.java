@@ -14,6 +14,7 @@ import java.util.Map;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 import com.uspring.sdsmesplus.entity.po.ProdFinishedProductPO;
 import com.uspring.sdsmesplus.entity.po.ProdProductMaterialPO;
+import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePO;
 
 /** 
  * @ClassName: ReportService 
@@ -146,5 +147,59 @@ public interface ReportService {
 	 * @return
 	 */
 	Map<String,Object> getWasteProdMaterial(Integer lineId,String nplBarcode,String beginTime,String endTime,String matProdCode,String matProdNumber,Integer pageNum,Integer pageSize);
+	
+	/**
+	 * 
+	 * @param lineId
+	 * @param poCode 工单编号
+	 * @param prodCode SAP号
+	 * @param prodNumber 产品简码
+	 * @param batchNo 批次号
+	 * @param furnaceNo 炉号
+	 * @param beginTime
+	 * @param endTime
+	 * @param pageNum
+	 * @param pageSize
+	 * @param matProdCode 物料SAP号
+	 * @param matProdNumber 物料简码
+	 * @return
+	 */
+	Map<String,Object> getMachMaterial(Integer lineId,String poCode,String prodCode,String prodNumber,String batchNo,String furnaceNo,String beginTime,String endTime,Integer pageNum,Integer pageSize,String matProdCode,String matProdNumber,String matBoxCode);
+	
+	/**
+	 * 查询safelunch记录
+	 * @param lineId 
+	 * @param poCode工单编号
+	 * @param prodCode 工单编号
+	 * @param prodNumber 产品简码
+	 * @param boxCode 箱号
+	 * @param beginTime
+	 * @param endTime
+	 * @param safelineId sefelunch产线
+	 * @return
+	 */
+	Map<String,Object> getSafeLunch(Integer lineId,String poCode,String prodCode,String prodNumber,String boxCode,String beginTime,String endTime,Integer pageNum,Integer pageSize,Integer safelineId);
+	
+	/**
+	 * 查询safelunch详细信息
+	 * @param lineId
+	 * @param poCode 工单编号
+	 * @param prodCode 工单编号
+	 * @param prodNumber 产品简码
+	 * @param boxCode 箱号
+	 * @param beginTime
+	 * @param endTime
+	 * @param safeLunchOrder safelunch检验编号
+	 * @param safelineId sefelunch产线
+	 * @return
+	 */
+	Map<String,Object> getSafeLunchDetail(Integer lineId,String poCode,String prodCode,String prodNumber,String boxCode,String beginTime,String endTime,String safeLunchOrder,Integer pageNum,Integer pageSize,Integer safelineId,String fpBarcode);
+	
+	/**
+	 * 获取safelunch线
+	 * @param fcId
+	 * @return
+	 */
+	List<SafelunchWorkLinePO> getSafeLunchWorkLine(Integer fcId);
 		
 }
