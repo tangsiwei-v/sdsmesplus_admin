@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ProdProcessStockDao">
+    
+    <select id="getProcessMaterial" resultType="map">
+        select a.*,b.prod_code,b.prod_number,b.prod_tuhao,b.prod_name from prod_process_stock a
+		left join plan_order b on a.po_code = b.po_code
+		where 1=1
+		<if test="poCode != null and poCode != ''">
+		  and a.po_code = #{poCode}
+		</if>
+		<if test="lineId != null and lineId != ''">
+		  and a.line_id = #{lineId}
+		</if>
+		<if test="prodCode != null and prodCode != ''">
+		  and b.prod_code = #{prodCode}
+		</if>
+		<if test="prodNumber != null and prodNumber != ''">
+		  and b.prod_number = #{prodNumber}
+		</if>
+		<if test="matProdCode != null and matProdCode != ''">
+		  and a.mat_code = #{matProdCode}
+		</if>
+		<if test="matProdNumber != null and matProdNumber != ''">
+		  and a.mat_number = #{matProdNumber}
+		</if>
+		<if test="furnaceNo != null and furnaceNo != ''">
+		  and a.mat_furnace_no = #{furnaceNo}
+		</if>
+		<if test="batchNo != null and batchNo != ''">
+		  and a.mat_batch_no = #{batchNo}
+		</if>
+		<if test="matBoxCode != null and matBoxCode != ''">
+		  and a.box_barcode = #{matBoxCode}
+		</if>
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime !=''">
+		  and a.create_time between #{beginTime} and #{endTime}
+		</if>
+		order by a.update_time desc
+    </select>
+</mapper>
