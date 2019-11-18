@@ -14,10 +14,13 @@ import com.uspring.sdsmesplus.dao.NonconformProductDao;
 import com.uspring.sdsmesplus.dao.ProdBoxLogDao;
 import com.uspring.sdsmesplus.dao.ProdFinishedProductDao;
 import com.uspring.sdsmesplus.dao.ProdOrderStockDao;
+import com.uspring.sdsmesplus.dao.ProdProcessStockDao;
 import com.uspring.sdsmesplus.dao.ProdProductMaterialDao;
-import com.uspring.sdsmesplus.dao.generate.ProdOrderStockPODao;
+import com.uspring.sdsmesplus.dao.SafelunchOrderDao;
+import com.uspring.sdsmesplus.dao.generate.SafelunchWorkLinePODao;
 import com.uspring.sdsmesplus.entity.po.ProdFinishedProductPOExample;
-import com.uspring.sdsmesplus.entity.po.ProdOrderStockPOExample;
+import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePO;
+import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePOExample;
 import com.uspring.sdsmesplus.service.MongoDBService;
 import com.uspring.sdsmesplus.service.ReportService;
 
@@ -41,6 +44,15 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	private NonconformProductDao noConformProductDao;
+	
+	@Autowired
+	private ProdProcessStockDao prodProcessStockDao;
+	
+	@Autowired
+	private SafelunchOrderDao safelunchOrderDao;
+	
+	@Autowired
+	private SafelunchWorkLinePODao safelunchWorklinePoDao;
 
 	@Override
 	public Map<String, Object> getProductInfo(String barcode) {
@@ -181,6 +193,71 @@ public class ReportServiceImpl implements ReportService {
 		resultMap.put("total", info.getTotal());
 		return resultMap;
 	}
+
+	@Override
+	public Map<String, Object> getMachMaterial (Integer lineId, String poCode, String prodCode, String prodNumber,
+			String batchNo, String furnaceNo, String beginTime, String endTime, Integer pageNum, Integer pageSize,String matProdCode,String matProdNumber,String matBoxCode) {
+		// TODO Auto-generated method stub
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		List<Map<String,Object>> dataList = this.prodProcessStockDao.getProcessMaterial(lineId, poCode, prodCode, prodNumber, batchNo, furnaceNo, beginTime, endTime, matProdCode, matProdNumber, matBoxCode);
+		
+        PageInfo info = new PageInfo(dataList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getSafeLunch(Integer lineId, String poCode, String prodCode, String prodNumber,
+			String boxCode, String beginTime, String endTime, Integer pageNum, Integer pageSize,Integer safelineId) {
+		// TODO Auto-generated method stub
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		List<Map<String,Object>> dataList = this.safelunchOrderDao.getSafeLunch(lineId, poCode, prodCode, prodNumber, boxCode, beginTime, endTime, safelineId);
+		
+        PageInfo info = new PageInfo(dataList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getSafeLunchDetail(Integer lineId, String poCode, String prodCode, String prodNumber,
+			String boxCode, String beginTime, String endTime, String safeLunchOrder, Integer pageNum,
+			Integer pageSize,Integer safelineId,String fpBarcode) {
+		// TODO Auto-generated method stub
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		List<Map<String,Object>> dataList = this.safelunchOrderDao.getSafeLunchDetail(lineId, poCode, prodCode, prodNumber, boxCode, beginTime, endTime, safeLunchOrder, safelineId,fpBarcode);
+		
+        PageInfo info = new PageInfo(dataList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
+	@Override
+	public List<SafelunchWorkLinePO> getSafeLunchWorkLine(Integer fcId) {
+		// TODO Auto-generated method stub
+		SafelunchWorkLinePOExample workLineExample = new SafelunchWorkLinePOExample();
+		workLineExample.createCriteria().andFcIdEqualTo(fcId);
+		
+		List<SafelunchWorkLinePO> workLineList = this.safelunchWorklinePoDao.selectByExample(workLineExample);
+		
+		return workLineList;
+	}
+
+
 
 
 }
