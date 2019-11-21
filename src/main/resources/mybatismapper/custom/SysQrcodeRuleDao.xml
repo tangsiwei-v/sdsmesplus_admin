@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.SysQrcodeRuleDao">
+
+	<select id="getQrcodeRuleList" resultType="map">
+		select sqr_id sqrId,a.fc_id fcId,prod_code prodCode,qrcode_length qrcodeLength,qrcode_start qrcodeStart,update_time updateTime,b.fc_name from sys_qrcode_rule a 
+		left join sys_factory b on a.fc_id = b.fc_id 
+		where 1=1 
+		<if test="fcId != null and fcId != ''">
+		  and a.fc_id = #{fcId}
+		</if>
+		<if test="prodCode != null and prodCode != ''">
+		  and a.prod_code = #{prodCode}
+		</if>
+	</select>
+	
+</mapper>

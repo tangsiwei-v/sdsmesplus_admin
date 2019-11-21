@@ -26,6 +26,8 @@
         <security:intercept-url pattern="/api/work_shift" access="permitAll" />
         <security:intercept-url pattern="/api/safelunch/workline" access="permitAll" />
         <security:intercept-url pattern="/api/department/workline/prodmodel/**" access="permitAll" />
+        <!-- 文件上传 -->
+        <security:intercept-url pattern="/api/file/**" access="permitAll" />
 		<!-- 其他接口接受权限认证 -->
 		<security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER')" />
 		

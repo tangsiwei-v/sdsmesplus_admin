@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.SysQrcodeRulePODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO">
+    <id column="sqr_id" jdbcType="INTEGER" property="sqrId" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="qrcode_length" jdbcType="INTEGER" property="qrcodeLength" />
+    <result column="qrcode_start" jdbcType="VARCHAR" property="qrcodeStart" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sqr_id, fc_id, prod_code, qrcode_length, qrcode_start, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_qrcode_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_qrcode_rule
+    where sqr_id = #{sqrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_qrcode_rule
+    where sqr_id = #{sqrId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePOExample">
+    delete from sys_qrcode_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO">
+    insert into sys_qrcode_rule (sqr_id, fc_id, prod_code, 
+      qrcode_length, qrcode_start, create_time, 
+      update_time)
+    values (#{sqrId,jdbcType=INTEGER}, #{fcId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, 
+      #{qrcodeLength,jdbcType=INTEGER}, #{qrcodeStart,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO">
+    insert into sys_qrcode_rule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sqrId != null">
+        sqr_id,
+      </if>
+      <if test="fcId != null">
+        fc_id,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="qrcodeLength != null">
+        qrcode_length,
+      </if>
+      <if test="qrcodeStart != null">
+        qrcode_start,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sqrId != null">
+        #{sqrId,jdbcType=INTEGER},
+      </if>
+      <if test="fcId != null">
+        #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcodeLength != null">
+        #{qrcodeLength,jdbcType=INTEGER},
+      </if>
+      <if test="qrcodeStart != null">
+        #{qrcodeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePOExample" resultType="java.lang.Long">
+    select count(*) from sys_qrcode_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_qrcode_rule
+    <set>
+      <if test="record.sqrId != null">
+        sqr_id = #{record.sqrId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcId != null">
+        fc_id = #{record.fcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qrcodeLength != null">
+        qrcode_length = #{record.qrcodeLength,jdbcType=INTEGER},
+      </if>
+      <if test="record.qrcodeStart != null">
+        qrcode_start = #{record.qrcodeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_qrcode_rule
+    set sqr_id = #{record.sqrId,jdbcType=INTEGER},
+      fc_id = #{record.fcId,jdbcType=INTEGER},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      qrcode_length = #{record.qrcodeLength,jdbcType=INTEGER},
+      qrcode_start = #{record.qrcodeStart,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO">
+    update sys_qrcode_rule
+    <set>
+      <if test="fcId != null">
+        fc_id = #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcodeLength != null">
+        qrcode_length = #{qrcodeLength,jdbcType=INTEGER},
+      </if>
+      <if test="qrcodeStart != null">
+        qrcode_start = #{qrcodeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sqr_id = #{sqrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO">
+    update sys_qrcode_rule
+    set fc_id = #{fcId,jdbcType=INTEGER},
+      prod_code = #{prodCode,jdbcType=VARCHAR},
+      qrcode_length = #{qrcodeLength,jdbcType=INTEGER},
+      qrcode_start = #{qrcodeStart,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where sqr_id = #{sqrId,jdbcType=INTEGER}
+  </update>
+</mapper>

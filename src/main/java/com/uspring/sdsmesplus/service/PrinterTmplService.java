@@ -1,9 +1,12 @@
 package com.uspring.sdsmesplus.service;
 
+import java.util.Map;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO;
+import com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO;
 import com.uspring.sdsmesplus.entity.vo.PrinterTmplVO;
 
 /** 
@@ -63,5 +66,5 @@ public interface PrinterTmplService {
 	 * @throws Exception 
 	 */
 	byte[] downloadTemplate(Integer tmplId) throws Exception;
-	
+
 }

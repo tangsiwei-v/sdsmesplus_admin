@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.dao.NonconformProductDao;
 import com.uspring.sdsmesplus.dao.ProdBoxLogDao;
+import com.uspring.sdsmesplus.dao.ProdBoxMaterialDao;
 import com.uspring.sdsmesplus.dao.ProdFinishedProductDao;
 import com.uspring.sdsmesplus.dao.ProdOrderStockDao;
 import com.uspring.sdsmesplus.dao.ProdProductMaterialDao;
@@ -41,6 +42,9 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	private NonconformProductDao noConformProductDao;
+	
+	@Autowired
+	private ProdBoxMaterialDao prodBoxMaterialDao;
 
 	@Override
 	public Map<String, Object> getProductInfo(String barcode) {
@@ -173,6 +177,23 @@ public class ReportServiceImpl implements ReportService {
 		page.startPage(pageNum, pageSize);
 		
 		List<Map<String,Object>> dataList = this.noConformProductDao.getWasteProdMaterial(lineId, nplBarcode, beginTime, endTime, matProdCode, matProdNumber);
+		
+        PageInfo info = new PageInfo(dataList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> boxMaterialUseInfo(Integer lineId, String beginTime, String endTime, String prodCode,
+			String matProdCode, String boxCode, String matBoxCode, Integer pageNum, Integer pageSize,String furnaceNo,String batchNo) {
+		// TODO Auto-generated method stub
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		List<Map<String,Object>> dataList = this.prodBoxMaterialDao.boxMaterialUseInfo(lineId, beginTime, endTime, prodCode, matProdCode, boxCode, matBoxCode, furnaceNo, batchNo);
 		
         PageInfo info = new PageInfo(dataList);
 		

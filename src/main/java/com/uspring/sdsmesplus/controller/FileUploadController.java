@@ -48,6 +48,15 @@ public class FileUploadController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/upload/pdf" , method = RequestMethod.POST)
+	@ApiOperation(value = "上传图片" , notes = "图片" , response = Result.class)
+	public Result doUploadPdf(@RequestParam("file") MultipartFile file, HttpServletRequest request,
+			HttpServletResponse response) {
+		USFile usfile = fileService.upPdfFile(file);
+		return new Result("success", usfile, StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/upload_base64" , method = RequestMethod.POST)
 	@ApiOperation(value = "base64上传图片" , notes = "依据base64编码上传图片" , response = Result.class)
 	public Result doUploadBase64(@RequestParam("imgStrs") String imgStrs, HttpServletRequest request,

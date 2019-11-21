@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.SjqcPdfPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SjqcPdfPO">
+    <id column="qcp_id" jdbcType="INTEGER" property="qcpId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="pdf_name" jdbcType="VARCHAR" property="pdfName" />
+    <result column="pdf_url" jdbcType="VARCHAR" property="pdfUrl" />
+    <result column="pdf_lastpage" jdbcType="INTEGER" property="pdfLastpage" />
+    <result column="pdf_type" jdbcType="VARCHAR" property="pdfType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uspring.sdsmesplus.entity.po.SjqcPdfPO">
+    <result column="pdf_content" jdbcType="VARBINARY" property="pdfContent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    qcp_id, prod_code, pdf_name, pdf_url, pdf_lastpage, pdf_type, create_time, update_time, 
+    fc_id
+  </sql>
+  <sql id="Blob_Column_List">
+    pdf_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.uspring.sdsmesplus.entity.po.SjqcPdfPOExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sjqc_pdf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SjqcPdfPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sjqc_pdf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sjqc_pdf
+    where qcp_id = #{qcpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sjqc_pdf
+    where qcp_id = #{qcpId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SjqcPdfPOExample">
+    delete from sjqc_pdf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SjqcPdfPO">
+    insert into sjqc_pdf (qcp_id, prod_code, pdf_name, 
+      pdf_url, pdf_lastpage, pdf_type, 
+      create_time, update_time, fc_id, 
+      pdf_content)
+    values (#{qcpId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, #{pdfName,jdbcType=VARCHAR}, 
+      #{pdfUrl,jdbcType=VARCHAR}, #{pdfLastpage,jdbcType=INTEGER}, #{pdfType,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{fcId,jdbcType=INTEGER}, 
+      #{pdfContent,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SjqcPdfPO">
+    insert into sjqc_pdf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="qcpId != null">
+        qcp_id,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="pdfName != null">
+        pdf_name,
+      </if>
+      <if test="pdfUrl != null">
+        pdf_url,
+      </if>
+      <if test="pdfLastpage != null">
+        pdf_lastpage,
+      </if>
+      <if test="pdfType != null">
+        pdf_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="fcId != null">
+        fc_id,
+      </if>
+      <if test="pdfContent != null">
+        pdf_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="qcpId != null">
+        #{qcpId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfName != null">
+        #{pdfName,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfUrl != null">
+        #{pdfUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfLastpage != null">
+        #{pdfLastpage,jdbcType=INTEGER},
+      </if>
+      <if test="pdfType != null">
+        #{pdfType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcId != null">
+        #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="pdfContent != null">
+        #{pdfContent,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SjqcPdfPOExample" resultType="java.lang.Long">
+    select count(*) from sjqc_pdf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sjqc_pdf
+    <set>
+      <if test="record.qcpId != null">
+        qcp_id = #{record.qcpId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdfName != null">
+        pdf_name = #{record.pdfName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdfUrl != null">
+        pdf_url = #{record.pdfUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdfLastpage != null">
+        pdf_lastpage = #{record.pdfLastpage,jdbcType=INTEGER},
+      </if>
+      <if test="record.pdfType != null">
+        pdf_type = #{record.pdfType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcId != null">
+        fc_id = #{record.fcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pdfContent != null">
+        pdf_content = #{record.pdfContent,jdbcType=VARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update sjqc_pdf
+    set qcp_id = #{record.qcpId,jdbcType=INTEGER},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      pdf_name = #{record.pdfName,jdbcType=VARCHAR},
+      pdf_url = #{record.pdfUrl,jdbcType=VARCHAR},
+      pdf_lastpage = #{record.pdfLastpage,jdbcType=INTEGER},
+      pdf_type = #{record.pdfType,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      fc_id = #{record.fcId,jdbcType=INTEGER},
+      pdf_content = #{record.pdfContent,jdbcType=VARBINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sjqc_pdf
+    set qcp_id = #{record.qcpId,jdbcType=INTEGER},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      pdf_name = #{record.pdfName,jdbcType=VARCHAR},
+      pdf_url = #{record.pdfUrl,jdbcType=VARCHAR},
+      pdf_lastpage = #{record.pdfLastpage,jdbcType=INTEGER},
+      pdf_type = #{record.pdfType,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      fc_id = #{record.fcId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SjqcPdfPO">
+    update sjqc_pdf
+    <set>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfName != null">
+        pdf_name = #{pdfName,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfUrl != null">
+        pdf_url = #{pdfUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfLastpage != null">
+        pdf_lastpage = #{pdfLastpage,jdbcType=INTEGER},
+      </if>
+      <if test="pdfType != null">
+        pdf_type = #{pdfType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcId != null">
+        fc_id = #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="pdfContent != null">
+        pdf_content = #{pdfContent,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where qcp_id = #{qcpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uspring.sdsmesplus.entity.po.SjqcPdfPO">
+    update sjqc_pdf
+    set prod_code = #{prodCode,jdbcType=VARCHAR},
+      pdf_name = #{pdfName,jdbcType=VARCHAR},
+      pdf_url = #{pdfUrl,jdbcType=VARCHAR},
+      pdf_lastpage = #{pdfLastpage,jdbcType=INTEGER},
+      pdf_type = #{pdfType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      fc_id = #{fcId,jdbcType=INTEGER},
+      pdf_content = #{pdfContent,jdbcType=VARBINARY}
+    where qcp_id = #{qcpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SjqcPdfPO">
+    update sjqc_pdf
+    set prod_code = #{prodCode,jdbcType=VARCHAR},
+      pdf_name = #{pdfName,jdbcType=VARCHAR},
+      pdf_url = #{pdfUrl,jdbcType=VARCHAR},
+      pdf_lastpage = #{pdfLastpage,jdbcType=INTEGER},
+      pdf_type = #{pdfType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      fc_id = #{fcId,jdbcType=INTEGER}
+    where qcp_id = #{qcpId,jdbcType=INTEGER}
+  </update>
+</mapper>

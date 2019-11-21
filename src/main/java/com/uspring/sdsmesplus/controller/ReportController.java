@@ -111,4 +111,11 @@ public class ReportController {
 	public Result getProductWasteMaterial(HttpServletResponse response,Integer lineId,String nplBarcode,String beginTime,String endTime,String matProdCode,String matProdNumber,Integer pageNum,Integer pageSize) {
 		return new Result("查询成功", this.reportService.getWasteProdMaterial(lineId, nplBarcode, beginTime, endTime, matProdCode, matProdNumber, pageNum, pageSize), StatusCode.SUCCESS);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/box/material", method = RequestMethod.GET)
+	@ApiOperation(value = "箱物料使用查询", notes = "箱物料使用查询", response = Result.class)
+	public Result getBoxMaterialUserInfo(HttpServletResponse response,Integer lineId,String prodCode,String matProdCode,String boxCode,String matBoxCode,Integer pageNum,Integer pageSize,String beginTime,String endTime,String furnaceNo,String batchNo) {
+		return new Result("查询成功", this.reportService.boxMaterialUseInfo(lineId, beginTime, endTime, prodCode, matProdCode, boxCode, matBoxCode, pageNum, pageSize, furnaceNo, batchNo), StatusCode.SUCCESS);
+	}
 }
