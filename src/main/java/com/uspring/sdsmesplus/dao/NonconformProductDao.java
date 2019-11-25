@@ -27,7 +27,7 @@ public interface NonconformProductDao extends NonconformProductLogPODao{
 	List<NonconformProductVO> record(@Param("fcId") Integer fcId, @Param("shopId") Integer shopId, @Param("lineId") Integer lineId, @Param("shiftId") Integer shiftId, @Param("status") String status,
 			@Param("start_time") String start_time, @Param("end_time") String end_time, Integer page_size, Integer page_num);
 	
-	List<Map<String,Object>> getWasteProd(@Param("lineId")Integer lineId,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("matProdCode")String matProdCode,@Param("matProdNumber")String matProdNumber,@Param("status")String status,@Param("poCode")String poCode);
+	List<Map<String,Object>> getWasteProd(@Param("lineId")Integer lineId,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("matProdCode")String matProdCode,@Param("matProdNumber")String matProdNumber,@Param("status")String status,@Param("poCode")String poCode,@Param("shopId")Integer shopId,@Param("fcId")Integer fcId);
 	
-	List<Map<String,Object>> getWasteProdMaterial(@Param("lineId")Integer lineId, @Param("nplBarcode")String nplBarcode, @Param("beginTime")String beginTime, @Param("endTime")String endTime, @Param("matProdCode")String matProdCode, @Param("matProdNumber")String matProdNumber);
+	List<Map<String,Object>> getWasteProdMaterial(@Param("lineId")Integer lineId, @Param("nplBarcode")String nplBarcode, @Param("beginTime")String beginTime, @Param("endTime")String endTime, @Param("matProdCode")String matProdCode, @Param("matProdNumber")String matProdNumber,@Param("shopId")Integer shopId,@Param("fcId")Integer fcId);
 }

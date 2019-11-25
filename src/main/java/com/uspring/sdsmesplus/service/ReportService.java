@@ -61,7 +61,7 @@ public interface ReportService {
 	 * @param endTime 结束时间
 	 * @return
 	 */
-	Map<String,Object> getBoxList(Integer lineId, String boxCode, String tuhao,String prodCode, String prodNumber, String beginTime, String endTime, String poCode, Integer pageNum, Integer pageSize);
+	Map<String,Object> getBoxList(Integer lineId, String boxCode, String tuhao,String prodCode, String prodNumber, String beginTime, String endTime, String poCode, Integer pageNum, Integer pageSize,Integer shopId,Integer fcId);
 	
 	/**
 	 * @Title: getProductList 
@@ -75,7 +75,7 @@ public interface ReportService {
 	 * @param endTime 结束时间
 	 * @return
 	 */
-	Map<String,Object> getProductList(Integer lineId, String boxCode, String barcode, String tuhao,String prodCode,String prodNumber,String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize);
+	Map<String,Object> getProductList(Integer lineId, String boxCode, String barcode, String tuhao,String prodCode,String prodNumber,String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize,Integer shopId,Integer fcId);
 	
 	
 	/**
@@ -116,7 +116,7 @@ public interface ReportService {
 	 * @return
 	 */
 	Map<String,Object> getOrderStock(String orderCode, String prodCode, String beginTime, String endTime,
-			Integer pageNum, Integer pageSize, Integer lineId, String prodNumber,String matProdCode,String matProdNumber,String boxCode);
+			Integer pageNum, Integer pageSize, Integer lineId, String prodNumber,String matProdCode,String matProdNumber,String boxCode,Integer shopId,Integer fcId);
 	
 	/**
 	 * 获取不合格品记录
@@ -130,7 +130,7 @@ public interface ReportService {
 	 * @param status 状态
 	 * @return
 	 */
-	Map<String,Object> getWasteProd(Integer lineId,String prodCode,String prodNumber,String beginTime,String endTime,Integer pageNum,Integer pageSize,String matProdCode,String matProdNumber,String status,String poCode);
+	Map<String,Object> getWasteProd(Integer lineId,String prodCode,String prodNumber,String beginTime,String endTime,Integer pageNum,Integer pageSize,String matProdCode,String matProdNumber,String status,String poCode,Integer shopId,Integer fcId);
 	
 	/**
 	 * 
@@ -146,7 +146,7 @@ public interface ReportService {
 	 * @param pageSize
 	 * @return
 	 */
-	Map<String,Object> getWasteProdMaterial(Integer lineId,String nplBarcode,String beginTime,String endTime,String matProdCode,String matProdNumber,Integer pageNum,Integer pageSize);
+	Map<String,Object> getWasteProdMaterial(Integer lineId,String nplBarcode,String beginTime,String endTime,String matProdCode,String matProdNumber,Integer pageNum,Integer pageSize,Integer shopId,Integer fcId);
 	
 	/**
 	 * 
@@ -164,7 +164,7 @@ public interface ReportService {
 	 * @param matProdNumber 物料简码
 	 * @return
 	 */
-	Map<String,Object> getMachMaterial(Integer lineId,String poCode,String prodCode,String prodNumber,String batchNo,String furnaceNo,String beginTime,String endTime,Integer pageNum,Integer pageSize,String matProdCode,String matProdNumber,String matBoxCode);
+	Map<String,Object> getMachMaterial(Integer lineId,String poCode,String prodCode,String prodNumber,String batchNo,String furnaceNo,String beginTime,String endTime,Integer pageNum,Integer pageSize,String matProdCode,String matProdNumber,String matBoxCode,Integer shopId,Integer fcId);
 	
 	/**
 	 * 查询safelunch记录
@@ -178,7 +178,7 @@ public interface ReportService {
 	 * @param safelineId sefelunch产线
 	 * @return
 	 */
-	Map<String,Object> getSafeLunch(Integer lineId,String poCode,String prodCode,String prodNumber,String boxCode,String beginTime,String endTime,Integer pageNum,Integer pageSize,Integer safelineId);
+	Map<String,Object> getSafeLunch(Integer lineId,String poCode,String prodCode,String prodNumber,String boxCode,String beginTime,String endTime,Integer pageNum,Integer pageSize,Integer safelineId,Integer shopId,Integer fcId);
 	
 	/**
 	 * 查询safelunch详细信息
@@ -193,7 +193,7 @@ public interface ReportService {
 	 * @param safelineId sefelunch产线
 	 * @return
 	 */
-	Map<String,Object> getSafeLunchDetail(Integer lineId,String poCode,String prodCode,String prodNumber,String boxCode,String beginTime,String endTime,String safeLunchOrder,Integer pageNum,Integer pageSize,Integer safelineId,String fpBarcode);
+	Map<String,Object> getSafeLunchDetail(Integer lineId,String poCode,String prodCode,String prodNumber,String boxCode,String beginTime,String endTime,String safeLunchOrder,Integer pageNum,Integer pageSize,Integer safelineId,String fpBarcode,Integer shopId,Integer fcId);
 	
 	/**
 	 * 获取safelunch线

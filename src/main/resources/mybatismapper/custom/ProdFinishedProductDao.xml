@@ -12,6 +12,12 @@
 	    <if test="lineId != null and lineId > 0">
 	      and a.line_id = #{lineId}
 	    </if>
+	    <if test="shopId != null and shopId != ''">
+	      and c.shop_id = #{shopId}
+	    </if>
+	    <if test="fcId != null and fcId != ''">
+	      and d.fc_id = #{fcId}
+	    </if>
 	    <if test="prodCode != null and prodCode != ''">
 	      and a.prod_code like '%'+#{prodCode}+'%'
 	    </if>

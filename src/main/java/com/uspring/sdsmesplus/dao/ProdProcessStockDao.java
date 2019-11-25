@@ -26,7 +26,7 @@ import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 public interface ProdProcessStockDao{
 
 	List<Map<String,Object>> getProcessMaterial(@Param("lineId")Integer lineId, @Param("poCode")String poCode, @Param("prodCode")String prodCode, @Param("prodNumber")String prodNumber,
-			@Param("batchNo")String batchNo, @Param("furnaceNo")String furnaceNo, @Param("beginTime")String beginTime, @Param("endTime")String endTime,@Param("matProdCode")String matProdCode,@Param("matProdNumber")String matProdNumber,@Param("matBoxCode")String matBoxCode);
+			@Param("batchNo")String batchNo, @Param("furnaceNo")String furnaceNo, @Param("beginTime")String beginTime, @Param("endTime")String endTime,@Param("matProdCode")String matProdCode,@Param("matBoxCode")String matBoxCode,@Param("matProdNumber")String matProdNumber,@Param("shopId")Integer shopId,@Param("fcId")Integer fcId);
 	
 	
 }

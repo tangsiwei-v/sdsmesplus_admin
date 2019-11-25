@@ -6,10 +6,19 @@
         select a.*,c.safline_name,b.prod_code,b.prod_number,b.prod_name,b.prod_tuhao,b.po_code from safelunch_order a
 		left join prod_box_log b on a.box_barcode = b.box_barcode
 		left join safelunch_workline c on a.safline_id = c.safline_id
+		left join sys_line d on b.line_id = d.line_id
+		left join sys_workshop e on d.shop_id = e.shop_id
+		left join sys_factory f on e.fc_id = f.fc_id
 		where 1=1
 		<if test="lineId != null and lineId != ''">
 		  and b.line_id = #{lineId}
 		</if>
+		 <if test="shopId != null and shopId != ''">
+	      and e.shop_id = #{shopId}
+	    </if>
+	    <if test="fcId != null and fcId != ''">
+	      and f.fc_id = #{fcId}
+	    </if>
 		<if test="poCode != null and poCode != ''">
 		  and b.po_code = #{poCode}
 		</if>
@@ -36,10 +45,19 @@
         select a.*,c.prod_code,c.prod_number,c.prod_name,c.po_code from safelunch_product_log a
 		left join safelunch_order b on a.safelunch_order = b.safelunch_order
 		left join prod_box_log c on b.box_barcode = c.box_barcode
+		left join sys_line d on c.line_id = d.line_id
+		left join sys_workshop e on d.shop_id = e.shop_id
+		left join sys_factory f on e.fc_id = f.fc_id
 		where 1=1
 		<if test="lineId != null and lineId != ''">
 		  and c.line_id = #{lineId}
 		</if>
+		 <if test="shopId != null and shopId != ''">
+	      and e.shop_id = #{shopId}
+	    </if>
+	    <if test="fcId != null and fcId != ''">
+	      and f.fc_id = #{fcId}
+	    </if>
 		<if test="poCode != null and poCode != ''">
 		  and c.po_code = #{poCode}
 		</if>

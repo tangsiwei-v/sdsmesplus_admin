@@ -5,6 +5,9 @@
     <select id="getProcessMaterial" resultType="map">
         select a.*,b.prod_code,b.prod_number,b.prod_tuhao,b.prod_name from prod_process_stock a
 		left join plan_order b on a.po_code = b.po_code
+		left join sys_line c on b.line_id = c.line_id
+		left join sys_workshop d on c.shop_id = d.shop_id
+		left join sys_factory e on d.fc_id = e.fc_id
 		where 1=1
 		<if test="poCode != null and poCode != ''">
 		  and a.po_code = #{poCode}
@@ -12,6 +15,12 @@
 		<if test="lineId != null and lineId != ''">
 		  and a.line_id = #{lineId}
 		</if>
+		<if test="shopId != null and shopId != ''">
+	      and d.shop_id = #{shopId}
+	    </if>
+	    <if test="fcId != null and fcId != ''">
+	      and e.fc_id = #{fcId}
+	    </if>
 		<if test="prodCode != null and prodCode != ''">
 		  and b.prod_code = #{prodCode}
 		</if>

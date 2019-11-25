@@ -25,7 +25,7 @@ import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
  */
 public interface ProdOrderStockDao extends ProdProductMaterialPODao {
 
-	List<Map<String,Object>> getOrderStock(@Param("poCode")String poCode,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,@Param("matProdCode")String matProdCode,@Param("matProdNumber")String matProdNumber,@Param("boxCode")String boxCode,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("lineId")Integer lineId);
+	List<Map<String,Object>> getOrderStock(@Param("poCode")String poCode,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,@Param("matProdCode")String matProdCode,@Param("matProdNumber")String matProdNumber,@Param("boxCode")String boxCode,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("lineId")Integer lineId,@Param("shopId")Integer shopId,@Param("fcId")Integer fcId);
 	
 	
 }

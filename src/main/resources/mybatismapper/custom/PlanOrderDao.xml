@@ -32,10 +32,17 @@
 
 	<!-- 筛选条件查询 -->
 	<select id="queryPlanVO" parameterType="map" resultMap="BaseResultMapTwo">
-		select * from plan_order 
+		select a.* from plan_order a
+		left join sys_line b on a.line_id = b.line_id 
 		where 1 = 1
 		<if test="line_id !='' and line_id != null ">
-			and line_id = #{line_id}
+			and a.line_id = #{line_id}
+		</if>
+		<if test="shopId !='' and shopId != null ">
+			and b.shop_id = #{shopId}
+		</if>
+		<if test="fcId !='' and fcId != null ">
+			and b.fc_id = #{fcId}
 		</if>
 		<if test="order_code != null and order_code !='' ">
 			and po_code = #{order_code}
@@ -53,6 +60,7 @@
 				#{sta}
 			</foreach>
 		</if>
+		order by a.create_time desc
 	</select>
 	
 		<!-- 筛选条件查询 -->

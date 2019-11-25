@@ -83,6 +83,9 @@
     <select id="getWasteProd" resultType="map">
        select a.* from nonconform_product_log a
       left join plan_order b on a.po_code = b.po_code
+      left join sys_line c on b.line_id = c.line_id
+	  left join sys_workshop d on c.shop_id = d.shop_id
+	  left join sys_factory e on d.fc_id = e.fc_id
       where 1=1
       <if test="lineId != null and lineId != ''">
          and a.line_id = #{lineId}
@@ -108,6 +111,9 @@
     <select id="getWasteProdMaterial" resultType="map">
         select a.*,prod_code,b.prod_name,b.prod_tuhao from  nonconform_product_material a
 		left join nonconform_product_log b on a.npl_id = b.npl_id
+		left join sys_line c on b.line_id = c.line_id
+		left join sys_workshop d on c.shop_id = d.shop_id
+		left join sys_factory e on d.fc_id = e.fc_id
 		where 1=1
 		<if test="lineId != null and lineId != ''">
            and b.line_id = #{lineId}
