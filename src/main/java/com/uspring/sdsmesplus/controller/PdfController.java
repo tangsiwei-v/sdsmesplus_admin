@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.uspring.sdsmesplus.entity.po.SjqcPdfPO;
+import com.uspring.sdsmesplus.entity.po.SysProdPdfPO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.enums.StatusCode;
 import com.uspring.sdsmesplus.service.PdfService;
@@ -47,7 +47,7 @@ public class PdfController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ApiOperation(value = "添加pdf", notes = "添加pdf", response = Result.class)
-	public Result insertPdf(HttpServletResponse response, @RequestBody SjqcPdfPO pdfDo) {
+	public Result insertPdf(HttpServletResponse response, @RequestBody SysProdPdfPO pdfDo) {
 		this.pdfService.insertPdf(pdfDo);
 		return new Result("添加成功", "success", StatusCode.SUCCESS);
 	}
@@ -55,16 +55,16 @@ public class PdfController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	@ApiOperation(value = "修改pdf", notes = "修改pdf", response = Result.class)
-	public Result updatePdf(HttpServletResponse response, @RequestBody SjqcPdfPO pdfDo) {
+	public Result updatePdf(HttpServletResponse response, @RequestBody SysProdPdfPO pdfDo) {
 		this.pdfService.updatePdf(pdfDo);
 		return new Result("修改成功", "success", StatusCode.SUCCESS);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/{qcpId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{sppId}", method = RequestMethod.DELETE)
 	@ApiOperation(value = "删除pdf", notes = "删除pdf", response = Result.class)
-	public Result deletePdf(HttpServletResponse response, @PathVariable("qcpId") Integer qcpId) {
-		this.pdfService.deletePdf(qcpId);
+	public Result deletePdf(HttpServletResponse response, @PathVariable("sppId") Integer sppId) {
+		this.pdfService.deletePdf(sppId);
 		return new Result("删除成功", "success", StatusCode.SUCCESS);
 	}
 }

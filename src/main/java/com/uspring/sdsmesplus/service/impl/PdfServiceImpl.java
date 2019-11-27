@@ -73,8 +73,8 @@ public class PdfServiceImpl implements PdfService {
 	}
 
 	@Override
-	public void deletePdf(Integer qcpId) {
-		this.pdfDao.deleteByPrimaryKey(qcpId);
+	public void deletePdf(Integer sppId) {
+		this.pdfDao.deleteByPrimaryKey(sppId);
 		
 	}
 

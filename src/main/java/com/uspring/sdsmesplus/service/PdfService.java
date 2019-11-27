@@ -29,7 +29,7 @@ public interface PdfService {
 	
 	void updatePdf(SysProdPdfPO pdfDo);
 	
-	void deletePdf(Integer qcpId);
+	void deletePdf(Integer sppId);
 	
 	String uploadPdf(MultipartFile file);
 }

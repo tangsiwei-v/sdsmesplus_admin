@@ -3,7 +3,7 @@ package com.uspring.sdsmesplus.entity.po;
 import java.util.Date;
 
 public class SysProdPdfPO {
-    private Integer spdId;
+    private Integer sppId;
 
     private String prodCode;
 
@@ -23,12 +23,12 @@ public class SysProdPdfPO {
 
     private byte[] pdfContent;
 
-    public Integer getSpdId() {
-        return spdId;
+    public Integer getSppId() {
+        return sppId;
     }
 
-    public void setSpdId(Integer spdId) {
-        this.spdId = spdId;
+    public void setSppId(Integer sppId) {
+        this.sppId = sppId;
     }
 
     public String getProdCode() {

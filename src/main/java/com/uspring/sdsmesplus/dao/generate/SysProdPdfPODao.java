@@ -10,7 +10,7 @@ public interface SysProdPdfPODao {
 
     int deleteByExample(SysProdPdfPOExample example);
 
-    int deleteByPrimaryKey(Integer spdId);
+    int deleteByPrimaryKey(Integer sppId);
 
     int insert(SysProdPdfPO record);
 
@@ -20,7 +20,7 @@ public interface SysProdPdfPODao {
 
     List<SysProdPdfPO> selectByExample(SysProdPdfPOExample example);
 
-    SysProdPdfPO selectByPrimaryKey(Integer spdId);
+    SysProdPdfPO selectByPrimaryKey(Integer sppId);
 
     int updateByExampleSelective(@Param("record") SysProdPdfPO record, @Param("example") SysProdPdfPOExample example);
 

@@ -105,63 +105,63 @@ public class SysProdPdfPOExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andSpdIdIsNull() {
-            addCriterion("spd_id is null");
+        public Criteria andSppIdIsNull() {
+            addCriterion("spp_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdIsNotNull() {
-            addCriterion("spd_id is not null");
+        public Criteria andSppIdIsNotNull() {
+            addCriterion("spp_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdEqualTo(Integer value) {
-            addCriterion("spd_id =", value, "spdId");
+        public Criteria andSppIdEqualTo(Integer value) {
+            addCriterion("spp_id =", value, "sppId");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdNotEqualTo(Integer value) {
-            addCriterion("spd_id <>", value, "spdId");
+        public Criteria andSppIdNotEqualTo(Integer value) {
+            addCriterion("spp_id <>", value, "sppId");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdGreaterThan(Integer value) {
-            addCriterion("spd_id >", value, "spdId");
+        public Criteria andSppIdGreaterThan(Integer value) {
+            addCriterion("spp_id >", value, "sppId");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("spd_id >=", value, "spdId");
+        public Criteria andSppIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("spp_id >=", value, "sppId");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdLessThan(Integer value) {
-            addCriterion("spd_id <", value, "spdId");
+        public Criteria andSppIdLessThan(Integer value) {
+            addCriterion("spp_id <", value, "sppId");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdLessThanOrEqualTo(Integer value) {
-            addCriterion("spd_id <=", value, "spdId");
+        public Criteria andSppIdLessThanOrEqualTo(Integer value) {
+            addCriterion("spp_id <=", value, "sppId");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdIn(List<Integer> values) {
-            addCriterion("spd_id in", values, "spdId");
+        public Criteria andSppIdIn(List<Integer> values) {
+            addCriterion("spp_id in", values, "sppId");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdNotIn(List<Integer> values) {
-            addCriterion("spd_id not in", values, "spdId");
+        public Criteria andSppIdNotIn(List<Integer> values) {
+            addCriterion("spp_id not in", values, "sppId");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdBetween(Integer value1, Integer value2) {
-            addCriterion("spd_id between", value1, value2, "spdId");
+        public Criteria andSppIdBetween(Integer value1, Integer value2) {
+            addCriterion("spp_id between", value1, value2, "sppId");
             return (Criteria) this;
         }
 
-        public Criteria andSpdIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("spd_id not between", value1, value2, "spdId");
+        public Criteria andSppIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("spp_id not between", value1, value2, "sppId");
             return (Criteria) this;
         }
 

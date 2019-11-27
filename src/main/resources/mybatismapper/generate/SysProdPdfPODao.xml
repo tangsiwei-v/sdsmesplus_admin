@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.uspring.sdsmesplus.dao.generate.SysProdPdfPODao">
   <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SysProdPdfPO">
-    <id column="spd_id" jdbcType="INTEGER" property="spdId" />
+    <id column="spp_id" jdbcType="INTEGER" property="sppId" />
     <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
     <result column="pdf_name" jdbcType="VARCHAR" property="pdfName" />
     <result column="pdf_url" jdbcType="VARCHAR" property="pdfUrl" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    spd_id, prod_code, pdf_name, pdf_url, pdf_lastpage, pdf_type, create_time, update_time, 
+    spp_id, prod_code, pdf_name, pdf_url, pdf_lastpage, pdf_type, create_time, update_time, 
     fc_id
   </sql>
   <sql id="Blob_Column_List">
@@ -116,11 +116,11 @@
     ,
     <include refid="Blob_Column_List" />
     from sys_prod_pdf
-    where spd_id = #{spdId,jdbcType=INTEGER}
+    where spp_id = #{sppId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_prod_pdf
-    where spd_id = #{spdId,jdbcType=INTEGER}
+    where spp_id = #{sppId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysProdPdfPOExample">
     delete from sys_prod_pdf
@@ -129,11 +129,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysProdPdfPO">
-    insert into sys_prod_pdf (spd_id, prod_code, pdf_name, 
+    insert into sys_prod_pdf (spp_id, prod_code, pdf_name, 
       pdf_url, pdf_lastpage, pdf_type, 
       create_time, update_time, fc_id, 
       pdf_content)
-    values (#{spdId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, #{pdfName,jdbcType=VARCHAR}, 
+    values (#{sppId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, #{pdfName,jdbcType=VARCHAR}, 
       #{pdfUrl,jdbcType=VARCHAR}, #{pdfLastpage,jdbcType=INTEGER}, #{pdfType,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{fcId,jdbcType=INTEGER}, 
       #{pdfContent,jdbcType=VARBINARY})
@@ -141,8 +141,8 @@
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysProdPdfPO">
     insert into sys_prod_pdf
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="spdId != null">
-        spd_id,
+      <if test="sppId != null">
+        spp_id,
       </if>
       <if test="prodCode != null">
         prod_code,
@@ -173,8 +173,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="spdId != null">
-        #{spdId,jdbcType=INTEGER},
+      <if test="sppId != null">
+        #{sppId,jdbcType=INTEGER},
       </if>
       <if test="prodCode != null">
         #{prodCode,jdbcType=VARCHAR},
@@ -214,8 +214,8 @@
   <update id="updateByExampleSelective" parameterType="map">
     update sys_prod_pdf
     <set>
-      <if test="record.spdId != null">
-        spd_id = #{record.spdId,jdbcType=INTEGER},
+      <if test="record.sppId != null">
+        spp_id = #{record.sppId,jdbcType=INTEGER},
       </if>
       <if test="record.prodCode != null">
         prod_code = #{record.prodCode,jdbcType=VARCHAR},
@@ -251,7 +251,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update sys_prod_pdf
-    set spd_id = #{record.spdId,jdbcType=INTEGER},
+    set spp_id = #{record.sppId,jdbcType=INTEGER},
       prod_code = #{record.prodCode,jdbcType=VARCHAR},
       pdf_name = #{record.pdfName,jdbcType=VARCHAR},
       pdf_url = #{record.pdfUrl,jdbcType=VARCHAR},
@@ -267,7 +267,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update sys_prod_pdf
-    set spd_id = #{record.spdId,jdbcType=INTEGER},
+    set spp_id = #{record.sppId,jdbcType=INTEGER},
       prod_code = #{record.prodCode,jdbcType=VARCHAR},
       pdf_name = #{record.pdfName,jdbcType=VARCHAR},
       pdf_url = #{record.pdfUrl,jdbcType=VARCHAR},
@@ -311,7 +311,7 @@
         pdf_content = #{pdfContent,jdbcType=VARBINARY},
       </if>
     </set>
-    where spd_id = #{spdId,jdbcType=INTEGER}
+    where spp_id = #{sppId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uspring.sdsmesplus.entity.po.SysProdPdfPO">
     update sys_prod_pdf
@@ -324,7 +324,7 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       fc_id = #{fcId,jdbcType=INTEGER},
       pdf_content = #{pdfContent,jdbcType=VARBINARY}
-    where spd_id = #{spdId,jdbcType=INTEGER}
+    where spp_id = #{sppId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SysProdPdfPO">
     update sys_prod_pdf
@@ -336,6 +336,6 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       fc_id = #{fcId,jdbcType=INTEGER}
-    where spd_id = #{spdId,jdbcType=INTEGER}
+    where spp_id = #{sppId,jdbcType=INTEGER}
   </update>
 </mapper>
