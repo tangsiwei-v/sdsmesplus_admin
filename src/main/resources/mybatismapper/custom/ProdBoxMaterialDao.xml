@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ProdBoxMaterialDao">
+
+	<select id="boxMaterialUseInfo" resultType="map">
+	    select distinct a.*,c.material_name matName,c.material_tuhao materialTuhao,b.prod_code prodCode from prod_box_material a 
+		left join prod_box_log b on a.box_barcode = b.box_barcode
+		left join plan_op_bom c on a.mat_code = c.material_code
+		where 1=1
+		<if test="lineId != null and lineId != ''">
+		  and b.line_id = #{lineId}
+		</if>
+		<if test="prodCode != null and prodCode != ''">
+		  and b.prod_code = #{prodCode}
+		</if>
+		<if test="matProdCode != null and matProdCode != ''">
+		  and a.mat_code = #{matProdCode}
+		</if>
+		<if test="boxCode != null and boxCode != ''">
+		  and a.box_barcode = #{boxCode}
+		</if>
+		<if test="matBoxCode != null and matBoxCode != ''">
+		  and a.mat_box_barcode = #{matBoxCode}
+		</if>
+		<if test="batchNo != null and batchNo != ''">
+		  and a.mat_batch_no = #{batchNo}
+		</if>
+		<if test="furnaceNo != null and furnaceNo != ''">
+		  and a.mat_furnace_no = #{furnaceNo}
+		</if>
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+		  and a.create_time between #{beginTime} and #{endTime}
+		</if>
+		order by a.create_time desc
+	</select>
+
+</mapper>

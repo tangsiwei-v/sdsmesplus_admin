@@ -13,6 +13,8 @@ public interface FileService {
 
 	USFile upFile(MultipartFile file);
 	
+	USFile upPdfFile(MultipartFile file);
+	
 	String downFile(HttpServletResponse response , String fileName);
 	
 	void DeleteFile(String filename);

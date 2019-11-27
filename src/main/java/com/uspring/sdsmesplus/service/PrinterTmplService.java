@@ -63,5 +63,5 @@ public interface PrinterTmplService {
 	 * @throws Exception 
 	 */
 	byte[] downloadTemplate(Integer tmplId) throws Exception;
-	
+
 }

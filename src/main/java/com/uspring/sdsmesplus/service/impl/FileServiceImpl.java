@@ -30,9 +30,36 @@ public class FileServiceImpl implements FileService {
 	@Value("#{prop.image_up_load_file}")
 	private String IMG_UPLOAD_DIR;
 	
+	@Value("#{prop.pdf_up_load_file}")
+	private String PdfPath;
+	
 	@Override
 	public USFile upFile(MultipartFile file) {
 		File parent = new File(IMG_UPLOAD_DIR);
+		String uuid =  UUIDUtil.getUUID();
+		// 没有文件目录 就创建目录
+		if (!parent.exists())
+			parent.mkdirs();
+		// 生成相关参数
+		String oldName = file.getOriginalFilename();			
+		String suffix = oldName.substring(oldName.lastIndexOf(".")+1);
+		String filename = uuid + "." + suffix;
+		try {
+			file.transferTo(new File(parent, filename));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String imgUrl = "/api/file/" + filename;   
+		USFile usfile = new USFile(filename, imgUrl, uuid);
+		return usfile;
+	}
+	
+	
+	@Override
+	public USFile upPdfFile(MultipartFile file) {
+		File parent = new File(PdfPath);
 		String uuid =  UUIDUtil.getUUID();
 		// 没有文件目录 就创建目录
 		if (!parent.exists())
