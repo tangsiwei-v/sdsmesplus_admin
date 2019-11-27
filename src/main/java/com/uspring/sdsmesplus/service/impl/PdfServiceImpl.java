@@ -15,10 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.uspring.sdsmesplus.dao.generate.SjqcPdfPODao;
-import com.uspring.sdsmesplus.entity.po.SjqcPdfPO;
-import com.uspring.sdsmesplus.entity.po.SjqcPdfPOExample;
-import com.uspring.sdsmesplus.entity.po.SjqcPdfPOExample.Criteria;
+import com.uspring.sdsmesplus.dao.generate.SysProdPdfPODao;
+import com.uspring.sdsmesplus.entity.po.SysProdPdfPO;
+import com.uspring.sdsmesplus.entity.po.SysProdPdfPOExample;
 import com.uspring.sdsmesplus.service.PdfService;
 
 /**
@@ -33,18 +32,15 @@ import com.uspring.sdsmesplus.service.PdfService;
 public class PdfServiceImpl implements PdfService {
 
 	@Autowired
-	private SjqcPdfPODao pdfDao;
+	private SysProdPdfPODao pdfDao;
 	
 	@Value("#{prop.pdf_up_load_file}")
 	private String uploadFilePath;
 	
 	@Override
 	public Map<String, Object> getPdfList(String prodCode,Integer pageNum,Integer pageSize,Integer fcId) {
-		// TODO Auto-generated method stub
-		
-		
-		SjqcPdfPOExample pdfExample = new SjqcPdfPOExample();
-		Criteria pdfCriteria = pdfExample.createCriteria();
+		SysProdPdfPOExample pdfExample = new SysProdPdfPOExample();
+		SysProdPdfPOExample.Criteria pdfCriteria = pdfExample.createCriteria();
 		if(prodCode != null && !"".equals(prodCode)){
 			pdfCriteria.andProdCodeEqualTo(prodCode);
 		}
@@ -54,7 +50,7 @@ public class PdfServiceImpl implements PdfService {
 		
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		List<SjqcPdfPO> resultList = this.pdfDao.selectByExample(pdfExample);
+		List<SysProdPdfPO> resultList = this.pdfDao.selectByExample(pdfExample);
 		PageInfo info = new PageInfo(resultList);
 		
 		Map<String,Object> resultMap = new HashMap<String,Object>();
@@ -64,32 +60,27 @@ public class PdfServiceImpl implements PdfService {
 	}
 
 	@Override
-	public void insertPdf(SjqcPdfPO pdfDo) {
-		// TODO Auto-generated method stub
+	public void insertPdf(SysProdPdfPO pdfDo) {
 	    pdfDo.setCreateTime(new Date());
 	    pdfDo.setUpdateTime(new Date());
 		this.pdfDao.insertSelective(pdfDo);
 	}
 
 	@Override
-	public void updatePdf(SjqcPdfPO pdfDo) {
-		// TODO Auto-generated method stub
+	public void updatePdf(SysProdPdfPO pdfDo) {
 		pdfDo.setUpdateTime(new Date());
 		this.pdfDao.updateByPrimaryKeySelective(pdfDo);
 	}
 
 	@Override
 	public void deletePdf(Integer qcpId) {
-		// TODO Auto-generated method stub
 		this.pdfDao.deleteByPrimaryKey(qcpId);
 		
 	}
 
 	@Override
 	public String uploadPdf(MultipartFile file) {
-		// TODO Auto-generated method stub
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		
 		String fileName = df.format(new Date())+"/"+new Date().getTime()+file.getOriginalFilename()+file.getName().substring(file.getName().indexOf("."));
 		
 		File uploadFile = new File(uploadFilePath+fileName);

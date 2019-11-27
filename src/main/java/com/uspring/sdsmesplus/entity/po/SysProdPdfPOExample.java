@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SjqcPdfPOExample {
+public class SysProdPdfPOExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SjqcPdfPOExample() {
+    public SysProdPdfPOExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -105,63 +105,63 @@ public class SjqcPdfPOExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andQcpIdIsNull() {
-            addCriterion("qcp_id is null");
+        public Criteria andSpdIdIsNull() {
+            addCriterion("spd_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdIsNotNull() {
-            addCriterion("qcp_id is not null");
+        public Criteria andSpdIdIsNotNull() {
+            addCriterion("spd_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdEqualTo(Integer value) {
-            addCriterion("qcp_id =", value, "qcpId");
+        public Criteria andSpdIdEqualTo(Integer value) {
+            addCriterion("spd_id =", value, "spdId");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdNotEqualTo(Integer value) {
-            addCriterion("qcp_id <>", value, "qcpId");
+        public Criteria andSpdIdNotEqualTo(Integer value) {
+            addCriterion("spd_id <>", value, "spdId");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdGreaterThan(Integer value) {
-            addCriterion("qcp_id >", value, "qcpId");
+        public Criteria andSpdIdGreaterThan(Integer value) {
+            addCriterion("spd_id >", value, "spdId");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("qcp_id >=", value, "qcpId");
+        public Criteria andSpdIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("spd_id >=", value, "spdId");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdLessThan(Integer value) {
-            addCriterion("qcp_id <", value, "qcpId");
+        public Criteria andSpdIdLessThan(Integer value) {
+            addCriterion("spd_id <", value, "spdId");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdLessThanOrEqualTo(Integer value) {
-            addCriterion("qcp_id <=", value, "qcpId");
+        public Criteria andSpdIdLessThanOrEqualTo(Integer value) {
+            addCriterion("spd_id <=", value, "spdId");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdIn(List<Integer> values) {
-            addCriterion("qcp_id in", values, "qcpId");
+        public Criteria andSpdIdIn(List<Integer> values) {
+            addCriterion("spd_id in", values, "spdId");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdNotIn(List<Integer> values) {
-            addCriterion("qcp_id not in", values, "qcpId");
+        public Criteria andSpdIdNotIn(List<Integer> values) {
+            addCriterion("spd_id not in", values, "spdId");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdBetween(Integer value1, Integer value2) {
-            addCriterion("qcp_id between", value1, value2, "qcpId");
+        public Criteria andSpdIdBetween(Integer value1, Integer value2) {
+            addCriterion("spd_id between", value1, value2, "spdId");
             return (Criteria) this;
         }
 
-        public Criteria andQcpIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("qcp_id not between", value1, value2, "qcpId");
+        public Criteria andSpdIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("spd_id not between", value1, value2, "spdId");
             return (Criteria) this;
         }
 

@@ -2,8 +2,8 @@ package com.uspring.sdsmesplus.entity.po;
 
 import java.util.Date;
 
-public class SjqcPdfPO {
-    private Integer qcpId;
+public class SysProdPdfPO {
+    private Integer spdId;
 
     private String prodCode;
 
@@ -23,12 +23,12 @@ public class SjqcPdfPO {
 
     private byte[] pdfContent;
 
-    public Integer getQcpId() {
-        return qcpId;
+    public Integer getSpdId() {
+        return spdId;
     }
 
-    public void setQcpId(Integer qcpId) {
-        this.qcpId = qcpId;
+    public void setSpdId(Integer spdId) {
+        this.spdId = spdId;
     }
 
     public String getProdCode() {

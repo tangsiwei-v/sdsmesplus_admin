@@ -12,7 +12,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.uspring.sdsmesplus.entity.po.SjqcPdfPO;
+import com.uspring.sdsmesplus.entity.po.SysProdPdfPO;
 
 /** 
  * @ClassName: PdfService 
@@ -25,9 +25,9 @@ public interface PdfService {
 	
 	Map<String,Object> getPdfList(String prodCode,Integer pageNum,Integer pageSize,Integer fcId);
 	
-	void insertPdf(SjqcPdfPO pdfDo);
+	void insertPdf(SysProdPdfPO pdfDo);
 	
-	void updatePdf(SjqcPdfPO pdfDo);
+	void updatePdf(SysProdPdfPO pdfDo);
 	
 	void deletePdf(Integer qcpId);
 	
