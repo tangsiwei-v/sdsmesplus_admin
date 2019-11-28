@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePO;
+import com.uspring.sdsmesplus.entity.vo.StockStat;
 
 /**
  * @ClassName: ReportService
@@ -234,5 +235,24 @@ public interface ReportService {
 	Map<String, Object> boxMaterialUseInfo(Integer lineId, String beginTime, String endTime, String prodCode,
 			String matProdCode, String boxCode, String matBoxCode, Integer pageNum, Integer pageSize, String furnaceNo,
 			String batchNo);
-
+	
+	/**
+	 * 线上库存统计
+	 * 
+	 * @param lineId      	产线编号
+	 * @param poCode      	工单号
+	 * @param procCode    	工序号
+	 * @param matProdCode	物料号
+	 * @param matProdNumber 物料简码
+	 * @param boxCode   	箱号
+	 * @param groupBy     	统计办法
+	 * @param beginTime    	开始时间
+	 * @param endTime		结束时间
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	List<StockStat> statOrderStock(Integer lineId, String poCode, String procCode, 
+			String matProdCode, String matProdNumber, String boxCode, String groupBy, 
+			String beginTime, String endTime, Integer pageNum, Integer pageSize);
 }

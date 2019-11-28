@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.uspring.sdsmesplus.dao.generate.ProdProductMaterialPODao;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
+import com.uspring.sdsmesplus.entity.vo.StockStat;
 
 /** 
  * @ClassName: ProdProductMaterialDao
@@ -25,7 +26,15 @@ import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
  */
 public interface ProdOrderStockDao extends ProdProductMaterialPODao {
 
-	List<Map<String,Object>> getOrderStock(@Param("poCode")String poCode,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,@Param("matProdCode")String matProdCode,@Param("matProdNumber")String matProdNumber,@Param("boxCode")String boxCode,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("lineId")Integer lineId);
+	List<Map<String,Object>> getOrderStock(@Param("poCode")String poCode,@Param("prodCode")String prodCode,
+			@Param("prodNumber")String prodNumber,@Param("matProdCode")String matProdCode,@Param("matProdNumber")String matProdNumber,@Param("boxCode")String boxCode,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("lineId")Integer lineId);
 	
+	List<StockStat> statOrderStock(@Param("lineId")Integer lineId, @Param("poCode")String poCode, 
+			@Param("matCode")String matCode, @Param("boxBarcode")String boxBarcode);
 	
+	List<StockStat> statProcStock(@Param("lineId")Integer lineId, @Param("poCode")String poCode, 
+			@Param("matCode")String matCode, @Param("boxBarcode")String boxBarcode, @Param("procCode")String procCode);
+	
+	List<StockStat> statWipStock(@Param("lineId")Integer lineId, @Param("poCode")String poCode, 
+			@Param("matCode")String matCode, @Param("boxBarcode")String boxBarcode, @Param("procCode")String procCode);
 }
