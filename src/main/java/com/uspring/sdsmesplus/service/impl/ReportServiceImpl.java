@@ -15,6 +15,7 @@ import com.uspring.sdsmesplus.dao.ProdBoxLogDao;
 import com.uspring.sdsmesplus.dao.ProdBoxMaterialDao;
 import com.uspring.sdsmesplus.dao.ProdFinishedProductDao;
 import com.uspring.sdsmesplus.dao.ProdOrderStockDao;
+import com.uspring.sdsmesplus.dao.ProdProcessStockDao;
 import com.uspring.sdsmesplus.dao.ProdProductMaterialDao;
 import com.uspring.sdsmesplus.dao.SafelunchOrderDao;
 import com.uspring.sdsmesplus.dao.generate.SafelunchWorkLinePODao;
@@ -45,6 +46,9 @@ public class ReportServiceImpl implements ReportService {
 
 	@Autowired
 	private NonconformProductDao noConformProductDao;
+
+	@Autowired
+	private ProdProcessStockDao prodProcessStockDao;
 
 	@Autowired
 	private SafelunchOrderDao safelunchOrderDao;
@@ -205,6 +209,23 @@ public class ReportServiceImpl implements ReportService {
 		return resultMap;
 	}
 
+	public Map<String, Object> getMachMaterial(Integer lineId, String poCode, String prodCode, String prodNumber,
+			String batchNo, String furnaceNo, String beginTime, String endTime, Integer pageNum, Integer pageSize,
+			String matProdCode, String matProdNumber, String matBoxCode) {
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+
+		List<Map<String, Object>> dataList = this.prodProcessStockDao.getProcessMaterial(lineId, poCode, prodCode,
+				prodNumber, batchNo, furnaceNo, beginTime, endTime, matProdCode, matProdNumber, matBoxCode);
+
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
 	@Override
 	public Map<String, Object> getSafeLunch(Integer lineId, String poCode, String prodCode, String prodNumber,
 			String boxCode, String beginTime, String endTime, Integer pageNum, Integer pageSize, Integer safelineId) {
@@ -249,32 +270,24 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public Map<String, Object> getMachMaterial(Integer lineId, String poCode, String prodCode, String prodNumber,
-			String batchNo, String furnaceNo, String beginTime, String endTime, Integer pageNum, Integer pageSize,
-			String matProdCode, String matProdNumber, String matBoxCode) {
-		return null;
-	}
-
-	@Override
 	public List<StockStat> statOrderStock(Integer lineId, String poCode, String procCode, String matProdCode,
 			String matProdNumber, String boxCode, String groupBy, String beginTime, String endTime, Integer pageNum,
 			Integer pageSize) {
-		List<StockStat> stockList =  prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode);
-		stockList.addAll( prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode) );
-		stockList.addAll( prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode) );
-		
+		List<StockStat> stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode);
+		stockList.addAll(prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode));
+		stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode));
+
 		Map<String, StockStat> resultMap = new HashMap<String, StockStat>();
-		for(StockStat stock : stockList) {
+		for (StockStat stock : stockList) {
 			String key = stock.getBoxBarcode();
-			if("Batch".equals(groupBy)) 
+			if ("Batch".equals(groupBy))
 				key = stock.getMatCode() + stock.getBatchNo();
-			if(resultMap.containsKey(key)) {
+			if (resultMap.containsKey(key)) {
 				StockStat mapStock = resultMap.get(key);
 				mapStock.setMatCount(mapStock.getMatCount() + stock.getMatCount());
-			}
-			else {
-				if("Batch".equals(groupBy)) {
-					//批次统计-忽略工单、工序和箱的信息
+			} else {
+				if ("Batch".equals(groupBy)) {
+					// 批次统计-忽略工单、工序和箱的信息
 					stock.setBoxBarcode("");
 					stock.setProcCode("");
 					stock.setPoCode("");
@@ -284,7 +297,7 @@ public class ReportServiceImpl implements ReportService {
 		}
 		List<StockStat> resultList = new ArrayList<StockStat>();
 		resultList.addAll(resultMap.values());
-		
+
 		return resultList;
 	}
 
