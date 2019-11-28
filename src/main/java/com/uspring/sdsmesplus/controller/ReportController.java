@@ -99,17 +99,15 @@ public class ReportController {
 		return new Result("查询成功", this.reportService.getOrderStock(poCode, prodCode, beginTime, endTime, pageNum,
 				pageSize, lineId, prodNumber, matProdCode, matProdNumber, boxCode), StatusCode.SUCCESS);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/stock_statist", method = RequestMethod.GET)
 	@ApiOperation(value = "线上库存查询", notes = "统计线上库存信息", response = Result.class)
-	public Result getOrderStockStatisc(Integer lineId, String poCode, String procCode, 
-			String matProdCode, String matProdNumber, String boxCode, String groupBy, 
-			String beginTime, String endTime, Integer pageNum, Integer pageSize) {
-		return new Result("查询成功"
-				, this.reportService.statOrderStock(lineId, poCode, procCode, matProdCode, 
-				matProdNumber, boxCode, groupBy, beginTime, endTime, pageNum, pageSize)
-				, StatusCode.SUCCESS);
+	public Result getOrderStockStatisc(Integer lineId, String poCode, String procCode, String matProdCode,
+			String matProdNumber, String boxCode, String groupBy, String beginTime, String endTime, Integer pageNum,
+			Integer pageSize) {
+		return new Result("查询成功", this.reportService.statOrderStock(lineId, poCode, procCode, matProdCode,
+				matProdNumber, boxCode, groupBy, beginTime, endTime, pageNum, pageSize), StatusCode.SUCCESS);
 	}
 
 	@ResponseBody
@@ -178,33 +176,5 @@ public class ReportController {
 			String endTime, String furnaceNo, String batchNo) {
 		return new Result("查询成功", this.reportService.boxMaterialUseInfo(lineId, beginTime, endTime, prodCode,
 				matProdCode, boxCode, matBoxCode, pageNum, pageSize, furnaceNo, batchNo), StatusCode.SUCCESS);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/process/material", method = RequestMethod.GET)
-	@ApiOperation(value = "工序物料记录", notes = "工序物料记录", response = Result.class)
-	public Result getProcessMaterial(HttpServletResponse response,Integer lineId,String poCode,String prodCode,String prodNumber,String beginTime,String endTime,String matProdCode,String matProdNumber,Integer pageNum,Integer pageSize,String batchNo,String furnaceNo,String matBoxCode) {
-		return new Result("查询成功", this.reportService.getMachMaterial(lineId, poCode, prodCode, prodNumber, batchNo, furnaceNo, beginTime, endTime, pageNum, pageSize, matProdCode, matProdNumber,matBoxCode), StatusCode.SUCCESS);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/safelunch", method = RequestMethod.GET)
-	@ApiOperation(value = "查询safelunch记录", notes = "工序物料记录", response = Result.class)
-	public Result getSafelunch(HttpServletResponse response,Integer lineId,String poCode,String prodCode,String prodNumber,String boxCode,String beginTime,String endTime,Integer pageNum,Integer pageSize,Integer safelineId) {
-		return new Result("查询成功", this.reportService.getSafeLunch(lineId, poCode, prodCode, prodNumber, boxCode, beginTime, endTime, pageNum, pageSize, safelineId), StatusCode.SUCCESS);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/safelunch/detail", method = RequestMethod.GET)
-	@ApiOperation(value = "查询safelunch详情", notes = "查询safelunch详情", response = Result.class)
-	public Result getSafelunchDetail(HttpServletResponse response,Integer lineId,String poCode,String prodCode,String prodNumber,String boxCode,String beginTime,String endTime,String safeLunchOrder,Integer pageNum,Integer pageSize,Integer safelineId,String fpBarcode) {
-		return new Result("查询成功", this.reportService.getSafeLunchDetail(lineId, poCode, prodCode, prodNumber, boxCode, beginTime, endTime, safeLunchOrder, pageNum, pageSize, safelineId, fpBarcode), StatusCode.SUCCESS);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/safelunch/line", method = RequestMethod.GET)
-	@ApiOperation(value = "查询safelunch产线", notes = "查询safelunch产线", response = Result.class)
-	public Result getSafelunchLine(HttpServletResponse response,Integer fcId) {
-		return new Result("查询成功", this.reportService.getSafeLunchWorkLine(fcId), StatusCode.SUCCESS);
 	}
 }
