@@ -21,6 +21,7 @@ import com.uspring.sdsmesplus.dao.generate.SafelunchWorkLinePODao;
 import com.uspring.sdsmesplus.entity.po.ProdFinishedProductPOExample;
 import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePO;
 import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePOExample;
+import com.uspring.sdsmesplus.entity.vo.StockStat;
 import com.uspring.sdsmesplus.service.MongoDBService;
 import com.uspring.sdsmesplus.service.ReportService;
 
@@ -252,6 +253,39 @@ public class ReportServiceImpl implements ReportService {
 			String batchNo, String furnaceNo, String beginTime, String endTime, Integer pageNum, Integer pageSize,
 			String matProdCode, String matProdNumber, String matBoxCode) {
 		return null;
+	}
+
+	@Override
+	public List<StockStat> statOrderStock(Integer lineId, String poCode, String procCode, String matProdCode,
+			String matProdNumber, String boxCode, String groupBy, String beginTime, String endTime, Integer pageNum,
+			Integer pageSize) {
+		List<StockStat> stockList =  prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode);
+		stockList.addAll( prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode) );
+		stockList.addAll( prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode) );
+		
+		Map<String, StockStat> resultMap = new HashMap<String, StockStat>();
+		for(StockStat stock : stockList) {
+			String key = stock.getBoxBarcode();
+			if("Batch".equals(groupBy)) 
+				key = stock.getMatCode() + stock.getBatchNo();
+			if(resultMap.containsKey(key)) {
+				StockStat mapStock = resultMap.get(key);
+				mapStock.setMatCount(mapStock.getMatCount() + stock.getMatCount());
+			}
+			else {
+				if("Batch".equals(groupBy)) {
+					//批次统计-忽略工单、工序和箱的信息
+					stock.setBoxBarcode("");
+					stock.setProcCode("");
+					stock.setPoCode("");
+				}
+				resultMap.put(key, stock);
+			}
+		}
+		List<StockStat> resultList = new ArrayList<StockStat>();
+		resultList.addAll(resultMap.values());
+		
+		return resultList;
 	}
 
 }

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.uspring.sdsmesplus.dao.ProdOrderStockDao">
+	<resultMap id="StockStatMap" type="com.uspring.sdsmesplus.entity.vo.StockStat">
+	    <result column="po_code" jdbcType="VARCHAR" property="poCode" />
+	    <result column="procCode" jdbcType="VARCHAR" property="procCode" />
+	    <result column="box_barcode" jdbcType="VARCHAR" property="boxBarcode" />
+	    <result column="mat_code" jdbcType="VARCHAR" property="matCode" />
+	    <result column="mat_name" jdbcType="VARCHAR" property="matName" />
+	    <result column="mat_batch_no" jdbcType="VARCHAR" property="batchNo" />
+	    <result column="mat_furnace_no" jdbcType="VARCHAR" property="furnaceNo" />
+	    <result column="mat_glevel" jdbcType="VARCHAR" property="glevel" />
+	    <result column="box_quan_left" jdbcType="VARCHAR" property="matCount" />
+ 	</resultMap>
 
 	<select id="getOrderStock" resultType="map">
 	    select a.*,b.prod_code,b.prod_number from prod_order_stock a
@@ -33,4 +44,97 @@
 		order by a.update_time desc
 	</select>
 
+	<select id="statOrderStock" resultMap="StockStatMap">
+		select 
+			prod_order_stock.po_code,
+			'' procCode,
+			box_barcode,
+			mat_code,
+			mat_name,
+			mat_batch_no,
+			mat_furnace_no,
+			mat_glevel,
+			box_quan_left
+		from prod_order_stock left join plan_order on prod_order_stock.po_code = plan_order.po_code
+		where 1=1
+			<if test="lineId != null and lineId != ''">
+				and plan_order.line_id = #{lineId}
+			</if>
+			<if test="poCode != null and poCode != ''">
+				and prod_order_stock.po_code = #{poCode}
+			</if>
+			<if test="matCode != null and matCode != ''">
+				and mat_code = #{matCode}
+			</if>
+			<if test="boxBarcode != null and boxBarcode != ''">
+				and box_barcode = #{boxBarcode}
+			</if>
+			and is_cleaned = 0
+			and box_quan_left > 0
+	</select>
+	
+	<select id="statProcStock" resultMap="StockStatMap">
+		select 
+			po_code,
+			op_no procCode,
+			box_barcode,
+			mat_code,
+			mat_name,
+			mat_batch_no,
+			mat_furnace_no,
+			mat_glevel,
+			box_quan_left
+		from prod_process_stock
+		where 1=1
+			<if test="lineId != null and lineId != ''">
+				and line_id = #{lineId}
+			</if>
+			<if test="poCode != null and poCode != ''">
+				and po_code = #{poCode}
+			</if>
+			<if test="procCode != null and procCode != ''">
+				and op_no = #{procCode}
+			</if>
+			<if test="matCode != null and matCode != ''">
+				and mat_code = #{matCode}
+			</if>
+			<if test="boxBarcode != null and boxBarcode != ''">
+				and box_barcode = #{boxBarcode}
+			</if>
+			and is_cleaned = 0
+			and box_quan_left > 0
+	</select>
+	
+	<select id="statWipStock" resultMap="StockStatMap">
+		select 
+			po_code,
+			prod_box_log.op_no procCode,
+			prod_box_material.mat_box_barcode box_barcode,
+			mat_code,
+			mat_name,
+			mat_batch_no,
+			mat_furnace_no,
+			mat_glevel,
+			prod_box_material.mat_count box_quan_left
+		from prod_box_material left join prod_box_log on prod_box_material.box_barcode = prod_box_log.box_barcode
+		where 1=1
+			<if test="lineId != null and lineId != ''">
+				and line_id = #{lineId}
+			</if>
+			<if test="poCode != null and poCode != ''">
+				and po_code = #{poCode}
+			</if>
+			<if test="procCode != null and procCode != ''">
+				and prod_box_log.op_no = #{procCode}
+			</if>
+			<if test="matCode != null and matCode != ''">
+				and mat_code = #{matCode}
+			</if>
+			<if test="boxBarcode != null and boxBarcode != ''">
+				and prod_box_material.mat_box_barcode = #{boxBarcode}
+			</if>
+			and prod_box_log.is_wip = 1
+			and prod_box_log.is_feeded = 0
+			and prod_box_log.is_outsource = 0
+	</select>
 </mapper>
