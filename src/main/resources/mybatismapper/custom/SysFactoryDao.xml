@@ -103,6 +103,9 @@
 			<if test="fc_id != null">
 				and f.fc_id = #{fc_id}
 			</if>
+			<if test="fcIds != null">
+				and f.fc_id in (${fcIds})
+			</if>
 			<if test="fc_code != null">
 				and f.fc_code = #{fc_code}
 			</if>

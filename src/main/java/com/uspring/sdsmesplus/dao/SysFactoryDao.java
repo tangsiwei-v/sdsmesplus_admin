@@ -28,5 +28,5 @@ public interface SysFactoryDao extends SysFactoryPODao{
 	* @param fc_id 工厂ID,fc_code 工厂简码
 	* @return 工厂实体类
 	*/
-	List<FactoryVO> querytreenovsm (@Param("fc_id") Integer fc_id,@Param("fc_code") String fc_code);
+	List<FactoryVO> querytreenovsm (@Param("fc_id") Integer fc_id,@Param("fc_code") String fc_code,@Param("fcIds") String fcIds);
 }

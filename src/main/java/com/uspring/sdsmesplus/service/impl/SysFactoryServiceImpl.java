@@ -1,18 +1,24 @@
 package com.uspring.sdsmesplus.service.impl;
 
 import java.rmi.ServerException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.dao.SysFactoryDao;
 import com.uspring.sdsmesplus.dao.generate.SysFactoryPODao;
+import com.uspring.sdsmesplus.dao.generate.SysUserRolePODao;
 import com.uspring.sdsmesplus.entity.po.SysFactoryPO;
 import com.uspring.sdsmesplus.entity.po.SysFactoryPOExample;
+import com.uspring.sdsmesplus.entity.po.UserPO;
 import com.uspring.sdsmesplus.entity.po.SysFactoryPOExample.Criteria;
+import com.uspring.sdsmesplus.entity.po.SysUserRolePO;
+import com.uspring.sdsmesplus.entity.po.SysUserRolePOExample;
 import com.uspring.sdsmesplus.entity.vo.FactoryVO;
 import com.uspring.sdsmesplus.service.SysFactoryService;
 
@@ -23,6 +29,8 @@ public class SysFactoryServiceImpl implements SysFactoryService{
 	private SysFactoryDao sysFactoryDao;
 	@Autowired
 	private SysFactoryPODao sysFactoryPODao;
+	@Autowired
+	private SysUserRolePODao userRoleDao;
 	
 	@Override
 	public List<FactoryVO> queryFactory(Integer fc_id, String fc_code) {
@@ -33,7 +41,27 @@ public class SysFactoryServiceImpl implements SysFactoryService{
 	@Override
 	public List<FactoryVO> querytreenovsm(Integer fc_id, String fc_code) {
 		// TODO Auto-generated method stub
-		return sysFactoryDao.querytreenovsm(fc_id, fc_code);
+		//根据权限查询工厂
+		UserPO user = (UserPO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		String fcIds = null;
+		if(!user.getUserAccount().equals("sdsadmin")){
+			SysUserRolePOExample userRoleExample = new SysUserRolePOExample();
+			userRoleExample.createCriteria().andUserIdEqualTo(user.getUserId());
+			
+			List<SysUserRolePO> userRoleList = this.userRoleDao.selectByExample(userRoleExample);
+			
+			List<Integer> factoryIdList = new ArrayList<Integer>();
+			for(SysUserRolePO userRole:userRoleList){
+				factoryIdList.add(userRole.getFactoryId());
+			    if(fcIds == null){
+			    	fcIds = userRole.getFactoryId()+"";
+			    }else{
+			    	fcIds += ","+userRole.getFactoryId();
+			    }
+			}
+		}
+		return sysFactoryDao.querytreenovsm(fc_id, fc_code, fcIds);
 	}
 	
 	//查询工厂主数据
@@ -84,7 +112,27 @@ public class SysFactoryServiceImpl implements SysFactoryService{
 
 	//查询工厂主数据
 	public List<SysFactoryPO> selectFactorys() {
-		List<SysFactoryPO> factorys = sysFactoryPODao.selectByExample(null);
+		UserPO user = (UserPO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List<SysFactoryPO> factorys = new ArrayList<SysFactoryPO>();
+		if(user.getUserAccount().equals("sdsadmin")){
+			factorys = sysFactoryPODao.selectByExample(null);
+		}else{
+			SysUserRolePOExample userRoleExample = new SysUserRolePOExample();
+			userRoleExample.createCriteria().andUserIdEqualTo(user.getUserId());
+			
+			List<SysUserRolePO> userRoleList = this.userRoleDao.selectByExample(userRoleExample);
+			
+			List<Integer> factoryIdList = new ArrayList<Integer>();
+			for(SysUserRolePO userRole:userRoleList){
+				factoryIdList.add(userRole.getFactoryId());
+			}
+			
+			SysFactoryPOExample factoryExample = new SysFactoryPOExample();
+			factoryExample.createCriteria().andFcIdIn(factoryIdList);
+			
+			factorys = sysFactoryPODao.selectByExample(factoryExample);
+		}
+
 		return factorys;
 	}
 
