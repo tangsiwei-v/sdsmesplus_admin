@@ -26,10 +26,10 @@ import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 public interface SafelunchOrderDao{
 
 	public List<Map<String,Object>> getSafeLunch(@Param("lineId")Integer lineId, @Param("poCode")String poCode, @Param("prodCode")String prodCode, @Param("prodNumber")String prodNumber,
-			@Param("boxCode")String boxCode, @Param("beginTime")String beginTime, @Param("endTime")String endTime,@Param("safelineId")Integer safelineId);
+			@Param("boxCode")String boxCode, @Param("beginTime")String beginTime, @Param("endTime")String endTime,@Param("safelineId")Integer safelineId,@Param("shopId")Integer shopId,@Param("fcId")Integer fcId);
 	
 	public List<Map<String,Object>> getSafeLunchDetail(@Param("lineId")Integer lineId, @Param("poCode")String poCode, @Param("prodCode")String prodCode, @Param("prodNumber")String prodNumber,
-			@Param("boxCode")String boxCode, @Param("beginTime")String beginTime, @Param("endTime")String endTime, @Param("safeLunchOrder")String safeLunchOrder,@Param("safelineId")Integer safelineId,@Param("fpBarcode")String fpBarcode);
+			@Param("boxCode")String boxCode, @Param("beginTime")String beginTime, @Param("endTime")String endTime, @Param("safeLunchOrder")String safeLunchOrder,@Param("safelineId")Integer safelineId,@Param("fpBarcode")String fpBarcode,@Param("shopId")Integer shopId,@Param("fcId")Integer fcId);
 	
 	
 }

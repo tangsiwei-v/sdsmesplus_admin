@@ -9,9 +9,9 @@
 	</select>
 	
 	<select id="useMaterialInfo" resultType="map">
-	    select distinct a.*,c.pt_desc1 mat_name,b.box_barcode from prod_product_material a
+	    select distinct a.*,c.material_name mat_name,b.box_barcode from prod_product_material a
 		left join prod_finished_product b on a.fp_id = b.fp_id
-		left join [DBSAP].[SAP].[dbo].[pt_mstr] c on a.mat_code = c.pt_part  where 1=1
+		left join plan_op_bom c on a.mat_code = c.material_code  where 1=1
 		<if test="fpBarcode != null and fpBarcode != ''">
 		  and a.fp_barcode = #{fpBarcode}
 		</if>
