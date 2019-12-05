@@ -55,4 +55,5 @@ public interface PlanOrderDao extends PlanOrderPODao {
 	* @return  无客户号有打印模板的工单
 	*/
 	List<PlanOrderPO> queryNullVO(@Param("factory_code") String fcCode);
+	
 }

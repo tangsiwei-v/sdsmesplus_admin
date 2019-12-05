@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.uspring.sdsmesplus.dao.generate.ProdOrderStockPODao;
 import com.uspring.sdsmesplus.dao.generate.ProdProductMaterialPODao;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 
@@ -23,7 +24,7 @@ import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
  * @date 2019年7月13日 下午15:09:39
  *  
  */
-public interface ProdOrderStockDao extends ProdProductMaterialPODao {
+public interface ProdOrderStockDao extends ProdOrderStockPODao {
 
 	List<Map<String,Object>> getOrderStock(@Param("poCode")String poCode,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,@Param("matProdCode")String matProdCode,@Param("matProdNumber")String matProdNumber,@Param("boxCode")String boxCode,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("lineId")Integer lineId,@Param("shopId")Integer shopId,@Param("fcId")Integer fcId);
 	

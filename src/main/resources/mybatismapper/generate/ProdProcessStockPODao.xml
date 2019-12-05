@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.ProdProcessStockPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.ProdProcessStockPO">
+    <id column="procb_id" jdbcType="INTEGER" property="procbId" />
+    <result column="po_code" jdbcType="VARCHAR" property="poCode" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="op_no" jdbcType="VARCHAR" property="opNo" />
+    <result column="op_name" jdbcType="VARCHAR" property="opName" />
+    <result column="mat_mandat" jdbcType="VARCHAR" property="matMandat" />
+    <result column="mat_warehouse_num" jdbcType="VARCHAR" property="matWarehouseNum" />
+    <result column="mat_entitled_part" jdbcType="VARCHAR" property="matEntitledPart" />
+    <result column="mat_huident" jdbcType="VARCHAR" property="matHuident" />
+    <result column="mat_number" jdbcType="VARCHAR" property="matNumber" />
+    <result column="mat_code" jdbcType="VARCHAR" property="matCode" />
+    <result column="mat_tuhao" jdbcType="VARCHAR" property="matTuhao" />
+    <result column="mat_name" jdbcType="VARCHAR" property="matName" />
+    <result column="mat_furnace_no" jdbcType="VARCHAR" property="matFurnaceNo" />
+    <result column="mat_glevel" jdbcType="VARCHAR" property="matGlevel" />
+    <result column="mat_version" jdbcType="VARCHAR" property="matVersion" />
+    <result column="mat_batch_no" jdbcType="VARCHAR" property="matBatchNo" />
+    <result column="box_quan" jdbcType="DECIMAL" property="boxQuan" />
+    <result column="box_barcode" jdbcType="VARCHAR" property="boxBarcode" />
+    <result column="box_inspector" jdbcType="VARCHAR" property="boxInspector" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_wip" jdbcType="BIT" property="isWip" />
+    <result column="is_open" jdbcType="BIT" property="isOpen" />
+    <result column="box_quan_left" jdbcType="DECIMAL" property="boxQuanLeft" />
+    <result column="is_cleaned" jdbcType="BIT" property="isCleaned" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    procb_id, po_code, line_id, op_no, op_name, mat_mandat, mat_warehouse_num, mat_entitled_part, 
+    mat_huident, mat_number, mat_code, mat_tuhao, mat_name, mat_furnace_no, mat_glevel, 
+    mat_version, mat_batch_no, box_quan, box_barcode, box_inspector, create_time, update_time, 
+    is_wip, is_open, box_quan_left, is_cleaned
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessStockPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prod_process_stock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_process_stock
+    where procb_id = #{procbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prod_process_stock
+    where procb_id = #{procbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessStockPOExample">
+    delete from prod_process_stock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessStockPO">
+    insert into prod_process_stock (procb_id, po_code, line_id, 
+      op_no, op_name, mat_mandat, 
+      mat_warehouse_num, mat_entitled_part, mat_huident, 
+      mat_number, mat_code, mat_tuhao, 
+      mat_name, mat_furnace_no, mat_glevel, 
+      mat_version, mat_batch_no, box_quan, 
+      box_barcode, box_inspector, create_time, 
+      update_time, is_wip, is_open, 
+      box_quan_left, is_cleaned)
+    values (#{procbId,jdbcType=INTEGER}, #{poCode,jdbcType=VARCHAR}, #{lineId,jdbcType=INTEGER}, 
+      #{opNo,jdbcType=VARCHAR}, #{opName,jdbcType=VARCHAR}, #{matMandat,jdbcType=VARCHAR}, 
+      #{matWarehouseNum,jdbcType=VARCHAR}, #{matEntitledPart,jdbcType=VARCHAR}, #{matHuident,jdbcType=VARCHAR}, 
+      #{matNumber,jdbcType=VARCHAR}, #{matCode,jdbcType=VARCHAR}, #{matTuhao,jdbcType=VARCHAR}, 
+      #{matName,jdbcType=VARCHAR}, #{matFurnaceNo,jdbcType=VARCHAR}, #{matGlevel,jdbcType=VARCHAR}, 
+      #{matVersion,jdbcType=VARCHAR}, #{matBatchNo,jdbcType=VARCHAR}, #{boxQuan,jdbcType=DECIMAL}, 
+      #{boxBarcode,jdbcType=VARCHAR}, #{boxInspector,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isWip,jdbcType=BIT}, #{isOpen,jdbcType=BIT}, 
+      #{boxQuanLeft,jdbcType=DECIMAL}, #{isCleaned,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessStockPO">
+    insert into prod_process_stock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="procbId != null">
+        procb_id,
+      </if>
+      <if test="poCode != null">
+        po_code,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="opNo != null">
+        op_no,
+      </if>
+      <if test="opName != null">
+        op_name,
+      </if>
+      <if test="matMandat != null">
+        mat_mandat,
+      </if>
+      <if test="matWarehouseNum != null">
+        mat_warehouse_num,
+      </if>
+      <if test="matEntitledPart != null">
+        mat_entitled_part,
+      </if>
+      <if test="matHuident != null">
+        mat_huident,
+      </if>
+      <if test="matNumber != null">
+        mat_number,
+      </if>
+      <if test="matCode != null">
+        mat_code,
+      </if>
+      <if test="matTuhao != null">
+        mat_tuhao,
+      </if>
+      <if test="matName != null">
+        mat_name,
+      </if>
+      <if test="matFurnaceNo != null">
+        mat_furnace_no,
+      </if>
+      <if test="matGlevel != null">
+        mat_glevel,
+      </if>
+      <if test="matVersion != null">
+        mat_version,
+      </if>
+      <if test="matBatchNo != null">
+        mat_batch_no,
+      </if>
+      <if test="boxQuan != null">
+        box_quan,
+      </if>
+      <if test="boxBarcode != null">
+        box_barcode,
+      </if>
+      <if test="boxInspector != null">
+        box_inspector,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isWip != null">
+        is_wip,
+      </if>
+      <if test="isOpen != null">
+        is_open,
+      </if>
+      <if test="boxQuanLeft != null">
+        box_quan_left,
+      </if>
+      <if test="isCleaned != null">
+        is_cleaned,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="procbId != null">
+        #{procbId,jdbcType=INTEGER},
+      </if>
+      <if test="poCode != null">
+        #{poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="opNo != null">
+        #{opNo,jdbcType=VARCHAR},
+      </if>
+      <if test="opName != null">
+        #{opName,jdbcType=VARCHAR},
+      </if>
+      <if test="matMandat != null">
+        #{matMandat,jdbcType=VARCHAR},
+      </if>
+      <if test="matWarehouseNum != null">
+        #{matWarehouseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="matEntitledPart != null">
+        #{matEntitledPart,jdbcType=VARCHAR},
+      </if>
+      <if test="matHuident != null">
+        #{matHuident,jdbcType=VARCHAR},
+      </if>
+      <if test="matNumber != null">
+        #{matNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="matCode != null">
+        #{matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="matTuhao != null">
+        #{matTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="matName != null">
+        #{matName,jdbcType=VARCHAR},
+      </if>
+      <if test="matFurnaceNo != null">
+        #{matFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="matGlevel != null">
+        #{matGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="matVersion != null">
+        #{matVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="matBatchNo != null">
+        #{matBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="boxQuan != null">
+        #{boxQuan,jdbcType=DECIMAL},
+      </if>
+      <if test="boxBarcode != null">
+        #{boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="boxInspector != null">
+        #{boxInspector,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isWip != null">
+        #{isWip,jdbcType=BIT},
+      </if>
+      <if test="isOpen != null">
+        #{isOpen,jdbcType=BIT},
+      </if>
+      <if test="boxQuanLeft != null">
+        #{boxQuanLeft,jdbcType=DECIMAL},
+      </if>
+      <if test="isCleaned != null">
+        #{isCleaned,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessStockPOExample" resultType="java.lang.Long">
+    select count(*) from prod_process_stock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_process_stock
+    <set>
+      <if test="record.procbId != null">
+        procb_id = #{record.procbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.poCode != null">
+        po_code = #{record.poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.opNo != null">
+        op_no = #{record.opNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opName != null">
+        op_name = #{record.opName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matMandat != null">
+        mat_mandat = #{record.matMandat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matWarehouseNum != null">
+        mat_warehouse_num = #{record.matWarehouseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matEntitledPart != null">
+        mat_entitled_part = #{record.matEntitledPart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matHuident != null">
+        mat_huident = #{record.matHuident,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matNumber != null">
+        mat_number = #{record.matNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matCode != null">
+        mat_code = #{record.matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matTuhao != null">
+        mat_tuhao = #{record.matTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matName != null">
+        mat_name = #{record.matName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matFurnaceNo != null">
+        mat_furnace_no = #{record.matFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matGlevel != null">
+        mat_glevel = #{record.matGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matVersion != null">
+        mat_version = #{record.matVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matBatchNo != null">
+        mat_batch_no = #{record.matBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boxQuan != null">
+        box_quan = #{record.boxQuan,jdbcType=DECIMAL},
+      </if>
+      <if test="record.boxBarcode != null">
+        box_barcode = #{record.boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boxInspector != null">
+        box_inspector = #{record.boxInspector,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isWip != null">
+        is_wip = #{record.isWip,jdbcType=BIT},
+      </if>
+      <if test="record.isOpen != null">
+        is_open = #{record.isOpen,jdbcType=BIT},
+      </if>
+      <if test="record.boxQuanLeft != null">
+        box_quan_left = #{record.boxQuanLeft,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isCleaned != null">
+        is_cleaned = #{record.isCleaned,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_process_stock
+    set procb_id = #{record.procbId,jdbcType=INTEGER},
+      po_code = #{record.poCode,jdbcType=VARCHAR},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      op_no = #{record.opNo,jdbcType=VARCHAR},
+      op_name = #{record.opName,jdbcType=VARCHAR},
+      mat_mandat = #{record.matMandat,jdbcType=VARCHAR},
+      mat_warehouse_num = #{record.matWarehouseNum,jdbcType=VARCHAR},
+      mat_entitled_part = #{record.matEntitledPart,jdbcType=VARCHAR},
+      mat_huident = #{record.matHuident,jdbcType=VARCHAR},
+      mat_number = #{record.matNumber,jdbcType=VARCHAR},
+      mat_code = #{record.matCode,jdbcType=VARCHAR},
+      mat_tuhao = #{record.matTuhao,jdbcType=VARCHAR},
+      mat_name = #{record.matName,jdbcType=VARCHAR},
+      mat_furnace_no = #{record.matFurnaceNo,jdbcType=VARCHAR},
+      mat_glevel = #{record.matGlevel,jdbcType=VARCHAR},
+      mat_version = #{record.matVersion,jdbcType=VARCHAR},
+      mat_batch_no = #{record.matBatchNo,jdbcType=VARCHAR},
+      box_quan = #{record.boxQuan,jdbcType=DECIMAL},
+      box_barcode = #{record.boxBarcode,jdbcType=VARCHAR},
+      box_inspector = #{record.boxInspector,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      is_wip = #{record.isWip,jdbcType=BIT},
+      is_open = #{record.isOpen,jdbcType=BIT},
+      box_quan_left = #{record.boxQuanLeft,jdbcType=DECIMAL},
+      is_cleaned = #{record.isCleaned,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessStockPO">
+    update prod_process_stock
+    <set>
+      <if test="poCode != null">
+        po_code = #{poCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="opNo != null">
+        op_no = #{opNo,jdbcType=VARCHAR},
+      </if>
+      <if test="opName != null">
+        op_name = #{opName,jdbcType=VARCHAR},
+      </if>
+      <if test="matMandat != null">
+        mat_mandat = #{matMandat,jdbcType=VARCHAR},
+      </if>
+      <if test="matWarehouseNum != null">
+        mat_warehouse_num = #{matWarehouseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="matEntitledPart != null">
+        mat_entitled_part = #{matEntitledPart,jdbcType=VARCHAR},
+      </if>
+      <if test="matHuident != null">
+        mat_huident = #{matHuident,jdbcType=VARCHAR},
+      </if>
+      <if test="matNumber != null">
+        mat_number = #{matNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="matCode != null">
+        mat_code = #{matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="matTuhao != null">
+        mat_tuhao = #{matTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="matName != null">
+        mat_name = #{matName,jdbcType=VARCHAR},
+      </if>
+      <if test="matFurnaceNo != null">
+        mat_furnace_no = #{matFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="matGlevel != null">
+        mat_glevel = #{matGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="matVersion != null">
+        mat_version = #{matVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="matBatchNo != null">
+        mat_batch_no = #{matBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="boxQuan != null">
+        box_quan = #{boxQuan,jdbcType=DECIMAL},
+      </if>
+      <if test="boxBarcode != null">
+        box_barcode = #{boxBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="boxInspector != null">
+        box_inspector = #{boxInspector,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isWip != null">
+        is_wip = #{isWip,jdbcType=BIT},
+      </if>
+      <if test="isOpen != null">
+        is_open = #{isOpen,jdbcType=BIT},
+      </if>
+      <if test="boxQuanLeft != null">
+        box_quan_left = #{boxQuanLeft,jdbcType=DECIMAL},
+      </if>
+      <if test="isCleaned != null">
+        is_cleaned = #{isCleaned,jdbcType=BIT},
+      </if>
+    </set>
+    where procb_id = #{procbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessStockPO">
+    update prod_process_stock
+    set po_code = #{poCode,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=INTEGER},
+      op_no = #{opNo,jdbcType=VARCHAR},
+      op_name = #{opName,jdbcType=VARCHAR},
+      mat_mandat = #{matMandat,jdbcType=VARCHAR},
+      mat_warehouse_num = #{matWarehouseNum,jdbcType=VARCHAR},
+      mat_entitled_part = #{matEntitledPart,jdbcType=VARCHAR},
+      mat_huident = #{matHuident,jdbcType=VARCHAR},
+      mat_number = #{matNumber,jdbcType=VARCHAR},
+      mat_code = #{matCode,jdbcType=VARCHAR},
+      mat_tuhao = #{matTuhao,jdbcType=VARCHAR},
+      mat_name = #{matName,jdbcType=VARCHAR},
+      mat_furnace_no = #{matFurnaceNo,jdbcType=VARCHAR},
+      mat_glevel = #{matGlevel,jdbcType=VARCHAR},
+      mat_version = #{matVersion,jdbcType=VARCHAR},
+      mat_batch_no = #{matBatchNo,jdbcType=VARCHAR},
+      box_quan = #{boxQuan,jdbcType=DECIMAL},
+      box_barcode = #{boxBarcode,jdbcType=VARCHAR},
+      box_inspector = #{boxInspector,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_wip = #{isWip,jdbcType=BIT},
+      is_open = #{isOpen,jdbcType=BIT},
+      box_quan_left = #{boxQuanLeft,jdbcType=DECIMAL},
+      is_cleaned = #{isCleaned,jdbcType=BIT}
+    where procb_id = #{procbId,jdbcType=INTEGER}
+  </update>
+</mapper>
