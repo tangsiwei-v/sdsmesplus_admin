@@ -54,6 +54,12 @@ public class PlanOrderPO {
     private Date createTime;
 
     private Date updateTime;
+    
+    private String lineName;
+    
+    private String shopName;
+    
+    private String fcName;
 
     public Integer getPoId() {
         return poId;
@@ -273,6 +279,32 @@ public class PlanOrderPO {
 
         return false;
     }
+    
+    
+
+	public String getLineName() {
+		return lineName;
+	}
+
+	public void setLineName(String lineName) {
+		this.lineName = lineName;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public String getFcName() {
+		return fcName;
+	}
+
+	public void setFcName(String fcName) {
+		this.fcName = fcName;
+	}
 
 	private boolean equalsStr(String poCode2, String poCode3) {
 		 if(StringUtils.isEmpty(poCode2) && StringUtils.isEmpty(poCode3)){

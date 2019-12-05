@@ -11,14 +11,29 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.dao.NonconformProductDao;
+import com.uspring.sdsmesplus.dao.PlanOrderDao;
 import com.uspring.sdsmesplus.dao.ProdBoxLogDao;
+import com.uspring.sdsmesplus.dao.ProdBoxMaterialDao;
 import com.uspring.sdsmesplus.dao.ProdFinishedProductDao;
 import com.uspring.sdsmesplus.dao.ProdOrderStockDao;
 import com.uspring.sdsmesplus.dao.ProdProcessStockDao;
 import com.uspring.sdsmesplus.dao.ProdProductMaterialDao;
 import com.uspring.sdsmesplus.dao.SafelunchOrderDao;
+import com.uspring.sdsmesplus.dao.generate.NonconformProductLogPODao;
+import com.uspring.sdsmesplus.dao.generate.ProdCleanLogPODao;
 import com.uspring.sdsmesplus.dao.generate.SafelunchWorkLinePODao;
+import com.uspring.sdsmesplus.entity.po.NonconformProductLogPO;
+import com.uspring.sdsmesplus.entity.po.NonconformProductLogPOExample;
+import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
+import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
+import com.uspring.sdsmesplus.entity.po.ProdBoxLogPOExample;
+import com.uspring.sdsmesplus.entity.po.ProdCleanLogPO;
+import com.uspring.sdsmesplus.entity.po.ProdCleanLogPOExample;
 import com.uspring.sdsmesplus.entity.po.ProdFinishedProductPOExample;
+import com.uspring.sdsmesplus.entity.po.ProdOrderStockPO;
+import com.uspring.sdsmesplus.entity.po.ProdOrderStockPOExample;
+import com.uspring.sdsmesplus.entity.po.ProdProcessStockPO;
+import com.uspring.sdsmesplus.entity.po.ProdProcessStockPOExample;
 import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePO;
 import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePOExample;
 import com.uspring.sdsmesplus.service.MongoDBService;
@@ -53,6 +68,18 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	private SafelunchWorkLinePODao safelunchWorklinePoDao;
+	
+	@Autowired
+	private ProdBoxMaterialDao prodBoxMaterialDao;
+
+	@Autowired
+	private PlanOrderDao planOrderDao;
+	
+	@Autowired
+	private ProdCleanLogPODao prodCleanLogPoDao;
+	
+	@Autowired
+	private NonconformProductLogPODao nonconformProductDao;
 
 	@Override
 	public Map<String, Object> getProductInfo(String barcode) {
@@ -258,7 +285,184 @@ public class ReportServiceImpl implements ReportService {
 		return workLineList;
 	}
 
+	@Override
 
+	public Map<String, Object> boxMaterialUseInfo(Integer lineId, String beginTime, String endTime, String prodCode,
+			String matProdCode, String boxCode, String matBoxCode, Integer pageNum, Integer pageSize,String furnaceNo,String batchNo) {
+		// TODO Auto-generated method stub
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		List<Map<String,Object>> dataList = this.prodBoxMaterialDao.boxMaterialUseInfo(lineId, beginTime, endTime, prodCode, matProdCode, boxCode, matBoxCode, furnaceNo, batchNo);
+		
+        PageInfo info = new PageInfo(dataList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
 
+	public Map<String, Object> getOrderDetail(Integer lineId, Integer shopId, Integer fcId, String prodCode,
+			String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize) {
+		// TODO Auto-generated method stub
+		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
+		
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("line_id", lineId);
+		paramMap.put("shopId", shopId);
+		paramMap.put("fcId", fcId);
+		paramMap.put("order_code", poCode);
+		paramMap.put("starDate", beginTime);
+		paramMap.put("endDate", endTime);
+		paramMap.put("prodCode", prodCode);
+		paramMap.put("prodNumber", prodNumber);
+		
+		List<PlanOrderPO> dataList = planOrderDao.queryPlanVO(paramMap);
+		
+		for(PlanOrderPO dataObject:dataList){
+			Map<String,Object> resultMap =  getOrderData(dataObject.getPoCode());
+			
+			resultMap.put("orderData", dataObject);
+			
+			resultList.add(resultMap);
+		}
+
+        PageInfo info = new PageInfo(dataList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", resultList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+		
+	}
+	
+	public Map<String,Object> getOrderData(String opNo){
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		//上料数量
+		//装配上料数量
+		double chargCount = 0;
+		double completeCount = 0;
+		double wasteCount = 0;
+		double cleanCount = 0;
+		double outSourceCount = 0;
+		
+		resultMap.put("chargCount", chargCount);
+		resultMap.put("completeCount", completeCount);
+		resultMap.put("wasteCount", wasteCount);
+		resultMap.put("cleanCount", cleanCount);
+		resultMap.put("outSourceCount", outSourceCount);
+		
+		ProdOrderStockPOExample orderStockExample = new ProdOrderStockPOExample();
+		orderStockExample.createCriteria().andPoCodeEqualTo(opNo);
+		
+		List<ProdOrderStockPO> prodOrderStockList = this.prodOrderStockDao.selectByExample(orderStockExample);
+		for(ProdOrderStockPO data:prodOrderStockList){
+			chargCount += data.getBoxQuan().doubleValue();
+		}
+		
+		//机加上料数量
+		if(chargCount == 0){
+			ProdProcessStockPOExample prodProcessStockExampel = new ProdProcessStockPOExample();
+			prodProcessStockExampel.createCriteria().andOpNoEqualTo(opNo);
+			
+			List<ProdProcessStockPO> prodProcessStockList = this.prodProcessStockDao.selectByExample(prodProcessStockExampel);
+			
+			for(ProdProcessStockPO data:prodProcessStockList){
+				chargCount += data.getBoxQuan().doubleValue();
+			}
+		}
+		
+		//报交数量
+		ProdBoxLogPOExample prodBoxLogExample = new ProdBoxLogPOExample();
+		prodBoxLogExample.createCriteria().andPoCodeEqualTo(opNo);
+		
+		List<ProdBoxLogPO> prodBoxLogList = prodBoxLogDao.selectByExample(prodBoxLogExample);
+		
+		for(ProdBoxLogPO data:prodBoxLogList){
+			completeCount += data.getBoxQuan().doubleValue();
+		}
+		
+		//清线数量 //委外数量
+		ProdCleanLogPOExample prodClanLogExample = new ProdCleanLogPOExample();
+		prodClanLogExample.createCriteria().andPoCodeEqualTo(opNo);
+		
+		List<ProdCleanLogPO> prodCleanLogList = this.prodCleanLogPoDao.selectByExample(prodClanLogExample);
+		
+		for(ProdCleanLogPO data:prodCleanLogList){
+			if(data.getIsOutsource()){
+				outSourceCount += data.getClRestCount().doubleValue();
+			}else{
+				cleanCount += data.getClRestCount().doubleValue();
+			}
+			
+		}
+		
+		//不合格品数量
+		NonconformProductLogPOExample nonconformProductExample = new NonconformProductLogPOExample();
+		nonconformProductExample.createCriteria().andPoCodeEqualTo(opNo);
+		
+		List<NonconformProductLogPO> wasteList = this.nonconformProductDao.selectByExample(nonconformProductExample);
+		
+		for(NonconformProductLogPO data:wasteList){
+			wasteCount += data.getNplQty().doubleValue();
+		}
+		
+		resultMap.put("chargCount", chargCount);
+		resultMap.put("completeCount", completeCount);
+		resultMap.put("wasteCount", wasteCount);
+		resultMap.put("cleanCount", cleanCount);
+		resultMap.put("outSourceCount", outSourceCount);
+		
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getOrderDetailInfoByType(String poCode, Integer type, Integer pageNum, Integer pageSize) {
+		// TODO Auto-generated method stub
+		
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		List resultList = new ArrayList();
+		
+		//type 1.上料记录， 2.报交数量，3清线记录，4委外记录,5.不合格品记录
+		if(type == 1){
+			ProdOrderStockPOExample orderStockExample = new ProdOrderStockPOExample();
+			orderStockExample.createCriteria().andPoCodeEqualTo(poCode);
+			
+			resultList = this.prodOrderStockDao.selectByExample(orderStockExample);
+		}else if(type == 2){
+			ProdBoxLogPOExample prodBoxLogExample = new ProdBoxLogPOExample();
+			prodBoxLogExample.createCriteria().andPoCodeEqualTo(poCode);
+			
+			resultList = prodBoxLogDao.selectByExample(prodBoxLogExample);
+		}else if(type == 3){
+			ProdCleanLogPOExample prodClanLogExample = new ProdCleanLogPOExample();
+			prodClanLogExample.createCriteria().andPoCodeEqualTo(poCode).andIsOutsourceEqualTo(false);
+			
+			resultList = this.prodCleanLogPoDao.selectByExample(prodClanLogExample);
+		}else if(type == 4){
+			ProdCleanLogPOExample prodClanLogExample = new ProdCleanLogPOExample();
+			prodClanLogExample.createCriteria().andPoCodeEqualTo(poCode).andIsOutsourceEqualTo(true);
+			
+			resultList = this.prodCleanLogPoDao.selectByExample(prodClanLogExample);
+		}else if(type == 5){
+			NonconformProductLogPOExample nonconformProductExample = new NonconformProductLogPOExample();
+			nonconformProductExample.createCriteria().andPoCodeEqualTo(poCode);
+			
+			resultList = this.nonconformProductDao.selectByExample(nonconformProductExample);
+		}
+		
+        PageInfo info = new PageInfo(resultList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", resultList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
 
 }

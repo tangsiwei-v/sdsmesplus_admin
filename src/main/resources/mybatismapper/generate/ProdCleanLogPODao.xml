@@ -7,10 +7,19 @@
     <result column="po_code" jdbcType="VARCHAR" property="poCode" />
     <result column="mat_code" jdbcType="VARCHAR" property="matCode" />
     <result column="mat_name" jdbcType="VARCHAR" property="matName" />
+    <result column="mat_number" jdbcType="VARCHAR" property="matNumber" />
+    <result column="mat_tuhao" jdbcType="VARCHAR" property="matTuhao" />
+    <result column="mat_furnace_no" jdbcType="VARCHAR" property="matFurnaceNo" />
+    <result column="mat_glevel" jdbcType="VARCHAR" property="matGlevel" />
+    <result column="mat_batch_no" jdbcType="VARCHAR" property="matBatchNo" />
     <result column="box_barcode_old" jdbcType="VARCHAR" property="boxBarcodeOld" />
     <result column="box_barcode_new" jdbcType="VARCHAR" property="boxBarcodeNew" />
     <result column="cl_used_count" jdbcType="DECIMAL" property="clUsedCount" />
     <result column="cl_rest_count" jdbcType="DECIMAL" property="clRestCount" />
+    <result column="is_extra" jdbcType="BIT" property="isExtra" />
+    <result column="is_outsource" jdbcType="BIT" property="isOutsource" />
+    <result column="cl_person_number" jdbcType="VARCHAR" property="clPersonNumber" />
+    <result column="cl_person_name" jdbcType="VARCHAR" property="clPersonName" />
     <result column="is_confirmed" jdbcType="BIT" property="isConfirmed" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -73,8 +82,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    cl_id, cl_code, po_code, mat_code, mat_name, box_barcode_old, box_barcode_new, cl_used_count, 
-    cl_rest_count, is_confirmed, create_time
+    cl_id, cl_code, po_code, mat_code, mat_name, mat_number, mat_tuhao, mat_furnace_no, 
+    mat_glevel, mat_batch_no, box_barcode_old, box_barcode_new, cl_used_count, cl_rest_count, 
+    is_extra, is_outsource, cl_person_number, cl_person_name, is_confirmed, create_time
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdCleanLogPOExample" resultMap="BaseResultMap">
     select
@@ -108,12 +118,18 @@
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdCleanLogPO">
     insert into prod_clean_log (cl_id, cl_code, po_code, 
-      mat_code, mat_name, box_barcode_old, 
-      box_barcode_new, cl_used_count, cl_rest_count, 
+      mat_code, mat_name, mat_number, 
+      mat_tuhao, mat_furnace_no, mat_glevel, 
+      mat_batch_no, box_barcode_old, box_barcode_new, 
+      cl_used_count, cl_rest_count, is_extra, 
+      is_outsource, cl_person_number, cl_person_name, 
       is_confirmed, create_time)
     values (#{clId,jdbcType=INTEGER}, #{clCode,jdbcType=VARCHAR}, #{poCode,jdbcType=VARCHAR}, 
-      #{matCode,jdbcType=VARCHAR}, #{matName,jdbcType=VARCHAR}, #{boxBarcodeOld,jdbcType=VARCHAR}, 
-      #{boxBarcodeNew,jdbcType=VARCHAR}, #{clUsedCount,jdbcType=DECIMAL}, #{clRestCount,jdbcType=DECIMAL}, 
+      #{matCode,jdbcType=VARCHAR}, #{matName,jdbcType=VARCHAR}, #{matNumber,jdbcType=VARCHAR}, 
+      #{matTuhao,jdbcType=VARCHAR}, #{matFurnaceNo,jdbcType=VARCHAR}, #{matGlevel,jdbcType=VARCHAR}, 
+      #{matBatchNo,jdbcType=VARCHAR}, #{boxBarcodeOld,jdbcType=VARCHAR}, #{boxBarcodeNew,jdbcType=VARCHAR}, 
+      #{clUsedCount,jdbcType=DECIMAL}, #{clRestCount,jdbcType=DECIMAL}, #{isExtra,jdbcType=BIT}, 
+      #{isOutsource,jdbcType=BIT}, #{clPersonNumber,jdbcType=VARCHAR}, #{clPersonName,jdbcType=VARCHAR}, 
       #{isConfirmed,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdCleanLogPO">
@@ -134,6 +150,21 @@
       <if test="matName != null">
         mat_name,
       </if>
+      <if test="matNumber != null">
+        mat_number,
+      </if>
+      <if test="matTuhao != null">
+        mat_tuhao,
+      </if>
+      <if test="matFurnaceNo != null">
+        mat_furnace_no,
+      </if>
+      <if test="matGlevel != null">
+        mat_glevel,
+      </if>
+      <if test="matBatchNo != null">
+        mat_batch_no,
+      </if>
       <if test="boxBarcodeOld != null">
         box_barcode_old,
       </if>
@@ -145,6 +176,18 @@
       </if>
       <if test="clRestCount != null">
         cl_rest_count,
+      </if>
+      <if test="isExtra != null">
+        is_extra,
+      </if>
+      <if test="isOutsource != null">
+        is_outsource,
+      </if>
+      <if test="clPersonNumber != null">
+        cl_person_number,
+      </if>
+      <if test="clPersonName != null">
+        cl_person_name,
       </if>
       <if test="isConfirmed != null">
         is_confirmed,
@@ -169,6 +212,21 @@
       <if test="matName != null">
         #{matName,jdbcType=VARCHAR},
       </if>
+      <if test="matNumber != null">
+        #{matNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="matTuhao != null">
+        #{matTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="matFurnaceNo != null">
+        #{matFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="matGlevel != null">
+        #{matGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="matBatchNo != null">
+        #{matBatchNo,jdbcType=VARCHAR},
+      </if>
       <if test="boxBarcodeOld != null">
         #{boxBarcodeOld,jdbcType=VARCHAR},
       </if>
@@ -180,6 +238,18 @@
       </if>
       <if test="clRestCount != null">
         #{clRestCount,jdbcType=DECIMAL},
+      </if>
+      <if test="isExtra != null">
+        #{isExtra,jdbcType=BIT},
+      </if>
+      <if test="isOutsource != null">
+        #{isOutsource,jdbcType=BIT},
+      </if>
+      <if test="clPersonNumber != null">
+        #{clPersonNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="clPersonName != null">
+        #{clPersonName,jdbcType=VARCHAR},
       </if>
       <if test="isConfirmed != null">
         #{isConfirmed,jdbcType=BIT},
@@ -213,6 +283,21 @@
       <if test="record.matName != null">
         mat_name = #{record.matName,jdbcType=VARCHAR},
       </if>
+      <if test="record.matNumber != null">
+        mat_number = #{record.matNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matTuhao != null">
+        mat_tuhao = #{record.matTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matFurnaceNo != null">
+        mat_furnace_no = #{record.matFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matGlevel != null">
+        mat_glevel = #{record.matGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matBatchNo != null">
+        mat_batch_no = #{record.matBatchNo,jdbcType=VARCHAR},
+      </if>
       <if test="record.boxBarcodeOld != null">
         box_barcode_old = #{record.boxBarcodeOld,jdbcType=VARCHAR},
       </if>
@@ -224,6 +309,18 @@
       </if>
       <if test="record.clRestCount != null">
         cl_rest_count = #{record.clRestCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isExtra != null">
+        is_extra = #{record.isExtra,jdbcType=BIT},
+      </if>
+      <if test="record.isOutsource != null">
+        is_outsource = #{record.isOutsource,jdbcType=BIT},
+      </if>
+      <if test="record.clPersonNumber != null">
+        cl_person_number = #{record.clPersonNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clPersonName != null">
+        cl_person_name = #{record.clPersonName,jdbcType=VARCHAR},
       </if>
       <if test="record.isConfirmed != null">
         is_confirmed = #{record.isConfirmed,jdbcType=BIT},
@@ -243,10 +340,19 @@
       po_code = #{record.poCode,jdbcType=VARCHAR},
       mat_code = #{record.matCode,jdbcType=VARCHAR},
       mat_name = #{record.matName,jdbcType=VARCHAR},
+      mat_number = #{record.matNumber,jdbcType=VARCHAR},
+      mat_tuhao = #{record.matTuhao,jdbcType=VARCHAR},
+      mat_furnace_no = #{record.matFurnaceNo,jdbcType=VARCHAR},
+      mat_glevel = #{record.matGlevel,jdbcType=VARCHAR},
+      mat_batch_no = #{record.matBatchNo,jdbcType=VARCHAR},
       box_barcode_old = #{record.boxBarcodeOld,jdbcType=VARCHAR},
       box_barcode_new = #{record.boxBarcodeNew,jdbcType=VARCHAR},
       cl_used_count = #{record.clUsedCount,jdbcType=DECIMAL},
       cl_rest_count = #{record.clRestCount,jdbcType=DECIMAL},
+      is_extra = #{record.isExtra,jdbcType=BIT},
+      is_outsource = #{record.isOutsource,jdbcType=BIT},
+      cl_person_number = #{record.clPersonNumber,jdbcType=VARCHAR},
+      cl_person_name = #{record.clPersonName,jdbcType=VARCHAR},
       is_confirmed = #{record.isConfirmed,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -268,6 +374,21 @@
       <if test="matName != null">
         mat_name = #{matName,jdbcType=VARCHAR},
       </if>
+      <if test="matNumber != null">
+        mat_number = #{matNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="matTuhao != null">
+        mat_tuhao = #{matTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="matFurnaceNo != null">
+        mat_furnace_no = #{matFurnaceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="matGlevel != null">
+        mat_glevel = #{matGlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="matBatchNo != null">
+        mat_batch_no = #{matBatchNo,jdbcType=VARCHAR},
+      </if>
       <if test="boxBarcodeOld != null">
         box_barcode_old = #{boxBarcodeOld,jdbcType=VARCHAR},
       </if>
@@ -279,6 +400,18 @@
       </if>
       <if test="clRestCount != null">
         cl_rest_count = #{clRestCount,jdbcType=DECIMAL},
+      </if>
+      <if test="isExtra != null">
+        is_extra = #{isExtra,jdbcType=BIT},
+      </if>
+      <if test="isOutsource != null">
+        is_outsource = #{isOutsource,jdbcType=BIT},
+      </if>
+      <if test="clPersonNumber != null">
+        cl_person_number = #{clPersonNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="clPersonName != null">
+        cl_person_name = #{clPersonName,jdbcType=VARCHAR},
       </if>
       <if test="isConfirmed != null">
         is_confirmed = #{isConfirmed,jdbcType=BIT},
@@ -295,10 +428,19 @@
       po_code = #{poCode,jdbcType=VARCHAR},
       mat_code = #{matCode,jdbcType=VARCHAR},
       mat_name = #{matName,jdbcType=VARCHAR},
+      mat_number = #{matNumber,jdbcType=VARCHAR},
+      mat_tuhao = #{matTuhao,jdbcType=VARCHAR},
+      mat_furnace_no = #{matFurnaceNo,jdbcType=VARCHAR},
+      mat_glevel = #{matGlevel,jdbcType=VARCHAR},
+      mat_batch_no = #{matBatchNo,jdbcType=VARCHAR},
       box_barcode_old = #{boxBarcodeOld,jdbcType=VARCHAR},
       box_barcode_new = #{boxBarcodeNew,jdbcType=VARCHAR},
       cl_used_count = #{clUsedCount,jdbcType=DECIMAL},
       cl_rest_count = #{clRestCount,jdbcType=DECIMAL},
+      is_extra = #{isExtra,jdbcType=BIT},
+      is_outsource = #{isOutsource,jdbcType=BIT},
+      cl_person_number = #{clPersonNumber,jdbcType=VARCHAR},
+      cl_person_name = #{clPersonName,jdbcType=VARCHAR},
       is_confirmed = #{isConfirmed,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where cl_id = #{clId,jdbcType=INTEGER}

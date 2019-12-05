@@ -201,5 +201,44 @@ public interface ReportService {
 	 * @return
 	 */
 	List<SafelunchWorkLinePO> getSafeLunchWorkLine(Integer fcId);
+	
+	/**
+	 * 箱物料使用查询
+	 * @param lineId 产线编号
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param prodCode 产品简码
+	 * @param matProdCode 物料简码
+	 * @param boxCode 箱号
+	 * @param matBoxCode 物料箱号
+	 * @param pageNum 
+	 * @param pageSize
+	 * @return
+	 */
+	Map<String,Object> boxMaterialUseInfo(Integer lineId,String beginTime,String endTime,String prodCode,String matProdCode,String boxCode,String matBoxCode,Integer pageNum,Integer pageSize,String furnaceNo,String batchNo);
+
+	/**
+	 * 获取工单详细信息
+	 * @param lineId 产线编号
+	 * @param shopId 车间编号
+	 * @param fcId 工厂编号
+	 * @param prodCode SAP号
+	 * @param ProdNumber 产品简码
+	 * @param poCode 工单号
+	 * @param beginTime 
+	 * @param endTime
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	Map<String,Object> getOrderDetail(Integer lineId, Integer shopId, Integer fcId, String prodCode,String prodNumber,String poCode,String beginTime,String endTime,Integer pageNum,Integer pageSize);
+	
+	/**
+	 * 查询工单下某个类型的数据
+	 * @param poCode
+	 * @param type  1.上料记录， 2.报交记录，3清线记录，4委外记录,5.不合格品记录
+	 * @return
+	 */
+	Map<String,Object> getOrderDetailInfoByType(String poCode, Integer type, Integer pageNum, Integer pageSize);
 		
 }

@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.uspring.sdsmesplus.dao.generate.ProdBoxLogPODao;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 
 /** 
@@ -22,7 +23,7 @@ import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
  * @date 2019年7月13日 下午15:09:39
  *  
  */
-public interface ProdBoxLogDao {
+public interface ProdBoxLogDao extends ProdBoxLogPODao{
 
 	/**
 	 * 根据工单号查询产品总数

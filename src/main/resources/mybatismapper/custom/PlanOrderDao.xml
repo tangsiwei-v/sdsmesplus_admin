@@ -28,12 +28,17 @@
 		<result column="po_status" jdbcType="VARCHAR" property="poStatus" />
 		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="lineName" jdbcType="VARCHAR" property="lineName" />
+        <result column="shopName" jdbcType="VARCHAR" property="shopName" />
+		<result column="fcName" jdbcType="VARCHAR" property="fcName" />
 	</resultMap>
 
 	<!-- 筛选条件查询 -->
 	<select id="queryPlanVO" parameterType="map" resultMap="BaseResultMapTwo">
-		select a.* from plan_order a
+		select a.*,b.line_name lineName,c.shop_name shopName,d.fc_name fcName from plan_order a
 		left join sys_line b on a.line_id = b.line_id 
+		left join sys_workshop c on b.shop_id = c.shop_id
+		left join sys_factory d on c.fc_id = d.fc_id
 		where 1 = 1
 		<if test="line_id !='' and line_id != null ">
 			and a.line_id = #{line_id}
@@ -52,6 +57,12 @@
 		</if>
 		<if test="endDate != null and endDate !='' ">
 			and po_end_datetime &lt;= #{endDate}
+		</if>
+		<if test="prodCode != null and prodCode !='' ">
+			and prod_code = #{prodCode}
+		</if>
+		<if test="prodNumber != null and prodNumber !='' ">
+			and prod_number = #{prodNumber}
 		</if>
 		<if test="status != null and status !='' ">
 			and po_status in
@@ -86,5 +97,4 @@
 		select *  from  plan_order 	
            where fc_code = #{factory_code} and po_status != 'Completed' and customer_code != ''
 	</select>
-
 </mapper>
