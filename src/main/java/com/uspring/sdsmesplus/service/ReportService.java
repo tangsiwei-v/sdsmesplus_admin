@@ -201,5 +201,21 @@ public interface ReportService {
 	 * @return
 	 */
 	List<SafelunchWorkLinePO> getSafeLunchWorkLine(Integer fcId);
+	
+	/**
+	 * 箱物料使用查询
+	 * @param lineId 产线编号
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param prodCode 产品简码
+	 * @param matProdCode 物料简码
+	 * @param boxCode 箱号
+	 * @param matBoxCode 物料箱号
+	 * @param pageNum 
+	 * @param pageSize
+	 * @return
+	 */
+	Map<String,Object> boxMaterialUseInfo(Integer lineId,String beginTime,String endTime,String prodCode,String matProdCode,String boxCode,String matBoxCode,Integer pageNum,Integer pageSize,String furnaceNo,String batchNo);
+
 		
 }

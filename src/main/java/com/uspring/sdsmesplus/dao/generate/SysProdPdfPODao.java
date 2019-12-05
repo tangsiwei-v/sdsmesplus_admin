@@ -16,21 +16,15 @@ public interface SysProdPdfPODao {
 
     int insertSelective(SysProdPdfPO record);
 
-    List<SysProdPdfPO> selectByExampleWithBLOBs(SysProdPdfPOExample example);
-
     List<SysProdPdfPO> selectByExample(SysProdPdfPOExample example);
 
     SysProdPdfPO selectByPrimaryKey(Integer sppId);
 
     int updateByExampleSelective(@Param("record") SysProdPdfPO record, @Param("example") SysProdPdfPOExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") SysProdPdfPO record, @Param("example") SysProdPdfPOExample example);
-
     int updateByExample(@Param("record") SysProdPdfPO record, @Param("example") SysProdPdfPOExample example);
 
     int updateByPrimaryKeySelective(SysProdPdfPO record);
-
-    int updateByPrimaryKeyWithBLOBs(SysProdPdfPO record);
 
     int updateByPrimaryKey(SysProdPdfPO record);
 }

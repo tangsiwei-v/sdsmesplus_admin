@@ -165,6 +165,66 @@ public class SysProdPdfPOExample {
             return (Criteria) this;
         }
 
+        public Criteria andFcIdIsNull() {
+            addCriterion("fc_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdIsNotNull() {
+            addCriterion("fc_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdEqualTo(Integer value) {
+            addCriterion("fc_id =", value, "fcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdNotEqualTo(Integer value) {
+            addCriterion("fc_id <>", value, "fcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdGreaterThan(Integer value) {
+            addCriterion("fc_id >", value, "fcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("fc_id >=", value, "fcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdLessThan(Integer value) {
+            addCriterion("fc_id <", value, "fcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdLessThanOrEqualTo(Integer value) {
+            addCriterion("fc_id <=", value, "fcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdIn(List<Integer> values) {
+            addCriterion("fc_id in", values, "fcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdNotIn(List<Integer> values) {
+            addCriterion("fc_id not in", values, "fcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdBetween(Integer value1, Integer value2) {
+            addCriterion("fc_id between", value1, value2, "fcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("fc_id not between", value1, value2, "fcId");
+            return (Criteria) this;
+        }
+
         public Criteria andProdCodeIsNull() {
             addCriterion("prod_code is null");
             return (Criteria) this;
@@ -302,6 +362,76 @@ public class SysProdPdfPOExample {
 
         public Criteria andPdfNameNotBetween(String value1, String value2) {
             addCriterion("pdf_name not between", value1, value2, "pdfName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentIsNull() {
+            addCriterion("pdf_content is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentIsNotNull() {
+            addCriterion("pdf_content is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentEqualTo(String value) {
+            addCriterion("pdf_content =", value, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentNotEqualTo(String value) {
+            addCriterion("pdf_content <>", value, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentGreaterThan(String value) {
+            addCriterion("pdf_content >", value, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentGreaterThanOrEqualTo(String value) {
+            addCriterion("pdf_content >=", value, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentLessThan(String value) {
+            addCriterion("pdf_content <", value, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentLessThanOrEqualTo(String value) {
+            addCriterion("pdf_content <=", value, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentLike(String value) {
+            addCriterion("pdf_content like", value, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentNotLike(String value) {
+            addCriterion("pdf_content not like", value, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentIn(List<String> values) {
+            addCriterion("pdf_content in", values, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentNotIn(List<String> values) {
+            addCriterion("pdf_content not in", values, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentBetween(String value1, String value2) {
+            addCriterion("pdf_content between", value1, value2, "pdfContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfContentNotBetween(String value1, String value2) {
+            addCriterion("pdf_content not between", value1, value2, "pdfContent");
             return (Criteria) this;
         }
 
@@ -622,66 +752,6 @@ public class SysProdPdfPOExample {
 
         public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
             addCriterion("update_time not between", value1, value2, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdIsNull() {
-            addCriterion("fc_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdIsNotNull() {
-            addCriterion("fc_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdEqualTo(Integer value) {
-            addCriterion("fc_id =", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdNotEqualTo(Integer value) {
-            addCriterion("fc_id <>", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdGreaterThan(Integer value) {
-            addCriterion("fc_id >", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("fc_id >=", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdLessThan(Integer value) {
-            addCriterion("fc_id <", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdLessThanOrEqualTo(Integer value) {
-            addCriterion("fc_id <=", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdIn(List<Integer> values) {
-            addCriterion("fc_id in", values, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdNotIn(List<Integer> values) {
-            addCriterion("fc_id not in", values, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdBetween(Integer value1, Integer value2) {
-            addCriterion("fc_id between", value1, value2, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("fc_id not between", value1, value2, "fcId");
             return (Criteria) this;
         }
     }

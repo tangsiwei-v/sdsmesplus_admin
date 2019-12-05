@@ -5,9 +5,13 @@ import java.util.Date;
 public class SysProdPdfPO {
     private Integer sppId;
 
+    private Integer fcId;
+
     private String prodCode;
 
     private String pdfName;
+
+    private String pdfContent;
 
     private String pdfUrl;
 
@@ -19,16 +23,20 @@ public class SysProdPdfPO {
 
     private Date updateTime;
 
-    private Integer fcId;
-
-    private byte[] pdfContent;
-
     public Integer getSppId() {
         return sppId;
     }
 
     public void setSppId(Integer sppId) {
         this.sppId = sppId;
+    }
+
+    public Integer getFcId() {
+        return fcId;
+    }
+
+    public void setFcId(Integer fcId) {
+        this.fcId = fcId;
     }
 
     public String getProdCode() {
@@ -45,6 +53,14 @@ public class SysProdPdfPO {
 
     public void setPdfName(String pdfName) {
         this.pdfName = pdfName == null ? null : pdfName.trim();
+    }
+
+    public String getPdfContent() {
+        return pdfContent;
+    }
+
+    public void setPdfContent(String pdfContent) {
+        this.pdfContent = pdfContent == null ? null : pdfContent.trim();
     }
 
     public String getPdfUrl() {
@@ -85,21 +101,5 @@ public class SysProdPdfPO {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Integer getFcId() {
-        return fcId;
-    }
-
-    public void setFcId(Integer fcId) {
-        this.fcId = fcId;
-    }
-
-    public byte[] getPdfContent() {
-        return pdfContent;
-    }
-
-    public void setPdfContent(byte[] pdfContent) {
-        this.pdfContent = pdfContent;
     }
 }
