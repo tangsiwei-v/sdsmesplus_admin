@@ -11,6 +11,7 @@
 	    <result column="mat_furnace_no" jdbcType="VARCHAR" property="furnaceNo" />
 	    <result column="mat_glevel" jdbcType="VARCHAR" property="glevel" />
 	    <result column="box_quan_left" jdbcType="VARCHAR" property="matCount" />
+	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
  	</resultMap>
 
 	<select id="getOrderStock" resultType="map">
@@ -63,12 +64,23 @@
 			mat_batch_no,
 			mat_furnace_no,
 			mat_glevel,
-			box_quan_left
-		from prod_order_stock left join plan_order on prod_order_stock.po_code = plan_order.po_code
+			box_quan_left,
+			prod_order_stock.create_time
+		from prod_order_stock 
+		left join plan_order on prod_order_stock.po_code = plan_order.po_code
+		left join sys_line c on plan_order.line_id = c.line_id
+		left join sys_workshop d on c.shop_id = d.shop_id
+		left join sys_factory e on d.fc_id = e.fc_id
 		where 1=1
 			<if test="lineId != null and lineId != ''">
 				and plan_order.line_id = #{lineId}
 			</if>
+			<if test="shopId != null and shopId != ''">
+		      and d.shop_id = #{shopId}
+		    </if>
+		    <if test="fcId != null and fcId != ''">
+		      and e.fc_id = #{fcId}
+		    </if>
 			<if test="poCode != null and poCode != ''">
 				and prod_order_stock.po_code = #{poCode}
 			</if>
@@ -78,8 +90,13 @@
 			<if test="boxBarcode != null and boxBarcode != ''">
 				and box_barcode = #{boxBarcode}
 			</if>
-			and is_cleaned = 0
-			and box_quan_left > 0
+			<if test="isCleaned == 0">
+			  and is_cleaned = 0
+			  and box_quan_left > 0
+			</if>
+			<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+			  and prod_order_stock.create_time between #{beginTime} and #{endTime}
+			</if>
 	</select>
 	
 	<select id="statProcStock" resultMap="StockStatMap">
@@ -92,12 +109,22 @@
 			mat_batch_no,
 			mat_furnace_no,
 			mat_glevel,
-			box_quan_left
-		from prod_process_stock
+			box_quan_left,
+			a.create_time
+		from prod_process_stock a
+		left join sys_line c on a.line_id = c.line_id
+		left join sys_workshop d on c.shop_id = d.shop_id
+		left join sys_factory e on d.fc_id = e.fc_id
 		where 1=1
 			<if test="lineId != null and lineId != ''">
-				and line_id = #{lineId}
+				and a.line_id = #{lineId}
 			</if>
+			<if test="shopId != null and shopId != ''">
+		        and d.shop_id = #{shopId}
+		    </if>
+		    <if test="fcId != null and fcId != ''">
+		        and e.fc_id = #{fcId}
+		    </if>
 			<if test="poCode != null and poCode != ''">
 				and po_code = #{poCode}
 			</if>
@@ -110,8 +137,14 @@
 			<if test="boxBarcode != null and boxBarcode != ''">
 				and box_barcode = #{boxBarcode}
 			</if>
-			and is_cleaned = 0
-			and box_quan_left > 0
+			<if test="isCleaned == 0">
+			  and is_cleaned = 0
+			  and box_quan_left > 0
+			</if>
+			<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+			  and a.create_time between #{beginTime} and #{endTime}
+			</if>
+			
 	</select>
 	
 	<select id="statWipStock" resultMap="StockStatMap">
@@ -124,12 +157,23 @@
 			mat_batch_no,
 			mat_furnace_no,
 			mat_glevel,
-			prod_box_material.mat_count box_quan_left
-		from prod_box_material left join prod_box_log on prod_box_material.box_barcode = prod_box_log.box_barcode
+			prod_box_material.mat_count box_quan_left,
+			prod_box_material.create_time
+		from prod_box_material 
+		left join prod_box_log on prod_box_material.box_barcode = prod_box_log.box_barcode
+		left join sys_line c on prod_box_log.line_id = c.line_id
+		left join sys_workshop d on c.shop_id = d.shop_id
+		left join sys_factory e on d.fc_id = e.fc_id
 		where 1=1
 			<if test="lineId != null and lineId != ''">
-				and line_id = #{lineId}
+				and c.line_id = #{lineId}
 			</if>
+			<if test="shopId != null and shopId != ''">
+		        and d.shop_id = #{shopId}
+		    </if>
+		    <if test="fcId != null and fcId != ''">
+		        and e.fc_id = #{fcId}
+		    </if>
 			<if test="poCode != null and poCode != ''">
 				and po_code = #{poCode}
 			</if>
@@ -145,5 +189,8 @@
 			and prod_box_log.is_wip = 1
 			and prod_box_log.is_feeded = 0
 			and prod_box_log.is_outsource = 0
+			<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+			  and prod_box_material.create_time between #{beginTime} and #{endTime}
+			</if>
 	</select>
 </mapper>
