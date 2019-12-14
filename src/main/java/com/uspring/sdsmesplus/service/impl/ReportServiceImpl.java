@@ -10,17 +10,18 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.uspring.sdsmesplus.dao.LineProdModelDao;
 import com.uspring.sdsmesplus.dao.NonconformProductDao;
 import com.uspring.sdsmesplus.dao.PlanOrderDao;
 import com.uspring.sdsmesplus.dao.ProdBoxLogDao;
 import com.uspring.sdsmesplus.dao.ProdBoxMaterialDao;
+import com.uspring.sdsmesplus.dao.ProdCleanLogDao;
 import com.uspring.sdsmesplus.dao.ProdFinishedProductDao;
 import com.uspring.sdsmesplus.dao.ProdOrderStockDao;
 import com.uspring.sdsmesplus.dao.ProdProcessStockDao;
 import com.uspring.sdsmesplus.dao.ProdProductMaterialDao;
 import com.uspring.sdsmesplus.dao.SafelunchOrderDao;
 import com.uspring.sdsmesplus.dao.generate.NonconformProductLogPODao;
-import com.uspring.sdsmesplus.dao.generate.ProdCleanLogPODao;
 import com.uspring.sdsmesplus.dao.generate.SafelunchWorkLinePODao;
 import com.uspring.sdsmesplus.entity.po.NonconformProductLogPO;
 import com.uspring.sdsmesplus.entity.po.NonconformProductLogPOExample;
@@ -36,6 +37,8 @@ import com.uspring.sdsmesplus.entity.po.ProdProcessStockPO;
 import com.uspring.sdsmesplus.entity.po.ProdProcessStockPOExample;
 import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePO;
 import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePOExample;
+import com.uspring.sdsmesplus.entity.po.SysLineProdmodelPO;
+import com.uspring.sdsmesplus.entity.po.SysLineProdmodelPOExample;
 import com.uspring.sdsmesplus.service.MongoDBService;
 import com.uspring.sdsmesplus.service.ReportService;
 
@@ -76,10 +79,13 @@ public class ReportServiceImpl implements ReportService {
 	private PlanOrderDao planOrderDao;
 	
 	@Autowired
-	private ProdCleanLogPODao prodCleanLogPoDao;
+	private NonconformProductLogPODao nonconformProductDao;
 	
 	@Autowired
-	private NonconformProductLogPODao nonconformProductDao;
+	private ProdCleanLogDao prodCleanLogPoDao;
+	
+	@Autowired
+	private LineProdModelDao LineProdModelDao;
 
 	@Override
 	public Map<String, Object> getProductInfo(String barcode) {
@@ -324,7 +330,7 @@ public class ReportServiceImpl implements ReportService {
 		List<PlanOrderPO> dataList = planOrderDao.queryPlanVO(paramMap);
 		
 		for(PlanOrderPO dataObject:dataList){
-			Map<String,Object> resultMap =  getOrderData(dataObject.getPoCode());
+			Map<String,Object> resultMap =  getOrderData(dataObject.getPoCode(),dataObject.getLineId());
 			
 			resultMap.put("orderData", dataObject);
 			
@@ -340,7 +346,7 @@ public class ReportServiceImpl implements ReportService {
 		
 	}
 	
-	public Map<String,Object> getOrderData(String opNo){
+	public Map<String,Object> getOrderData(String poCode,Integer lineId){
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		//上料数量
 		//装配上料数量
@@ -350,35 +356,45 @@ public class ReportServiceImpl implements ReportService {
 		double cleanCount = 0;
 		double outSourceCount = 0;
 		
-		resultMap.put("chargCount", chargCount);
-		resultMap.put("completeCount", completeCount);
-		resultMap.put("wasteCount", wasteCount);
-		resultMap.put("cleanCount", cleanCount);
-		resultMap.put("outSourceCount", outSourceCount);
+		//类型 1装配上料，2机加上料
+		int type = 1;
 		
-		ProdOrderStockPOExample orderStockExample = new ProdOrderStockPOExample();
-		orderStockExample.createCriteria().andPoCodeEqualTo(opNo);
+		//判断产线类型
+		SysLineProdmodelPOExample modelExample = new SysLineProdmodelPOExample();
+		modelExample.createCriteria().andLineIdEqualTo(lineId);
+		List<SysLineProdmodelPO> modelList = this.LineProdModelDao.selectByExample(modelExample);
 		
-		List<ProdOrderStockPO> prodOrderStockList = this.prodOrderStockDao.selectByExample(orderStockExample);
-		for(ProdOrderStockPO data:prodOrderStockList){
-			chargCount += data.getBoxQuan().doubleValue();
-		}
-		
-		//机加上料数量
-		if(chargCount == 0){
-			ProdProcessStockPOExample prodProcessStockExampel = new ProdProcessStockPOExample();
-			prodProcessStockExampel.createCriteria().andOpNoEqualTo(opNo);
+		if(modelList.size() > 0){
+			String model = modelList.get(0).getProdModel();
 			
-			List<ProdProcessStockPO> prodProcessStockList = this.prodProcessStockDao.selectByExample(prodProcessStockExampel);
-			
-			for(ProdProcessStockPO data:prodProcessStockList){
-				chargCount += data.getBoxQuan().doubleValue();
+			if(model.equals("cv_assy") || model.equals("sec_assy")){
+				//读取工单库存表
+				ProdOrderStockPOExample orderStockExample = new ProdOrderStockPOExample();
+				orderStockExample.createCriteria().andPoCodeEqualTo(poCode);
+				
+				List<ProdOrderStockPO> prodOrderStockList = this.prodOrderStockDao.selectByExample(orderStockExample);
+				for(ProdOrderStockPO data:prodOrderStockList){
+					chargCount += data.getBoxQuan().doubleValue();
+				}
+				type = 1;
+			}else{
+				//读取工序库存表
+				ProdProcessStockPOExample prodProcessStockExampel = new ProdProcessStockPOExample();
+				prodProcessStockExampel.createCriteria().andPoCodeEqualTo(poCode);
+				
+				List<ProdProcessStockPO> prodProcessStockList = this.prodProcessStockDao.selectByExample(prodProcessStockExampel);
+				
+				for(ProdProcessStockPO data:prodProcessStockList){
+					chargCount += data.getBoxQuan().doubleValue();
+				}
+				type = 2;
 			}
+			
 		}
 		
 		//报交数量
 		ProdBoxLogPOExample prodBoxLogExample = new ProdBoxLogPOExample();
-		prodBoxLogExample.createCriteria().andPoCodeEqualTo(opNo);
+		prodBoxLogExample.createCriteria().andPoCodeEqualTo(poCode);
 		
 		List<ProdBoxLogPO> prodBoxLogList = prodBoxLogDao.selectByExample(prodBoxLogExample);
 		
@@ -388,7 +404,7 @@ public class ReportServiceImpl implements ReportService {
 		
 		//清线数量 //委外数量
 		ProdCleanLogPOExample prodClanLogExample = new ProdCleanLogPOExample();
-		prodClanLogExample.createCriteria().andPoCodeEqualTo(opNo);
+		prodClanLogExample.createCriteria().andPoCodeEqualTo(poCode);
 		
 		List<ProdCleanLogPO> prodCleanLogList = this.prodCleanLogPoDao.selectByExample(prodClanLogExample);
 		
@@ -403,7 +419,7 @@ public class ReportServiceImpl implements ReportService {
 		
 		//不合格品数量
 		NonconformProductLogPOExample nonconformProductExample = new NonconformProductLogPOExample();
-		nonconformProductExample.createCriteria().andPoCodeEqualTo(opNo);
+		nonconformProductExample.createCriteria().andPoCodeEqualTo(poCode);
 		
 		List<NonconformProductLogPO> wasteList = this.nonconformProductDao.selectByExample(nonconformProductExample);
 		
@@ -411,6 +427,7 @@ public class ReportServiceImpl implements ReportService {
 			wasteCount += data.getNplQty().doubleValue();
 		}
 		
+		resultMap.put("modelType", type);
 		resultMap.put("chargCount", chargCount);
 		resultMap.put("completeCount", completeCount);
 		resultMap.put("wasteCount", wasteCount);
@@ -461,6 +478,30 @@ public class ReportServiceImpl implements ReportService {
 		
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		resultMap.put("data", resultList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getCleanInfo(Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode, String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, String beginTime, String endTime, String type, Integer pageNum, Integer pageSize) {
+		// TODO Auto-generated method stub
+		
+		PageHelper page = new PageHelper();
+		page.startPage(pageNum, pageSize);
+		
+		boolean searchType = false;
+		if(type.equals("1")){
+			searchType = false;
+		}else{
+			searchType = true;
+		}
+		
+		List<Map<String,Object>> dataList = this.prodCleanLogPoDao.getCleanLog(fcId, shopId, lineId, poCode, prodCode, prodNumber, matProdCode, matProdNumber, boxCode, matBoxCode, beginTime, endTime, searchType);
+		
+        PageInfo info = new PageInfo(dataList);
+		
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("data", dataList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
 	}

@@ -153,4 +153,11 @@ public class ReportController {
 		return new Result("查询成功", this.reportService.getOrderDetailInfoByType(poCode, type, pageNum, pageSize), StatusCode.SUCCESS);
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/clean/detail", method = RequestMethod.GET)
+	@ApiOperation(value = "查询清线记录", notes = "查询清线记录", response = Result.class)
+	public Result getCleanInfo(HttpServletResponse response,Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode, String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, String beginTime, String endTime, String type, Integer pageNum, Integer pageSize) {
+		return new Result("查询成功", this.reportService.getCleanInfo(fcId, shopId, lineId, poCode, prodCode, prodNumber, matProdCode, matProdNumber, boxCode, matBoxCode, beginTime, endTime, type, pageNum, pageSize), StatusCode.SUCCESS);
+	}
 }

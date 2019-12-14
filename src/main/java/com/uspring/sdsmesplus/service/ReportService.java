@@ -240,5 +240,11 @@ public interface ReportService {
 	 * @return
 	 */
 	Map<String,Object> getOrderDetailInfoByType(String poCode, Integer type, Integer pageNum, Integer pageSize);
+	
+	/**
+	 * 产品清线记录
+	 * type 1清线， 2委外
+	 */
+	Map<String,Object> getCleanInfo(Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode, String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, String beginTime, String endTime, String type, Integer pageNum, Integer pageSize);
 		
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ProdCleanLogDao">
+    
+    <select id="getCleanLog" resultType="map">
+        select distinct a.*,b.prod_code,b.prod_number,b.prod_tuhao,b.prod_name,c.line_name,d.shop_name,e.fc_name from prod_clean_log a
+		left join plan_order b on a.po_code = b.po_code
+		left join sys_line c on b.line_id = c.line_id
+		left join sys_workshop d on c.shop_id = d.shop_id
+		left join sys_factory e on d.fc_id = e.fc_id
+		where 1=1
+		<if test="poCode != null and poCode != ''">
+		  and a.po_code = #{poCode}
+		</if>
+		<if test="lineId != null and lineId != ''">
+		  and b.line_id = #{lineId}
+		</if>
+		<if test="shopId != null and shopId != ''">
+	      and d.shop_id = #{shopId}
+	    </if>
+	    <if test="fcId != null and fcId != ''">
+	      and e.fc_id = #{fcId}
+	    </if>
+		<if test="prodCode != null and prodCode != ''">
+		  and b.prod_code = #{prodCode}
+		</if>
+		<if test="prodNumber != null and prodNumber != ''">
+		  and b.prod_number = #{prodNumber}
+		</if>
+		<if test="matProdCode != null and matProdCode != ''">
+		  and a.mat_code = #{matProdCode}
+		</if>
+		<if test="matProdNumber != null and matProdNumber != ''">
+		  and a.mat_number = #{matProdNumber}
+		</if>
+		<if test="boxCode != null and boxCode != ''">
+		  and a.box_barcode_old = #{boxCode}
+		</if>
+		<if test="matBoxCode != null and matBoxCode != ''">
+		  and a.box_barcode_new = #{matBoxCode}
+		</if>
+		<if test="searchType != null and searchType != ''">
+		  and a.is_outsource = #{searchType}
+		</if>
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime !=''">
+		  and a.create_time between #{beginTime} and #{endTime}
+		</if>
+		order by a.create_time desc
+    </select>
+</mapper>

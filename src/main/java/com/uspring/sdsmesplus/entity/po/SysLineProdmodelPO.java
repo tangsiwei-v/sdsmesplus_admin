@@ -1,5 +1,6 @@
 package com.uspring.sdsmesplus.entity.po;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class SysLineProdmodelPO {
@@ -10,6 +11,8 @@ public class SysLineProdmodelPO {
     private String prodModel;
 
     private String opNo;
+
+    private BigDecimal extraRate;
 
     private Date createTime;
 
@@ -43,6 +46,14 @@ public class SysLineProdmodelPO {
 
     public void setOpNo(String opNo) {
         this.opNo = opNo == null ? null : opNo.trim();
+    }
+
+    public BigDecimal getExtraRate() {
+        return extraRate;
+    }
+
+    public void setExtraRate(BigDecimal extraRate) {
+        this.extraRate = extraRate;
     }
 
     public Date getCreateTime() {

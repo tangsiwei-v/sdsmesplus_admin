@@ -1,5 +1,6 @@
 package com.uspring.sdsmesplus.entity.po;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -362,6 +363,66 @@ public class SysLineProdmodelPOExample {
 
         public Criteria andOpNoNotBetween(String value1, String value2) {
             addCriterion("op_no not between", value1, value2, "opNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateIsNull() {
+            addCriterion("extra_rate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateIsNotNull() {
+            addCriterion("extra_rate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateEqualTo(BigDecimal value) {
+            addCriterion("extra_rate =", value, "extraRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateNotEqualTo(BigDecimal value) {
+            addCriterion("extra_rate <>", value, "extraRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateGreaterThan(BigDecimal value) {
+            addCriterion("extra_rate >", value, "extraRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("extra_rate >=", value, "extraRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateLessThan(BigDecimal value) {
+            addCriterion("extra_rate <", value, "extraRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("extra_rate <=", value, "extraRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateIn(List<BigDecimal> values) {
+            addCriterion("extra_rate in", values, "extraRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateNotIn(List<BigDecimal> values) {
+            addCriterion("extra_rate not in", values, "extraRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("extra_rate between", value1, value2, "extraRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtraRateNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("extra_rate not between", value1, value2, "extraRate");
             return (Criteria) this;
         }
 
