@@ -36,169 +36,196 @@ import com.uspring.sdsmesplus.entity.po.ProdProcessStockPO;
 import com.uspring.sdsmesplus.entity.po.ProdProcessStockPOExample;
 import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePO;
 import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePOExample;
+import com.uspring.sdsmesplus.entity.vo.StockStat;
 import com.uspring.sdsmesplus.service.MongoDBService;
 import com.uspring.sdsmesplus.service.ReportService;
 
 @Service
 public class ReportServiceImpl implements ReportService {
-	
+
 	@Autowired
 	private ProdFinishedProductDao prodFinishDao;
-	
+
 	@Autowired
 	private ProdBoxLogDao prodBoxLogDao;
-	
+
 	@Autowired
 	private MongoDBService mongoDBservice;
-	
+
 	@Autowired
 	private ProdProductMaterialDao productMaterialDao;
-	
+
 	@Autowired
 	private ProdOrderStockDao prodOrderStockDao;
-	
+
 	@Autowired
 	private NonconformProductDao noConformProductDao;
-	
+
 	@Autowired
 	private ProdProcessStockDao prodProcessStockDao;
-	
+
 	@Autowired
 	private SafelunchOrderDao safelunchOrderDao;
-	
+
 	@Autowired
 	private SafelunchWorkLinePODao safelunchWorklinePoDao;
-	
+
 	@Autowired
 	private ProdBoxMaterialDao prodBoxMaterialDao;
 
 	@Autowired
 	private PlanOrderDao planOrderDao;
-	
+
 	@Autowired
 	private ProdCleanLogPODao prodCleanLogPoDao;
-	
+
 	@Autowired
 	private NonconformProductLogPODao nonconformProductDao;
 
 	@Override
 	public Map<String, Object> getProductInfo(String barcode) {
-		// TODO Auto-generated method stub
-		Map<String,Object> resultMap = this.prodFinishDao.getProductInfo(barcode);
+		Map<String, Object> resultMap = this.prodFinishDao.getProductInfo(barcode);
 		return resultMap;
 	}
 
 	@Override
-	public List<Map<String,Object>> costMaterial(Integer fpId) {
-		// TODO Auto-generated method stub
+	public List<Map<String, Object>> costMaterial(Integer fpId) {
 		return this.productMaterialDao.costMaterialInfo(fpId);
 	}
 
 	@Override
 	public List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId) {
-		// TODO Auto-generated method stub
-		
 		return this.mongoDBservice.getProcessData(rfid, lineId);
 	}
 
 	@Override
-	public Map<String,Object> getBoxList(Integer lineId, String boxCode, String tuhao, String prodCode,String prodNumber,
-			String beginTime, String endTime,String poCode, Integer pageNum, Integer pageSize,Integer shopId,Integer fcId) {
-		// TODO Auto-generated method stub
-		
+	public Map<String, Object> getBoxList(Integer lineId, String boxCode, String tuhao, String prodCode,
+			String prodNumber, String beginTime, String endTime, String poCode, Integer pageNum, Integer pageSize,
+			Integer shopId, Integer fcId) {
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		List<Map<String,Object>> resultList = this.prodBoxLogDao.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime, poCode,shopId,fcId);
+		List<Map<String, Object>> resultList = this.prodBoxLogDao.getBoxList(lineId, boxCode, tuhao, prodCode,
+				prodNumber, beginTime, endTime, poCode, shopId, fcId);
 		PageInfo info = new PageInfo(resultList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", resultList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
 	}
 
 	@Override
-	public Map<String,Object> getProductList(Integer lineId, String boxCode, String barcode, String tuhao,
-			String prodCode,String prodNumber,String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize,Integer shopId,Integer fcId) {
-		// TODO Auto-generated method stub
+	public Map<String, Object> getProductList(Integer lineId, String boxCode, String barcode, String tuhao,
+			String prodCode, String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum,
+			Integer pageSize, Integer shopId, Integer fcId) {
 		ProdFinishedProductPOExample prodExample = new ProdFinishedProductPOExample();
-		ProdFinishedProductPOExample.Criteria criteria = prodExample.createCriteria(); 
-		
-		
+		ProdFinishedProductPOExample.Criteria criteria = prodExample.createCriteria();
+
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		List<Map<String,Object>> resultList = this.prodFinishDao.getProductList(lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime,shopId,fcId);
-		
+		List<Map<String, Object>> resultList = this.prodFinishDao.getProductList(lineId, boxCode, barcode, tuhao,
+				prodCode, prodNumber, poCode, beginTime, endTime, shopId, fcId);
+
 		PageInfo info = new PageInfo(resultList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", resultList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
 	}
 
 	@Override
-	public Map<String,Object> useMaterialInfo(String fpBarcode, String boxCode, String materialCode,
-			String batchNo, String furnaceNo, String prodCode,String materialBoxCode, String beginTime, String endTime, Integer pageNum,
-			Integer pageSize) {
-		// TODO Auto-generated method stub
-		
+	public Map<String, Object> useMaterialInfo(String fpBarcode, String boxCode, String materialCode, String batchNo,
+			String furnaceNo, String prodCode, String materialBoxCode, String beginTime, String endTime,
+			Integer pageNum, Integer pageSize) {
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		List<Map<String,Object>> dataList = this.productMaterialDao.useMaterialInfo(fpBarcode, materialCode, batchNo, furnaceNo, prodCode, materialBoxCode, beginTime, endTime);
-		
-		
-        PageInfo info = new PageInfo(dataList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+		List<Map<String, Object>> dataList = this.productMaterialDao.useMaterialInfo(fpBarcode, materialCode, batchNo,
+				furnaceNo, prodCode, materialBoxCode, beginTime, endTime);
+
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", dataList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
 	}
 
 	@Override
-	public List<Map<String,Object>> getInverseQuery(Integer type, String value, Integer fcId) {
-		// TODO Auto-generated method stub
-		List<Map<String,Object>> resulList = new ArrayList<Map<String,Object>>();
-	    Map<String,Object> rfidMap = this.mongoDBservice.dataReverSearch(type, value, fcId);
-	    if(rfidMap != null){
-	    	resulList = this.prodFinishDao.getProductData(Integer.parseInt(rfidMap.get("line").toString()), rfidMap.get("rfid").toString());
-	    }
-	    
+	public List<Map<String, Object>> getInverseQuery(Integer type, String value, Integer fcId) {
+		List<Map<String, Object>> resulList = new ArrayList<Map<String, Object>>();
+		Map<String, Object> rfidMap = this.mongoDBservice.dataReverSearch(type, value, fcId);
+		if (rfidMap != null) {
+			resulList = this.prodFinishDao.getProductData(Integer.parseInt(rfidMap.get("line").toString()),
+					rfidMap.get("rfid").toString());
+		}
+
 		return resulList;
 	}
 
 	@Override
 	public Map<String, Object> getOrderStock(String orderCode, String prodCode, String beginTime, String endTime,
-			Integer pageNum, Integer pageSize, Integer lineId, String prodNumber,String matProdCode,String matProdNumber,String boxCode,Integer shopId,Integer fcId) {
-		// TODO Auto-generated method stub
+			Integer pageNum, Integer pageSize, Integer lineId, String prodNumber, String matProdCode,
+			String matProdNumber, String boxCode, Integer shopId, Integer fcId) {
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		
-		List<Map<String,Object>> dataList = this.prodOrderStockDao.getOrderStock(orderCode, prodCode, prodNumber, matProdCode, matProdNumber,boxCode, beginTime, endTime, lineId, shopId, fcId);
-		
-        PageInfo info = new PageInfo(dataList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+
+		List<Map<String, Object>> dataList = this.prodOrderStockDao.getOrderStock(orderCode, prodCode, prodNumber,
+				matProdCode, matProdNumber, boxCode, beginTime, endTime, lineId, shopId, fcId);
+
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", dataList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
 	}
 
 	@Override
+	public List<StockStat> statOrderStock(Integer lineId, String poCode, String procCode, String matProdCode,
+			String matProdNumber, String boxCode, String groupBy, String beginTime, String endTime, Integer pageNum,
+			Integer pageSize) {
+		List<StockStat> stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode);
+		stockList.addAll(prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode));
+		stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode));
+
+		Map<String, StockStat> resultMap = new HashMap<String, StockStat>();
+		for (StockStat stock : stockList) {
+			String key = stock.getBoxBarcode();
+			if ("Batch".equals(groupBy))
+				key = stock.getMatCode() + stock.getBatchNo();
+			if (resultMap.containsKey(key)) {
+				StockStat mapStock = resultMap.get(key);
+				mapStock.setMatCount(mapStock.getMatCount() + stock.getMatCount());
+			} else {
+				if ("Batch".equals(groupBy)) {
+					// 批次统计-忽略工单、工序和箱的信息
+					stock.setBoxBarcode("");
+					stock.setProcCode("");
+					stock.setPoCode("");
+				}
+				resultMap.put(key, stock);
+			}
+		}
+		List<StockStat> resultList = new ArrayList<StockStat>();
+		resultList.addAll(resultMap.values());
+
+		return resultList;
+	}
+
+	@Override
 	public Map<String, Object> getWasteProd(Integer lineId, String prodCode, String prodNumber, String beginTime,
-			String endTime, Integer pageNum, Integer pageSize, String matProdCode, String matProdNumber,
-			String status,String poCode,Integer shopId,Integer fcId) {
-		// TODO Auto-generated method stub noConformProductDao
-		
+			String endTime, Integer pageNum, Integer pageSize, String matProdCode, String matProdNumber, String status,
+			String poCode, Integer shopId, Integer fcId) {
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		
-		List<Map<String,Object>> dataList = this.noConformProductDao.getWasteProd(lineId, prodCode, prodNumber, beginTime, endTime, matProdCode, matProdNumber, status, poCode, shopId, fcId);
-		
-        PageInfo info = new PageInfo(dataList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+
+		List<Map<String, Object>> dataList = this.noConformProductDao.getWasteProd(lineId, prodCode, prodNumber,
+				beginTime, endTime, matProdCode, matProdNumber, status, poCode, shopId, fcId);
+
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", dataList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
@@ -206,34 +233,35 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public Map<String, Object> getWasteProdMaterial(Integer lineId, String nplBarcode, String beginTime, String endTime,
-			 String matProdCode, String matProdNumber, Integer pageNum,
-			Integer pageSize,Integer shopId,Integer fcId) {
-		// TODO Auto-generated method stub
+			String matProdCode, String matProdNumber, Integer pageNum, Integer pageSize, Integer shopId, Integer fcId) {
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		
-		List<Map<String,Object>> dataList = this.noConformProductDao.getWasteProdMaterial(lineId, nplBarcode, beginTime, endTime, matProdCode, matProdNumber,shopId,fcId);
-		
-        PageInfo info = new PageInfo(dataList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+
+		List<Map<String, Object>> dataList = this.noConformProductDao.getWasteProdMaterial(lineId, nplBarcode,
+				beginTime, endTime, matProdCode, matProdNumber, shopId, fcId);
+
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", dataList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
 	}
 
 	@Override
-	public Map<String, Object> getMachMaterial (Integer lineId, String poCode, String prodCode, String prodNumber,
-			String batchNo, String furnaceNo, String beginTime, String endTime, Integer pageNum, Integer pageSize,String matProdCode,String matProdNumber,String matBoxCode,Integer shopId,Integer fcId) {
-		// TODO Auto-generated method stub
+	public Map<String, Object> getMachMaterial(Integer lineId, String poCode, String prodCode, String prodNumber,
+			String batchNo, String furnaceNo, String beginTime, String endTime, Integer pageNum, Integer pageSize,
+			String matProdCode, String matProdNumber, String matBoxCode, Integer shopId, Integer fcId) {
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		
-		List<Map<String,Object>> dataList = this.prodProcessStockDao.getProcessMaterial(lineId, poCode, prodCode, prodNumber, batchNo, furnaceNo, beginTime, endTime, matProdCode, matProdNumber, matBoxCode,shopId,fcId);
-		
-        PageInfo info = new PageInfo(dataList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+
+		List<Map<String, Object>> dataList = this.prodProcessStockDao.getProcessMaterial(lineId, poCode, prodCode,
+				prodNumber, batchNo, furnaceNo, beginTime, endTime, matProdCode, matProdNumber, matBoxCode, shopId,
+				fcId);
+
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", dataList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
@@ -241,16 +269,17 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public Map<String, Object> getSafeLunch(Integer lineId, String poCode, String prodCode, String prodNumber,
-			String boxCode, String beginTime, String endTime, Integer pageNum, Integer pageSize,Integer safelineId,Integer shopId,Integer fcId) {
-		// TODO Auto-generated method stub
+			String boxCode, String beginTime, String endTime, Integer pageNum, Integer pageSize, Integer safelineId,
+			Integer shopId, Integer fcId) {
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		
-		List<Map<String,Object>> dataList = this.safelunchOrderDao.getSafeLunch(lineId, poCode, prodCode, prodNumber, boxCode, beginTime, endTime, safelineId,shopId,fcId);
-		
-        PageInfo info = new PageInfo(dataList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+
+		List<Map<String, Object>> dataList = this.safelunchOrderDao.getSafeLunch(lineId, poCode, prodCode, prodNumber,
+				boxCode, beginTime, endTime, safelineId, shopId, fcId);
+
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", dataList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
@@ -258,17 +287,17 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public Map<String, Object> getSafeLunchDetail(Integer lineId, String poCode, String prodCode, String prodNumber,
-			String boxCode, String beginTime, String endTime, String safeLunchOrder, Integer pageNum,
-			Integer pageSize,Integer safelineId,String fpBarcode,Integer shopId,Integer fcId) {
-		// TODO Auto-generated method stub
+			String boxCode, String beginTime, String endTime, String safeLunchOrder, Integer pageNum, Integer pageSize,
+			Integer safelineId, String fpBarcode, Integer shopId, Integer fcId) {
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		
-		List<Map<String,Object>> dataList = this.safelunchOrderDao.getSafeLunchDetail(lineId, poCode, prodCode, prodNumber, boxCode, beginTime, endTime, safeLunchOrder, safelineId,fpBarcode,shopId,fcId);
-		
-        PageInfo info = new PageInfo(dataList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+
+		List<Map<String, Object>> dataList = this.safelunchOrderDao.getSafeLunchDetail(lineId, poCode, prodCode,
+				prodNumber, boxCode, beginTime, endTime, safeLunchOrder, safelineId, fpBarcode, shopId, fcId);
+
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", dataList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
@@ -276,28 +305,27 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public List<SafelunchWorkLinePO> getSafeLunchWorkLine(Integer fcId) {
-		// TODO Auto-generated method stub
 		SafelunchWorkLinePOExample workLineExample = new SafelunchWorkLinePOExample();
 		workLineExample.createCriteria().andFcIdEqualTo(fcId);
-		
+
 		List<SafelunchWorkLinePO> workLineList = this.safelunchWorklinePoDao.selectByExample(workLineExample);
-		
 		return workLineList;
 	}
 
 	@Override
 
 	public Map<String, Object> boxMaterialUseInfo(Integer lineId, String beginTime, String endTime, String prodCode,
-			String matProdCode, String boxCode, String matBoxCode, Integer pageNum, Integer pageSize,String furnaceNo,String batchNo) {
-		// TODO Auto-generated method stub
+			String matProdCode, String boxCode, String matBoxCode, Integer pageNum, Integer pageSize, String furnaceNo,
+			String batchNo) {
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		
-		List<Map<String,Object>> dataList = this.prodBoxMaterialDao.boxMaterialUseInfo(lineId, beginTime, endTime, prodCode, matProdCode, boxCode, matBoxCode, furnaceNo, batchNo);
-		
-        PageInfo info = new PageInfo(dataList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+
+		List<Map<String, Object>> dataList = this.prodBoxMaterialDao.boxMaterialUseInfo(lineId, beginTime, endTime,
+				prodCode, matProdCode, boxCode, matBoxCode, furnaceNo, batchNo);
+
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", dataList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
@@ -305,13 +333,12 @@ public class ReportServiceImpl implements ReportService {
 
 	public Map<String, Object> getOrderDetail(Integer lineId, Integer shopId, Integer fcId, String prodCode,
 			String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize) {
-		// TODO Auto-generated method stub
-		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
-		
+		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
+
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		
-		Map<String,Object> paramMap = new HashMap<String,Object>();
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("line_id", lineId);
 		paramMap.put("shopId", shopId);
 		paramMap.put("fcId", fcId);
@@ -320,146 +347,146 @@ public class ReportServiceImpl implements ReportService {
 		paramMap.put("endDate", endTime);
 		paramMap.put("prodCode", prodCode);
 		paramMap.put("prodNumber", prodNumber);
-		
+
 		List<PlanOrderPO> dataList = planOrderDao.queryPlanVO(paramMap);
-		
-		for(PlanOrderPO dataObject:dataList){
-			Map<String,Object> resultMap =  getOrderData(dataObject.getPoCode());
-			
+
+		for (PlanOrderPO dataObject : dataList) {
+			Map<String, Object> resultMap = getOrderData(dataObject.getPoCode());
+
 			resultMap.put("orderData", dataObject);
-			
+
 			resultList.add(resultMap);
 		}
 
-        PageInfo info = new PageInfo(dataList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", resultList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
-		
+
 	}
-	
-	public Map<String,Object> getOrderData(String opNo){
-		Map<String,Object> resultMap = new HashMap<String,Object>();
-		//上料数量
-		//装配上料数量
+
+	public Map<String, Object> getOrderData(String opNo) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		// 上料数量
+		// 装配上料数量
 		double chargCount = 0;
 		double completeCount = 0;
 		double wasteCount = 0;
 		double cleanCount = 0;
 		double outSourceCount = 0;
-		
+
 		resultMap.put("chargCount", chargCount);
 		resultMap.put("completeCount", completeCount);
 		resultMap.put("wasteCount", wasteCount);
 		resultMap.put("cleanCount", cleanCount);
 		resultMap.put("outSourceCount", outSourceCount);
-		
+
 		ProdOrderStockPOExample orderStockExample = new ProdOrderStockPOExample();
 		orderStockExample.createCriteria().andPoCodeEqualTo(opNo);
-		
+
 		List<ProdOrderStockPO> prodOrderStockList = this.prodOrderStockDao.selectByExample(orderStockExample);
-		for(ProdOrderStockPO data:prodOrderStockList){
+		for (ProdOrderStockPO data : prodOrderStockList) {
 			chargCount += data.getBoxQuan().doubleValue();
 		}
-		
-		//机加上料数量
-		if(chargCount == 0){
+
+		// 机加上料数量
+		if (chargCount == 0) {
 			ProdProcessStockPOExample prodProcessStockExampel = new ProdProcessStockPOExample();
 			prodProcessStockExampel.createCriteria().andOpNoEqualTo(opNo);
-			
-			List<ProdProcessStockPO> prodProcessStockList = this.prodProcessStockDao.selectByExample(prodProcessStockExampel);
-			
-			for(ProdProcessStockPO data:prodProcessStockList){
+
+			List<ProdProcessStockPO> prodProcessStockList = this.prodProcessStockDao
+					.selectByExample(prodProcessStockExampel);
+
+			for (ProdProcessStockPO data : prodProcessStockList) {
 				chargCount += data.getBoxQuan().doubleValue();
 			}
 		}
-		
-		//报交数量
+
+		// 报交数量
 		ProdBoxLogPOExample prodBoxLogExample = new ProdBoxLogPOExample();
 		prodBoxLogExample.createCriteria().andPoCodeEqualTo(opNo);
-		
+
 		List<ProdBoxLogPO> prodBoxLogList = prodBoxLogDao.selectByExample(prodBoxLogExample);
-		
-		for(ProdBoxLogPO data:prodBoxLogList){
+
+		for (ProdBoxLogPO data : prodBoxLogList) {
 			completeCount += data.getBoxQuan().doubleValue();
 		}
-		
-		//清线数量 //委外数量
+
+		// 清线数量 //委外数量
 		ProdCleanLogPOExample prodClanLogExample = new ProdCleanLogPOExample();
 		prodClanLogExample.createCriteria().andPoCodeEqualTo(opNo);
-		
+
 		List<ProdCleanLogPO> prodCleanLogList = this.prodCleanLogPoDao.selectByExample(prodClanLogExample);
-		
-		for(ProdCleanLogPO data:prodCleanLogList){
-			if(data.getIsOutsource()){
+
+		for (ProdCleanLogPO data : prodCleanLogList) {
+			if (data.getIsOutsource()) {
 				outSourceCount += data.getClRestCount().doubleValue();
-			}else{
+			} else {
 				cleanCount += data.getClRestCount().doubleValue();
 			}
-			
+
 		}
-		
-		//不合格品数量
+
+		// 不合格品数量
 		NonconformProductLogPOExample nonconformProductExample = new NonconformProductLogPOExample();
 		nonconformProductExample.createCriteria().andPoCodeEqualTo(opNo);
-		
+
 		List<NonconformProductLogPO> wasteList = this.nonconformProductDao.selectByExample(nonconformProductExample);
-		
-		for(NonconformProductLogPO data:wasteList){
+
+		for (NonconformProductLogPO data : wasteList) {
 			wasteCount += data.getNplQty().doubleValue();
 		}
-		
+
 		resultMap.put("chargCount", chargCount);
 		resultMap.put("completeCount", completeCount);
 		resultMap.put("wasteCount", wasteCount);
 		resultMap.put("cleanCount", cleanCount);
 		resultMap.put("outSourceCount", outSourceCount);
-		
+
 		return resultMap;
 	}
 
 	@Override
-	public Map<String, Object> getOrderDetailInfoByType(String poCode, Integer type, Integer pageNum, Integer pageSize) {
-		// TODO Auto-generated method stub
-		
+	public Map<String, Object> getOrderDetailInfoByType(String poCode, Integer type, Integer pageNum,
+			Integer pageSize) {
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		
+
 		List resultList = new ArrayList();
-		
-		//type 1.上料记录， 2.报交数量，3清线记录，4委外记录,5.不合格品记录
-		if(type == 1){
+
+		// type 1.上料记录， 2.报交数量，3清线记录，4委外记录,5.不合格品记录
+		if (type == 1) {
 			ProdOrderStockPOExample orderStockExample = new ProdOrderStockPOExample();
 			orderStockExample.createCriteria().andPoCodeEqualTo(poCode);
-			
+
 			resultList = this.prodOrderStockDao.selectByExample(orderStockExample);
-		}else if(type == 2){
+		} else if (type == 2) {
 			ProdBoxLogPOExample prodBoxLogExample = new ProdBoxLogPOExample();
 			prodBoxLogExample.createCriteria().andPoCodeEqualTo(poCode);
-			
+
 			resultList = prodBoxLogDao.selectByExample(prodBoxLogExample);
-		}else if(type == 3){
+		} else if (type == 3) {
 			ProdCleanLogPOExample prodClanLogExample = new ProdCleanLogPOExample();
 			prodClanLogExample.createCriteria().andPoCodeEqualTo(poCode).andIsOutsourceEqualTo(false);
-			
+
 			resultList = this.prodCleanLogPoDao.selectByExample(prodClanLogExample);
-		}else if(type == 4){
+		} else if (type == 4) {
 			ProdCleanLogPOExample prodClanLogExample = new ProdCleanLogPOExample();
 			prodClanLogExample.createCriteria().andPoCodeEqualTo(poCode).andIsOutsourceEqualTo(true);
-			
+
 			resultList = this.prodCleanLogPoDao.selectByExample(prodClanLogExample);
-		}else if(type == 5){
+		} else if (type == 5) {
 			NonconformProductLogPOExample nonconformProductExample = new NonconformProductLogPOExample();
 			nonconformProductExample.createCriteria().andPoCodeEqualTo(poCode);
-			
+
 			resultList = this.nonconformProductDao.selectByExample(nonconformProductExample);
 		}
-		
-        PageInfo info = new PageInfo(resultList);
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+
+		PageInfo info = new PageInfo(resultList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", resultList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;

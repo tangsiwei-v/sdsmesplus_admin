@@ -89,6 +89,20 @@ public class ReportController {
 		return new Result("查询成功", this.reportService.getOrderStock(poCode, prodCode, beginTime, endTime, pageNum, pageSize, lineId,prodNumber,matProdCode,matProdNumber,boxCode,shopId,fcId), StatusCode.SUCCESS);
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "/stock_statist", method = RequestMethod.GET)
+	@ApiOperation(value = "线上库存查询", notes = "统计线上库存信息", response = Result.class)
+	public Result getOrderStockStatisc(Integer lineId, String poCode, String procCode, 
+			String matProdCode, String matProdNumber, String boxCode, String groupBy, 
+			String beginTime, String endTime, Integer pageNum, Integer pageSize) {
+		return new Result("查询成功"
+				, this.reportService.statOrderStock(lineId, poCode, procCode, matProdCode, 
+				matProdNumber, boxCode, groupBy, beginTime, endTime, pageNum, pageSize)
+				, StatusCode.SUCCESS);
+	}
+
+	
 	@ResponseBody
 	@RequestMapping(value = "/waste", method = RequestMethod.GET)
 	@ApiOperation(value = "不合格品查询", notes = "不合格品查询", response = Result.class)
