@@ -572,6 +572,30 @@ public class DateUtils {
 		System.out.println(B.charAt(3));
 		System.out.println(B.charAt(6));
      }
+	
+	/**
+	 * 在当前的时间上加一天
+	 * @param endTime
+	 * @return
+	 */
+	public static String dealEndTime(String endTime){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		String returnTime = "";
+		if(!endTime.equals("")){
+			Calendar c1 = Calendar.getInstance();
+			try {
+				c1.setTime(df.parse(endTime));
+				c1.add(Calendar.DAY_OF_YEAR, 1);
+				
+				returnTime = df.format(c1.getTime());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return returnTime;
+	}
   
 	
 }

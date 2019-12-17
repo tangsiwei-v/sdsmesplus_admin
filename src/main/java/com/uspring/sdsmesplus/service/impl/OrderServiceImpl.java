@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.uspring.sdsmesplus.common.DateUtils;
 import com.uspring.sdsmesplus.dao.PlanOrderDao;
 import com.uspring.sdsmesplus.dao.SysFactoryDao;
 import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
@@ -44,6 +45,7 @@ public class OrderServiceImpl implements OrderService {
 			}
 			if (map.containsKey("end_time")) {
 				String end = (String) map.get("end_time");
+				end = DateUtils.dealEndTime(end);
 				map.put("endDate", end);
 			}
 			// 切割传入status

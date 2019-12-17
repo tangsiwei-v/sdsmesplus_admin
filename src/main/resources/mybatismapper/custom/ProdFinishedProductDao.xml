@@ -34,7 +34,7 @@
 	      and fp_barcode like '%'+#{barcode}+'%'
 	    </if>
 	    <if test="poCode != null and poCode != ''">
-	      and a.po_code like '%'+#{poCode}+'%'
+	      and a.po_code = #{poCode}
 	    </if>
 	    <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
 	      and a.create_time between #{beginTime} and #{endTime}

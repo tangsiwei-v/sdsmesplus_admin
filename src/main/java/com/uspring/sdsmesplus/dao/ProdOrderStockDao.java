@@ -34,14 +34,18 @@ public interface ProdOrderStockDao extends ProdOrderStockPODao {
 			@Param("shopId") Integer shopId, @Param("fcId") Integer fcId);
 
 	List<StockStat> statOrderStock(@Param("lineId") Integer lineId, @Param("poCode") String poCode,
-			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode);
+			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode,
+			@Param("isCleaned") Integer isCleaned, @Param("shopId") Integer shopId, @Param("fcId") Integer fcId,
+			@Param("beginTime") String beginTime, @Param("endTime") String endTime);
 
 	List<StockStat> statProcStock(@Param("lineId") Integer lineId, @Param("poCode") String poCode,
 			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode,
-			@Param("procCode") String procCode);
+			@Param("procCode") String procCode, @Param("isCleaned") Integer isCleaned, @Param("shopId") Integer shopId,
+			@Param("fcId") Integer fcId, @Param("beginTime") String beginTime, @Param("endTime") String endTime);
 
 	List<StockStat> statWipStock(@Param("lineId") Integer lineId, @Param("poCode") String poCode,
 			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode,
-			@Param("procCode") String procCode);
+			@Param("procCode") String procCode, @Param("shopId") Integer shopId, @Param("fcId") Integer fcId,
+			@Param("beginTime") String beginTime, @Param("endTime") String endTime);
 
 }

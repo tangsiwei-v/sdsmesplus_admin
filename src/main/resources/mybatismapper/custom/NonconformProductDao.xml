@@ -81,7 +81,7 @@
     
     
     <select id="getWasteProd" resultType="map">
-       select a.* from nonconform_product_log a
+       select a.*,c.line_name,d.shop_name,e.fc_name from nonconform_product_log a
       left join plan_order b on a.po_code = b.po_code
       left join sys_line c on b.line_id = c.line_id
 	  left join sys_workshop d on c.shop_id = d.shop_id
@@ -90,8 +90,14 @@
       <if test="lineId != null and lineId != ''">
          and a.line_id = #{lineId}
       </if>
+      <if test="shopId != null and shopId != ''">
+         and d.shop_id = #{shopId}
+      </if>
+      <if test="fcId != null and fcId != ''">
+         and e.fc_id = #{fcId}
+      </if>
       <if test="poCode != null and poCode != ''">
-         and a.poCode  = #{poCode}
+         and a.po_code  = #{poCode}
       </if>
       <if test="prodCode != null and prodCode != ''">
          and b.prod_code  = #{prodCode}
