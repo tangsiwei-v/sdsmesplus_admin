@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.NonconformTroubleCodePODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePO">
+    <id column="trc_id" jdbcType="INTEGER" property="trcId" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="op_code" jdbcType="VARCHAR" property="opCode" />
+    <result column="trc_code" jdbcType="VARCHAR" property="trcCode" />
+    <result column="trc_name" jdbcType="VARCHAR" property="trcName" />
+    <result column="trc_desc" jdbcType="VARCHAR" property="trcDesc" />
+    <result column="trc_index" jdbcType="INTEGER" property="trcIndex" />
+    <result column="trc_alarm" jdbcType="BIT" property="trcAlarm" />
+    <result column="is_active" jdbcType="BIT" property="isActive" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    trc_id, fc_id, op_code, trc_code, trc_name, trc_desc, trc_index, trc_alarm, is_active, 
+    create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from nonconform_trouble_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from nonconform_trouble_code
+    where trc_id = #{trcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from nonconform_trouble_code
+    where trc_id = #{trcId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePOExample">
+    delete from nonconform_trouble_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePO">
+    insert into nonconform_trouble_code (trc_id, fc_id, op_code, 
+      trc_code, trc_name, trc_desc, 
+      trc_index, trc_alarm, is_active, 
+      create_time, update_time)
+    values (#{trcId,jdbcType=INTEGER}, #{fcId,jdbcType=INTEGER}, #{opCode,jdbcType=VARCHAR}, 
+      #{trcCode,jdbcType=VARCHAR}, #{trcName,jdbcType=VARCHAR}, #{trcDesc,jdbcType=VARCHAR}, 
+      #{trcIndex,jdbcType=INTEGER}, #{trcAlarm,jdbcType=BIT}, #{isActive,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePO">
+    insert into nonconform_trouble_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="trcId != null">
+        trc_id,
+      </if>
+      <if test="fcId != null">
+        fc_id,
+      </if>
+      <if test="opCode != null">
+        op_code,
+      </if>
+      <if test="trcCode != null">
+        trc_code,
+      </if>
+      <if test="trcName != null">
+        trc_name,
+      </if>
+      <if test="trcDesc != null">
+        trc_desc,
+      </if>
+      <if test="trcIndex != null">
+        trc_index,
+      </if>
+      <if test="trcAlarm != null">
+        trc_alarm,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="trcId != null">
+        #{trcId,jdbcType=INTEGER},
+      </if>
+      <if test="fcId != null">
+        #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="opCode != null">
+        #{opCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trcCode != null">
+        #{trcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trcName != null">
+        #{trcName,jdbcType=VARCHAR},
+      </if>
+      <if test="trcDesc != null">
+        #{trcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="trcIndex != null">
+        #{trcIndex,jdbcType=INTEGER},
+      </if>
+      <if test="trcAlarm != null">
+        #{trcAlarm,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePOExample" resultType="java.lang.Long">
+    select count(*) from nonconform_trouble_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update nonconform_trouble_code
+    <set>
+      <if test="record.trcId != null">
+        trc_id = #{record.trcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcId != null">
+        fc_id = #{record.fcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.opCode != null">
+        op_code = #{record.opCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trcCode != null">
+        trc_code = #{record.trcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trcName != null">
+        trc_name = #{record.trcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trcDesc != null">
+        trc_desc = #{record.trcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trcIndex != null">
+        trc_index = #{record.trcIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.trcAlarm != null">
+        trc_alarm = #{record.trcAlarm,jdbcType=BIT},
+      </if>
+      <if test="record.isActive != null">
+        is_active = #{record.isActive,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update nonconform_trouble_code
+    set trc_id = #{record.trcId,jdbcType=INTEGER},
+      fc_id = #{record.fcId,jdbcType=INTEGER},
+      op_code = #{record.opCode,jdbcType=VARCHAR},
+      trc_code = #{record.trcCode,jdbcType=VARCHAR},
+      trc_name = #{record.trcName,jdbcType=VARCHAR},
+      trc_desc = #{record.trcDesc,jdbcType=VARCHAR},
+      trc_index = #{record.trcIndex,jdbcType=INTEGER},
+      trc_alarm = #{record.trcAlarm,jdbcType=BIT},
+      is_active = #{record.isActive,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePO">
+    update nonconform_trouble_code
+    <set>
+      <if test="fcId != null">
+        fc_id = #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="opCode != null">
+        op_code = #{opCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trcCode != null">
+        trc_code = #{trcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trcName != null">
+        trc_name = #{trcName,jdbcType=VARCHAR},
+      </if>
+      <if test="trcDesc != null">
+        trc_desc = #{trcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="trcIndex != null">
+        trc_index = #{trcIndex,jdbcType=INTEGER},
+      </if>
+      <if test="trcAlarm != null">
+        trc_alarm = #{trcAlarm,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where trc_id = #{trcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePO">
+    update nonconform_trouble_code
+    set fc_id = #{fcId,jdbcType=INTEGER},
+      op_code = #{opCode,jdbcType=VARCHAR},
+      trc_code = #{trcCode,jdbcType=VARCHAR},
+      trc_name = #{trcName,jdbcType=VARCHAR},
+      trc_desc = #{trcDesc,jdbcType=VARCHAR},
+      trc_index = #{trcIndex,jdbcType=INTEGER},
+      trc_alarm = #{trcAlarm,jdbcType=BIT},
+      is_active = #{isActive,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where trc_id = #{trcId,jdbcType=INTEGER}
+  </update>
+</mapper>

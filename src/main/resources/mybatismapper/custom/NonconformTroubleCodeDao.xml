@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.NonconformTroubleCodeDao">
+   <select id="getNonconformTrouCode" resultType="map">
+        select a.trc_id trcId,a.fc_id fcId,a.op_code opCode,a.trc_code trcCode,a.trc_name trcName,a.trc_desc trcDesc,a.trc_index trcIndex,
+		a.trc_alarm trcAlarm,a.is_active isActive,a.create_time createTime,update_time updateTime,b.fc_name from nonconform_trouble_code a
+		left join sys_factory b on a.fc_id = b.fc_id
+		where 1=1
+		<if test="fcId != null and fcId != ''">
+		  and a.fc_id = #{fcId}
+		</if>
+   </select>
+</mapper>
