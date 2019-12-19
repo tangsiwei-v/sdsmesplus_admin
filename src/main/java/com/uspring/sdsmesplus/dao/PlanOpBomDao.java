@@ -1,5 +1,6 @@
 package com.uspring.sdsmesplus.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -22,4 +23,6 @@ public interface PlanOpBomDao extends PlanOpBomPODao{
 	* @return  订单实体类
 	*/
 	List<PlanOpBomPO> selectBomByOrdercode(@Param("order_code") String order_code);
+	
+	List<PlanOpBomPO> selectBomByMtCode(@Param("mtCodes") List<String> mtCodes);
 }

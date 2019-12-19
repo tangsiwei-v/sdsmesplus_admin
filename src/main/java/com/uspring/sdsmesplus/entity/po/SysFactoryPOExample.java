@@ -513,6 +513,216 @@ public class SysFactoryPOExample {
             addCriterion("fc_sds_id not between", value1, value2, "fcSdsId");
             return (Criteria) this;
         }
+
+        public Criteria andFcSapCompanyIsNull() {
+            addCriterion("fc_sap_company is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyIsNotNull() {
+            addCriterion("fc_sap_company is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyEqualTo(String value) {
+            addCriterion("fc_sap_company =", value, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyNotEqualTo(String value) {
+            addCriterion("fc_sap_company <>", value, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyGreaterThan(String value) {
+            addCriterion("fc_sap_company >", value, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyGreaterThanOrEqualTo(String value) {
+            addCriterion("fc_sap_company >=", value, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyLessThan(String value) {
+            addCriterion("fc_sap_company <", value, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyLessThanOrEqualTo(String value) {
+            addCriterion("fc_sap_company <=", value, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyLike(String value) {
+            addCriterion("fc_sap_company like", value, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyNotLike(String value) {
+            addCriterion("fc_sap_company not like", value, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyIn(List<String> values) {
+            addCriterion("fc_sap_company in", values, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyNotIn(List<String> values) {
+            addCriterion("fc_sap_company not in", values, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyBetween(String value1, String value2) {
+            addCriterion("fc_sap_company between", value1, value2, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSapCompanyNotBetween(String value1, String value2) {
+            addCriterion("fc_sap_company not between", value1, value2, "fcSapCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoIsNull() {
+            addCriterion("fc_EWM_LocNo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoIsNotNull() {
+            addCriterion("fc_EWM_LocNo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoEqualTo(String value) {
+            addCriterion("fc_EWM_LocNo =", value, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoNotEqualTo(String value) {
+            addCriterion("fc_EWM_LocNo <>", value, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoGreaterThan(String value) {
+            addCriterion("fc_EWM_LocNo >", value, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoGreaterThanOrEqualTo(String value) {
+            addCriterion("fc_EWM_LocNo >=", value, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoLessThan(String value) {
+            addCriterion("fc_EWM_LocNo <", value, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoLessThanOrEqualTo(String value) {
+            addCriterion("fc_EWM_LocNo <=", value, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoLike(String value) {
+            addCriterion("fc_EWM_LocNo like", value, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoNotLike(String value) {
+            addCriterion("fc_EWM_LocNo not like", value, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoIn(List<String> values) {
+            addCriterion("fc_EWM_LocNo in", values, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoNotIn(List<String> values) {
+            addCriterion("fc_EWM_LocNo not in", values, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoBetween(String value1, String value2) {
+            addCriterion("fc_EWM_LocNo between", value1, value2, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcEwmLocnoNotBetween(String value1, String value2) {
+            addCriterion("fc_EWM_LocNo not between", value1, value2, "fcEwmLocno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteIsNull() {
+            addCriterion("fc_site is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteIsNotNull() {
+            addCriterion("fc_site is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteEqualTo(String value) {
+            addCriterion("fc_site =", value, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteNotEqualTo(String value) {
+            addCriterion("fc_site <>", value, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteGreaterThan(String value) {
+            addCriterion("fc_site >", value, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteGreaterThanOrEqualTo(String value) {
+            addCriterion("fc_site >=", value, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteLessThan(String value) {
+            addCriterion("fc_site <", value, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteLessThanOrEqualTo(String value) {
+            addCriterion("fc_site <=", value, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteLike(String value) {
+            addCriterion("fc_site like", value, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteNotLike(String value) {
+            addCriterion("fc_site not like", value, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteIn(List<String> values) {
+            addCriterion("fc_site in", values, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteNotIn(List<String> values) {
+            addCriterion("fc_site not in", values, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteBetween(String value1, String value2) {
+            addCriterion("fc_site between", value1, value2, "fcSite");
+            return (Criteria) this;
+        }
+
+        public Criteria andFcSiteNotBetween(String value1, String value2) {
+            addCriterion("fc_site not between", value1, value2, "fcSite");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

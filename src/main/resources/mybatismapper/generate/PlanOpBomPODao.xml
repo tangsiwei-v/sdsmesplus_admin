@@ -6,7 +6,10 @@
     <result column="plop_id" jdbcType="INTEGER" property="plopId" />
     <result column="material_posnr" jdbcType="VARCHAR" property="materialPosnr" />
     <result column="material_code" jdbcType="VARCHAR" property="materialCode" />
-    <result column="material_count" jdbcType="INTEGER" property="materialCount" />
+    <result column="material_name" jdbcType="VARCHAR" property="materialName" />
+    <result column="material_tuhao" jdbcType="VARCHAR" property="materialTuhao" />
+    <result column="material_number" jdbcType="NCHAR" property="materialNumber" />
+    <result column="material_count" jdbcType="DECIMAL" property="materialCount" />
     <result column="material_unit" jdbcType="VARCHAR" property="materialUnit" />
     <result column="material_stloc" jdbcType="VARCHAR" property="materialStloc" />
     <result column="material_psa" jdbcType="VARCHAR" property="materialPsa" />
@@ -70,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    plbm_id, plop_id, material_posnr, material_code, material_count, material_unit, material_stloc, 
-    material_psa
+    plbm_id, plop_id, material_posnr, material_code, material_name, material_tuhao, material_number, 
+    material_count, material_unit, material_stloc, material_psa
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.PlanOpBomPOExample" resultMap="BaseResultMap">
     select
@@ -105,10 +108,12 @@
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.PlanOpBomPO">
     insert into plan_op_bom (plbm_id, plop_id, material_posnr, 
-      material_code, material_count, material_unit, 
+      material_code, material_name, material_tuhao, 
+      material_number, material_count, material_unit, 
       material_stloc, material_psa)
     values (#{plbmId,jdbcType=INTEGER}, #{plopId,jdbcType=INTEGER}, #{materialPosnr,jdbcType=VARCHAR}, 
-      #{materialCode,jdbcType=VARCHAR}, #{materialCount,jdbcType=INTEGER}, #{materialUnit,jdbcType=VARCHAR}, 
+      #{materialCode,jdbcType=VARCHAR}, #{materialName,jdbcType=VARCHAR}, #{materialTuhao,jdbcType=VARCHAR}, 
+      #{materialNumber,jdbcType=NCHAR}, #{materialCount,jdbcType=DECIMAL}, #{materialUnit,jdbcType=VARCHAR}, 
       #{materialStloc,jdbcType=VARCHAR}, #{materialPsa,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.PlanOpBomPO">
@@ -125,6 +130,15 @@
       </if>
       <if test="materialCode != null">
         material_code,
+      </if>
+      <if test="materialName != null">
+        material_name,
+      </if>
+      <if test="materialTuhao != null">
+        material_tuhao,
+      </if>
+      <if test="materialNumber != null">
+        material_number,
       </if>
       <if test="materialCount != null">
         material_count,
@@ -152,8 +166,17 @@
       <if test="materialCode != null">
         #{materialCode,jdbcType=VARCHAR},
       </if>
+      <if test="materialName != null">
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialTuhao != null">
+        #{materialTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="materialNumber != null">
+        #{materialNumber,jdbcType=NCHAR},
+      </if>
       <if test="materialCount != null">
-        #{materialCount,jdbcType=INTEGER},
+        #{materialCount,jdbcType=DECIMAL},
       </if>
       <if test="materialUnit != null">
         #{materialUnit,jdbcType=VARCHAR},
@@ -187,8 +210,17 @@
       <if test="record.materialCode != null">
         material_code = #{record.materialCode,jdbcType=VARCHAR},
       </if>
+      <if test="record.materialName != null">
+        material_name = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialTuhao != null">
+        material_tuhao = #{record.materialTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialNumber != null">
+        material_number = #{record.materialNumber,jdbcType=NCHAR},
+      </if>
       <if test="record.materialCount != null">
-        material_count = #{record.materialCount,jdbcType=INTEGER},
+        material_count = #{record.materialCount,jdbcType=DECIMAL},
       </if>
       <if test="record.materialUnit != null">
         material_unit = #{record.materialUnit,jdbcType=VARCHAR},
@@ -210,7 +242,10 @@
       plop_id = #{record.plopId,jdbcType=INTEGER},
       material_posnr = #{record.materialPosnr,jdbcType=VARCHAR},
       material_code = #{record.materialCode,jdbcType=VARCHAR},
-      material_count = #{record.materialCount,jdbcType=INTEGER},
+      material_name = #{record.materialName,jdbcType=VARCHAR},
+      material_tuhao = #{record.materialTuhao,jdbcType=VARCHAR},
+      material_number = #{record.materialNumber,jdbcType=NCHAR},
+      material_count = #{record.materialCount,jdbcType=DECIMAL},
       material_unit = #{record.materialUnit,jdbcType=VARCHAR},
       material_stloc = #{record.materialStloc,jdbcType=VARCHAR},
       material_psa = #{record.materialPsa,jdbcType=VARCHAR}
@@ -230,8 +265,17 @@
       <if test="materialCode != null">
         material_code = #{materialCode,jdbcType=VARCHAR},
       </if>
+      <if test="materialName != null">
+        material_name = #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialTuhao != null">
+        material_tuhao = #{materialTuhao,jdbcType=VARCHAR},
+      </if>
+      <if test="materialNumber != null">
+        material_number = #{materialNumber,jdbcType=NCHAR},
+      </if>
       <if test="materialCount != null">
-        material_count = #{materialCount,jdbcType=INTEGER},
+        material_count = #{materialCount,jdbcType=DECIMAL},
       </if>
       <if test="materialUnit != null">
         material_unit = #{materialUnit,jdbcType=VARCHAR},
@@ -250,7 +294,10 @@
     set plop_id = #{plopId,jdbcType=INTEGER},
       material_posnr = #{materialPosnr,jdbcType=VARCHAR},
       material_code = #{materialCode,jdbcType=VARCHAR},
-      material_count = #{materialCount,jdbcType=INTEGER},
+      material_name = #{materialName,jdbcType=VARCHAR},
+      material_tuhao = #{materialTuhao,jdbcType=VARCHAR},
+      material_number = #{materialNumber,jdbcType=NCHAR},
+      material_count = #{materialCount,jdbcType=DECIMAL},
       material_unit = #{materialUnit,jdbcType=VARCHAR},
       material_stloc = #{materialStloc,jdbcType=VARCHAR},
       material_psa = #{materialPsa,jdbcType=VARCHAR}

@@ -8,6 +8,9 @@
     <result column="fc_address" jdbcType="VARCHAR" property="fcAddress" />
     <result column="fc_domain" jdbcType="VARCHAR" property="fcDomain" />
     <result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
+    <result column="fc_sap_company" jdbcType="VARCHAR" property="fcSapCompany" />
+    <result column="fc_EWM_LocNo" jdbcType="VARCHAR" property="fcEwmLocno" />
+    <result column="fc_site" jdbcType="VARCHAR" property="fcSite" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    fc_id, fc_code, fc_name, fc_address, fc_domain, fc_sds_id
+    fc_id, fc_code, fc_name, fc_address, fc_domain, fc_sds_id, fc_sap_company, fc_EWM_LocNo, 
+    fc_site
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysFactoryPOExample" resultMap="BaseResultMap">
     select
@@ -102,10 +106,12 @@
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
     insert into sys_factory (fc_id, fc_code, fc_name, 
-      fc_address, fc_domain, fc_sds_id
+      fc_address, fc_domain, fc_sds_id, 
+      fc_sap_company, fc_EWM_LocNo, fc_site
       )
     values (#{fcId,jdbcType=INTEGER}, #{fcCode,jdbcType=VARCHAR}, #{fcName,jdbcType=VARCHAR}, 
-      #{fcAddress,jdbcType=VARCHAR}, #{fcDomain,jdbcType=VARCHAR}, #{fcSdsId,jdbcType=VARCHAR}
+      #{fcAddress,jdbcType=VARCHAR}, #{fcDomain,jdbcType=VARCHAR}, #{fcSdsId,jdbcType=VARCHAR}, 
+      #{fcSapCompany,jdbcType=VARCHAR}, #{fcEwmLocno,jdbcType=VARCHAR}, #{fcSite,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
@@ -129,6 +135,15 @@
       <if test="fcSdsId != null">
         fc_sds_id,
       </if>
+      <if test="fcSapCompany != null">
+        fc_sap_company,
+      </if>
+      <if test="fcEwmLocno != null">
+        fc_EWM_LocNo,
+      </if>
+      <if test="fcSite != null">
+        fc_site,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="fcId != null">
@@ -148,6 +163,15 @@
       </if>
       <if test="fcSdsId != null">
         #{fcSdsId,jdbcType=VARCHAR},
+      </if>
+      <if test="fcSapCompany != null">
+        #{fcSapCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="fcEwmLocno != null">
+        #{fcEwmLocno,jdbcType=VARCHAR},
+      </if>
+      <if test="fcSite != null">
+        #{fcSite,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +202,15 @@
       <if test="record.fcSdsId != null">
         fc_sds_id = #{record.fcSdsId,jdbcType=VARCHAR},
       </if>
+      <if test="record.fcSapCompany != null">
+        fc_sap_company = #{record.fcSapCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcEwmLocno != null">
+        fc_EWM_LocNo = #{record.fcEwmLocno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcSite != null">
+        fc_site = #{record.fcSite,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +223,10 @@
       fc_name = #{record.fcName,jdbcType=VARCHAR},
       fc_address = #{record.fcAddress,jdbcType=VARCHAR},
       fc_domain = #{record.fcDomain,jdbcType=VARCHAR},
-      fc_sds_id = #{record.fcSdsId,jdbcType=VARCHAR}
+      fc_sds_id = #{record.fcSdsId,jdbcType=VARCHAR},
+      fc_sap_company = #{record.fcSapCompany,jdbcType=VARCHAR},
+      fc_EWM_LocNo = #{record.fcEwmLocno,jdbcType=VARCHAR},
+      fc_site = #{record.fcSite,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +249,15 @@
       <if test="fcSdsId != null">
         fc_sds_id = #{fcSdsId,jdbcType=VARCHAR},
       </if>
+      <if test="fcSapCompany != null">
+        fc_sap_company = #{fcSapCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="fcEwmLocno != null">
+        fc_EWM_LocNo = #{fcEwmLocno,jdbcType=VARCHAR},
+      </if>
+      <if test="fcSite != null">
+        fc_site = #{fcSite,jdbcType=VARCHAR},
+      </if>
     </set>
     where fc_id = #{fcId,jdbcType=INTEGER}
   </update>
@@ -222,7 +267,10 @@
       fc_name = #{fcName,jdbcType=VARCHAR},
       fc_address = #{fcAddress,jdbcType=VARCHAR},
       fc_domain = #{fcDomain,jdbcType=VARCHAR},
-      fc_sds_id = #{fcSdsId,jdbcType=VARCHAR}
+      fc_sds_id = #{fcSdsId,jdbcType=VARCHAR},
+      fc_sap_company = #{fcSapCompany,jdbcType=VARCHAR},
+      fc_EWM_LocNo = #{fcEwmLocno,jdbcType=VARCHAR},
+      fc_site = #{fcSite,jdbcType=VARCHAR}
     where fc_id = #{fcId,jdbcType=INTEGER}
   </update>
 </mapper>

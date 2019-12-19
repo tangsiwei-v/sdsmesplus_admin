@@ -4,3 +4,6 @@ image_up_load_file = D://
 #pdf文件存储位置
 pdf_up_load_file = D://file/pdf
 
+
+#MPMLINK
+mpmlink_xml_dirt = ftp://windcadmin:1qaz%40WSX@192.168.180.88
