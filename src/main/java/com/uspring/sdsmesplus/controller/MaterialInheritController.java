@@ -77,5 +77,12 @@ public class MaterialInheritController extends BaseController {
 		return new Result("查询成功", this.materialInheritService.getProdBOM(prodCode, fcId), StatusCode.SUCCESS);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/prodCode/info", method = RequestMethod.GET)
+	@ApiOperation(value = "获取产品的基本信息", notes = "", response = Result.class)
+	public Result get(HttpServletResponse response, String prodCode) {
+		return new Result("查询成功", this.materialInheritService.getMtInfo(prodCode), StatusCode.SUCCESS);
+	}
+	
 	
 }

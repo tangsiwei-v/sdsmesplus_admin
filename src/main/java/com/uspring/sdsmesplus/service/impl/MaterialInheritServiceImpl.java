@@ -105,13 +105,17 @@ public class MaterialInheritServiceImpl implements MaterialInheritService {
 	@Override
 	public PlanOpBomPO getMtInfo(String prodCode) {
 		// TODO Auto-generated method stub
-		BomMaterial bomInfo = null;
+		PlanOpBomPO bomInfo = null;
 		
 		List<String> mtCodes = new ArrayList<String>();
 		mtCodes.add(prodCode);
 		List<PlanOpBomPO> bomList = this.bomDao.selectBomByMtCode(mtCodes);
 		
+		if(bomList.size() > 0){
+			bomInfo = bomList.get(0);
+		}
+		
 		return null;
 	}
-
+  
 }

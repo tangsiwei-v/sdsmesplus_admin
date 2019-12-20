@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.uspring.sdsmesplus.entity.po.PlanOpBomPO;
 import com.uspring.sdsmesplus.entity.po.SysMaterialInheritPO;
 import com.uspring.sdsmesplus.entity.po.SysProdPdfPO;
 import com.uspring.sdsmesplus.mpmlink.BomMaterial;
@@ -36,7 +37,7 @@ public interface MaterialInheritService {
 	
 	List<BomMaterial> getProdBOM(String prodCode, Integer fcId);
 	
-	BomMaterial getMtInfo(String prodCode);
+	PlanOpBomPO getMtInfo(String prodCode);
 	
 	
 }
