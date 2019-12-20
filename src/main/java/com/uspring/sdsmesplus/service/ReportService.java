@@ -11,6 +11,8 @@ package com.uspring.sdsmesplus.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 import com.uspring.sdsmesplus.entity.po.ProdFinishedProductPO;
 import com.uspring.sdsmesplus.entity.po.ProdProductMaterialPO;
@@ -78,9 +80,9 @@ public interface ReportService {
 	 * @param endTime   结束时间
 	 * @return
 	 */
-	Map<String, Object> getProductList(Integer lineId, String boxCode, String barcode, String tuhao, String prodCode,
+	Map<String, Object> getProductList(HttpServletResponse response,Integer lineId, String boxCode, String barcode, String tuhao, String prodCode,
 			String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize,
-			Integer shopId, Integer fcId);
+			Integer shopId, Integer fcId, Integer isExport);
 
 	/**
 	 * @Title: useMaterialInfo

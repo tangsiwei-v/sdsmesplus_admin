@@ -84,7 +84,17 @@ public class MongoDBServiceImpl implements MongoDBService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		return mongoTemplate.findOne(query, map.getClass(), PPARAM_COLLECTIONS);
 	}
+	
+	@Override
+	public List<Map<String, Object>> findPParamByRFIDList(List<String> rfids, String lineId) {
+		Criteria criatira = new Criteria();
+		criatira.andOperator(Criteria.where("rfid").in(rfids), Criteria.where("line").is(lineId));
+		Query query = new Query(criatira);
+		Map<String, Object> map = new HashMap<String, Object>();
+		return (List<Map<String, Object>>) mongoTemplate.find(query, map.getClass(), PPARAM_COLLECTIONS);
+	}
 
+	
 	@Override
 	public String updateCodeByOrder(Integer lineId, String qrCode) {
 		// 获取最新的一条记录
