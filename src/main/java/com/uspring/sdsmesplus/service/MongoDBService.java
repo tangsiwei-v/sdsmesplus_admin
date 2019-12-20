@@ -29,6 +29,9 @@ public interface MongoDBService {
 	//按RFID查询过程参数
 	Map<String, Object> findPParamByRFIDAndLine(String rfid,String line);
 	
+	//获取RFID集合查询数据
+	List<Map<String,Object>> findPParamByRFIDList(List<String> rfids,String line);
+	
 	//根据工单编号，修改当天二维码为空的数据最后一条数据
 	String updateCodeByOrder(Integer lineId,String qrCode);
 	

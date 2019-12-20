@@ -5,14 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.uspring.sdsmesplus.common.ExportXls;
 import com.uspring.sdsmesplus.dao.LineProdModelDao;
 import com.uspring.sdsmesplus.dao.NonconformProductDao;
 import com.uspring.sdsmesplus.dao.PlanOrderDao;
+import com.uspring.sdsmesplus.dao.ProcessParamDao;
 import com.uspring.sdsmesplus.dao.ProdBoxLogDao;
 import com.uspring.sdsmesplus.dao.ProdBoxMaterialDao;
 import com.uspring.sdsmesplus.dao.ProdCleanLogDao;
@@ -23,6 +27,8 @@ import com.uspring.sdsmesplus.dao.ProdProductMaterialDao;
 import com.uspring.sdsmesplus.dao.SafelunchOrderDao;
 import com.uspring.sdsmesplus.dao.generate.NonconformProductLogPODao;
 import com.uspring.sdsmesplus.dao.generate.SafelunchWorkLinePODao;
+import com.uspring.sdsmesplus.dao.generate.SysProcessPODao;
+import com.uspring.sdsmesplus.dao.generate.SysProcessParamPODao;
 import com.uspring.sdsmesplus.entity.po.NonconformProductLogPO;
 import com.uspring.sdsmesplus.entity.po.NonconformProductLogPOExample;
 import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
@@ -40,6 +46,10 @@ import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePO;
 import com.uspring.sdsmesplus.entity.po.SafelunchWorkLinePOExample;
 import com.uspring.sdsmesplus.entity.po.SysLineProdmodelPO;
 import com.uspring.sdsmesplus.entity.po.SysLineProdmodelPOExample;
+import com.uspring.sdsmesplus.entity.po.SysProcessPO;
+import com.uspring.sdsmesplus.entity.po.SysProcessPOExample;
+import com.uspring.sdsmesplus.entity.po.SysProcessParamPO;
+import com.uspring.sdsmesplus.entity.po.SysProcessParamPOExample;
 import com.uspring.sdsmesplus.entity.vo.StockStat;
 import com.uspring.sdsmesplus.service.MongoDBService;
 import com.uspring.sdsmesplus.service.ReportService;
@@ -88,6 +98,15 @@ public class ReportServiceImpl implements ReportService {
 
 	@Autowired
 	private LineProdModelDao LineProdModelDao;
+	
+	@Autowired  
+	private SysProcessPODao processDao;
+	
+	@Autowired
+	private SysProcessParamPODao processParamDao;
+	
+	@Autowired
+	private ProcessParamDao ParamDao;
 
 	@Override
 	public Map<String, Object> getProductInfo(String barcode) {
@@ -122,23 +141,103 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public Map<String, Object> getProductList(Integer lineId, String boxCode, String barcode, String tuhao,
+	public Map<String, Object> getProductList(HttpServletResponse response,Integer lineId, String boxCode, String barcode, String tuhao,
 			String prodCode, String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum,
-			Integer pageSize, Integer shopId, Integer fcId) {
+			Integer pageSize, Integer shopId, Integer fcId, Integer isExport) {
+		
+		if(lineId == 161){
+			shopId = null;
+			fcId = null;
+			lineId = 42281;
+		}
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
 		ProdFinishedProductPOExample prodExample = new ProdFinishedProductPOExample();
 		ProdFinishedProductPOExample.Criteria criteria = prodExample.createCriteria();
 
 		PageHelper page = new PageHelper();
-		page.startPage(pageNum, pageSize);
+		
+		//是否分页显示
+		if(isExport != 1){
+			page.startPage(pageNum, pageSize);
+		}
 		List<Map<String, Object>> resultList = this.prodFinishDao.getProductList(lineId, boxCode, barcode, tuhao,
 				prodCode, prodNumber, poCode, beginTime, endTime, shopId, fcId);
-
+        
+		//是否导出
+		if(isExport == 1){
+			exportProductInfo(resultList,response);
+	    }
+		
 		PageInfo info = new PageInfo(resultList);
 
-		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", resultList);
 		resultMap.put("total", info.getTotal());
+
 		return resultMap;
+	}
+	
+	public void exportProductInfo(List<Map<String, Object>> productList,HttpServletResponse response){
+		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
+		Integer lineId = 0;
+		
+		List<String> rfidList = new ArrayList<String>();
+		
+		for(Map<String,Object> productInfo:productList){
+			/*List<Map<String,Object>> processList = this.mongoDBservice.getProcessData(productInfo.get("fp_rfid").toString(), Integer.parseInt(productInfo.get("line_id").toString()));
+			resultList.add(processList);*/
+			
+			lineId = Integer.parseInt(productInfo.get("line_id").toString());
+			rfidList.add(productInfo.get("fp_rfid").toString());
+		}
+		
+		/*rfidList.clear();
+		rfidList.add("20191129060018");
+		rfidList.add("20191129060016");
+		rfidList.add("20191129060015");
+		rfidList.add("20191129060014");
+		rfidList.add("20191129060006");
+		rfidList.add("20191129060005");*/
+		//获取产品的所有数据
+		resultList = this.mongoDBservice.findPParamByRFIDList(rfidList, lineId+"");
+		
+		lineId = 161;
+		//获取所有工序的数据
+		SysProcessPOExample processExample = new SysProcessPOExample();
+		processExample.createCriteria().andLineIdEqualTo(lineId);
+		processExample.setOrderByClause("sp_order asc");
+		
+		List<Map<String,Object>> resultProcessList = new ArrayList<Map<String,Object>>();
+		//查询产品需要显示的工序
+		List<SysProcessPO> processList = this.processDao.selectByExample(processExample);
+		for(SysProcessPO processDo:processList){
+			/*Map<String,Object> processMap = new HashMap<String,Object>();
+			processMap.put("processName", processDo.getSpName());
+			processMap.put("processCode", processDo.getSpCode());
+			processMap.put("paramList", new ArrayList());*/
+			
+			//查询所有的工序参数
+			SysProcessParamPOExample paramExample = new SysProcessParamPOExample();
+			paramExample.createCriteria().andSpIdEqualTo(processDo.getSpId()).andPpShowEqualTo(true);
+			paramExample.setOrderByClause("pp_order asc");
+			List<SysProcessParamPO> paramList = this.processParamDao.selectByExample(paramExample);
+			
+			//List<Map<String,Object>> paramValueList = new ArrayList<Map<String,Object>>();
+			
+			for(SysProcessParamPO paramDo:paramList){
+				Map<String,Object> paramMap = new HashMap<String,Object>();
+				paramMap.put("paramName", paramDo.getPpName());
+				paramMap.put("paramCode", paramDo.getPpCode());
+				
+				paramMap.put("processName", processDo.getSpName());
+				paramMap.put("processCode", processDo.getSpCode());
+				
+				resultProcessList.add(paramMap);
+			}
+			//processMap.put("paramList", paramValueList);
+		}
+		ExportXls.exportBarcode(resultList, response, resultProcessList, null, "精确追溯数据");
 	}
 
 	@Override

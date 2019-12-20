@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uspring.sdsmesplus.common.DateUtils;
@@ -43,10 +44,21 @@ public class ReportController {
 	@ResponseBody
 	@RequestMapping(value = "/barcode", method = RequestMethod.GET)
 	@ApiOperation(value = "查询产品总成信息", notes = "查询产品总成信息", response = Result.class)
-	public Result getBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,Integer pageNum,Integer pageSize,Integer shopId,Integer fcId) {
+	public Result getBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,
+			Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,@RequestParam(defaultValue="0",value="isExprot",required=false) Integer ixExport) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getProductList(lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId), StatusCode.SUCCESS);
+		return new Result("查询成功", this.reportService.getProductList(response, lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId, ixExport), StatusCode.SUCCESS);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/barcode/export", method = RequestMethod.POST)
+	@ApiOperation(value = "查询产品总成信息", notes = "查询产品总成信息", response = Result.class)
+	public Result exportBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,
+			Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,@RequestParam(defaultValue="0",value="isExprot",required=false) Integer ixExport) {
+		endTime = DateUtils.dealEndTime(endTime);
+		return new Result("查询成功", this.reportService.getProductList(response, lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId, ixExport), StatusCode.SUCCESS);
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/barcode/info", method = RequestMethod.GET)
