@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.SysMaterialInheritPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SysMaterialInheritPO">
+    <id column="math_id" jdbcType="INTEGER" property="mathId" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="mat_code" jdbcType="VARCHAR" property="matCode" />
+    <result column="mat_name" jdbcType="VARCHAR" property="matName" />
+    <result column="furnace_mat_code" jdbcType="VARCHAR" property="furnaceMatCode" />
+    <result column="furnace_mat_name" jdbcType="VARCHAR" property="furnaceMatName" />
+    <result column="batch_mat_code" jdbcType="VARCHAR" property="batchMatCode" />
+    <result column="batch_mat_name" jdbcType="VARCHAR" property="batchMatName" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    math_id, fc_id, mat_code, mat_name, furnace_mat_code, furnace_mat_name, batch_mat_code, 
+    batch_mat_name, update_time, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysMaterialInheritPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_material_inherit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_material_inherit
+    where math_id = #{mathId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_material_inherit
+    where math_id = #{mathId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysMaterialInheritPOExample">
+    delete from sys_material_inherit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysMaterialInheritPO">
+    insert into sys_material_inherit (math_id, fc_id, mat_code, 
+      mat_name, furnace_mat_code, furnace_mat_name, 
+      batch_mat_code, batch_mat_name, update_time, 
+      create_time)
+    values (#{mathId,jdbcType=INTEGER}, #{fcId,jdbcType=INTEGER}, #{matCode,jdbcType=VARCHAR}, 
+      #{matName,jdbcType=VARCHAR}, #{furnaceMatCode,jdbcType=VARCHAR}, #{furnaceMatName,jdbcType=VARCHAR}, 
+      #{batchMatCode,jdbcType=VARCHAR}, #{batchMatName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysMaterialInheritPO">
+    insert into sys_material_inherit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mathId != null">
+        math_id,
+      </if>
+      <if test="fcId != null">
+        fc_id,
+      </if>
+      <if test="matCode != null">
+        mat_code,
+      </if>
+      <if test="matName != null">
+        mat_name,
+      </if>
+      <if test="furnaceMatCode != null">
+        furnace_mat_code,
+      </if>
+      <if test="furnaceMatName != null">
+        furnace_mat_name,
+      </if>
+      <if test="batchMatCode != null">
+        batch_mat_code,
+      </if>
+      <if test="batchMatName != null">
+        batch_mat_name,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mathId != null">
+        #{mathId,jdbcType=INTEGER},
+      </if>
+      <if test="fcId != null">
+        #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="matCode != null">
+        #{matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="matName != null">
+        #{matName,jdbcType=VARCHAR},
+      </if>
+      <if test="furnaceMatCode != null">
+        #{furnaceMatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="furnaceMatName != null">
+        #{furnaceMatName,jdbcType=VARCHAR},
+      </if>
+      <if test="batchMatCode != null">
+        #{batchMatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="batchMatName != null">
+        #{batchMatName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysMaterialInheritPOExample" resultType="java.lang.Long">
+    select count(*) from sys_material_inherit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_material_inherit
+    <set>
+      <if test="record.mathId != null">
+        math_id = #{record.mathId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcId != null">
+        fc_id = #{record.fcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.matCode != null">
+        mat_code = #{record.matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matName != null">
+        mat_name = #{record.matName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.furnaceMatCode != null">
+        furnace_mat_code = #{record.furnaceMatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.furnaceMatName != null">
+        furnace_mat_name = #{record.furnaceMatName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchMatCode != null">
+        batch_mat_code = #{record.batchMatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchMatName != null">
+        batch_mat_name = #{record.batchMatName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_material_inherit
+    set math_id = #{record.mathId,jdbcType=INTEGER},
+      fc_id = #{record.fcId,jdbcType=INTEGER},
+      mat_code = #{record.matCode,jdbcType=VARCHAR},
+      mat_name = #{record.matName,jdbcType=VARCHAR},
+      furnace_mat_code = #{record.furnaceMatCode,jdbcType=VARCHAR},
+      furnace_mat_name = #{record.furnaceMatName,jdbcType=VARCHAR},
+      batch_mat_code = #{record.batchMatCode,jdbcType=VARCHAR},
+      batch_mat_name = #{record.batchMatName,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SysMaterialInheritPO">
+    update sys_material_inherit
+    <set>
+      <if test="fcId != null">
+        fc_id = #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="matCode != null">
+        mat_code = #{matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="matName != null">
+        mat_name = #{matName,jdbcType=VARCHAR},
+      </if>
+      <if test="furnaceMatCode != null">
+        furnace_mat_code = #{furnaceMatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="furnaceMatName != null">
+        furnace_mat_name = #{furnaceMatName,jdbcType=VARCHAR},
+      </if>
+      <if test="batchMatCode != null">
+        batch_mat_code = #{batchMatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="batchMatName != null">
+        batch_mat_name = #{batchMatName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where math_id = #{mathId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SysMaterialInheritPO">
+    update sys_material_inherit
+    set fc_id = #{fcId,jdbcType=INTEGER},
+      mat_code = #{matCode,jdbcType=VARCHAR},
+      mat_name = #{matName,jdbcType=VARCHAR},
+      furnace_mat_code = #{furnaceMatCode,jdbcType=VARCHAR},
+      furnace_mat_name = #{furnaceMatName,jdbcType=VARCHAR},
+      batch_mat_code = #{batchMatCode,jdbcType=VARCHAR},
+      batch_mat_name = #{batchMatName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where math_id = #{mathId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -13,6 +13,12 @@ public class SysFactoryPO {
 
     private String fcSdsId;
 
+    private String fcSapCompany;
+
+    private String fcEwmLocno;
+
+    private String fcSite;
+
     public Integer getFcId() {
         return fcId;
     }
@@ -59,5 +65,29 @@ public class SysFactoryPO {
 
     public void setFcSdsId(String fcSdsId) {
         this.fcSdsId = fcSdsId == null ? null : fcSdsId.trim();
+    }
+
+    public String getFcSapCompany() {
+        return fcSapCompany;
+    }
+
+    public void setFcSapCompany(String fcSapCompany) {
+        this.fcSapCompany = fcSapCompany == null ? null : fcSapCompany.trim();
+    }
+
+    public String getFcEwmLocno() {
+        return fcEwmLocno;
+    }
+
+    public void setFcEwmLocno(String fcEwmLocno) {
+        this.fcEwmLocno = fcEwmLocno == null ? null : fcEwmLocno.trim();
+    }
+
+    public String getFcSite() {
+        return fcSite;
+    }
+
+    public void setFcSite(String fcSite) {
+        this.fcSite = fcSite == null ? null : fcSite.trim();
     }
 }

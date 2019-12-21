@@ -10,6 +10,8 @@
     <result column="material_unit" jdbcType="VARCHAR" property="materialUnit" />
     <result column="material_stloc" jdbcType="VARCHAR" property="materialStloc" />
     <result column="material_psa" jdbcType="VARCHAR" property="materialPsa" />
+    <result column="material_name" jdbcType="VARCHAR" property="materialName" />
+    <result column="material_number" jdbcType="VARCHAR" property="materialNumber" />
   </resultMap>
   
   
@@ -27,5 +29,13 @@
 			and a.po_code = #{order_code}
 		</if>
 		order by a.create_time asc
+	</select>
+	
+	<select id="selectBomByMtCode" resultMap="BomMap">
+	   select distinct material_code,material_name,material_number from plan_op_bom
+	   where 1=1 and material_code in
+	   <foreach collection="mtCodes" item="mtCode" open="(" separator="," close=")">
+	     #{mtCode}
+	   </foreach>
 	</select>
 </mapper>
