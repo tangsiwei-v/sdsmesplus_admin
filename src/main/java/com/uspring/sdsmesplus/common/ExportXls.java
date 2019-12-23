@@ -1,7 +1,9 @@
 package com.uspring.sdsmesplus.common;
 
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -170,10 +172,9 @@ public class ExportXls {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public static void exportBarcode(List<Map<String, Object>> historyData, HttpServletResponse response,
-			List<Map<String,Object>> processList, List<String> columnList, String fileName) {
+			List<Map<String, Object>> processList, List<String> columnList, String fileName) {
 		try {
 
 			HSSFWorkbook wb = new HSSFWorkbook();
@@ -256,30 +257,35 @@ public class ExportXls {
 			style5.setBorderRight(HSSFBorderFormatting.BORDER_THIN);
 			style5.setRightBorderColor(HSSFColor.WHITE.index);
 
-			
-			List<Map<String,Object>> titleList = new ArrayList<Map<String,Object>>();
-			
+			List<Map<String, Object>> titleList = new ArrayList<Map<String, Object>>();
+
 			int rowAt = 0;
 			HSSFRow row = sheet.createRow(rowAt);
 			HSSFCell cell = row.createCell(0);
-			sheet.setColumnWidth(0, 4000);
-			sheet.setColumnWidth(1, 4000);
+			// sheet.setColumnWidth(0, 8000);
+			// sheet.autoSizeColumn((short) 0);
+			// sheet.setColumnWidth(1, 8000);
+			// sheet.autoSizeColumn((short) 1);
 			for (int i = 0; i < processList.size(); i++) {
-				sheet.setColumnWidth(i, 4000);
+				// sheet.setColumnWidth(i, 8000);
+				// sheet.autoSizeColumn((short) i);
 				cell = row.createCell(i);
-				cell.setCellValue(processList.get(i).get("processName").toString()+"--"+processList.get(i).get("paramName").toString());
+				cell.setCellValue(processList.get(i).get("processName").toString() + "--"
+						+ processList.get(i).get("paramName").toString());
 				cell.setCellStyle(style1);
-				
-				Map<String,Object> titleMap = new HashMap<String,Object>();
+
+				int length = cell.getStringCellValue().getBytes().length * 256;
+				sheet.setColumnWidth(i, length);
+
+				Map<String, Object> titleMap = new HashMap<String, Object>();
 				titleMap.put("processCode", processList.get(i).get("processCode").toString());
 				titleMap.put("paramCode", processList.get(i).get("paramCode").toString());
-				
+
 				titleList.add(titleMap);
 			}
-			
+
 			rowAt = 1;
-			for(Map<String,Object> dataMap:historyData){
-				
+			for (Map<String, Object> dataMap : historyData) {
 				row = sheet.createRow(rowAt);
 				HSSFCellStyle styleTemp = null;
 				if (rowAt % 2 == 0) {
@@ -288,55 +294,41 @@ public class ExportXls {
 				} else {
 					styleTemp = style4;
 				}
-				sheet.setColumnWidth(rowAt, 4000);
-				
-				for(int i = 0; i < titleList.size(); i++){
+				// sheet.setColumnWidth(rowAt, 4000);
 
+				for (int i = 0; i < titleList.size(); i++) {
 					cell = row.createCell(i);
-					
-					String value = dealData(dataMap,titleList.get(i).get("processCode").toString(),titleList.get(i).get("paramCode").toString());
-					
+					String value = dealData(dataMap, titleList.get(i).get("processCode").toString(),
+							titleList.get(i).get("paramCode").toString());
 					cell.setCellValue(value);
 					cell.setCellStyle(styleTemp);
 				}
 				rowAt++;
 			}
-			
-			
-
-			/*for (Map<String, Object> dataMap : historyData) {
-				row = sheet.createRow(rowAt);
-				HSSFCellStyle styleTemp = null;
-				if (rowAt % 2 == 0) {
-					styleTemp = style3;
-
-				} else {
-					styleTemp = style4;
-				}
-
-				sheet.setColumnWidth(rowAt, 4000);
-
-				for (int i = 0; i < columnList.size(); i++) {
-					cell = row.createCell(i);
-					if (dataMap.get(columnList.get(i)) == null) {
-						cell.setCellValue("-");
-					} else
-						cell.setCellValue(dataMap.get(columnList.get(i)).toString());
-					cell.setCellStyle(styleTemp);
-				}
-
-				rowAt++;
-			}*/
-
-			String filename = fileName;
-			response.setContentType("application/octet-stream");
-			response.setHeader("Content-Disposition",
-					"attachment;filename=" + new String((fileName).getBytes("gb2312"), "ISO-8859-1") + ".xls");
 
 			/*
-			 * File file = new File("F:/日月光报表/1.xls"); FileOutputStream ouputStream = new
-			 * FileOutputStream(file);
+			 * for (Map<String, Object> dataMap : historyData) { row =
+			 * sheet.createRow(rowAt); HSSFCellStyle styleTemp = null; if (rowAt % 2 == 0) {
+			 * styleTemp = style3;
+			 * 
+			 * } else { styleTemp = style4; }
+			 * 
+			 * sheet.setColumnWidth(rowAt, 4000);
+			 * 
+			 * for (int i = 0; i < columnList.size(); i++) { cell = row.createCell(i); if
+			 * (dataMap.get(columnList.get(i)) == null) { cell.setCellValue("-"); } else
+			 * cell.setCellValue(dataMap.get(columnList.get(i)).toString());
+			 * cell.setCellStyle(styleTemp); }
+			 * 
+			 * rowAt++; }
 			 */
+
+			// String filename = fileName;
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd");
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition", "attachment;filename="
+					+ new String((fileName).getBytes("gb2312"), "ISO-8859-1") + "-" + sdf.format(new Date()) + ".xls");
+
 			OutputStream ouputStream = response.getOutputStream();
 			wb.write(ouputStream);
 			ouputStream.flush();
@@ -345,16 +337,16 @@ public class ExportXls {
 			e.printStackTrace();
 		}
 	}
-	
-	public static String dealData(Map<String,Object> dataMap,String processCode, String paramCode){
+
+	public static String dealData(Map<String, Object> dataMap, String processCode, String paramCode) {
 		String resultValue = "-";
-		
-		Map<String,Object> processMap = (Map<String, Object>) dataMap.get(processCode);
-		if(processMap != null){
-			if(processMap.get(paramCode) != null){
+
+		Map<String, Object> processMap = (Map<String, Object>) dataMap.get(processCode);
+		if (processMap != null) {
+			if (processMap.get(paramCode) != null) {
 				resultValue = processMap.get(paramCode).toString();
 			}
-		} 
+		}
 		return resultValue;
 	}
 }

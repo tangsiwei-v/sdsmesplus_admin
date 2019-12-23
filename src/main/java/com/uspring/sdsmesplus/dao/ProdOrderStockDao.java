@@ -47,5 +47,4 @@ public interface ProdOrderStockDao extends ProdOrderStockPODao {
 			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode,
 			@Param("procCode") String procCode, @Param("shopId") Integer shopId, @Param("fcId") Integer fcId,
 			@Param("beginTime") String beginTime, @Param("endTime") String endTime);
-
 }
