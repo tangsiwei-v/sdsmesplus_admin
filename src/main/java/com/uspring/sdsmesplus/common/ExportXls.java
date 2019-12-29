@@ -1,6 +1,7 @@
 package com.uspring.sdsmesplus.common;
 
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -34,7 +36,7 @@ public class ExportXls {
 	 * @param columnList  字段名
 	 * @param fileName    文件名
 	 */
-	public static void exportXml(List<Map<String, Object>> historyData, HttpServletResponse response,
+	public static void exportXls(List<Map<String,Object>> historyData, HttpServletResponse response,
 			List<String> titleList, List<String> columnList, String fileName) {
 		try {
 
@@ -131,7 +133,7 @@ public class ExportXls {
 			}
 			rowAt++;
 
-			for (Map<String, Object> dataMap : historyData) {
+			for (Map<String,Object> dataMap : historyData) {
 				row = sheet.createRow(rowAt);
 				HSSFCellStyle styleTemp = null;
 				if (rowAt % 2 == 0) {
@@ -349,4 +351,39 @@ public class ExportXls {
 		}
 		return resultValue;
 	}
+	
+	/**
+	 * 实体类转map
+	 * @param obj
+	 * @return
+	 */
+	public static Map<String,Object> entityToMap(Object obj){
+		Map<String,Object> map = new HashMap<String,Object>();
+		Class<?> clazz = obj.getClass();
+		for(Field field:clazz.getDeclaredFields()){
+			field.setAccessible(true);
+			String fieldName = field.getName();
+			Object object = null;
+			try{
+				object = field.get(obj);
+			}catch(Exception e){
+				
+			}
+			map.put(fieldName, object);
+		}
+		return map;
+	}
+	/**
+	 * 实体集合转map集合
+	 * @param objList
+	 * @return
+	 */
+	public static List<Map<String,Object>> entityListToMapList(List<Object> objList){
+		List<Map<String,Object>> mapList = new ArrayList<Map<String,Object>>();
+		for(Object obj:objList){
+			mapList.add(entityToMap(obj));
+		}
+		return mapList;
+	}
+	
 }

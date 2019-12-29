@@ -13,6 +13,19 @@
 	    <result column="box_quan_left" jdbcType="VARCHAR" property="matCount" />
 	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
  	</resultMap>
+ 	
+ 	<resultMap id="noConfromMap" type="com.uspring.sdsmesplus.entity.vo.StockStat">
+	    <result column="po_code" jdbcType="VARCHAR" property="poCode" />
+	    <result column="npl_find_op" jdbcType="VARCHAR" property="procCode" />
+	    <result column="material_box_code" jdbcType="VARCHAR" property="boxBarcode" />
+	    <result column="material_code" jdbcType="VARCHAR" property="matCode" />
+	    <result column="material_name" jdbcType="VARCHAR" property="matName" />
+	    <result column="material_batch_code" jdbcType="VARCHAR" property="batchNo" />
+	    <result column="material_furnace_no" jdbcType="VARCHAR" property="furnaceNo" />
+	    <result column="material_glevel" jdbcType="VARCHAR" property="glevel" />
+	    <result column="material_qty" jdbcType="VARCHAR" property="matCount" />
+	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+ 	</resultMap>
 
 	<select id="getOrderStock" resultType="map">
 	    select a.*,b.prod_code,b.prod_number from prod_order_stock a
@@ -75,6 +88,9 @@
 			<if test="lineId != null and lineId != ''">
 				and plan_order.line_id = #{lineId}
 			</if>
+			<if test="vsmId != null and vsmId != ''">
+		        and c.vsm_id = #{vsmId}
+		    </if>
 			<if test="shopId != null and shopId != ''">
 		      and d.shop_id = #{shopId}
 		    </if>
@@ -119,6 +135,9 @@
 			<if test="lineId != null and lineId != ''">
 				and a.line_id = #{lineId}
 			</if>
+			<if test="vsmId != null and vsmId != ''">
+		        and c.vsm_id = #{vsmId}
+		    </if>
 			<if test="shopId != null and shopId != ''">
 		        and d.shop_id = #{shopId}
 		    </if>
@@ -168,6 +187,9 @@
 			<if test="lineId != null and lineId != ''">
 				and c.line_id = #{lineId}
 			</if>
+			<if test="vsmId != null and vsmId != ''">
+		        and c.vsm_id = #{vsmId}
+		    </if>
 			<if test="shopId != null and shopId != ''">
 		        and d.shop_id = #{shopId}
 		    </if>
@@ -193,4 +215,42 @@
 			  and prod_box_material.create_time between #{beginTime} and #{endTime}
 			</if>
 	</select>
+	
+	<select id="statNonconform" resultMap="noConfromMap">
+		select b.po_code,b.prod_code,b.npl_find_op,a.material_box_code,a.material_code,
+		a.material_name,a.material_batch_code,a.material_furnace_no,a.material_glevel,a.material_qty,
+		b.create_time from nonconform_product_material a 
+		left join nonconform_product_log b on a.npl_id = b.npl_id
+		left join sys_line c on b.line_id = c.line_id 
+		where 1=1
+		<if test="lineId != null and lineId != ''">
+			and b.line_id = #{lineId}
+		</if>
+		<if test="shopId != null and shopId != ''">
+	        and b.shop_id = #{shopId}
+	    </if>
+	    <if test="fcId != null and fcId != ''">
+	        and b.fc_id = #{fcId}
+	    </if>
+	    <if test="vsmId != null and vsmId != ''">
+	        and c.vsm_id = #{vsmId}
+	    </if>
+		<if test="poCode != null and poCode != ''">
+			and b.po_code = #{poCode}
+		</if>
+		<if test="procCode != null and procCode != ''">
+			and b.npl_find_op = #{procCode}
+		</if>
+		<if test="matCode != null and matCode != ''">
+			and a.material_code = #{matCode}
+		</if>
+		<if test="boxBarcode != null and boxBarcode != ''">
+			and a.material_box_code = #{boxBarcode}
+		</if>
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+		  and b.create_time between #{beginTime} and #{endTime}
+		</if>
+		and b.npl_status = 'Submited'
+	</select>
+	
 </mapper>

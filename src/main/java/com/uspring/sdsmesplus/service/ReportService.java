@@ -147,7 +147,7 @@ public interface ReportService {
 	 */
 	List<StockStat> statOrderStock(Integer lineId, String poCode, String procCode, String matProdCode,
 			String matProdNumber, String boxCode, String groupBy, String beginTime, String endTime, Integer pageNum,
-			Integer pageSize, Integer isCleaned, Integer shopId, Integer fcId);
+			Integer pageSize, Integer isCleaned, Integer shopId, Integer fcId, Integer vsmId, Integer isExprot,HttpServletResponse response);
 	
 	/**
 	 * 获取不合格品记录
