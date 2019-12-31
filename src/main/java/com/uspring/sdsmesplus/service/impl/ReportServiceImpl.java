@@ -291,7 +291,7 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public List<StockStat> statOrderStock(Integer lineId, String poCode, String procCode, String matProdCode,
 			String matProdNumber, String boxCode, String groupBy, String beginTime, String endTime, Integer pageNum,
-			Integer pageSize, Integer isCleaned, Integer shopId, Integer fcId) {
+			Integer pageSize, Integer isCleaned, Integer shopId, Integer fcId, Integer vsmId, Integer isExprot,HttpServletResponse response) {
 
 		List<StockStat> stockList = new ArrayList<StockStat>();
 
@@ -306,19 +306,25 @@ public class ReportServiceImpl implements ReportService {
 				String model = modelList.get(0).getProdModel();
 				if (model.equals("cv_assy") || model.equals("sec_assy")) {
 					stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode, isCleaned,
-							shopId, fcId, beginTime, endTime);
+							shopId, fcId, beginTime, endTime, vsmId);
 				} else {
 					stockList = prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode,
-							isCleaned, shopId, fcId, beginTime, endTime);
+							isCleaned, shopId, fcId, beginTime, endTime, vsmId);
+					stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode, shopId,
+							fcId, beginTime, endTime, vsmId));
 				}
+				stockList.addAll(prodOrderStockDao.statNonconform(lineId, poCode, matProdCode, boxCode, procCode,
+						shopId, fcId, beginTime, endTime, vsmId));
 			}
 		} else {
 			stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode, isCleaned, shopId, fcId,
-					beginTime, endTime);
+					beginTime, endTime, vsmId);
 			stockList.addAll(prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode, isCleaned,
-					shopId, fcId, beginTime, endTime));
+					shopId, fcId, beginTime, endTime, vsmId));
 			stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode, shopId,
-					fcId, beginTime, endTime));
+					fcId, beginTime, endTime, vsmId));
+			stockList.addAll(prodOrderStockDao.statNonconform(lineId, poCode, matProdCode, boxCode, procCode,
+					shopId, fcId, beginTime, endTime, vsmId));
 		}
 
 		Map<String, StockStat> resultMap = new HashMap<String, StockStat>();
@@ -341,6 +347,41 @@ public class ReportServiceImpl implements ReportService {
 		}
 		List<StockStat> resultList = new ArrayList<StockStat>();
 		resultList.addAll(resultMap.values());
+		
+		//导出
+		if(isExprot == 1){
+			List<Object> objList = new ArrayList<Object>();
+			for(StockStat stockStat:resultList){
+				objList.add(stockStat);
+			}
+			
+			List<Map<String,Object>> historyData = ExportXls.entityListToMapList(objList);
+			
+			List<String> titleList = new ArrayList<String>();
+			titleList.add("工单号");
+			titleList.add("工序号");
+			titleList.add("箱号");
+			titleList.add("物料号");
+			titleList.add("物料名称");
+			titleList.add("批次号");
+			titleList.add("炉号");
+			titleList.add("档位");
+			titleList.add("数量");
+			
+			List<String> columnList = new ArrayList<String>();
+			columnList.add("poCode");
+			columnList.add("procCode");
+			columnList.add("boxBarcode");
+			columnList.add("matCode");
+			columnList.add("matName");
+			columnList.add("batchNo");
+			columnList.add("furnaceNo");
+			columnList.add("glevel");
+			columnList.add("matCount");
+			
+			ExportXls.exportXls(historyData, response, titleList, columnList, "线上库存报表");
+		}
+		
 
 		return resultList;
 	}

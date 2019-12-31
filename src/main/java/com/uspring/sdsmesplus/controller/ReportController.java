@@ -112,11 +112,26 @@ public class ReportController {
 	@ApiOperation(value = "线上库存查询", notes = "统计线上库存信息", response = Result.class)
 	public Result getOrderStockStatisc(Integer lineId, String poCode, String procCode, 
 			String matProdCode, String matProdNumber, String boxCode, String groupBy, 
-			String beginTime, String endTime, Integer pageNum, Integer pageSize, Integer isCleaned, Integer shopId, Integer fcId) {
+			String beginTime, String endTime, Integer pageNum, Integer pageSize, Integer isCleaned, Integer shopId, Integer fcId, Integer vsmId,
+			@RequestParam(required=false,defaultValue="0",value="isExprot")Integer isExport,HttpServletResponse response) {
 		endTime = DateUtils.dealEndTime(endTime);
 		return new Result("查询成功"
 				, this.reportService.statOrderStock(lineId, poCode, procCode, matProdCode, 
-				matProdNumber, boxCode, groupBy, beginTime, endTime, pageNum, pageSize, isCleaned, shopId, fcId)
+				matProdNumber, boxCode, groupBy, beginTime, endTime, pageNum, pageSize, isCleaned, shopId, fcId, vsmId, isExport,response)
+				, StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/stock_statist/export", method = RequestMethod.POST)
+	@ApiOperation(value = "线上库存导出", notes = "导出线上库存信息", response = Result.class)
+	public Result exportOrderStockStatisc(Integer lineId, String poCode, String procCode, 
+			String matProdCode, String matProdNumber, String boxCode, String groupBy, 
+			String beginTime, String endTime, Integer pageNum, Integer pageSize, Integer isCleaned, Integer shopId, Integer fcId, Integer vsmId,
+			@RequestParam(required=false,defaultValue="0",value="isExprot")Integer isExport,HttpServletResponse response) {
+		endTime = DateUtils.dealEndTime(endTime);
+		return new Result("导出成功"
+				, this.reportService.statOrderStock(lineId, poCode, procCode, matProdCode, 
+				matProdNumber, boxCode, groupBy, beginTime, endTime, pageNum, pageSize, isCleaned, shopId, fcId, vsmId, isExport, response)
 				, StatusCode.SUCCESS);
 	}
 
