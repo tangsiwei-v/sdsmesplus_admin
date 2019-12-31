@@ -113,6 +113,13 @@
 			<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
 			  and prod_order_stock.create_time between #{beginTime} and #{endTime}
 			</if>
+			<if test="poCodes != null">
+				and prod_order_stock.po_code in
+				<foreach collection="poCodes" item="sta" index="index"
+					open="(" close=")" separator=",">
+					#{sta}
+				</foreach>
+			</if>
 	</select>
 	
 	<select id="statProcStock" resultMap="StockStatMap">
@@ -162,6 +169,13 @@
 			</if>
 			<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
 			  and a.create_time between #{beginTime} and #{endTime}
+			</if>
+			<if test="poCodes != null">
+				and a.po_code in
+				<foreach collection="poCodes" item="sta" index="index"
+					open="(" close=")" separator=",">
+					#{sta}
+				</foreach>
 			</if>
 			
 	</select>
@@ -214,6 +228,13 @@
 			<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
 			  and prod_box_material.create_time between #{beginTime} and #{endTime}
 			</if>
+			<if test="poCodes != null">
+				and prod_box_log.po_code in
+				<foreach collection="poCodes" item="sta" index="index"
+					open="(" close=")" separator=",">
+					#{sta}
+				</foreach>
+			</if>
 	</select>
 	
 	<select id="statNonconform" resultMap="noConfromMap">
@@ -251,6 +272,13 @@
 		  and b.create_time between #{beginTime} and #{endTime}
 		</if>
 		and b.npl_status = 'Submited'
+		<if test="poCodes != null">
+			and b.po_code in
+			<foreach collection="poCodes" item="sta" index="index"
+				open="(" close=")" separator=",">
+				#{sta}
+			</foreach>
+		</if>
 	</select>
 	
 </mapper>

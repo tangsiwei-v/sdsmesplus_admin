@@ -50,8 +50,10 @@ import com.uspring.sdsmesplus.entity.po.SysProcessPO;
 import com.uspring.sdsmesplus.entity.po.SysProcessPOExample;
 import com.uspring.sdsmesplus.entity.po.SysProcessParamPO;
 import com.uspring.sdsmesplus.entity.po.SysProcessParamPOExample;
+import com.uspring.sdsmesplus.entity.vo.PlanOrderVO;
 import com.uspring.sdsmesplus.entity.vo.StockStat;
 import com.uspring.sdsmesplus.service.MongoDBService;
+import com.uspring.sdsmesplus.service.OrderService;
 import com.uspring.sdsmesplus.service.ReportService;
 
 @Service
@@ -107,6 +109,10 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	private ProcessParamDao ParamDao;
+	
+	@Autowired
+	private PlanOrderDao planDao;
+	
 
 	@Override
 	public Map<String, Object> getProductInfo(String barcode) {
@@ -294,6 +300,19 @@ public class ReportServiceImpl implements ReportService {
 			Integer pageSize, Integer isCleaned, Integer shopId, Integer fcId, Integer vsmId, Integer isExprot,HttpServletResponse response) {
 
 		List<StockStat> stockList = new ArrayList<StockStat>();
+		
+		Map<String, Object> orderParam = new HashMap<String, Object>();
+		orderParam.put("vsmId", vsmId);
+		orderParam.put("line_id", lineId);
+		List<String> status = new ArrayList<String>();
+		status.add("Executing");
+		orderParam.put("statusList", status);
+		List<PlanOrderPO> orderList = planDao.queryPlanVO(orderParam);
+		
+		List<String> poCodes = new ArrayList<String>();
+		for(int i = 0; i < orderList.size(); i++){
+			poCodes.add(orderList.get(i).getPoCode());
+		}
 
 		if (lineId != null) {
 			SysLineProdmodelPOExample modelExample = new SysLineProdmodelPOExample();
@@ -306,25 +325,25 @@ public class ReportServiceImpl implements ReportService {
 				String model = modelList.get(0).getProdModel();
 				if (model.equals("cv_assy") || model.equals("sec_assy")) {
 					stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode, isCleaned,
-							shopId, fcId, beginTime, endTime, vsmId);
+							shopId, fcId, beginTime, endTime, vsmId, poCodes);
 				} else {
 					stockList = prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode,
-							isCleaned, shopId, fcId, beginTime, endTime, vsmId);
+							isCleaned, shopId, fcId, beginTime, endTime, vsmId, poCodes);
 					stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode, shopId,
-							fcId, beginTime, endTime, vsmId));
+							fcId, beginTime, endTime, vsmId, poCodes));
 				}
 				stockList.addAll(prodOrderStockDao.statNonconform(lineId, poCode, matProdCode, boxCode, procCode,
-						shopId, fcId, beginTime, endTime, vsmId));
+						shopId, fcId, beginTime, endTime, vsmId, poCodes));
 			}
 		} else {
 			stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode, isCleaned, shopId, fcId,
-					beginTime, endTime, vsmId);
+					beginTime, endTime, vsmId, poCodes);
 			stockList.addAll(prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode, isCleaned,
-					shopId, fcId, beginTime, endTime, vsmId));
+					shopId, fcId, beginTime, endTime, vsmId, poCodes));
 			stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode, shopId,
-					fcId, beginTime, endTime, vsmId));
+					fcId, beginTime, endTime, vsmId, poCodes));
 			stockList.addAll(prodOrderStockDao.statNonconform(lineId, poCode, matProdCode, boxCode, procCode,
-					shopId, fcId, beginTime, endTime, vsmId));
+					shopId, fcId, beginTime, endTime, vsmId, poCodes));
 		}
 
 		Map<String, StockStat> resultMap = new HashMap<String, StockStat>();

@@ -1,7 +1,5 @@
 package com.uspring.sdsmesplus.controller;
 
-import static org.junit.Assert.fail;
-
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;

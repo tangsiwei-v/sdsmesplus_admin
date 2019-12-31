@@ -36,21 +36,21 @@ public interface ProdOrderStockDao extends ProdOrderStockPODao {
 	List<StockStat> statOrderStock(@Param("lineId") Integer lineId, @Param("poCode") String poCode,
 			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode,
 			@Param("isCleaned") Integer isCleaned, @Param("shopId") Integer shopId, @Param("fcId") Integer fcId,
-			@Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("vsmId") Integer vsmId);
+			@Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("vsmId") Integer vsmId, @Param("poCodes") List<String> poCodes);
 
 	List<StockStat> statProcStock(@Param("lineId") Integer lineId, @Param("poCode") String poCode,
 			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode,
 			@Param("procCode") String procCode, @Param("isCleaned") Integer isCleaned, @Param("shopId") Integer shopId,
 			@Param("fcId") Integer fcId, @Param("beginTime") String beginTime, @Param("endTime") String endTime,
-			@Param("vsmId") Integer vsmId);
+			@Param("vsmId") Integer vsmId, @Param("poCodes") List<String> poCodes);
 
 	List<StockStat> statWipStock(@Param("lineId") Integer lineId, @Param("poCode") String poCode,
 			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode,
 			@Param("procCode") String procCode, @Param("shopId") Integer shopId, @Param("fcId") Integer fcId,
-			@Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("vsmId") Integer vsmId);
+			@Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("vsmId") Integer vsmId, @Param("poCodes") List<String> poCodes);
 	
 	List<StockStat> statNonconform(@Param("lineId") Integer lineId, @Param("poCode") String poCode,
 			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode,
 			@Param("procCode") String procCode, @Param("shopId") Integer shopId, @Param("fcId") Integer fcId,
-			@Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("vsmId") Integer vsmId);
+			@Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("vsmId") Integer vsmId, @Param("poCodes") List<String> poCodes);
 }
