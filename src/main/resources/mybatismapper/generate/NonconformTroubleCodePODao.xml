@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePO">
     <id column="trc_id" jdbcType="INTEGER" property="trcId" />
     <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="vsm_id" jdbcType="INTEGER" property="vsmId" />
     <result column="op_code" jdbcType="VARCHAR" property="opCode" />
     <result column="trc_code" jdbcType="VARCHAR" property="trcCode" />
     <result column="trc_name" jdbcType="VARCHAR" property="trcName" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    trc_id, fc_id, op_code, trc_code, trc_name, trc_desc, trc_index, trc_alarm, is_active, 
-    create_time, update_time
+    trc_id, fc_id, vsm_id, op_code, trc_code, trc_name, trc_desc, trc_index, trc_alarm, 
+    is_active, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePOExample" resultMap="BaseResultMap">
     select
@@ -107,14 +108,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePO">
-    insert into nonconform_trouble_code (trc_id, fc_id, op_code, 
-      trc_code, trc_name, trc_desc, 
-      trc_index, trc_alarm, is_active, 
-      create_time, update_time)
-    values (#{trcId,jdbcType=INTEGER}, #{fcId,jdbcType=INTEGER}, #{opCode,jdbcType=VARCHAR}, 
-      #{trcCode,jdbcType=VARCHAR}, #{trcName,jdbcType=VARCHAR}, #{trcDesc,jdbcType=VARCHAR}, 
-      #{trcIndex,jdbcType=INTEGER}, #{trcAlarm,jdbcType=BIT}, #{isActive,jdbcType=BIT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    insert into nonconform_trouble_code (trc_id, fc_id, vsm_id, 
+      op_code, trc_code, trc_name, 
+      trc_desc, trc_index, trc_alarm, 
+      is_active, create_time, update_time
+      )
+    values (#{trcId,jdbcType=INTEGER}, #{fcId,jdbcType=INTEGER}, #{vsmId,jdbcType=INTEGER}, 
+      #{opCode,jdbcType=VARCHAR}, #{trcCode,jdbcType=VARCHAR}, #{trcName,jdbcType=VARCHAR}, 
+      #{trcDesc,jdbcType=VARCHAR}, #{trcIndex,jdbcType=INTEGER}, #{trcAlarm,jdbcType=BIT}, 
+      #{isActive,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePO">
     insert into nonconform_trouble_code
@@ -124,6 +127,9 @@
       </if>
       <if test="fcId != null">
         fc_id,
+      </if>
+      <if test="vsmId != null">
+        vsm_id,
       </if>
       <if test="opCode != null">
         op_code,
@@ -159,6 +165,9 @@
       </if>
       <if test="fcId != null">
         #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="vsmId != null">
+        #{vsmId,jdbcType=INTEGER},
       </if>
       <if test="opCode != null">
         #{opCode,jdbcType=VARCHAR},
@@ -204,6 +213,9 @@
       <if test="record.fcId != null">
         fc_id = #{record.fcId,jdbcType=INTEGER},
       </if>
+      <if test="record.vsmId != null">
+        vsm_id = #{record.vsmId,jdbcType=INTEGER},
+      </if>
       <if test="record.opCode != null">
         op_code = #{record.opCode,jdbcType=VARCHAR},
       </if>
@@ -240,6 +252,7 @@
     update nonconform_trouble_code
     set trc_id = #{record.trcId,jdbcType=INTEGER},
       fc_id = #{record.fcId,jdbcType=INTEGER},
+      vsm_id = #{record.vsmId,jdbcType=INTEGER},
       op_code = #{record.opCode,jdbcType=VARCHAR},
       trc_code = #{record.trcCode,jdbcType=VARCHAR},
       trc_name = #{record.trcName,jdbcType=VARCHAR},
@@ -258,6 +271,9 @@
     <set>
       <if test="fcId != null">
         fc_id = #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="vsmId != null">
+        vsm_id = #{vsmId,jdbcType=INTEGER},
       </if>
       <if test="opCode != null">
         op_code = #{opCode,jdbcType=VARCHAR},
@@ -292,6 +308,7 @@
   <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.NonconformTroubleCodePO">
     update nonconform_trouble_code
     set fc_id = #{fcId,jdbcType=INTEGER},
+      vsm_id = #{vsmId,jdbcType=INTEGER},
       op_code = #{opCode,jdbcType=VARCHAR},
       trc_code = #{trcCode,jdbcType=VARCHAR},
       trc_name = #{trcName,jdbcType=VARCHAR},

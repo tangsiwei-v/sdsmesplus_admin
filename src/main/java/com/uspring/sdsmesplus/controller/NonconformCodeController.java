@@ -44,10 +44,12 @@ public class NonconformCodeController extends BaseController {
 	@ApiOperation(value = "查询缺陷模式", notes = "查询缺陷模式", response = Result.class)
 	public Result queryDevice(HttpServletResponse response,
 			@RequestParam(value = "fcId", required = false) Integer fcId,
+			@RequestParam(value = "shopId", required = false) Integer shopId,
+			@RequestParam(value = "vsmId", required = false) Integer vsmId,
 			@RequestParam(value = "pageNum", required = false) Integer pageNum,
 			@RequestParam(value = "pageSize", required = false) Integer pageSize) {
 		
-		return new Result("查询成功", this.nonconfromCodeSerice.getNonconformTrouCode(fcId, pageNum, pageSize), StatusCode.SUCCESS);
+		return new Result("查询成功", this.nonconfromCodeSerice.getNonconformTrouCode(fcId, pageNum, pageSize,shopId, vsmId), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody

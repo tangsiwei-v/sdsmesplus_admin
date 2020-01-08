@@ -225,6 +225,66 @@ public class NonconformTroubleCodePOExample {
             return (Criteria) this;
         }
 
+        public Criteria andVsmIdIsNull() {
+            addCriterion("vsm_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdIsNotNull() {
+            addCriterion("vsm_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdEqualTo(Integer value) {
+            addCriterion("vsm_id =", value, "vsmId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdNotEqualTo(Integer value) {
+            addCriterion("vsm_id <>", value, "vsmId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdGreaterThan(Integer value) {
+            addCriterion("vsm_id >", value, "vsmId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("vsm_id >=", value, "vsmId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdLessThan(Integer value) {
+            addCriterion("vsm_id <", value, "vsmId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdLessThanOrEqualTo(Integer value) {
+            addCriterion("vsm_id <=", value, "vsmId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdIn(List<Integer> values) {
+            addCriterion("vsm_id in", values, "vsmId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdNotIn(List<Integer> values) {
+            addCriterion("vsm_id not in", values, "vsmId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdBetween(Integer value1, Integer value2) {
+            addCriterion("vsm_id between", value1, value2, "vsmId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVsmIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("vsm_id not between", value1, value2, "vsmId");
+            return (Criteria) this;
+        }
+
         public Criteria andOpCodeIsNull() {
             addCriterion("op_code is null");
             return (Criteria) this;
