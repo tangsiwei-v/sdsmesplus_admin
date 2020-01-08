@@ -22,6 +22,6 @@ public interface NonconformTroubleCodeDao extends NonconformTroubleCodePODao{
 	 * @param fcId 工厂编号
 	 * @return
 	 */
-	List<Map<String,Object>> getNonconformTrouCode(@Param("fcId")Integer fcId);
+	List<Map<String,Object>> getNonconformTrouCode(@Param("fcId")Integer fcId, @Param("shopId")Integer shopId, @Param("vsmId")Integer vsmId);
 
 }

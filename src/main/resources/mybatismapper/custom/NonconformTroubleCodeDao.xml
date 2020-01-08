@@ -3,11 +3,19 @@
 <mapper namespace="com.uspring.sdsmesplus.dao.NonconformTroubleCodeDao">
    <select id="getNonconformTrouCode" resultType="map">
         select a.trc_id trcId,a.fc_id fcId,a.op_code opCode,a.trc_code trcCode,a.trc_name trcName,a.trc_desc trcDesc,a.trc_index trcIndex,
-		a.trc_alarm trcAlarm,a.is_active isActive,a.create_time createTime,update_time updateTime,b.fc_name from nonconform_trouble_code a
-		left join sys_factory b on a.fc_id = b.fc_id
+		a.trc_alarm trcAlarm,a.is_active isActive,a.create_time createTime,update_time updateTime,d.fc_name,c.shop_name,b.vsm_name,a.vsm_id vsmId,c.shop_id shopId from nonconform_trouble_code a
+		left join sys_vsm b on a.vsm_id = b.vsm_id
+		left join sys_workshop c on b.shop_id = c.shop_id
+		left join sys_factory d on a.fc_id = d.fc_id
 		where 1=1
 		<if test="fcId != null and fcId != ''">
 		  and a.fc_id = #{fcId}
+		</if>
+		<if test="shopId != null and shopId != ''">
+		  and c.shop_id = #{shopId}
+		</if>
+		<if test="vsmId != null and vsmId != ''">
+		  and a.vsm_id = #{vsmId}
 		</if>
    </select>
 </mapper>

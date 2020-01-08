@@ -28,11 +28,11 @@ public class NonconformTroubleCodeServiceImpl implements NonconformTroubleCodeSe
 	private NonconformTroubleCodeDao nonConformTroubleDao;
 
 	@Override
-	public Map<String, Object> getNonconformTrouCode(Integer fcId, Integer pageNum, Integer pageSize) {
+	public Map<String, Object> getNonconformTrouCode(Integer fcId, Integer pageNum, Integer pageSize, Integer shopId, Integer vsmId) {
 		// TODO Auto-generated method stub
 		PageHelper page = new PageHelper();
 		page.startPage(pageNum, pageSize);
-		List<Map<String,Object>> resultList = this.nonConformTroubleDao.getNonconformTrouCode(fcId);
+		List<Map<String,Object>> resultList = this.nonConformTroubleDao.getNonconformTrouCode(fcId, shopId, vsmId);
 		PageInfo info = new PageInfo(resultList);
 		
 		Map<String,Object> resultMap = new HashMap<String,Object>();

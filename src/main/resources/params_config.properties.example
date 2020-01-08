@@ -2,7 +2,7 @@
 image_up_load_file = D://
 
 #pdf文件存储位置
-pdf_up_load_file = D://file/pdf
+pdf_up_load_file = D://web_pub/sds_mes_pdf
 
 
 #MPMLINK

@@ -26,7 +26,7 @@ public interface NonconformTroubleCodeService {
 	 * @param fcId 工厂编号
 	 * @throws Exception 
 	 */
-	Map<String,Object> getNonconformTrouCode(Integer fcId,Integer pageNum,Integer pageSize);
+	Map<String,Object> getNonconformTrouCode(Integer fcId,Integer pageNum,Integer pageSize,Integer shopId, Integer vsmId);
 	
 	/**
 	 * @Title: insertNonconformTrouCode

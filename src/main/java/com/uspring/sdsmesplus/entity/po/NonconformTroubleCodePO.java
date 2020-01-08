@@ -7,6 +7,8 @@ public class NonconformTroubleCodePO {
 
     private Integer fcId;
 
+    private Integer vsmId;
+
     private String opCode;
 
     private String trcCode;
@@ -39,6 +41,14 @@ public class NonconformTroubleCodePO {
 
     public void setFcId(Integer fcId) {
         this.fcId = fcId;
+    }
+
+    public Integer getVsmId() {
+        return vsmId;
+    }
+
+    public void setVsmId(Integer vsmId) {
+        this.vsmId = vsmId;
     }
 
     public String getOpCode() {
