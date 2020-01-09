@@ -62,11 +62,12 @@ public interface ReportService {
 	 * @param prodCode  产品简码
 	 * @param beginTime 开始时间
 	 * @param endTime   结束时间
+	 * @param isExport 是否导出
 	 * @return
 	 */
 	Map<String, Object> getBoxList(Integer lineId, String boxCode, String tuhao, String prodCode, String prodNumber,
 			String beginTime, String endTime, String poCode, Integer pageNum, Integer pageSize, Integer shopId,
-			Integer fcId);
+			Integer fcId, Integer isExport, HttpServletResponse response);
 
 	/**
 	 * @Title: getProductList
@@ -102,7 +103,7 @@ public interface ReportService {
 	 */
 	Map<String, Object> useMaterialInfo(String fpBarcode, String boxCode, String materialCode, String batchNo,
 			String furnaceNo, String prodCode, String materialBoxCode, String beginTime, String endTime,
-			Integer pageNum, Integer pageSize);
+			Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
 
 	/**
 	 * 三大件反查
@@ -164,7 +165,7 @@ public interface ReportService {
 	 */
 	Map<String, Object> getWasteProd(Integer lineId, String prodCode, String prodNumber, String beginTime,
 			String endTime, Integer pageNum, Integer pageSize, String matProdCode, String matProdNumber, String status,
-			String poCode, Integer shopId, Integer fcId);
+			String poCode, Integer shopId, Integer fcId, Integer isExport,HttpServletResponse response);
 
 	/**
 	 * 
@@ -181,7 +182,7 @@ public interface ReportService {
 	 * @return
 	 */
 	Map<String, Object> getWasteProdMaterial(Integer lineId, String nplBarcode, String beginTime, String endTime,
-			String matProdCode, String matProdNumber, Integer pageNum, Integer pageSize, Integer shopId, Integer fcId);
+			String matProdCode, String matProdNumber, Integer pageNum, Integer pageSize, Integer shopId, Integer fcId, Integer isExport, HttpServletResponse response);
 
 	/**
 	 * 
@@ -218,7 +219,7 @@ public interface ReportService {
 	 */
 	Map<String, Object> getSafeLunch(Integer lineId, String poCode, String prodCode, String prodNumber, String boxCode,
 			String beginTime, String endTime, Integer pageNum, Integer pageSize, Integer safelineId, Integer shopId,
-			Integer fcId);
+			Integer fcId, Integer isExport, HttpServletResponse response);
 
 	/**
 	 * 查询safelunch详细信息
@@ -236,7 +237,7 @@ public interface ReportService {
 	 */
 	Map<String, Object> getSafeLunchDetail(Integer lineId, String poCode, String prodCode, String prodNumber,
 			String boxCode, String beginTime, String endTime, String safeLunchOrder, Integer pageNum, Integer pageSize,
-			Integer safelineId, String fpBarcode, Integer shopId, Integer fcId);
+			Integer safelineId, String fpBarcode, Integer shopId, Integer fcId, Integer isExport, HttpServletResponse response);
 
 	/**
 	 * 获取safelunch线
@@ -262,7 +263,7 @@ public interface ReportService {
 	 */
 	Map<String, Object> boxMaterialUseInfo(Integer lineId, String beginTime, String endTime, String prodCode,
 			String matProdCode, String boxCode, String matBoxCode, Integer pageNum, Integer pageSize, String furnaceNo,
-			String batchNo);
+			String batchNo, Integer isExport, HttpServletResponse response);
 
 	/**
 	 * 获取工单详细信息
@@ -280,7 +281,7 @@ public interface ReportService {
 	 * @return
 	 */
 	Map<String, Object> getOrderDetail(Integer lineId, Integer shopId, Integer fcId, String prodCode, String prodNumber,
-			String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize);
+			String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
 
 	/**
 	 * 查询工单下某个类型的数据
@@ -297,6 +298,6 @@ public interface ReportService {
 	 */
 	Map<String,Object> getCleanInfo(Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode, 
 			String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, 
-			String beginTime, String endTime, String type, Integer pageNum, Integer pageSize);
+			String beginTime, String endTime, String type, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
 
 }

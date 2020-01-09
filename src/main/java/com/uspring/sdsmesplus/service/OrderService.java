@@ -3,6 +3,8 @@ package com.uspring.sdsmesplus.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
 
@@ -17,7 +19,7 @@ import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
 public interface OrderService {
 
 	// 查询工单
-	public PageInfo<PlanOrderPO> selectOrder(Map<String, Object> map);
+	public PageInfo<PlanOrderPO> selectOrder(Map<String, Object> map,Integer isExport, HttpServletResponse response);
 
 	//查询没有配置打印程序的工单
 	public List<PlanOrderPO> selectPrinterByFactory(Integer fcId);

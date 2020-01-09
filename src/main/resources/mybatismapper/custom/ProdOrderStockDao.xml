@@ -113,13 +113,13 @@
 			<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
 			  and prod_order_stock.create_time between #{beginTime} and #{endTime}
 			</if>
-			<if test="poCodes != null">
+			<!-- <if test="poCodes != null">
 				and prod_order_stock.po_code in
 				<foreach collection="poCodes" item="sta" index="index"
 					open="(" close=")" separator=",">
 					#{sta}
 				</foreach>
-			</if>
+			</if> -->
 	</select>
 	
 	<select id="statProcStock" resultMap="StockStatMap">
@@ -272,13 +272,13 @@
 		  and b.create_time between #{beginTime} and #{endTime}
 		</if>
 		and b.npl_status = 'Submited'
-		<if test="poCodes != null">
+		<!-- <if test="poCodes != null">
 			and b.po_code in
 			<foreach collection="poCodes" item="sta" index="index"
 				open="(" close=")" separator=",">
 				#{sta}
 			</foreach>
-		</if>
+		</if> -->
 	</select>
 	
 </mapper>
