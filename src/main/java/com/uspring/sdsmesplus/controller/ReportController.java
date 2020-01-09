@@ -43,7 +43,7 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/box/export", method = RequestMethod.POST)
-	@ApiOperation(value = "查询箱合格证信息", notes = "查询箱合格证信息", response = Result.class)
+	@ApiOperation(value = "导出箱合格证信息", notes = "导出箱合格证信息", response = Result.class)
 	public Result exportBoxList(HttpServletResponse response,Integer lineId,String boxCode,String tuhao,String prodCode,String prodNumber,String beginTime,String endTime,String poCode, Integer pageNum,Integer pageSize,Integer shopId,Integer fcId) {
 		endTime = DateUtils.dealEndTime(endTime);
 		return new Result("导出成功", this.reportService.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime,poCode, pageNum, pageSize, shopId, fcId,1,response), StatusCode.SUCCESS);
@@ -110,11 +110,11 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/material/export", method = RequestMethod.POST)
-	@ApiOperation(value = "查询物料使用", notes = "查询物料使用", response = Result.class)
+	@ApiOperation(value = "导出物料使用", notes = "导出物料使用", response = Result.class)
 	public Result ExportMaterialList(HttpServletResponse response,String fpBarcode,String boxCode,String materialCode,String batchNo,String furnaceNo,String prodCode,String materialBoxCode,
 			String beginTime,String endTime,Integer pageNum,Integer pageSize) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.useMaterialInfo(fpBarcode, boxCode, materialCode, batchNo, furnaceNo, prodCode, materialBoxCode, beginTime, endTime, pageNum, pageSize, 1 ,response), StatusCode.SUCCESS);
+		return new Result("导出成功", this.reportService.useMaterialInfo(fpBarcode, boxCode, materialCode, batchNo, furnaceNo, prodCode, materialBoxCode, beginTime, endTime, pageNum, pageSize, 1 ,response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
@@ -172,10 +172,10 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/waste/export", method = RequestMethod.POST)
-	@ApiOperation(value = "不合格品查询", notes = "不合格品查询", response = Result.class)
+	@ApiOperation(value = "不合格品导出", notes = "不合格品导出", response = Result.class)
 	public Result exportProductWaste(HttpServletResponse response,Integer lineId,String prodCode,String prodNumber,String beginTime,String endTime,Integer pageNum,Integer pageSize,String matProdCode,String matProdNumber,String status,String poCode,Integer shopId,Integer fcId) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getWasteProd(lineId, prodCode, prodNumber, beginTime, endTime, pageNum, pageSize, matProdCode, matProdNumber, status, poCode,shopId,fcId, 1, response), StatusCode.SUCCESS);
+		return new Result("导出成功", this.reportService.getWasteProd(lineId, prodCode, prodNumber, beginTime, endTime, pageNum, pageSize, matProdCode, matProdNumber, status, poCode,shopId,fcId, 1, response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
@@ -188,10 +188,10 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/waste/material/export", method = RequestMethod.POST)
-	@ApiOperation(value = "不合格品零件", notes = "不合格品零件", response = Result.class)
+	@ApiOperation(value = "导出不合格品零件", notes = "不合格品零件", response = Result.class)
 	public Result exportProductWasteMaterial(HttpServletResponse response,Integer lineId,String nplBarcode,String beginTime,String endTime,String matProdCode,String matProdNumber,Integer pageNum,Integer pageSize,Integer shopId,Integer fcId) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getWasteProdMaterial(lineId, nplBarcode, beginTime, endTime, matProdCode, matProdNumber, pageNum, pageSize, shopId, fcId,1 ,response), StatusCode.SUCCESS);
+		return new Result("导出成功", this.reportService.getWasteProdMaterial(lineId, nplBarcode, beginTime, endTime, matProdCode, matProdNumber, pageNum, pageSize, shopId, fcId,1 ,response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
@@ -212,10 +212,10 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/safelunch/export", method = RequestMethod.POST)
-	@ApiOperation(value = "查询safelunch记录", notes = "工序物料记录", response = Result.class)
+	@ApiOperation(value = "导出safelunch记录", notes = "工序物料记录", response = Result.class)
 	public Result exportSafelunch(HttpServletResponse response,Integer lineId,String poCode,String prodCode,String prodNumber,String boxCode,String beginTime,String endTime,Integer pageNum,Integer pageSize,Integer safelineId,Integer shopId,Integer fcId) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getSafeLunch(lineId, poCode, prodCode, prodNumber, boxCode, beginTime, endTime, pageNum, pageSize, safelineId,shopId,fcId,1,response), StatusCode.SUCCESS);
+		return new Result("导出成功", this.reportService.getSafeLunch(lineId, poCode, prodCode, prodNumber, boxCode, beginTime, endTime, pageNum, pageSize, safelineId,shopId,fcId,1,response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
@@ -228,10 +228,10 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/safelunch/detail/export", method = RequestMethod.POST)
-	@ApiOperation(value = "查询safelunch详情", notes = "查询safelunch详情", response = Result.class)
+	@ApiOperation(value = "导出safelunch详情", notes = "导出safelunch详情", response = Result.class)
 	public Result exportSafelunchDetail(HttpServletResponse response,Integer lineId,String poCode,String prodCode,String prodNumber,String boxCode,String beginTime,String endTime,String safeLunchOrder,Integer pageNum,Integer pageSize,Integer safelineId,String fpBarcode,Integer shopId,Integer fcId) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getSafeLunchDetail(lineId, poCode, prodCode, prodNumber, boxCode, beginTime, endTime, safeLunchOrder, pageNum, pageSize, safelineId, fpBarcode, shopId, fcId, 1, response), StatusCode.SUCCESS);
+		return new Result("导出成功", this.reportService.getSafeLunchDetail(lineId, poCode, prodCode, prodNumber, boxCode, beginTime, endTime, safeLunchOrder, pageNum, pageSize, safelineId, fpBarcode, shopId, fcId, 1, response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
@@ -252,10 +252,10 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/box/material/export", method = RequestMethod.POST)
-	@ApiOperation(value = "箱物料使用查询", notes = "箱物料使用查询", response = Result.class)
+	@ApiOperation(value = "箱物料使用导出", notes = "箱物料使用导出", response = Result.class)
 	public Result ExportBoxMaterialUserInfo(HttpServletResponse response,Integer lineId,String prodCode,String matProdCode,String boxCode,String matBoxCode,Integer pageNum,Integer pageSize,String beginTime,String endTime,String furnaceNo,String batchNo) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.boxMaterialUseInfo(lineId, beginTime, endTime, prodCode, matProdCode, boxCode, matBoxCode, pageNum, pageSize, furnaceNo, batchNo, 1, response), StatusCode.SUCCESS);
+		return new Result("导出成功", this.reportService.boxMaterialUseInfo(lineId, beginTime, endTime, prodCode, matProdCode, boxCode, matBoxCode, pageNum, pageSize, furnaceNo, batchNo, 1, response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
@@ -268,10 +268,10 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/order/detail/export", method = RequestMethod.POST)
-	@ApiOperation(value = "查询工单详细信息", notes = "查询工单详细信息", response = Result.class)
+	@ApiOperation(value = "导出工单详细信息", notes = "导出工单详细信息", response = Result.class)
 	public Result exportOrderDetail(HttpServletResponse response,Integer lineId,String poCode,String prodCode,String prodNumber,String beginTime,String endTime,Integer pageNum,Integer pageSize,Integer shopId,Integer fcId) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getOrderDetail(lineId, shopId, fcId, prodCode, prodNumber, poCode, beginTime, endTime, pageNum, pageSize, 1, response), StatusCode.SUCCESS);
+		return new Result("导出成功", this.reportService.getOrderDetail(lineId, shopId, fcId, prodCode, prodNumber, poCode, beginTime, endTime, pageNum, pageSize, 1, response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
@@ -292,9 +292,9 @@ public class ReportController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/clean/detail/export", method = RequestMethod.POST)
-	@ApiOperation(value = "查询清线记录", notes = "查询清线记录", response = Result.class)
+	@ApiOperation(value = "导出清线记录", notes = "导出清线记录", response = Result.class)
 	public Result exportCleanInfo(HttpServletResponse response,Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode, String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, String beginTime, String endTime, String type, Integer pageNum, Integer pageSize) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getCleanInfo(fcId, shopId, lineId, poCode, prodCode, prodNumber, matProdCode, matProdNumber, boxCode, matBoxCode, beginTime, endTime, type, pageNum, pageSize, 1,response), StatusCode.SUCCESS);
+		return new Result("导出成功", this.reportService.getCleanInfo(fcId, shopId, lineId, poCode, prodCode, prodNumber, matProdCode, matProdNumber, boxCode, matBoxCode, beginTime, endTime, type, pageNum, pageSize, 1,response), StatusCode.SUCCESS);
 	}
 }
