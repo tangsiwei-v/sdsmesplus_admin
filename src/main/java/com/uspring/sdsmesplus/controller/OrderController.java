@@ -44,7 +44,15 @@ public class OrderController extends BaseController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ApiOperation(value = "工单查询", response = Result.class)
 	public Result selectOrder(HttpServletResponse response, @RequestParam Map<String, Object> map) throws Exception {
-		PageInfo<PlanOrderPO> plans = orderService.selectOrder(map);
+		PageInfo<PlanOrderPO> plans = orderService.selectOrder(map,0,response);
+		return new Result("success", plans, StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/export", method = RequestMethod.POST)
+	@ApiOperation(value = "工单查询", response = Result.class)
+	public Result exportOrder(HttpServletResponse response, @RequestParam Map<String, Object> map) throws Exception {
+		PageInfo<PlanOrderPO> plans = orderService.selectOrder(map,1,response);
 		return new Result("success", plans, StatusCode.SUCCESS);
 	}
 	
