@@ -297,4 +297,20 @@ public class ReportController {
 		endTime = DateUtils.dealEndTime(endTime);
 		return new Result("导出成功", this.reportService.getCleanInfo(fcId, shopId, lineId, poCode, prodCode, prodNumber, matProdCode, matProdNumber, boxCode, matBoxCode, beginTime, endTime, type, pageNum, pageSize, 1,response), StatusCode.SUCCESS);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/productreplace", method = RequestMethod.GET)
+	@ApiOperation(value = "总成替换查询", notes = "总成替换查询", response = Result.class)
+	public Result getProductReplace(HttpServletResponse response,Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode,  String beginTime, String endTime, Integer pageNum, Integer pageSize) {
+		endTime = DateUtils.dealEndTime(endTime);
+		return new Result("查询成功", this.reportService.getProductReplace(fcId, shopId, lineId, poCode, prodCode, beginTime, endTime, pageNum, pageSize, 0, response), StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/productreplace/export", method = RequestMethod.POST)
+	@ApiOperation(value = "总成替换导出", notes = "总成替换导出", response = Result.class)
+	public Result exportProductReplace(HttpServletResponse response,Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode,  String beginTime, String endTime, Integer pageNum, Integer pageSize) {
+		endTime = DateUtils.dealEndTime(endTime);
+		return new Result("导出成功", this.reportService.getProductReplace(fcId, shopId, lineId, poCode, prodCode, beginTime, endTime, pageNum, pageSize, 1, response), StatusCode.SUCCESS);
+	}
 }

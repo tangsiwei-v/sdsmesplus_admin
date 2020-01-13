@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.ProductReplaceDao">
+	<select id="getProductReplace" resultType="map">
+	    select a.*,b.line_name,c.shop_name,d.fc_name from prod_barcode_replace a
+			left join sys_line b on a.line_id = b.line_id
+			left join sys_workshop c on c.shop_id = b.shop_id
+			left join sys_factory d on c.fc_id = d.fc_id
+			where 1=1
+		<if test="lineId != null and lineId != ''">
+		  and a.line_id = #{lineId}
+		</if>
+		 <if test="shopId != null and shopId != ''">
+	      and c.shop_id = #{shopId}
+	    </if>
+	    <if test="fcId != null and fcId != ''">
+	      and d.fc_id = #{fcId}
+	    </if>
+		<if test="poCode != null and poCode != ''">
+		  and a.po_code = #{poCode}
+		</if>
+		<if test="prodCode != null and prodCode != ''">
+		  and a.prod_code = #{prodCode}
+		</if>
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+		  and a.create_time between #{beginTime} and #{endTime}
+		</if>
+	</select>
+</mapper>

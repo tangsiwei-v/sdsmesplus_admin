@@ -299,5 +299,10 @@ public interface ReportService {
 	Map<String,Object> getCleanInfo(Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode, 
 			String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, 
 			String beginTime, String endTime, String type, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
+	/**
+	 * 总成替换查询
+	 */
+	Map<String,Object> getProductReplace(Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode, 
+			String beginTime, String endTime, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
 
 }
