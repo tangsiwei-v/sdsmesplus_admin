@@ -9,6 +9,8 @@ public class SysQrcodeRulePO {
 
     private String prodCode;
 
+    private String customerCode;
+
     private Integer qrcodeLength;
 
     private String qrcodeStart;
@@ -16,6 +18,8 @@ public class SysQrcodeRulePO {
     private Date createTime;
 
     private Date updateTime;
+
+    private Boolean qrcodeCheck;
 
     public Integer getSqrId() {
         return sqrId;
@@ -39,6 +43,14 @@ public class SysQrcodeRulePO {
 
     public void setProdCode(String prodCode) {
         this.prodCode = prodCode == null ? null : prodCode.trim();
+    }
+
+    public String getCustomerCode() {
+        return customerCode;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode == null ? null : customerCode.trim();
     }
 
     public Integer getQrcodeLength() {
@@ -71,5 +83,13 @@ public class SysQrcodeRulePO {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Boolean getQrcodeCheck() {
+        return qrcodeCheck;
+    }
+
+    public void setQrcodeCheck(Boolean qrcodeCheck) {
+        this.qrcodeCheck = qrcodeCheck;
     }
 }

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SysQrcodeRulePOExample {
+public class ProdProcessCheckPOExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SysQrcodeRulePOExample() {
+    public ProdProcessCheckPOExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -105,123 +105,63 @@ public class SysQrcodeRulePOExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andSqrIdIsNull() {
-            addCriterion("sqr_id is null");
+        public Criteria andPpcIdIsNull() {
+            addCriterion("ppc_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdIsNotNull() {
-            addCriterion("sqr_id is not null");
+        public Criteria andPpcIdIsNotNull() {
+            addCriterion("ppc_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdEqualTo(Integer value) {
-            addCriterion("sqr_id =", value, "sqrId");
+        public Criteria andPpcIdEqualTo(Integer value) {
+            addCriterion("ppc_id =", value, "ppcId");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdNotEqualTo(Integer value) {
-            addCriterion("sqr_id <>", value, "sqrId");
+        public Criteria andPpcIdNotEqualTo(Integer value) {
+            addCriterion("ppc_id <>", value, "ppcId");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdGreaterThan(Integer value) {
-            addCriterion("sqr_id >", value, "sqrId");
+        public Criteria andPpcIdGreaterThan(Integer value) {
+            addCriterion("ppc_id >", value, "ppcId");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("sqr_id >=", value, "sqrId");
+        public Criteria andPpcIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ppc_id >=", value, "ppcId");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdLessThan(Integer value) {
-            addCriterion("sqr_id <", value, "sqrId");
+        public Criteria andPpcIdLessThan(Integer value) {
+            addCriterion("ppc_id <", value, "ppcId");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdLessThanOrEqualTo(Integer value) {
-            addCriterion("sqr_id <=", value, "sqrId");
+        public Criteria andPpcIdLessThanOrEqualTo(Integer value) {
+            addCriterion("ppc_id <=", value, "ppcId");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdIn(List<Integer> values) {
-            addCriterion("sqr_id in", values, "sqrId");
+        public Criteria andPpcIdIn(List<Integer> values) {
+            addCriterion("ppc_id in", values, "ppcId");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdNotIn(List<Integer> values) {
-            addCriterion("sqr_id not in", values, "sqrId");
+        public Criteria andPpcIdNotIn(List<Integer> values) {
+            addCriterion("ppc_id not in", values, "ppcId");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdBetween(Integer value1, Integer value2) {
-            addCriterion("sqr_id between", value1, value2, "sqrId");
+        public Criteria andPpcIdBetween(Integer value1, Integer value2) {
+            addCriterion("ppc_id between", value1, value2, "ppcId");
             return (Criteria) this;
         }
 
-        public Criteria andSqrIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("sqr_id not between", value1, value2, "sqrId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdIsNull() {
-            addCriterion("fc_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdIsNotNull() {
-            addCriterion("fc_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdEqualTo(Integer value) {
-            addCriterion("fc_id =", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdNotEqualTo(Integer value) {
-            addCriterion("fc_id <>", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdGreaterThan(Integer value) {
-            addCriterion("fc_id >", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("fc_id >=", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdLessThan(Integer value) {
-            addCriterion("fc_id <", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdLessThanOrEqualTo(Integer value) {
-            addCriterion("fc_id <=", value, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdIn(List<Integer> values) {
-            addCriterion("fc_id in", values, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdNotIn(List<Integer> values) {
-            addCriterion("fc_id not in", values, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdBetween(Integer value1, Integer value2) {
-            addCriterion("fc_id between", value1, value2, "fcId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFcIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("fc_id not between", value1, value2, "fcId");
+        public Criteria andPpcIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("ppc_id not between", value1, value2, "ppcId");
             return (Criteria) this;
         }
 
@@ -295,203 +235,313 @@ public class SysQrcodeRulePOExample {
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeIsNull() {
-            addCriterion("customer_code is null");
+        public Criteria andLineIdIsNull() {
+            addCriterion("line_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeIsNotNull() {
-            addCriterion("customer_code is not null");
+        public Criteria andLineIdIsNotNull() {
+            addCriterion("line_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeEqualTo(String value) {
-            addCriterion("customer_code =", value, "customerCode");
+        public Criteria andLineIdEqualTo(Integer value) {
+            addCriterion("line_id =", value, "lineId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeNotEqualTo(String value) {
-            addCriterion("customer_code <>", value, "customerCode");
+        public Criteria andLineIdNotEqualTo(Integer value) {
+            addCriterion("line_id <>", value, "lineId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeGreaterThan(String value) {
-            addCriterion("customer_code >", value, "customerCode");
+        public Criteria andLineIdGreaterThan(Integer value) {
+            addCriterion("line_id >", value, "lineId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("customer_code >=", value, "customerCode");
+        public Criteria andLineIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("line_id >=", value, "lineId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeLessThan(String value) {
-            addCriterion("customer_code <", value, "customerCode");
+        public Criteria andLineIdLessThan(Integer value) {
+            addCriterion("line_id <", value, "lineId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeLessThanOrEqualTo(String value) {
-            addCriterion("customer_code <=", value, "customerCode");
+        public Criteria andLineIdLessThanOrEqualTo(Integer value) {
+            addCriterion("line_id <=", value, "lineId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeLike(String value) {
-            addCriterion("customer_code like", value, "customerCode");
+        public Criteria andLineIdIn(List<Integer> values) {
+            addCriterion("line_id in", values, "lineId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeNotLike(String value) {
-            addCriterion("customer_code not like", value, "customerCode");
+        public Criteria andLineIdNotIn(List<Integer> values) {
+            addCriterion("line_id not in", values, "lineId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeIn(List<String> values) {
-            addCriterion("customer_code in", values, "customerCode");
+        public Criteria andLineIdBetween(Integer value1, Integer value2) {
+            addCriterion("line_id between", value1, value2, "lineId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeNotIn(List<String> values) {
-            addCriterion("customer_code not in", values, "customerCode");
+        public Criteria andLineIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("line_id not between", value1, value2, "lineId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeBetween(String value1, String value2) {
-            addCriterion("customer_code between", value1, value2, "customerCode");
+        public Criteria andOpCodeIsNull() {
+            addCriterion("op_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerCodeNotBetween(String value1, String value2) {
-            addCriterion("customer_code not between", value1, value2, "customerCode");
+        public Criteria andOpCodeIsNotNull() {
+            addCriterion("op_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthIsNull() {
-            addCriterion("qrcode_length is null");
+        public Criteria andOpCodeEqualTo(String value) {
+            addCriterion("op_code =", value, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthIsNotNull() {
-            addCriterion("qrcode_length is not null");
+        public Criteria andOpCodeNotEqualTo(String value) {
+            addCriterion("op_code <>", value, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthEqualTo(Integer value) {
-            addCriterion("qrcode_length =", value, "qrcodeLength");
+        public Criteria andOpCodeGreaterThan(String value) {
+            addCriterion("op_code >", value, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthNotEqualTo(Integer value) {
-            addCriterion("qrcode_length <>", value, "qrcodeLength");
+        public Criteria andOpCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("op_code >=", value, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthGreaterThan(Integer value) {
-            addCriterion("qrcode_length >", value, "qrcodeLength");
+        public Criteria andOpCodeLessThan(String value) {
+            addCriterion("op_code <", value, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthGreaterThanOrEqualTo(Integer value) {
-            addCriterion("qrcode_length >=", value, "qrcodeLength");
+        public Criteria andOpCodeLessThanOrEqualTo(String value) {
+            addCriterion("op_code <=", value, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthLessThan(Integer value) {
-            addCriterion("qrcode_length <", value, "qrcodeLength");
+        public Criteria andOpCodeLike(String value) {
+            addCriterion("op_code like", value, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthLessThanOrEqualTo(Integer value) {
-            addCriterion("qrcode_length <=", value, "qrcodeLength");
+        public Criteria andOpCodeNotLike(String value) {
+            addCriterion("op_code not like", value, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthIn(List<Integer> values) {
-            addCriterion("qrcode_length in", values, "qrcodeLength");
+        public Criteria andOpCodeIn(List<String> values) {
+            addCriterion("op_code in", values, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthNotIn(List<Integer> values) {
-            addCriterion("qrcode_length not in", values, "qrcodeLength");
+        public Criteria andOpCodeNotIn(List<String> values) {
+            addCriterion("op_code not in", values, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthBetween(Integer value1, Integer value2) {
-            addCriterion("qrcode_length between", value1, value2, "qrcodeLength");
+        public Criteria andOpCodeBetween(String value1, String value2) {
+            addCriterion("op_code between", value1, value2, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeLengthNotBetween(Integer value1, Integer value2) {
-            addCriterion("qrcode_length not between", value1, value2, "qrcodeLength");
+        public Criteria andOpCodeNotBetween(String value1, String value2) {
+            addCriterion("op_code not between", value1, value2, "opCode");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartIsNull() {
-            addCriterion("qrcode_start is null");
+        public Criteria andSkipCheckIsNull() {
+            addCriterion("skip_check is null");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartIsNotNull() {
-            addCriterion("qrcode_start is not null");
+        public Criteria andSkipCheckIsNotNull() {
+            addCriterion("skip_check is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartEqualTo(String value) {
-            addCriterion("qrcode_start =", value, "qrcodeStart");
+        public Criteria andSkipCheckEqualTo(Boolean value) {
+            addCriterion("skip_check =", value, "skipCheck");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartNotEqualTo(String value) {
-            addCriterion("qrcode_start <>", value, "qrcodeStart");
+        public Criteria andSkipCheckNotEqualTo(Boolean value) {
+            addCriterion("skip_check <>", value, "skipCheck");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartGreaterThan(String value) {
-            addCriterion("qrcode_start >", value, "qrcodeStart");
+        public Criteria andSkipCheckGreaterThan(Boolean value) {
+            addCriterion("skip_check >", value, "skipCheck");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartGreaterThanOrEqualTo(String value) {
-            addCriterion("qrcode_start >=", value, "qrcodeStart");
+        public Criteria andSkipCheckGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("skip_check >=", value, "skipCheck");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartLessThan(String value) {
-            addCriterion("qrcode_start <", value, "qrcodeStart");
+        public Criteria andSkipCheckLessThan(Boolean value) {
+            addCriterion("skip_check <", value, "skipCheck");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartLessThanOrEqualTo(String value) {
-            addCriterion("qrcode_start <=", value, "qrcodeStart");
+        public Criteria andSkipCheckLessThanOrEqualTo(Boolean value) {
+            addCriterion("skip_check <=", value, "skipCheck");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartLike(String value) {
-            addCriterion("qrcode_start like", value, "qrcodeStart");
+        public Criteria andSkipCheckIn(List<Boolean> values) {
+            addCriterion("skip_check in", values, "skipCheck");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartNotLike(String value) {
-            addCriterion("qrcode_start not like", value, "qrcodeStart");
+        public Criteria andSkipCheckNotIn(List<Boolean> values) {
+            addCriterion("skip_check not in", values, "skipCheck");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartIn(List<String> values) {
-            addCriterion("qrcode_start in", values, "qrcodeStart");
+        public Criteria andSkipCheckBetween(Boolean value1, Boolean value2) {
+            addCriterion("skip_check between", value1, value2, "skipCheck");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartNotIn(List<String> values) {
-            addCriterion("qrcode_start not in", values, "qrcodeStart");
+        public Criteria andSkipCheckNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("skip_check not between", value1, value2, "skipCheck");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartBetween(String value1, String value2) {
-            addCriterion("qrcode_start between", value1, value2, "qrcodeStart");
+        public Criteria andIsActiveIsNull() {
+            addCriterion("is_active is null");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeStartNotBetween(String value1, String value2) {
-            addCriterion("qrcode_start not between", value1, value2, "qrcodeStart");
+        public Criteria andIsActiveIsNotNull() {
+            addCriterion("is_active is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsActiveEqualTo(Boolean value) {
+            addCriterion("is_active =", value, "isActive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsActiveNotEqualTo(Boolean value) {
+            addCriterion("is_active <>", value, "isActive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsActiveGreaterThan(Boolean value) {
+            addCriterion("is_active >", value, "isActive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsActiveGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_active >=", value, "isActive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsActiveLessThan(Boolean value) {
+            addCriterion("is_active <", value, "isActive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsActiveLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_active <=", value, "isActive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsActiveIn(List<Boolean> values) {
+            addCriterion("is_active in", values, "isActive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsActiveNotIn(List<Boolean> values) {
+            addCriterion("is_active not in", values, "isActive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsActiveBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_active between", value1, value2, "isActive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsActiveNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_active not between", value1, value2, "isActive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedIsNull() {
+            addCriterion("is_deleted is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedIsNotNull() {
+            addCriterion("is_deleted is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedEqualTo(Boolean value) {
+            addCriterion("is_deleted =", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedNotEqualTo(Boolean value) {
+            addCriterion("is_deleted <>", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedGreaterThan(Boolean value) {
+            addCriterion("is_deleted >", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_deleted >=", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedLessThan(Boolean value) {
+            addCriterion("is_deleted <", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_deleted <=", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedIn(List<Boolean> values) {
+            addCriterion("is_deleted in", values, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedNotIn(List<Boolean> values) {
+            addCriterion("is_deleted not in", values, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_deleted between", value1, value2, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_deleted not between", value1, value2, "isDeleted");
             return (Criteria) this;
         }
 
@@ -615,63 +665,73 @@ public class SysQrcodeRulePOExample {
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckIsNull() {
-            addCriterion("qrcode_check is null");
+        public Criteria andOpNameIsNull() {
+            addCriterion("op_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckIsNotNull() {
-            addCriterion("qrcode_check is not null");
+        public Criteria andOpNameIsNotNull() {
+            addCriterion("op_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckEqualTo(Boolean value) {
-            addCriterion("qrcode_check =", value, "qrcodeCheck");
+        public Criteria andOpNameEqualTo(String value) {
+            addCriterion("op_name =", value, "opName");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckNotEqualTo(Boolean value) {
-            addCriterion("qrcode_check <>", value, "qrcodeCheck");
+        public Criteria andOpNameNotEqualTo(String value) {
+            addCriterion("op_name <>", value, "opName");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckGreaterThan(Boolean value) {
-            addCriterion("qrcode_check >", value, "qrcodeCheck");
+        public Criteria andOpNameGreaterThan(String value) {
+            addCriterion("op_name >", value, "opName");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("qrcode_check >=", value, "qrcodeCheck");
+        public Criteria andOpNameGreaterThanOrEqualTo(String value) {
+            addCriterion("op_name >=", value, "opName");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckLessThan(Boolean value) {
-            addCriterion("qrcode_check <", value, "qrcodeCheck");
+        public Criteria andOpNameLessThan(String value) {
+            addCriterion("op_name <", value, "opName");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckLessThanOrEqualTo(Boolean value) {
-            addCriterion("qrcode_check <=", value, "qrcodeCheck");
+        public Criteria andOpNameLessThanOrEqualTo(String value) {
+            addCriterion("op_name <=", value, "opName");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckIn(List<Boolean> values) {
-            addCriterion("qrcode_check in", values, "qrcodeCheck");
+        public Criteria andOpNameLike(String value) {
+            addCriterion("op_name like", value, "opName");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckNotIn(List<Boolean> values) {
-            addCriterion("qrcode_check not in", values, "qrcodeCheck");
+        public Criteria andOpNameNotLike(String value) {
+            addCriterion("op_name not like", value, "opName");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckBetween(Boolean value1, Boolean value2) {
-            addCriterion("qrcode_check between", value1, value2, "qrcodeCheck");
+        public Criteria andOpNameIn(List<String> values) {
+            addCriterion("op_name in", values, "opName");
             return (Criteria) this;
         }
 
-        public Criteria andQrcodeCheckNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("qrcode_check not between", value1, value2, "qrcodeCheck");
+        public Criteria andOpNameNotIn(List<String> values) {
+            addCriterion("op_name not in", values, "opName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNameBetween(String value1, String value2) {
+            addCriterion("op_name between", value1, value2, "opName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpNameNotBetween(String value1, String value2) {
+            addCriterion("op_name not between", value1, value2, "opName");
             return (Criteria) this;
         }
     }
