@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.uspring.sdsmesplus.dao.generate.SysQrcodeRulePODao">
-  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO">
-    <id column="sqr_id" jdbcType="INTEGER" property="sqrId" />
-    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.ProdProcessCheckPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPO">
+    <id column="ppc_id" jdbcType="INTEGER" property="ppcId" />
     <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
-    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
-    <result column="qrcode_length" jdbcType="INTEGER" property="qrcodeLength" />
-    <result column="qrcode_start" jdbcType="VARCHAR" property="qrcodeStart" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="op_code" jdbcType="VARCHAR" property="opCode" />
+    <result column="skip_check" jdbcType="BIT" property="skipCheck" />
+    <result column="is_active" jdbcType="BIT" property="isActive" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="qrcode_check" jdbcType="BIT" property="qrcodeCheck" />
+    <result column="op_name" jdbcType="VARCHAR" property="opName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,16 +72,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    sqr_id, fc_id, prod_code, customer_code, qrcode_length, qrcode_start, create_time, 
-    update_time, qrcode_check
+    ppc_id, prod_code, line_id, op_code, skip_check, is_active, is_deleted, create_time, 
+    update_time, op_name
   </sql>
-  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePOExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPOExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from sys_qrcode_rule
+    from prod_process_check
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,49 +92,52 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_qrcode_rule
-    where sqr_id = #{sqrId,jdbcType=INTEGER}
+    from prod_process_check
+    where ppc_id = #{ppcId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sys_qrcode_rule
-    where sqr_id = #{sqrId,jdbcType=INTEGER}
+    delete from prod_process_check
+    where ppc_id = #{ppcId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePOExample">
-    delete from sys_qrcode_rule
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPOExample">
+    delete from prod_process_check
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO">
-    insert into sys_qrcode_rule (sqr_id, fc_id, prod_code, 
-      customer_code, qrcode_length, qrcode_start, 
-      create_time, update_time, qrcode_check
-      )
-    values (#{sqrId,jdbcType=INTEGER}, #{fcId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, 
-      #{customerCode,jdbcType=VARCHAR}, #{qrcodeLength,jdbcType=INTEGER}, #{qrcodeStart,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{qrcodeCheck,jdbcType=BIT}
-      )
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPO">
+    insert into prod_process_check (ppc_id, prod_code, line_id, 
+      op_code, skip_check, is_active, 
+      is_deleted, create_time, update_time, 
+      op_name)
+    values (#{ppcId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, #{lineId,jdbcType=INTEGER}, 
+      #{opCode,jdbcType=VARCHAR}, #{skipCheck,jdbcType=BIT}, #{isActive,jdbcType=BIT}, 
+      #{isDeleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{opName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO">
-    insert into sys_qrcode_rule
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPO">
+    insert into prod_process_check
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="sqrId != null">
-        sqr_id,
-      </if>
-      <if test="fcId != null">
-        fc_id,
+      <if test="ppcId != null">
+        ppc_id,
       </if>
       <if test="prodCode != null">
         prod_code,
       </if>
-      <if test="customerCode != null">
-        customer_code,
+      <if test="lineId != null">
+        line_id,
       </if>
-      <if test="qrcodeLength != null">
-        qrcode_length,
+      <if test="opCode != null">
+        op_code,
       </if>
-      <if test="qrcodeStart != null">
-        qrcode_start,
+      <if test="skipCheck != null">
+        skip_check,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
       </if>
       <if test="createTime != null">
         create_time,
@@ -141,28 +145,31 @@
       <if test="updateTime != null">
         update_time,
       </if>
-      <if test="qrcodeCheck != null">
-        qrcode_check,
+      <if test="opName != null">
+        op_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="sqrId != null">
-        #{sqrId,jdbcType=INTEGER},
-      </if>
-      <if test="fcId != null">
-        #{fcId,jdbcType=INTEGER},
+      <if test="ppcId != null">
+        #{ppcId,jdbcType=INTEGER},
       </if>
       <if test="prodCode != null">
         #{prodCode,jdbcType=VARCHAR},
       </if>
-      <if test="customerCode != null">
-        #{customerCode,jdbcType=VARCHAR},
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
       </if>
-      <if test="qrcodeLength != null">
-        #{qrcodeLength,jdbcType=INTEGER},
+      <if test="opCode != null">
+        #{opCode,jdbcType=VARCHAR},
       </if>
-      <if test="qrcodeStart != null">
-        #{qrcodeStart,jdbcType=VARCHAR},
+      <if test="skipCheck != null">
+        #{skipCheck,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -170,37 +177,40 @@
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="qrcodeCheck != null">
-        #{qrcodeCheck,jdbcType=BIT},
+      <if test="opName != null">
+        #{opName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePOExample" resultType="java.lang.Long">
-    select count(*) from sys_qrcode_rule
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPOExample" resultType="java.lang.Long">
+    select count(*) from prod_process_check
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update sys_qrcode_rule
+    update prod_process_check
     <set>
-      <if test="record.sqrId != null">
-        sqr_id = #{record.sqrId,jdbcType=INTEGER},
-      </if>
-      <if test="record.fcId != null">
-        fc_id = #{record.fcId,jdbcType=INTEGER},
+      <if test="record.ppcId != null">
+        ppc_id = #{record.ppcId,jdbcType=INTEGER},
       </if>
       <if test="record.prodCode != null">
         prod_code = #{record.prodCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.customerCode != null">
-        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
       </if>
-      <if test="record.qrcodeLength != null">
-        qrcode_length = #{record.qrcodeLength,jdbcType=INTEGER},
+      <if test="record.opCode != null">
+        op_code = #{record.opCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.qrcodeStart != null">
-        qrcode_start = #{record.qrcodeStart,jdbcType=VARCHAR},
+      <if test="record.skipCheck != null">
+        skip_check = #{record.skipCheck,jdbcType=BIT},
+      </if>
+      <if test="record.isActive != null">
+        is_active = #{record.isActive,jdbcType=BIT},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -208,8 +218,8 @@
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.qrcodeCheck != null">
-        qrcode_check = #{record.qrcodeCheck,jdbcType=BIT},
+      <if test="record.opName != null">
+        op_name = #{record.opName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -217,37 +227,41 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update sys_qrcode_rule
-    set sqr_id = #{record.sqrId,jdbcType=INTEGER},
-      fc_id = #{record.fcId,jdbcType=INTEGER},
+    update prod_process_check
+    set ppc_id = #{record.ppcId,jdbcType=INTEGER},
       prod_code = #{record.prodCode,jdbcType=VARCHAR},
-      customer_code = #{record.customerCode,jdbcType=VARCHAR},
-      qrcode_length = #{record.qrcodeLength,jdbcType=INTEGER},
-      qrcode_start = #{record.qrcodeStart,jdbcType=VARCHAR},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      op_code = #{record.opCode,jdbcType=VARCHAR},
+      skip_check = #{record.skipCheck,jdbcType=BIT},
+      is_active = #{record.isActive,jdbcType=BIT},
+      is_deleted = #{record.isDeleted,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      qrcode_check = #{record.qrcodeCheck,jdbcType=BIT}
+      op_name = #{record.opName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO">
-    update sys_qrcode_rule
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPO">
+    update prod_process_check
     <set>
-      <if test="fcId != null">
-        fc_id = #{fcId,jdbcType=INTEGER},
-      </if>
       <if test="prodCode != null">
         prod_code = #{prodCode,jdbcType=VARCHAR},
       </if>
-      <if test="customerCode != null">
-        customer_code = #{customerCode,jdbcType=VARCHAR},
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
       </if>
-      <if test="qrcodeLength != null">
-        qrcode_length = #{qrcodeLength,jdbcType=INTEGER},
+      <if test="opCode != null">
+        op_code = #{opCode,jdbcType=VARCHAR},
       </if>
-      <if test="qrcodeStart != null">
-        qrcode_start = #{qrcodeStart,jdbcType=VARCHAR},
+      <if test="skipCheck != null">
+        skip_check = #{skipCheck,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -255,22 +269,23 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="qrcodeCheck != null">
-        qrcode_check = #{qrcodeCheck,jdbcType=BIT},
+      <if test="opName != null">
+        op_name = #{opName,jdbcType=VARCHAR},
       </if>
     </set>
-    where sqr_id = #{sqrId,jdbcType=INTEGER}
+    where ppc_id = #{ppcId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.SysQrcodeRulePO">
-    update sys_qrcode_rule
-    set fc_id = #{fcId,jdbcType=INTEGER},
-      prod_code = #{prodCode,jdbcType=VARCHAR},
-      customer_code = #{customerCode,jdbcType=VARCHAR},
-      qrcode_length = #{qrcodeLength,jdbcType=INTEGER},
-      qrcode_start = #{qrcodeStart,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPO">
+    update prod_process_check
+    set prod_code = #{prodCode,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=INTEGER},
+      op_code = #{opCode,jdbcType=VARCHAR},
+      skip_check = #{skipCheck,jdbcType=BIT},
+      is_active = #{isActive,jdbcType=BIT},
+      is_deleted = #{isDeleted,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      qrcode_check = #{qrcodeCheck,jdbcType=BIT}
-    where sqr_id = #{sqrId,jdbcType=INTEGER}
+      op_name = #{opName,jdbcType=VARCHAR}
+    where ppc_id = #{ppcId,jdbcType=INTEGER}
   </update>
 </mapper>
