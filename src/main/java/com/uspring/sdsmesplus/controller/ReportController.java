@@ -313,4 +313,20 @@ public class ReportController {
 		endTime = DateUtils.dealEndTime(endTime);
 		return new Result("导出成功", this.reportService.getProductReplace(fcId, shopId, lineId, poCode, prodCode, beginTime, endTime, pageNum, pageSize, 1, response), StatusCode.SUCCESS);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/operaLog", method = RequestMethod.GET)
+	@ApiOperation(value = "查询操作记录", notes = "查询操作记录", response = Result.class)
+	public Result getOperaLog(HttpServletResponse response,Integer fcId, Integer shopId, Integer lineId, String empName, String empNumber, String note, String logType, String beginTime, String endTime, String type, Integer pageNum, Integer pageSize) {
+		endTime = DateUtils.dealEndTime(endTime);
+		return new Result("查询成功", this.reportService.getOperaLog(fcId, shopId, lineId, empName, empNumber, note, beginTime, endTime, logType, pageNum, pageSize, 0, response), StatusCode.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/operaLog/export", method = RequestMethod.POST)
+	@ApiOperation(value = "导出操作记录", notes = "导出操作记录", response = Result.class)
+	public Result exportOperaLog(HttpServletResponse response,Integer fcId, Integer shopId, Integer lineId, String empName, String empNumber, String note, String logType, String beginTime, String endTime, String type, Integer pageNum, Integer pageSize) {
+		endTime = DateUtils.dealEndTime(endTime);
+		return new Result("导出成功", this.reportService.getOperaLog(fcId, shopId, lineId, empName, empNumber, note, beginTime, endTime, logType, pageNum, pageSize, 1, response), StatusCode.SUCCESS);
+	}
 }

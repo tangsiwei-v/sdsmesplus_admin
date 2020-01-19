@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.SysLogDao">
+
+	<select id="getSysLog" resultType="map">
+		select a.*,b.line_name,c.shop_name,d.fc_name from sys_log a
+		left join sys_line b on a.line_id = b.line_id
+		left join sys_workshop c on b.shop_id = c.shop_id
+		left join sys_factory d on c.fc_id = d.fc_id
+		where 1=1
+		<if test="lineId != null and lineId != ''">
+		   and b.line_id = #{lineId}
+		</if>
+		<if test="shopId != null and shopId != ''">
+		   and c.shop_id = #{shopId}
+		</if>
+		<if test="fcId != null and fcId != ''">
+		   and d.fc_id = #{fcId}
+		</if>
+		<if test="logType != null and logType != ''">
+		   and log_type = #{logType}
+		</if>
+		<if test="empName != null and empName != ''">
+		   and log_emp_name = #{empName}
+		</if>
+		<if test="empNumber != null and empNumber != ''">
+		   and log_emp_number = #{empNumber}
+		</if>
+		<if test="note != null and note != ''">
+		   and log_note like '%'+#{note}+'%'
+		</if>
+		<if test="beginTime != null and endTime != null and beginTime != '' and endTime != ''">
+		   and a.create_time between #{beginTime} and #{endTime}
+		</if>
+		order by a.create_time desc
+	</select>
+	
+</mapper>
