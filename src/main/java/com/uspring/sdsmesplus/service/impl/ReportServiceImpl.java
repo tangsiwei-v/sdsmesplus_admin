@@ -27,6 +27,7 @@ import com.uspring.sdsmesplus.dao.ProdProcessStockDao;
 import com.uspring.sdsmesplus.dao.ProdProductMaterialDao;
 import com.uspring.sdsmesplus.dao.ProductReplaceDao;
 import com.uspring.sdsmesplus.dao.SafelunchOrderDao;
+import com.uspring.sdsmesplus.dao.SysLogDao;
 import com.uspring.sdsmesplus.dao.generate.NonconformProductLogPODao;
 import com.uspring.sdsmesplus.dao.generate.SafelunchWorkLinePODao;
 import com.uspring.sdsmesplus.dao.generate.SysProcessPODao;
@@ -117,6 +118,9 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	private ProductReplaceDao productReplaceDao;
+	
+	@Autowired
+	private SysLogDao sysLogdao;
 	
 
 	@Override
@@ -1214,6 +1218,53 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("fc_name");
 			
 			ExportXls.exportXls(dataList, response, titleList, columnList, "总成替换查询");
+	    }
+		
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getOperaLog(Integer fcId, Integer shopId, Integer lineId, String empName,
+			String empNumber, String note, String beginTime, String endTime, String logType, Integer pageNum,
+			Integer pageSize, Integer isExport, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		PageHelper page = new PageHelper();
+		if(isExport != 1){
+			page.startPage(pageNum, pageSize);
+		}
+
+		List<Map<String, Object>> dataList = this.sysLogdao.getSysLog(fcId, shopId, lineId, logType, empName, empNumber, note, beginTime, endTime);
+				
+
+		//是否导出
+		if(isExport == 1){
+			List<String> titleList = new ArrayList<String>();
+			titleList.add("工单号");
+			titleList.add("SAP号");
+			titleList.add("旧条码");
+			titleList.add("新条码");
+			titleList.add("时间");
+			titleList.add("产线");
+			titleList.add("车间");
+			titleList.add("工厂");
+			
+			List<String> columnList = new ArrayList<String>();
+			columnList.add("po_code");
+			columnList.add("prod_code");
+			columnList.add("fp_barcode_old");
+			columnList.add("fp_barcode_new");
+			columnList.add("create_time");
+			columnList.add("line_name");
+			columnList.add("shop_name");
+			columnList.add("fc_name");
+			
+			ExportXls.exportXls(dataList, response, titleList, columnList, "日志查询");
 	    }
 		
 		PageInfo info = new PageInfo(dataList);
