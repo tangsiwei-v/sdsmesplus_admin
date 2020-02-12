@@ -1241,28 +1241,45 @@ public class ReportServiceImpl implements ReportService {
 
 		List<Map<String, Object>> dataList = this.sysLogdao.getSysLog(fcId, shopId, lineId, logType, empName, empNumber, note, beginTime, endTime);
 				
-
+		for(Map<String, Object> dataMap:dataList){
+			if(dataMap.get("log_type").toString().equals("unqlty")){
+				dataMap.put("logType", "不合格品");
+			}else if(dataMap.get("log_type").toString().equals("package")){
+				dataMap.put("logType", "装箱");
+			}else if(dataMap.get("log_type").toString().equals("order")){
+				dataMap.put("logType", "工单");
+			}else if(dataMap.get("log_type").toString().equals("wipbox")){
+				dataMap.put("logType", "过程码");
+			}else if(dataMap.get("log_type").toString().equals("outsourcing")){
+				dataMap.put("logType", "委外");
+			}
+		}
+		
 		//是否导出
 		if(isExport == 1){
 			List<String> titleList = new ArrayList<String>();
 			titleList.add("工单号");
-			titleList.add("SAP号");
-			titleList.add("旧条码");
-			titleList.add("新条码");
+			titleList.add("日志类型");
+			titleList.add("详情");
+			titleList.add("操作工号");
+			titleList.add("操作人");
+			titleList.add("备注");
 			titleList.add("时间");
-			titleList.add("产线");
-			titleList.add("车间");
 			titleList.add("工厂");
+			titleList.add("车间");
+			titleList.add("产线");
 			
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("po_code");
-			columnList.add("prod_code");
-			columnList.add("fp_barcode_old");
-			columnList.add("fp_barcode_new");
+			columnList.add("logType");
+			columnList.add("log_note");
+			columnList.add("log_emp_number");
+			columnList.add("log_emp_name");
+			columnList.add("log_remarks");
 			columnList.add("create_time");
-			columnList.add("line_name");
-			columnList.add("shop_name");
 			columnList.add("fc_name");
+			columnList.add("shop_name");
+			columnList.add("line_name");
 			
 			ExportXls.exportXls(dataList, response, titleList, columnList, "日志查询");
 	    }
