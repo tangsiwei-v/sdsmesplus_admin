@@ -128,8 +128,9 @@ public class DepartmentController extends BaseController {
 			@RequestParam(value = "shopId", required = false) Integer shopId,
 			@RequestParam(value = "vsmId", required = false) Integer vsmId,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
-			@RequestParam(value = "page_num", required = false) Integer page_num) {
-		PageInfo<VsmVO> vsms = sysVsmServer.queryVsm(shopId, vsmId, page_size, page_num);
+			@RequestParam(value = "page_num", required = false) Integer page_num,
+			@RequestParam(value = "fcId", required = false, defaultValue="") Integer fcId) {
+		PageInfo<VsmVO> vsms = sysVsmServer.queryVsm(shopId, vsmId, page_size, page_num, fcId);
 		return new Result("查询成功", vsms, StatusCode.SUCCESS);
 	}
 

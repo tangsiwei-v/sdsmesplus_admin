@@ -20,5 +20,5 @@ public interface SysVsmDao extends SysVsmPODao{
 	* page_size page_num
 	* @return  工段实体类
 	*/
-	List<VsmVO> queryVsm(@Param("shopId") Integer shopId, @Param("vsmId") Integer vsmId, Integer page_size, Integer page_num);
+	List<VsmVO> queryVsm(@Param("shopId") Integer shopId, @Param("vsmId") Integer vsmId, Integer page_size, Integer page_num, @Param("fcId") Integer fcId);
 }
