@@ -19,7 +19,7 @@ public interface LineProdModelServer {
 	*  page_size page_num
 	* @return 产线模式实体类
 	*/
-	PageInfo<LineProdmodelVO> queryLineProdmodel(Integer lineId, Integer fcId, Integer page_size, Integer page_num);
+	PageInfo<LineProdmodelVO> queryLineProdmodel(Integer lineId, Integer fcId, Integer page_size, Integer page_num, Integer shopId);
 
 	/**
 	 * @Title: insertLineProdmodel

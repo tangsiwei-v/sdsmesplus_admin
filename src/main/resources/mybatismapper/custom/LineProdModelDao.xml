@@ -6,6 +6,7 @@
     <result column="line_id" jdbcType="INTEGER" property="lineId" />
     <result column="prod_model" jdbcType="VARCHAR" property="prodModel" />
     <result column="op_no" jdbcType="VARCHAR" property="opNo" />
+    <result column="extra_rate" jdbcType="VARCHAR" property="extraRate" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <collection property="lines" ofType="com.uspring.sdsmesplus.entity.vo.LineVO">
 		<id column="line_id" jdbcType="INTEGER" property="lineId" />
@@ -42,6 +43,9 @@
 	</if>
 	<if test="fcId !='' and fcId != null">
 		and f.fc_id = #{fcId}
+	</if>
+	<if test="shopId != '' and shopId != null">
+	   and l.shop_id = #{shopId}
 	</if>
   	</select>
 </mapper>
