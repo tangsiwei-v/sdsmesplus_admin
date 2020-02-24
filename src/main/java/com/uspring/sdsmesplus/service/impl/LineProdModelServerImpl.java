@@ -1,5 +1,6 @@
 package com.uspring.sdsmesplus.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class LineProdModelServerImpl implements LineProdModelServer {
 
 	// 查询产线模式主数据
 	public PageInfo<LineProdmodelVO> queryLineProdmodel(Integer lineId, Integer fcId, Integer page_size,
-			Integer page_num) {
+			Integer page_num, Integer shopId) {
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -32,18 +33,26 @@ public class LineProdModelServerImpl implements LineProdModelServer {
 			page_size = 1000;
 		}
 		PageHelper.startPage(page_num, page_size);
-		List<LineProdmodelVO> lineProdmodels = prodModeldao.queryLineProdmodel(lineId, fcId, page_size, page_num);
+		List<LineProdmodelVO> lineProdmodels = prodModeldao.queryLineProdmodel(lineId, fcId, page_size, page_num, shopId);
 		PageInfo<LineProdmodelVO> pageInfo = new PageInfo<LineProdmodelVO>(lineProdmodels);
 		return pageInfo;
 	}
 
 	// 添加产线模式主数据
 	public void insertLineProdmodel(SysLineProdmodelPO lineProdmodel) {
+		
+		if(lineProdmodel.getExtraRate() != null){
+			lineProdmodel.setExtraRate(new BigDecimal((lineProdmodel.getExtraRate().doubleValue() / 100)+ ""));
+		}
+		
 		prodModeldao.insertSelective(lineProdmodel);
 	}
 
 	// 修改产线模式主数据
 	public void updateLineProdmodel(SysLineProdmodelPO lineProdmodel) {
+		if(lineProdmodel.getExtraRate() != null){
+			lineProdmodel.setExtraRate(new BigDecimal((lineProdmodel.getExtraRate().doubleValue() / 100)+ ""));
+		}
 		prodModeldao.updateByPrimaryKey(lineProdmodel);
 	}
 

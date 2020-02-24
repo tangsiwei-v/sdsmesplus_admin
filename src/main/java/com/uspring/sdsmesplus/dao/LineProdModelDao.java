@@ -21,5 +21,5 @@ public interface LineProdModelDao extends SysLineProdmodelPODao {
 	*  page_size page_num
 	* @return 产线模式实体类
 	*/
-	List<LineProdmodelVO> queryLineProdmodel(@Param("lineId") Integer lineId, @Param("fcId") Integer fcId, Integer page_size, Integer page_num);
+	List<LineProdmodelVO> queryLineProdmodel(@Param("lineId") Integer lineId, @Param("fcId") Integer fcId, Integer page_size, Integer page_num, @Param("shopId") Integer shopId);
 }
