@@ -92,9 +92,8 @@ public class DepartmentController extends BaseController {
 			@RequestParam(value = "vsmId", required = false) Integer vsmId,
 			@RequestParam(value = "lineId", required = false) Integer lineId,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
-			@RequestParam(value = "page_num", required = false) Integer page_num,
-			@RequestParam(value = "fcId", required = false, defaultValue="") Integer fcId) {
-		PageInfo<LineVO> lines = sysLineService.queryLine(shopId, vsmId, lineId, page_size, page_num, fcId);
+			@RequestParam(value = "page_num", required = false) Integer page_num) {
+		PageInfo<LineVO> lines = sysLineService.queryLine(shopId, vsmId, lineId, page_size, page_num);
 		return new Result("查询成功", lines, StatusCode.SUCCESS);
 	}
 
