@@ -24,7 +24,7 @@ public class SysVsmServerImpl implements SysVsmServer{
 	private SysVsmDao sysVsmDao;
 	
 	//查找工段主数据
-	public PageInfo<VsmVO> queryVsm(Integer shopId, Integer vsmId, Integer page_size, Integer page_num) {
+	public PageInfo<VsmVO> queryVsm(Integer shopId, Integer vsmId, Integer page_size, Integer page_num, Integer fcId) {
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -32,7 +32,7 @@ public class SysVsmServerImpl implements SysVsmServer{
 			page_size = 1000;
 		}
 		PageHelper.startPage(page_num, page_size);
-		List<VsmVO> vsms = sysVsmDao.queryVsm(shopId, vsmId, page_size, page_num);
+		List<VsmVO> vsms = sysVsmDao.queryVsm(shopId, vsmId, page_size, page_num, fcId);
 		PageInfo<VsmVO> pageInfo = new PageInfo<VsmVO>(vsms);
 		return pageInfo;
 	}

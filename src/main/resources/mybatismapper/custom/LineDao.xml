@@ -55,5 +55,8 @@
 	<if test="lineId !='' and lineId != null">
 		and v.line_id = #{lineId}
 	</if>
+	<if test="fcId !='' and fcId != null">
+		and l.fc_id = #{fcId}
+	</if>
   	</select>
 </mapper>

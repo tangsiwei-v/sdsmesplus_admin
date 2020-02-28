@@ -22,5 +22,5 @@ public interface LineDao extends SysLinePODao{
 	* page_size page_num
 	* @return 产线实体类
 	*/
-	List<LineVO> queryLine(@Param("shopId") Integer shopId,@Param("vsmId") Integer vsmId,@Param("lineId") Integer lineId, Integer page_size, Integer page_num);
+	List<LineVO> queryLine(@Param("shopId") Integer shopId,@Param("vsmId") Integer vsmId,@Param("lineId") Integer lineId, Integer page_size, Integer page_num,@Param("fcId") Integer fcId);
 }

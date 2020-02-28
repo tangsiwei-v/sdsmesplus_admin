@@ -16,11 +16,11 @@ public interface SysVsmServer {
 	/** 
 	* @Title: prodmodel
 	* @Description: 根据shopId,vsmId查找工段主数据
-	* @param shopId 车间ID, vsmId 工段ID,
+	* @param shopId 车间ID, vsmId 工段ID, fcId 工厂ID
 	* page_size page_num
 	* @return  工段实体类
 	*/
-	PageInfo<VsmVO> queryVsm(Integer shopId, Integer vsmId, Integer page_size, Integer page_num);
+	PageInfo<VsmVO> queryVsm(Integer shopId, Integer vsmId, Integer page_size, Integer page_num, Integer fcId);
 
 	/**
 	 * @Title: insertVsm

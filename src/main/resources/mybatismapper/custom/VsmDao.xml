@@ -35,5 +35,8 @@
 		<if test="vsmId !='' and vsmId != null">
 			and v.vsm_id = #{vsmId}
 		</if>
+		<if test="fcId !='' and fcId != null">
+			and w.fc_id = #{fcId}
+		</if>
   	</select>
 </mapper>

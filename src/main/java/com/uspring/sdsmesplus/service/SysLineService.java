@@ -39,7 +39,7 @@ public interface SysLineService {
 	* page_size page_num
 	* @return  产线实体类
 	*/
-	PageInfo<LineVO> queryLine(Integer shopId, Integer vsmId, Integer lineId, Integer page_size, Integer page_num);
+	PageInfo<LineVO> queryLine(Integer shopId, Integer vsmId, Integer lineId, Integer page_size, Integer page_num, Integer fcId);
 
 	/**
 	 * @Title: insertLine

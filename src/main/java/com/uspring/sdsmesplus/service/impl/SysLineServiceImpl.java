@@ -54,7 +54,7 @@ public class SysLineServiceImpl implements SysLineService{
 
 	//查询产线主数据
 	public PageInfo<LineVO> queryLine(Integer shopId, Integer vsmId, Integer lineId, Integer page_size,
-			Integer page_num) {
+			Integer page_num, Integer fcId) {
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -62,7 +62,7 @@ public class SysLineServiceImpl implements SysLineService{
 			page_size = 1000;
 		}
 		PageHelper.startPage(page_num, page_size);
-		List<LineVO> lines = lineDao.queryLine(shopId, vsmId, lineId, page_size, page_num);
+		List<LineVO> lines = lineDao.queryLine(shopId, vsmId, lineId, page_size, page_num, fcId);
 		PageInfo<LineVO> pageInfo = new PageInfo<LineVO>(lines);
 		return pageInfo;
 	}
