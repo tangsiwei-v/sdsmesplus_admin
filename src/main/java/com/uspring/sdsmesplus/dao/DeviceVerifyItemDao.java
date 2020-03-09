@@ -21,6 +21,6 @@ public interface DeviceVerifyItemDao extends SysDeviceVerifyItemPODao{
 	*  page_size page_num
 	* @return 设备防错实体类
 	*/
-	List<DeviceVerifyItemVO> queryDeviceVerifyItem(@Param("lineId") Integer lineId, Integer page_size, Integer page_num);
+	List<DeviceVerifyItemVO> queryDeviceVerifyItem(@Param("lineId") Integer lineId, @Param("factoryId") String factoryId, Integer page_size, Integer page_num);
 	
 }

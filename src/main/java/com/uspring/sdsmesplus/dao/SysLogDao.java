@@ -21,5 +21,5 @@ public interface SysLogDao{
 	* @param 
 	* @return 
 	*/
-	List<Map<String,Object>> getSysLog(@Param("fcId")Integer fcId,@Param("shopId")Integer shopId,@Param("lineId")Integer lineId,@Param("logType")String logType,@Param("empName")String empName,@Param("empNumber")String empNumber,@Param("note")String note,@Param("beginTime")String beginTime,@Param("endTime")String endTime);
+	List<Map<String,Object>> getSysLog(@Param("fcId")Integer fcId,@Param("shopId")Integer shopId,@Param("lineId")Integer lineId,@Param("poCode")String poCode,@Param("logType")String logType,@Param("empName")String empName,@Param("empNumber")String empNumber,@Param("note")String note,@Param("beginTime")String beginTime,@Param("endTime")String endTime);
 }

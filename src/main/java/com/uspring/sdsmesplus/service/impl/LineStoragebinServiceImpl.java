@@ -28,7 +28,7 @@ public class LineStoragebinServiceImpl implements LineStoragebinService{
 	private SysLineStoragebinPODao sysLineStoragebinPODao;
 	
 	//查找产线库位主数据
-	public PageInfo<LineStoragebinVO> selectLineStoragebins(Integer lineId, Integer page_size, Integer page_num) {
+	public PageInfo<LineStoragebinVO> selectLineStoragebins(Integer lineId, String factoryId,Integer page_size, Integer page_num) {
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -36,7 +36,7 @@ public class LineStoragebinServiceImpl implements LineStoragebinService{
 			page_size = 1000;
 		}
 		PageHelper.startPage(page_num, page_size);
-		List<LineStoragebinVO> lineStoragebins = lineStoragebinDao.selectLineStoragebins(lineId, page_size, page_num);
+		List<LineStoragebinVO> lineStoragebins = lineStoragebinDao.selectLineStoragebins(lineId, factoryId, page_size, page_num);
 		PageInfo<LineStoragebinVO> pageInfo = new PageInfo<LineStoragebinVO>(lineStoragebins);
 		return pageInfo;
 	}

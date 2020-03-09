@@ -308,7 +308,7 @@ public interface ReportService {
 	/**
 	 * 操作日志
 	 */
-	Map<String,Object> getOperaLog(Integer fcId, Integer shopId, Integer lineId, String empName, String empNumber, String note, 
+	Map<String,Object> getOperaLog(Integer fcId, Integer shopId, Integer lineId, String poCode, String empName, String empNumber, String note,
 			String beginTime, String endTime, String logType, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
 	
 }

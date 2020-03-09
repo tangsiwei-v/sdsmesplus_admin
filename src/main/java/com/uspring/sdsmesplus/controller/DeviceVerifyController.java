@@ -65,8 +65,9 @@ public class DeviceVerifyController extends BaseController {
 	public Result queryDeviceVerify(HttpServletResponse response,
 			@RequestParam(value = "lineId", required = false) Integer lineId,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
-			@RequestParam(value = "page_num", required = false) Integer page_num) {
-		PageInfo<DeviceVerifyItemVO> deviceVerifyLogPOs = deviceVerifyItemServer.queryDeviceVerifyItem(lineId,
+			@RequestParam(value = "page_num", required = false) Integer page_num,
+			@RequestParam(value = "factoryId", required = false) String factoryId) {
+		PageInfo<DeviceVerifyItemVO> deviceVerifyLogPOs = deviceVerifyItemServer.queryDeviceVerifyItem(lineId,factoryId,
 				page_size, page_num);
 		return new Result("查询成功", deviceVerifyLogPOs, StatusCode.SUCCESS);
 	}

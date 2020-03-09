@@ -1229,7 +1229,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public Map<String, Object> getOperaLog(Integer fcId, Integer shopId, Integer lineId, String empName,
+	public Map<String, Object> getOperaLog(Integer fcId, Integer shopId, Integer lineId, String poCode, String empName,
 			String empNumber, String note, String beginTime, String endTime, String logType, Integer pageNum,
 			Integer pageSize, Integer isExport, HttpServletResponse response) {
 		// TODO Auto-generated method stub
@@ -1239,7 +1239,7 @@ public class ReportServiceImpl implements ReportService {
 			page.startPage(pageNum, pageSize);
 		}
 
-		List<Map<String, Object>> dataList = this.sysLogdao.getSysLog(fcId, shopId, lineId, logType, empName, empNumber, note, beginTime, endTime);
+		List<Map<String, Object>> dataList = this.sysLogdao.getSysLog(fcId, shopId, lineId, poCode,logType, empName, empNumber, note, beginTime, endTime);
 				
 
 		//是否导出
