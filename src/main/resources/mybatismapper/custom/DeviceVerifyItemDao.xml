@@ -36,5 +36,8 @@
 	<if test="lineId !='' and lineId != null">
 			and d.line_id = #{lineId}
 	</if>
+	<if test="factoryId !='' and factoryId != null">
+		  and l.fc_id = #{factoryId}
+	</if>
   </select>
 </mapper>

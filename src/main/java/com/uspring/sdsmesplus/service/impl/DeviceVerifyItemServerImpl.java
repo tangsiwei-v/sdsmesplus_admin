@@ -40,7 +40,7 @@ public class DeviceVerifyItemServerImpl implements DeviceVerifyItemServer{
 	}		
 	
 	//查询设备防错要求
-	public PageInfo<DeviceVerifyItemVO> queryDeviceVerifyItem(Integer lineId, Integer page_size, Integer page_num) {
+	public PageInfo<DeviceVerifyItemVO> queryDeviceVerifyItem(Integer lineId, String factoryId, Integer page_size, Integer page_num) {
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -48,7 +48,7 @@ public class DeviceVerifyItemServerImpl implements DeviceVerifyItemServer{
 			page_size = 1000;
 		}
 		PageHelper.startPage(page_num, page_size);
-		List<DeviceVerifyItemVO> deviceVerifyItems = deviceVerifyItemDao.queryDeviceVerifyItem(lineId, page_size, page_num);
+		List<DeviceVerifyItemVO> deviceVerifyItems = deviceVerifyItemDao.queryDeviceVerifyItem(lineId, factoryId, page_size, page_num);
 		PageInfo<DeviceVerifyItemVO> pageInfo = new PageInfo<DeviceVerifyItemVO>(deviceVerifyItems);
 		return pageInfo;
 	}

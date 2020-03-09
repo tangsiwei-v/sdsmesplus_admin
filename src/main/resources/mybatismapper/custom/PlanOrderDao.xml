@@ -44,6 +44,9 @@
 		<if test="line_id !='' and line_id != null ">
 			and a.line_id = #{line_id}
 		</if>
+		<if test="factoryId !='' and factoryId != null ">
+			and b.fc_id = #{factoryId}
+		</if>
 		<if test="vsmId !='' and vsmId != null ">
 			and v.vsm_id = #{vsmId}
 		</if>
