@@ -44,6 +44,15 @@ public class OrderServiceImpl implements OrderService {
 			if(isExport != 1){
 				PageHelper.startPage(pageNum, pageSize);
 			}
+			if(map.containsKey("fcId")){
+				map.put("fcId", map.get("fcId"));
+			}
+			if(map.containsKey("shopId")){
+				map.put("shopId", map.get("shopId"));
+			}
+			if(map.containsKey("lineId")){
+				map.put("line_id", map.get("lineId"));
+			}
 			
 			// 时间判断
 			if (map.containsKey("start_time")) {

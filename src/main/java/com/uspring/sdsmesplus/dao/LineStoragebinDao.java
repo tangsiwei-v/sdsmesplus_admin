@@ -34,5 +34,5 @@ public interface LineStoragebinDao extends SysStoragebinPODao {
 	* page_num, page_size
 	* @return 产线库位实体类
 	*/
-	List<LineStoragebinVO> selectLineStoragebins(@Param("lineId") Integer lineId, Integer page_size, Integer page_num);
+	List<LineStoragebinVO> selectLineStoragebins(@Param("lineId") Integer lineId, Integer page_size, Integer page_num,@Param("shopId") Integer shopId,@Param("fcId") Integer fcId);
 }

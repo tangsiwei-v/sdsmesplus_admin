@@ -42,6 +42,6 @@ public interface DeviceVerifyItemServer {
 	*  page_size page_num
 	* @return 设备防错实体类
 	*/
-	PageInfo<DeviceVerifyItemVO> queryDeviceVerifyItem(Integer lineId, Integer page_size, Integer page_num);
+	PageInfo<DeviceVerifyItemVO> queryDeviceVerifyItem(Integer lineId, Integer page_size, Integer page_num, Integer shopId, Integer fcId);
 	
 }
