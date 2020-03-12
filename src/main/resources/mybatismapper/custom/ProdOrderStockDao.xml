@@ -27,6 +27,45 @@
 	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
  	</resultMap>
 
+	<select id="statCleanStock" resultMap="StockStatMap">
+		SELECT
+		a.po_code,
+		'' procCode,
+		a.box_barcode_new boxBarcode,
+		a.mat_code,
+		a.mat_name,
+		a.mat_batch_no,
+		a.mat_furnace_no,
+		a.mat_glevel,
+		a.cl_rest_count box_quan_left,
+		a.create_time
+		FROM
+		prod_clean_log a
+		left join plan_order b on a.po_code = b.po_code
+		LEFT JOIN sys_line c ON b.line_id = c.line_id
+		LEFT JOIN sys_workshop d ON c.shop_id = d.shop_id
+		LEFT JOIN sys_factory e ON d.fc_id = e.fc_id
+		where a.is_confirmed = 0
+		<if test="lineId != null and lineId != ''">
+			and c.line_id = #{lineId}
+		</if>
+		<if test="shopId != null and shopId != ''">
+			and c.shop_id = #{shopId}
+		</if>
+		<if test="fcId != null and fcId != ''">
+			and d.fc_id = #{fcId}
+		</if>
+		<if test="poCode != null and poCode != ''">
+			and b.po_code = #{poCode}
+		</if>
+		<if test="matCode != null and matCode != ''">
+			and a.material_code = #{matCode}
+		</if>
+		<if test="boxBarcode != null and boxBarcode != ''">
+			and a.material_box_code = #{boxBarcode}
+		</if>
+	</select>
+
 	<select id="getOrderStock" resultType="map">
 	    select a.*,b.prod_code,b.prod_number from prod_order_stock a
 		left join plan_order b on a.po_code = b.po_code
@@ -79,7 +118,7 @@
 			mat_glevel,
 			box_quan_left,
 			prod_order_stock.create_time
-		from prod_order_stock 
+		from prod_order_stock
 		left join plan_order on prod_order_stock.po_code = plan_order.po_code
 		left join sys_line c on plan_order.line_id = c.line_id
 		left join sys_workshop d on c.shop_id = d.shop_id
@@ -280,5 +319,8 @@
 			</foreach>
 		</if> -->
 	</select>
+
+
+
 	
 </mapper>

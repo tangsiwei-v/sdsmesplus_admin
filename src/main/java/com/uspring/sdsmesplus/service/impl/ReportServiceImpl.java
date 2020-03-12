@@ -425,11 +425,15 @@ public class ReportServiceImpl implements ReportService {
 				if (model.equals("cv_assy") || model.equals("sec_assy")) {
 					stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode, isCleaned,
 							shopId, fcId, beginTime, endTime, vsmId, poCodes);
+					stockList.addAll(prodOrderStockDao.statCleanStock(lineId, poCode, matProdCode, boxCode, procCode,
+							shopId, fcId, beginTime, endTime, poCodes));
 				} else {
 					stockList = prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode,
 							isCleaned, shopId, fcId, beginTime, endTime, vsmId, poCodes);
 					stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode, shopId,
 							fcId, beginTime, endTime, vsmId, poCodes));
+					stockList.addAll(prodOrderStockDao.statCleanStock(lineId, poCode, matProdCode, boxCode, procCode,
+							shopId, fcId, beginTime, endTime, poCodes));
 				}
 				stockList.addAll(prodOrderStockDao.statNonconform(lineId, poCode, matProdCode, boxCode, procCode,
 						shopId, fcId, beginTime, endTime, vsmId, poCodes));
@@ -443,6 +447,8 @@ public class ReportServiceImpl implements ReportService {
 					fcId, beginTime, endTime, vsmId, poCodes));
 			stockList.addAll(prodOrderStockDao.statNonconform(lineId, poCode, matProdCode, boxCode, procCode,
 					shopId, fcId, beginTime, endTime, vsmId, poCodes));
+			stockList.addAll(prodOrderStockDao.statCleanStock(lineId, poCode, matProdCode, boxCode, procCode,
+					shopId, fcId, beginTime, endTime, poCodes));
 		}
 
 		Map<String, StockStat> resultMap = new HashMap<String, StockStat>();
