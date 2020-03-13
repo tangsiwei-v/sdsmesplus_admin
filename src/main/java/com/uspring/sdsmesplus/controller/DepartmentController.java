@@ -244,10 +244,11 @@ public class DepartmentController extends BaseController {
 	@ApiOperation(value = "查询产线库位主数据", notes = "查询产线库位主数据", response = Result.class)
 	public Result selectLineStoragebins(HttpServletResponse response,
 			@RequestParam(value = "lineId", required = false) Integer lineId,
-			@RequestParam(value = "factoryId", required = false) String factoryId,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
-			@RequestParam(value = "page_num", required = false) Integer page_num) {
-		PageInfo<LineStoragebinVO> lineStoragebins = lineStoragebinService.selectLineStoragebins(lineId,factoryId,page_size,page_num);
+			@RequestParam(value = "page_num", required = false) Integer page_num,
+			@RequestParam(value = "shopId", required = false) Integer shopId,
+			@RequestParam(value = "fcId", required = false) Integer fcId) {
+		PageInfo<LineStoragebinVO> lineStoragebins = lineStoragebinService.selectLineStoragebins(lineId,page_size,page_num,shopId,fcId);
 		return new Result("查询成功", lineStoragebins, StatusCode.SUCCESS);
 	}
 

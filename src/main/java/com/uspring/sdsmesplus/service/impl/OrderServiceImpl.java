@@ -29,22 +29,31 @@ import com.uspring.sdsmesplus.service.OrderService;
  */
 @Service
 public class OrderServiceImpl implements OrderService {
-	
+
 	@Autowired
 	private PlanOrderDao planDao;
-	
+
 	@Autowired
 	private SysFactoryDao sysFactoryDao;
 
 	@Override
-	public PageInfo<PlanOrderPO> selectOrder(Map<String, Object> map,Integer isExport, HttpServletResponse response) {
+	public PageInfo<PlanOrderPO> selectOrder(Map<String, Object> map, Integer isExport, HttpServletResponse response) {
 		if (map != null) {
 			int pageNum = Integer.parseInt(map.get("page_num").toString());
 			int pageSize = Integer.parseInt(map.get("page_size").toString());
-			if(isExport != 1){
+			if (isExport != 1) {
 				PageHelper.startPage(pageNum, pageSize);
 			}
-			
+			if (map.containsKey("fcId")) {
+				map.put("fcId", map.get("fcId"));
+			}
+			if (map.containsKey("shopId")) {
+				map.put("shopId", map.get("shopId"));
+			}
+			if (map.containsKey("lineId")) {
+				map.put("line_id", map.get("lineId"));
+			}
+
 			// 时间判断
 			if (map.containsKey("start_time")) {
 				String star = (String) map.get("start_time");
@@ -57,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
 			}
 			// 切割传入status
 			if (map.containsKey("status")) {
-				if(!map.get("status").equals("")){
+				if (!map.get("status").equals("")) {
 					String stri = map.get("status").toString().replace("\"", "");
 					List<String> status = new ArrayList<String>();
 					String[] b = stri.split(",");
@@ -68,39 +77,39 @@ public class OrderServiceImpl implements OrderService {
 				}
 			}
 		}
-		
+
 		List<PlanOrderPO> list = planDao.queryPlanVO(map);
-		
-		//是否导出
-		if(isExport == 1){
+
+		// 是否导出
+		if (isExport == 1) {
 			List<Object> objList = new ArrayList<Object>();
-			for(PlanOrderPO planOrder:list){
+			for (PlanOrderPO planOrder : list) {
 				objList.add(planOrder);
 			}
-			
-			List<Map<String,Object>> mapList = ExportXls.entityListToMapList(objList);
-			
+
+			List<Map<String, Object>> mapList = ExportXls.entityListToMapList(objList);
+
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			
-			for(Map<String,Object> dataMap:mapList){
+
+			for (Map<String, Object> dataMap : mapList) {
 				String status = "";
-				if(dataMap.get("poStatus").toString().equals("Assigned")){
+				if (dataMap.get("poStatus").toString().equals("Assigned")) {
 					status = "下达";
-				}else if(dataMap.get("poStatus").toString().equals("Executing")){
+				} else if (dataMap.get("poStatus").toString().equals("Executing")) {
 					status = "执行";
-				}else if(dataMap.get("poStatus").toString().equals("Frozen")){
+				} else if (dataMap.get("poStatus").toString().equals("Frozen")) {
 					status = "冻结";
-				}else if(dataMap.get("poStatus").toString().equals("Completed")){
+				} else if (dataMap.get("poStatus").toString().equals("Completed")) {
 					status = "完成";
 				}
 				dataMap.put("status", status);
-				
+
 				String startTime = df.format(dataMap.get("poStartDatetime"));
 				dataMap.put("startTime", startTime);
 				String endTime = df.format(dataMap.get("poEndDatetime"));
 				dataMap.put("endTime", endTime);
 			}
-			
+
 			List<String> titleList = new ArrayList<String>();
 			titleList.add("工单号 ");
 			titleList.add("产品简码");
@@ -111,7 +120,7 @@ public class OrderServiceImpl implements OrderService {
 			titleList.add("计划开始");
 			titleList.add("计划结束");
 			titleList.add("状态");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("poCode");
 			columnList.add("prodCode");
@@ -122,30 +131,25 @@ public class OrderServiceImpl implements OrderService {
 			columnList.add("startTime");
 			columnList.add("endTime");
 			columnList.add("status");
-			
+
 			ExportXls.exportXls(mapList, response, titleList, columnList, "工单报表");
-	    }
-		
+		}
+
 		PageInfo<PlanOrderPO> pageInfo = new PageInfo<PlanOrderPO>(list);
 		return pageInfo;
 	}
 
 	@Override
 	public List<PlanOrderPO> selectPrinterByFactory(Integer fcId) {
-		
-    SysFactoryPO factory = sysFactoryDao.selectByPrimaryKey(fcId);
-    
-    List<PlanOrderPO> listPO1s = planDao.queryByFcCode(factory.getFcCode());   
-    
-    List<PlanOrderPO> listPO2s = planDao.queryNullVO(factory.getFcCode());    
-    
-	List<PlanOrderPO> listPOs = planDao.queryPrintVO(factory.getFcCode());
+		SysFactoryPO factory = sysFactoryDao.selectByPrimaryKey(fcId);
+		List<PlanOrderPO> listPO1s = planDao.queryByFcCode(factory.getFcCode());
+		List<PlanOrderPO> listPO2s = planDao.queryNullVO(factory.getFcCode());
+		List<PlanOrderPO> listPOs = planDao.queryPrintVO(factory.getFcCode());
 
-	listPO1s.removeAll(listPOs);
-	listPO1s.removeAll(listPO2s);
-	
-	return listPO1s;
+		listPO1s.removeAll(listPOs);
+		listPO1s.removeAll(listPO2s);
+
+		return listPO1s;
 	}
-
 
 }

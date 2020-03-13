@@ -64,8 +64,11 @@
   		<if test="lineId !='' and lineId != null">
 			and l.line_id = #{lineId}
 		</if>
-		<if test="factoryId !='' and factoryId != null">
-			and l.fc_id = #{factoryId}
+		<if test="shopId !='' and shopId != null">
+			and l.shop_id = #{shopId}
+		</if>
+		<if test="fcId !='' and fcId != null">
+			and l.fc_id = #{fcId}
 		</if>
   	</select>
   	

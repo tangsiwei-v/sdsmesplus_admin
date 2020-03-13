@@ -50,7 +50,7 @@ public class DeviceVerifyController extends BaseController {
 		deviceVerifyItemServer.updateDeviceVerifyItem(deviceVerifyItem);
 		return new Result("修改成功", "", StatusCode.SUCCESS);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/item/{dviId}", method = RequestMethod.DELETE)
 	@ApiOperation(value = "删除设备防错要求", notes = "删除设备防错要求", response = Result.class)
@@ -66,9 +66,10 @@ public class DeviceVerifyController extends BaseController {
 			@RequestParam(value = "lineId", required = false) Integer lineId,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
 			@RequestParam(value = "page_num", required = false) Integer page_num,
-			@RequestParam(value = "factoryId", required = false) String factoryId) {
-		PageInfo<DeviceVerifyItemVO> deviceVerifyLogPOs = deviceVerifyItemServer.queryDeviceVerifyItem(lineId,factoryId,
-				page_size, page_num);
+			@RequestParam(value = "shopId", required = false) Integer shopId,
+			@RequestParam(value = "fcId", required = false) Integer fcId) {
+		PageInfo<DeviceVerifyItemVO> deviceVerifyLogPOs = deviceVerifyItemServer.queryDeviceVerifyItem(lineId,
+				page_size, page_num, shopId, fcId);
 		return new Result("查询成功", deviceVerifyLogPOs, StatusCode.SUCCESS);
 	}
 }

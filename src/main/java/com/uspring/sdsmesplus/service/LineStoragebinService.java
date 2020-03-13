@@ -18,7 +18,7 @@ public interface LineStoragebinService {
 	* page_num, page_size
 	* @return 产线库位实体类
 	*/
-	PageInfo<LineStoragebinVO> selectLineStoragebins(Integer lineId, String factoryId,Integer page_size, Integer page_num);
+	PageInfo<LineStoragebinVO> selectLineStoragebins(Integer lineId, Integer page_size, Integer page_num, Integer shopId, Integer fcId);
 
 	/** 
 	* @Title: insertLineStoragebins

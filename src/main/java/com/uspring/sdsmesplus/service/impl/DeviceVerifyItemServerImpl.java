@@ -12,35 +12,36 @@ import com.uspring.sdsmesplus.entity.po.SysDeviceVerifyItemPO;
 import com.uspring.sdsmesplus.entity.vo.DeviceVerifyItemVO;
 import com.uspring.sdsmesplus.service.DeviceVerifyItemServer;
 
-/**   
+/**
  * @ClassName: DeviceVerifyItemServerImpl
  * @Version 1.0
- * @author: shangyanbing shangyanbing@uspring.cn   
- * @date: 2019年8月7日 上午11:49:31 
+ * @author: shangyanbing shangyanbing@uspring.cn
+ * @date: 2019年8月7日 上午11:49:31
  */
 
 @Service
-public class DeviceVerifyItemServerImpl implements DeviceVerifyItemServer{
+public class DeviceVerifyItemServerImpl implements DeviceVerifyItemServer {
 	@Autowired
 	private DeviceVerifyItemDao deviceVerifyItemDao;
-	
-	//添加设备防错要求
+
+	// 添加设备防错要求
 	public void insertDeviceVerifyItem(SysDeviceVerifyItemPO deviceVerifyItem) {
 		deviceVerifyItemDao.insertSelective(deviceVerifyItem);
 	}
-	
-	//修改设备防错要求
+
+	// 修改设备防错要求
 	public void updateDeviceVerifyItem(SysDeviceVerifyItemPO deviceVerifyItem) {
 		deviceVerifyItemDao.updateByPrimaryKey(deviceVerifyItem);
 	}
-	
-	//删除设备防错要求
+
+	// 删除设备防错要求
 	public void deleteDeviceVerifyItem(Integer dviId) {
 		deviceVerifyItemDao.deleteByPrimaryKey(dviId);
-	}		
-	
-	//查询设备防错要求
-	public PageInfo<DeviceVerifyItemVO> queryDeviceVerifyItem(Integer lineId, String factoryId, Integer page_size, Integer page_num) {
+	}
+
+	// 查询设备防错要求
+	public PageInfo<DeviceVerifyItemVO> queryDeviceVerifyItem(Integer lineId, Integer page_size, Integer page_num,
+			Integer shopId, Integer fcId) {
 		if (page_num == null) {
 			page_num = 1;
 		}
@@ -48,9 +49,10 @@ public class DeviceVerifyItemServerImpl implements DeviceVerifyItemServer{
 			page_size = 1000;
 		}
 		PageHelper.startPage(page_num, page_size);
-		List<DeviceVerifyItemVO> deviceVerifyItems = deviceVerifyItemDao.queryDeviceVerifyItem(lineId, factoryId, page_size, page_num);
+		List<DeviceVerifyItemVO> deviceVerifyItems = deviceVerifyItemDao.queryDeviceVerifyItem(lineId, page_size,
+				page_num, shopId, fcId);
 		PageInfo<DeviceVerifyItemVO> pageInfo = new PageInfo<DeviceVerifyItemVO>(deviceVerifyItems);
 		return pageInfo;
 	}
-	
+
 }
