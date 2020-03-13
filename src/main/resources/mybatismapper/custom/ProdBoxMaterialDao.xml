@@ -3,9 +3,8 @@
 <mapper namespace="com.uspring.sdsmesplus.dao.ProdBoxMaterialDao">
 
 	<select id="boxMaterialUseInfo" resultType="map">
-	    select distinct a.*,c.material_name matName,c.material_tuhao materialTuhao,b.prod_code prodCode from prod_box_material a 
+	    select distinct a.*,b.prod_code prodCode from prod_box_material a
 		left join prod_box_log b on a.box_barcode = b.box_barcode
-		left join plan_op_bom c on a.mat_code = c.material_code
 		where 1=1
 		<if test="lineId != null and lineId != ''">
 		  and b.line_id = #{lineId}
