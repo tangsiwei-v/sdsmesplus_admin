@@ -33,7 +33,7 @@ public interface ReportService {
 	 * @param barcode 产品条码
 	 * @return 产品基本信息
 	 */
-	Map<String, Object> getProductInfo(String barcode);
+	Map<String, Object> getProductInfo(String barcode,String prodCode);
 
 	/**
 	 * @Title: costMaterial

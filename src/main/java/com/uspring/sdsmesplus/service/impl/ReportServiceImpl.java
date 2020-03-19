@@ -124,8 +124,8 @@ public class ReportServiceImpl implements ReportService {
 	
 
 	@Override
-	public Map<String, Object> getProductInfo(String barcode) {
-		Map<String, Object> resultMap = this.prodFinishDao.getProductInfo(barcode);
+	public Map<String, Object> getProductInfo(String barcode,String prodCode) {
+		Map<String, Object> resultMap = this.prodFinishDao.getProductInfo(barcode, prodCode);
 		return resultMap;
 	}
 
