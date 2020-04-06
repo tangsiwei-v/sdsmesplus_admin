@@ -52,6 +52,9 @@
 		<if test="barcode != null and barcode != ''">
 		  and a.fp_barcode = #{barcode}
 		</if>
+		<if test="prodCode != null and prodCode != ''">
+			and a.prod_code = #{prodCode}
+		</if>
 		
 	</select>
 	

@@ -80,9 +80,9 @@ public class ReportController {
 	@ResponseBody
 	@RequestMapping(value = "/barcode/info", method = RequestMethod.GET)
 	@ApiOperation(value = "查询产品的基本信息", notes = "查询产品的基本信息", response = Result.class)
-	public Result getBarcodeInfo(HttpServletResponse response,String barcode) {
+	public Result getBarcodeInfo(HttpServletResponse response,String barcode,String prodCode) {
 		barcode = URLDecoder.decode(barcode);
-		return new Result("查询成功", this.reportService.getProductInfo(barcode), StatusCode.SUCCESS);
+		return new Result("查询成功", this.reportService.getProductInfo(barcode,prodCode), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
