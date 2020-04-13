@@ -59,6 +59,9 @@
 		<if test="order_code != null and order_code !='' ">
 			and po_code = #{order_code}
 		</if>
+		<if test="customerCode != null and customerCode !='' ">
+			and customer_code = #{customerCode}
+		</if>
 		<if test="starDate != null and starDate !='' and endDate != null and endDate !=''  ">
 			and po_start_datetime between #{starDate} and #{endDate}
 		</if>

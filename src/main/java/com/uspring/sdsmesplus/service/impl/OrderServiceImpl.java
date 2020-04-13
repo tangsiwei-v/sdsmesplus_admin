@@ -53,7 +53,18 @@ public class OrderServiceImpl implements OrderService {
 			if (map.containsKey("lineId")) {
 				map.put("line_id", map.get("lineId"));
 			}
-
+			if (map.containsKey("prodCode")) {
+				map.put("prodCode", map.get("prodCode"));
+			}
+			if (map.containsKey("orderCode")) {
+				map.put("order_code", map.get("orderCode"));
+			}
+			if (map.containsKey("prodNumber")) {
+				map.put("prodNumber", map.get("prodNumber"));
+			}
+			if (map.containsKey("customerCode")) {
+				map.put("customerCode", map.get("customerCode"));
+			}
 			// 时间判断
 			if (map.containsKey("start_time")) {
 				String star = (String) map.get("start_time");
