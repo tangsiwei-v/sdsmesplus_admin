@@ -7,6 +7,7 @@
     <result column="prod_model" jdbcType="VARCHAR" property="prodModel" />
     <result column="op_no" jdbcType="VARCHAR" property="opNo" />
     <result column="extra_rate" jdbcType="DECIMAL" property="extraRate" />
+    <result column="feed_limit_rate" jdbcType="DECIMAL" property="feedLimitRate" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    linemod_id, line_id, prod_model, op_no, extra_rate, create_time
+    linemod_id, line_id, prod_model, op_no, extra_rate, feed_limit_rate, create_time
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.SysLineProdmodelPOExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.SysLineProdmodelPO">
     insert into sys_line_prodmodel (linemod_id, line_id, prod_model, 
-      op_no, extra_rate, create_time
-      )
+      op_no, extra_rate, feed_limit_rate, 
+      create_time)
     values (#{linemodId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{prodModel,jdbcType=VARCHAR}, 
-      #{opNo,jdbcType=VARCHAR}, #{extraRate,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{opNo,jdbcType=VARCHAR}, #{extraRate,jdbcType=DECIMAL}, #{feedLimitRate,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.SysLineProdmodelPO">
     insert into sys_line_prodmodel
@@ -125,6 +126,9 @@
       </if>
       <if test="extraRate != null">
         extra_rate,
+      </if>
+      <if test="feedLimitRate != null">
+        feed_limit_rate,
       </if>
       <if test="createTime != null">
         create_time,
@@ -145,6 +149,9 @@
       </if>
       <if test="extraRate != null">
         #{extraRate,jdbcType=DECIMAL},
+      </if>
+      <if test="feedLimitRate != null">
+        #{feedLimitRate,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -175,6 +182,9 @@
       <if test="record.extraRate != null">
         extra_rate = #{record.extraRate,jdbcType=DECIMAL},
       </if>
+      <if test="record.feedLimitRate != null">
+        feed_limit_rate = #{record.feedLimitRate,jdbcType=DECIMAL},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -190,6 +200,7 @@
       prod_model = #{record.prodModel,jdbcType=VARCHAR},
       op_no = #{record.opNo,jdbcType=VARCHAR},
       extra_rate = #{record.extraRate,jdbcType=DECIMAL},
+      feed_limit_rate = #{record.feedLimitRate,jdbcType=DECIMAL},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -210,6 +221,9 @@
       <if test="extraRate != null">
         extra_rate = #{extraRate,jdbcType=DECIMAL},
       </if>
+      <if test="feedLimitRate != null">
+        feed_limit_rate = #{feedLimitRate,jdbcType=DECIMAL},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -222,6 +236,7 @@
       prod_model = #{prodModel,jdbcType=VARCHAR},
       op_no = #{opNo,jdbcType=VARCHAR},
       extra_rate = #{extraRate,jdbcType=DECIMAL},
+      feed_limit_rate = #{feedLimitRate,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where linemod_id = #{linemodId,jdbcType=INTEGER}
   </update>

@@ -426,6 +426,66 @@ public class SysLineProdmodelPOExample {
             return (Criteria) this;
         }
 
+        public Criteria andFeedLimitRateIsNull() {
+            addCriterion("feed_limit_rate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateIsNotNull() {
+            addCriterion("feed_limit_rate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateEqualTo(BigDecimal value) {
+            addCriterion("feed_limit_rate =", value, "feedLimitRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateNotEqualTo(BigDecimal value) {
+            addCriterion("feed_limit_rate <>", value, "feedLimitRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateGreaterThan(BigDecimal value) {
+            addCriterion("feed_limit_rate >", value, "feedLimitRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("feed_limit_rate >=", value, "feedLimitRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateLessThan(BigDecimal value) {
+            addCriterion("feed_limit_rate <", value, "feedLimitRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("feed_limit_rate <=", value, "feedLimitRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateIn(List<BigDecimal> values) {
+            addCriterion("feed_limit_rate in", values, "feedLimitRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateNotIn(List<BigDecimal> values) {
+            addCriterion("feed_limit_rate not in", values, "feedLimitRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("feed_limit_rate between", value1, value2, "feedLimitRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedLimitRateNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("feed_limit_rate not between", value1, value2, "feedLimitRate");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
