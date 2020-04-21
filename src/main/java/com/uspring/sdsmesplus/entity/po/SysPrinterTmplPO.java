@@ -13,13 +13,19 @@ public class SysPrinterTmplPO {
 
     private Integer ptmplSize;
 
+    private String ptmplRegex;
+
     private String ptmplFileName;
 
     private Integer ptCounterMin;
 
     private Integer ptCounterMax;
 
+    private String ptCounterResetType;
+
     private Integer ptCounterValue;
+
+    private Date ptCounterTime;
 
     private Date ptFileUpdatetime;
 
@@ -71,6 +77,14 @@ public class SysPrinterTmplPO {
         this.ptmplSize = ptmplSize;
     }
 
+    public String getPtmplRegex() {
+        return ptmplRegex;
+    }
+
+    public void setPtmplRegex(String ptmplRegex) {
+        this.ptmplRegex = ptmplRegex == null ? null : ptmplRegex.trim();
+    }
+
     public String getPtmplFileName() {
         return ptmplFileName;
     }
@@ -95,12 +109,28 @@ public class SysPrinterTmplPO {
         this.ptCounterMax = ptCounterMax;
     }
 
+    public String getPtCounterResetType() {
+        return ptCounterResetType;
+    }
+
+    public void setPtCounterResetType(String ptCounterResetType) {
+        this.ptCounterResetType = ptCounterResetType == null ? null : ptCounterResetType.trim();
+    }
+
     public Integer getPtCounterValue() {
         return ptCounterValue;
     }
 
     public void setPtCounterValue(Integer ptCounterValue) {
         this.ptCounterValue = ptCounterValue;
+    }
+
+    public Date getPtCounterTime() {
+        return ptCounterTime;
+    }
+
+    public void setPtCounterTime(Date ptCounterTime) {
+        this.ptCounterTime = ptCounterTime;
     }
 
     public Date getPtFileUpdatetime() {

@@ -425,6 +425,76 @@ public class SysPrinterTmplPOExample {
             return (Criteria) this;
         }
 
+        public Criteria andPtmplRegexIsNull() {
+            addCriterion("ptmpl_regex is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexIsNotNull() {
+            addCriterion("ptmpl_regex is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexEqualTo(String value) {
+            addCriterion("ptmpl_regex =", value, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexNotEqualTo(String value) {
+            addCriterion("ptmpl_regex <>", value, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexGreaterThan(String value) {
+            addCriterion("ptmpl_regex >", value, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexGreaterThanOrEqualTo(String value) {
+            addCriterion("ptmpl_regex >=", value, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexLessThan(String value) {
+            addCriterion("ptmpl_regex <", value, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexLessThanOrEqualTo(String value) {
+            addCriterion("ptmpl_regex <=", value, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexLike(String value) {
+            addCriterion("ptmpl_regex like", value, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexNotLike(String value) {
+            addCriterion("ptmpl_regex not like", value, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexIn(List<String> values) {
+            addCriterion("ptmpl_regex in", values, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexNotIn(List<String> values) {
+            addCriterion("ptmpl_regex not in", values, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexBetween(String value1, String value2) {
+            addCriterion("ptmpl_regex between", value1, value2, "ptmplRegex");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtmplRegexNotBetween(String value1, String value2) {
+            addCriterion("ptmpl_regex not between", value1, value2, "ptmplRegex");
+            return (Criteria) this;
+        }
+
         public Criteria andPtmplFileNameIsNull() {
             addCriterion("ptmpl_file_name is null");
             return (Criteria) this;
@@ -615,6 +685,76 @@ public class SysPrinterTmplPOExample {
             return (Criteria) this;
         }
 
+        public Criteria andPtCounterResetTypeIsNull() {
+            addCriterion("pt_counter_reset_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeIsNotNull() {
+            addCriterion("pt_counter_reset_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeEqualTo(String value) {
+            addCriterion("pt_counter_reset_type =", value, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeNotEqualTo(String value) {
+            addCriterion("pt_counter_reset_type <>", value, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeGreaterThan(String value) {
+            addCriterion("pt_counter_reset_type >", value, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("pt_counter_reset_type >=", value, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeLessThan(String value) {
+            addCriterion("pt_counter_reset_type <", value, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeLessThanOrEqualTo(String value) {
+            addCriterion("pt_counter_reset_type <=", value, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeLike(String value) {
+            addCriterion("pt_counter_reset_type like", value, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeNotLike(String value) {
+            addCriterion("pt_counter_reset_type not like", value, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeIn(List<String> values) {
+            addCriterion("pt_counter_reset_type in", values, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeNotIn(List<String> values) {
+            addCriterion("pt_counter_reset_type not in", values, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeBetween(String value1, String value2) {
+            addCriterion("pt_counter_reset_type between", value1, value2, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterResetTypeNotBetween(String value1, String value2) {
+            addCriterion("pt_counter_reset_type not between", value1, value2, "ptCounterResetType");
+            return (Criteria) this;
+        }
+
         public Criteria andPtCounterValueIsNull() {
             addCriterion("pt_counter_value is null");
             return (Criteria) this;
@@ -672,6 +812,66 @@ public class SysPrinterTmplPOExample {
 
         public Criteria andPtCounterValueNotBetween(Integer value1, Integer value2) {
             addCriterion("pt_counter_value not between", value1, value2, "ptCounterValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeIsNull() {
+            addCriterion("pt_counter_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeIsNotNull() {
+            addCriterion("pt_counter_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeEqualTo(Date value) {
+            addCriterion("pt_counter_time =", value, "ptCounterTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeNotEqualTo(Date value) {
+            addCriterion("pt_counter_time <>", value, "ptCounterTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeGreaterThan(Date value) {
+            addCriterion("pt_counter_time >", value, "ptCounterTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("pt_counter_time >=", value, "ptCounterTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeLessThan(Date value) {
+            addCriterion("pt_counter_time <", value, "ptCounterTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeLessThanOrEqualTo(Date value) {
+            addCriterion("pt_counter_time <=", value, "ptCounterTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeIn(List<Date> values) {
+            addCriterion("pt_counter_time in", values, "ptCounterTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeNotIn(List<Date> values) {
+            addCriterion("pt_counter_time not in", values, "ptCounterTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeBetween(Date value1, Date value2) {
+            addCriterion("pt_counter_time between", value1, value2, "ptCounterTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtCounterTimeNotBetween(Date value1, Date value2) {
+            addCriterion("pt_counter_time not between", value1, value2, "ptCounterTime");
             return (Criteria) this;
         }
 

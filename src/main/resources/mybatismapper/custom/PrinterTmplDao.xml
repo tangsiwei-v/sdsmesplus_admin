@@ -10,6 +10,8 @@
     <result column="ptmpl_file_name" jdbcType="VARCHAR" property="ptmplFileName" />
     <result column="pt_counter_min" jdbcType="INTEGER" property="ptCounterMin" />
     <result column="pt_counter_max" jdbcType="INTEGER" property="ptCounterMax" />
+    <result column="pt_counter_reset_type" jdbcType="VARCHAR" property="ptCounterResetType" />
+    <result column="ptmpl_regex" jdbcType="VARCHAR" property="ptmplRegex" />
     <result column="pt_counter_value" jdbcType="INTEGER" property="ptCounterValue" />
     <result column="pt_file_updatetime" jdbcType="TIMESTAMP" property="ptFileUpdatetime" />
     <result column="check_person" jdbcType="VARCHAR" property="checkPerson" />
@@ -26,7 +28,7 @@
   </resultMap>
   <select id="printerTmpl" resultMap="PrinterTmplMap">
   	 	select p.ptmpl_id,p.fc_id,p.prod_code,p.customer_code,p.ptmpl_size,
-			p.ptmpl_file_name,p.pt_counter_min,p.pt_counter_max,p.pt_counter_value,
+			p.ptmpl_file_name,p.pt_counter_min,p.pt_counter_max,p.pt_counter_reset_type,p.ptmpl_regex,p.pt_counter_value,
 			p.pt_file_updatetime,p.check_person,p.check_time,p.create_time,f.fc_name
 		from sys_printer_tmpl p left join sys_factory f 
 			on p.fc_id=f.fc_id
