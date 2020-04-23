@@ -44,14 +44,23 @@ public class LineProdModelServerImpl implements LineProdModelServer {
 		if(lineProdmodel.getExtraRate() != null){
 			lineProdmodel.setExtraRate(new BigDecimal((lineProdmodel.getExtraRate().doubleValue() / 100)+ ""));
 		}
+
+		if(lineProdmodel.getFeedLimitRate() != null){
+			lineProdmodel.setFeedLimitRate(new BigDecimal((lineProdmodel.getFeedLimitRate().doubleValue() / 100)+ ""));
+		}
 		
 		prodModeldao.insertSelective(lineProdmodel);
 	}
 
 	// 修改产线模式主数据
 	public void updateLineProdmodel(SysLineProdmodelPO lineProdmodel) {
+
 		if(lineProdmodel.getExtraRate() != null){
 			lineProdmodel.setExtraRate(new BigDecimal((lineProdmodel.getExtraRate().doubleValue() / 100)+ ""));
+		}
+
+		if(lineProdmodel.getFeedLimitRate() != null){
+			lineProdmodel.setFeedLimitRate(new BigDecimal((lineProdmodel.getFeedLimitRate().doubleValue() / 100)+ ""));
 		}
 		prodModeldao.updateByPrimaryKey(lineProdmodel);
 	}

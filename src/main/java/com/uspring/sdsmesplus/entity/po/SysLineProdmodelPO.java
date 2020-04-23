@@ -14,6 +14,8 @@ public class SysLineProdmodelPO {
 
     private BigDecimal extraRate;
 
+    private BigDecimal feedLimitRate;
+
     private Date createTime;
 
     public Integer getLinemodId() {
@@ -54,6 +56,14 @@ public class SysLineProdmodelPO {
 
     public void setExtraRate(BigDecimal extraRate) {
         this.extraRate = extraRate;
+    }
+
+    public BigDecimal getFeedLimitRate() {
+        return feedLimitRate;
+    }
+
+    public void setFeedLimitRate(BigDecimal feedLimitRate) {
+        this.feedLimitRate = feedLimitRate;
     }
 
     public Date getCreateTime() {
