@@ -13,6 +13,8 @@ public class ProdProcessCheckPO {
 
     private Boolean skipCheck;
 
+    private Boolean qrcodeCheck;
+
     private Boolean isActive;
 
     private Boolean isDeleted;
@@ -61,6 +63,14 @@ public class ProdProcessCheckPO {
 
     public void setSkipCheck(Boolean skipCheck) {
         this.skipCheck = skipCheck;
+    }
+
+    public Boolean getQrcodeCheck() {
+        return qrcodeCheck;
+    }
+
+    public void setQrcodeCheck(Boolean qrcodeCheck) {
+        this.qrcodeCheck = qrcodeCheck;
     }
 
     public Boolean getIsActive() {

@@ -1,6 +1,8 @@
 package com.uspring.sdsmesplus.controller;
 
 import javax.servlet.http.HttpServletResponse;
+
+import com.uspring.sdsmesplus.entity.po.ProdProcessCheckPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,5 +73,34 @@ public class DeviceVerifyController extends BaseController {
 		PageInfo<DeviceVerifyItemVO> deviceVerifyLogPOs = deviceVerifyItemServer.queryDeviceVerifyItem(lineId,
 				page_size, page_num, shopId, fcId);
 		return new Result("查询成功", deviceVerifyLogPOs, StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/check", method = RequestMethod.GET)
+	@ApiOperation(value = "查询申江连接轴是否跳过某台设备", notes = "查询申江连接轴是否跳过某台设备", response = Result.class)
+	public Result queryPordProcessCheck(Integer lineId, String prodCode, Integer page_size, Integer page_num) {
+		PageInfo<ProdProcessCheckPO> prodProcessCheckPOPageInfo = this.deviceVerifyItemServer.queryPordProcessCheckService(lineId, prodCode, page_size, page_num);
+		return new Result("查询成功", prodProcessCheckPOPageInfo, StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/check/item", method = RequestMethod.POST)
+	@ApiOperation(value = "添加申江连接轴是否跳过某台设备", notes = "添加申江连接轴是否跳过某台设备", response = Result.class)
+	public Result insertPordProcessCheck(@RequestBody ProdProcessCheckPO prodProcessCheckPO) {
+		return new Result("添加成功", this.deviceVerifyItemServer.insertPordProcessCheckService(prodProcessCheckPO), StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/check/update", method = RequestMethod.PUT)
+	@ApiOperation(value = "修改申江连接轴是否跳过某台设备", notes = "修改申江连接轴是否跳过某台设备", response = Result.class)
+	public Result updatePordProcessCheck(@RequestBody ProdProcessCheckPO prodProcessCheckPO) {
+		return new Result("修改成功", this.deviceVerifyItemServer.updatePordProcessCheckService(prodProcessCheckPO), StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/check/delete/{ppId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除申江连接轴是否跳过某台设备", notes = "删除申江连接轴是否跳过某台设备", response = Result.class)
+	public Result deletePordProcessCheck(@PathVariable("ppId") Integer ppId) {
+		return new Result("删除成功", this.deviceVerifyItemServer.deletePordProcessCheckService(ppId), StatusCode.SUCCESS);
 	}
 }
