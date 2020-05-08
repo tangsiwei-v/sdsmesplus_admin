@@ -104,4 +104,12 @@
 		select *  from  plan_order 	
            where fc_code = #{factory_code} and po_status != 'Completed' and customer_code != ''
 	</select>
+
+	<select id="getTodayPrintCount" resultType="int">
+		select count(1) from prod_printer_log a where DateDiff(dd, create_time, getdate()) = 0
+		and a.line_id = #{line_id} and a.prod_code = #{prod_code}
+		<if test="customer_code != null and customer_code !='' ">
+			and a.customer_code = #{customer_code}
+		</if>
+	</select>
 </mapper>

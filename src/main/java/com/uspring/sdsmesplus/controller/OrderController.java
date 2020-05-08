@@ -63,4 +63,11 @@ public class OrderController extends BaseController {
 		List<PlanOrderPO> plans = orderService.selectPrinterByFactory(fcId);
 		return new Result("success", plans, StatusCode.SUCCESS);
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/print_count/{poCode}", method = RequestMethod.GET)
+	@ApiOperation(value = "查询当前打印的总成条码数量", response = Result.class)
+	public Result toDayPrintCount(@PathVariable("poCode") String poCode) throws Exception {
+		return new Result("success", orderService.getTodayPrintCount(poCode), StatusCode.SUCCESS);
+	}
 }
