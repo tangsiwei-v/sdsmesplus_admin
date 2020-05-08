@@ -97,8 +97,8 @@ public class DeviceVerifyItemServerImpl implements DeviceVerifyItemServer {
 		}
 
 		List<String> list = new ArrayList<String>();
-		list.add("lianjiezhou_jiance1");
-		list.add("lianjiezhou_jiance2");
+		list.add("lianJieZhouJianCe1");
+		list.add("lianJieZhouJianCe2");
 		list.add("lianjiezhouyaji1");
 		list.add("lianjiezhouyaji2");
 		list.add("lianjiezhouyaji3");
