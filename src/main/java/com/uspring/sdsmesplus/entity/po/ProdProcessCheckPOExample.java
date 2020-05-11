@@ -425,6 +425,66 @@ public class ProdProcessCheckPOExample {
             return (Criteria) this;
         }
 
+        public Criteria andQrcodeCheckIsNull() {
+            addCriterion("qrcode_check is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckIsNotNull() {
+            addCriterion("qrcode_check is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckEqualTo(Boolean value) {
+            addCriterion("qrcode_check =", value, "qrcodeCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckNotEqualTo(Boolean value) {
+            addCriterion("qrcode_check <>", value, "qrcodeCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckGreaterThan(Boolean value) {
+            addCriterion("qrcode_check >", value, "qrcodeCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("qrcode_check >=", value, "qrcodeCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckLessThan(Boolean value) {
+            addCriterion("qrcode_check <", value, "qrcodeCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckLessThanOrEqualTo(Boolean value) {
+            addCriterion("qrcode_check <=", value, "qrcodeCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckIn(List<Boolean> values) {
+            addCriterion("qrcode_check in", values, "qrcodeCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckNotIn(List<Boolean> values) {
+            addCriterion("qrcode_check not in", values, "qrcodeCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckBetween(Boolean value1, Boolean value2) {
+            addCriterion("qrcode_check between", value1, value2, "qrcodeCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andQrcodeCheckNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("qrcode_check not between", value1, value2, "qrcodeCheck");
+            return (Criteria) this;
+        }
+
         public Criteria andIsActiveIsNull() {
             addCriterion("is_active is null");
             return (Criteria) this;

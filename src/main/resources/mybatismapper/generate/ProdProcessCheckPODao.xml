@@ -7,6 +7,7 @@
     <result column="line_id" jdbcType="INTEGER" property="lineId" />
     <result column="op_code" jdbcType="VARCHAR" property="opCode" />
     <result column="skip_check" jdbcType="BIT" property="skipCheck" />
+    <result column="qrcode_check" jdbcType="BIT" property="qrcodeCheck" />
     <result column="is_active" jdbcType="BIT" property="isActive" />
     <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -72,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ppc_id, prod_code, line_id, op_code, skip_check, is_active, is_deleted, create_time, 
-    update_time, op_name
+    ppc_id, prod_code, line_id, op_code, skip_check, qrcode_check, is_active, is_deleted, 
+    create_time, update_time, op_name
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPOExample" resultMap="BaseResultMap">
     select
@@ -107,13 +108,13 @@
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPO">
     insert into prod_process_check (ppc_id, prod_code, line_id, 
-      op_code, skip_check, is_active, 
-      is_deleted, create_time, update_time, 
-      op_name)
+      op_code, skip_check, qrcode_check, 
+      is_active, is_deleted, create_time, 
+      update_time, op_name)
     values (#{ppcId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, #{lineId,jdbcType=INTEGER}, 
-      #{opCode,jdbcType=VARCHAR}, #{skipCheck,jdbcType=BIT}, #{isActive,jdbcType=BIT}, 
-      #{isDeleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{opName,jdbcType=VARCHAR})
+      #{opCode,jdbcType=VARCHAR}, #{skipCheck,jdbcType=BIT}, #{qrcodeCheck,jdbcType=BIT}, 
+      #{isActive,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{opName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessCheckPO">
     insert into prod_process_check
@@ -132,6 +133,9 @@
       </if>
       <if test="skipCheck != null">
         skip_check,
+      </if>
+      <if test="qrcodeCheck != null">
+        qrcode_check,
       </if>
       <if test="isActive != null">
         is_active,
@@ -164,6 +168,9 @@
       </if>
       <if test="skipCheck != null">
         #{skipCheck,jdbcType=BIT},
+      </if>
+      <if test="qrcodeCheck != null">
+        #{qrcodeCheck,jdbcType=BIT},
       </if>
       <if test="isActive != null">
         #{isActive,jdbcType=BIT},
@@ -206,6 +213,9 @@
       <if test="record.skipCheck != null">
         skip_check = #{record.skipCheck,jdbcType=BIT},
       </if>
+      <if test="record.qrcodeCheck != null">
+        qrcode_check = #{record.qrcodeCheck,jdbcType=BIT},
+      </if>
       <if test="record.isActive != null">
         is_active = #{record.isActive,jdbcType=BIT},
       </if>
@@ -233,6 +243,7 @@
       line_id = #{record.lineId,jdbcType=INTEGER},
       op_code = #{record.opCode,jdbcType=VARCHAR},
       skip_check = #{record.skipCheck,jdbcType=BIT},
+      qrcode_check = #{record.qrcodeCheck,jdbcType=BIT},
       is_active = #{record.isActive,jdbcType=BIT},
       is_deleted = #{record.isDeleted,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -256,6 +267,9 @@
       </if>
       <if test="skipCheck != null">
         skip_check = #{skipCheck,jdbcType=BIT},
+      </if>
+      <if test="qrcodeCheck != null">
+        qrcode_check = #{qrcodeCheck,jdbcType=BIT},
       </if>
       <if test="isActive != null">
         is_active = #{isActive,jdbcType=BIT},
@@ -281,6 +295,7 @@
       line_id = #{lineId,jdbcType=INTEGER},
       op_code = #{opCode,jdbcType=VARCHAR},
       skip_check = #{skipCheck,jdbcType=BIT},
+      qrcode_check = #{qrcodeCheck,jdbcType=BIT},
       is_active = #{isActive,jdbcType=BIT},
       is_deleted = #{isDeleted,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
