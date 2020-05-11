@@ -23,6 +23,9 @@ public interface OrderService {
 
 	//查询没有配置打印程序的工单
 	public List<PlanOrderPO> selectPrinterByFactory(Integer fcId);
+
+	//查询当天打印数量
+	public int getTodayPrintCount (String poCode);
 	
 	
 

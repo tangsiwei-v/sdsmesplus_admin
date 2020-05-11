@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.uspring.sdsmesplus.entity.po.PlanOrderPOExample;
+import com.uspring.sdsmesplus.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -161,6 +163,14 @@ public class OrderServiceImpl implements OrderService {
 		listPO1s.removeAll(listPO2s);
 
 		return listPO1s;
+	}
+
+	@Override
+	public int getTodayPrintCount(String poCode) {
+		PlanOrderPOExample planOrderPOExample = new PlanOrderPOExample();
+		planOrderPOExample.createCriteria().andPoCodeEqualTo(poCode);
+		List<PlanOrderPO> planOrderPOS = planDao.selectByExample(planOrderPOExample);
+		return this.planDao.getTodayPrintCount(planOrderPOS.get(0).getLineId(), planOrderPOS.get(0).getProdCode(), planOrderPOS.get(0).getCustomerCode());
 	}
 
 }
