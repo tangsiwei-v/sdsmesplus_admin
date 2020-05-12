@@ -36,17 +36,17 @@ public class ReportController {
 	@ResponseBody
 	@RequestMapping(value = "/box", method = RequestMethod.GET)
 	@ApiOperation(value = "查询箱合格证信息", notes = "查询箱合格证信息", response = Result.class)
-	public Result getBoxList(HttpServletResponse response,Integer lineId,String boxCode,String tuhao,String prodCode,String prodNumber,String beginTime,String endTime,String poCode, Integer pageNum,Integer pageSize,Integer shopId,Integer fcId) {
+	public Result getBoxList(HttpServletResponse response,Integer lineId,String boxCode,String tuhao,String prodCode,String prodNumber,String beginTime,String endTime,String poCode, Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,String prodBatchCode) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime,poCode, pageNum, pageSize, shopId, fcId,0,response), StatusCode.SUCCESS);
+		return new Result("查询成功", this.reportService.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime,poCode, pageNum, pageSize, shopId, fcId,prodBatchCode,0,response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/box/export", method = RequestMethod.POST)
 	@ApiOperation(value = "导出箱合格证信息", notes = "导出箱合格证信息", response = Result.class)
-	public Result exportBoxList(HttpServletResponse response,Integer lineId,String boxCode,String tuhao,String prodCode,String prodNumber,String beginTime,String endTime,String poCode, Integer pageNum,Integer pageSize,Integer shopId,Integer fcId) {
+	public Result exportBoxList(HttpServletResponse response,Integer lineId,String boxCode,String tuhao,String prodCode,String prodNumber,String beginTime,String endTime,String poCode, Integer pageNum,Integer pageSize,Integer shopId,Integer fcId, String prodBatchCode) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("导出成功", this.reportService.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime,poCode, pageNum, pageSize, shopId, fcId,1,response), StatusCode.SUCCESS);
+		return new Result("导出成功", this.reportService.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime,poCode, pageNum, pageSize, shopId, fcId,prodBatchCode,1,response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
