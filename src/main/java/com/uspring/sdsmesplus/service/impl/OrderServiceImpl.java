@@ -166,11 +166,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int getTodayPrintCount(String poCode) {
+	public Map<String, String> getTodayPrintCount(String poCode) {
 		PlanOrderPOExample planOrderPOExample = new PlanOrderPOExample();
 		planOrderPOExample.createCriteria().andPoCodeEqualTo(poCode);
 		List<PlanOrderPO> planOrderPOS = planDao.selectByExample(planOrderPOExample);
-		return this.planDao.getTodayPrintCount(planOrderPOS.get(0).getLineId(), planOrderPOS.get(0).getProdCode(), planOrderPOS.get(0).getCustomerCode());
+		Map<String, String> todayPrintCountMap = this.planDao.getTodayPrintCount(planOrderPOS.get(0).getLineId(), planOrderPOS.get(0).getProdCode(), planOrderPOS.get(0).getCustomerCode());
+		return todayPrintCountMap;
 	}
 
 }

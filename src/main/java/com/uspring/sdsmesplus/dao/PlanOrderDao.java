@@ -59,7 +59,7 @@ public interface PlanOrderDao extends PlanOrderPODao {
 	/**
 	 * @Title: getTodayPrintCount
 	 * @Description:
-	 * @return  当天打印数量
+	 * @return  当天打印数量和最后一个流水号
 	 */
-	 int getTodayPrintCount(@Param("line_id") Integer line_id, @Param("prod_code") String prod_code, @Param("customer_code") String customer_code);
+	 Map<String, String> getTodayPrintCount(@Param("line_id") Integer line_id, @Param("prod_code") String prod_code, @Param("customer_code") String customer_code);
 }

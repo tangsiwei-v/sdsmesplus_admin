@@ -105,8 +105,15 @@
            where fc_code = #{factory_code} and po_status != 'Completed' and customer_code != ''
 	</select>
 
-	<select id="getTodayPrintCount" resultType="int">
-		select count(1) from prod_printer_log a where DateDiff(dd, create_time, getdate()) = 0
+	<select id="getTodayPrintCount" resultType="map">
+		select count(1) as todayCount,
+			(select top 1 b.barcode from prod_printer_log b
+				where b.line_id = #{line_id} and b.prod_code = #{prod_code}
+				<if test="customer_code != null and customer_code !='' ">
+					and b.customer_code = #{customer_code}
+				</if>
+				ORDER BY b.create_time desc) as lastBarcode
+		from prod_printer_log a where DateDiff(dd, create_time, getdate()) = 0
 		and a.line_id = #{line_id} and a.prod_code = #{prod_code}
 		<if test="customer_code != null and customer_code !='' ">
 			and a.customer_code = #{customer_code}

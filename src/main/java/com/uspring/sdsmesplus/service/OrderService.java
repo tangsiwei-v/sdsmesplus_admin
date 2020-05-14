@@ -25,7 +25,7 @@ public interface OrderService {
 	public List<PlanOrderPO> selectPrinterByFactory(Integer fcId);
 
 	//查询当天打印数量
-	public int getTodayPrintCount (String poCode);
+	public Map<String, String> getTodayPrintCount (String poCode);
 	
 	
 
