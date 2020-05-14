@@ -27,6 +27,9 @@
 	    <if test="fcId != null and fcId != ''">
 	      and d.fc_id = #{fcId}
 	    </if>
+		<if test="prodBatchCode != null and prodBatchCode != ''">
+			and a.prod_batch_code = #{prodBatchCode}
+		</if>
 	    <if test="prodCode != null and prodCode != ''">
 	      and prod_code like '%'+#{prodCode}+'%'
 	    </if>

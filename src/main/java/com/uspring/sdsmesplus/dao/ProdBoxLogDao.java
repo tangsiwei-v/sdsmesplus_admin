@@ -52,6 +52,6 @@ public interface ProdBoxLogDao extends ProdBoxLogPODao{
 	 * @return
 	 */
 	List<Map<String,Object>> getBoxList(@Param("lineId")Integer lineId,@Param("boxCode1")String boxCode,
-	@Param("tuhao")String tuhao,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("poCode")String poCode,@Param("shopId")Integer shopId,@Param("fcId")Integer fcId);
+	@Param("tuhao")String tuhao,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("poCode")String poCode,@Param("shopId")Integer shopId,@Param("fcId")Integer fcId,@Param("prodBatchCode") String prodBatchCode);
 
 }

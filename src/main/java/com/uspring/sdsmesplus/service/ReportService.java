@@ -67,7 +67,7 @@ public interface ReportService {
 	 */
 	Map<String, Object> getBoxList(Integer lineId, String boxCode, String tuhao, String prodCode, String prodNumber,
 			String beginTime, String endTime, String poCode, Integer pageNum, Integer pageSize, Integer shopId,
-			Integer fcId, Integer isExport, HttpServletResponse response);
+			Integer fcId, String prodBatchCode, Integer isExport, HttpServletResponse response);
 
 	/**
 	 * @Title: getProductList

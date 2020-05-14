@@ -142,14 +142,14 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public Map<String, Object> getBoxList(Integer lineId, String boxCode, String tuhao, String prodCode,
 			String prodNumber, String beginTime, String endTime, String poCode, Integer pageNum, Integer pageSize,
-			Integer shopId, Integer fcId, Integer isExport, HttpServletResponse response) {
+			Integer shopId, Integer fcId,  String prodBatchCode, Integer isExport, HttpServletResponse response) {
 		PageHelper page = new PageHelper();
 		//是否分页显示
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
 		}
 		List<Map<String, Object>> resultList = this.prodBoxLogDao.getBoxList(lineId, boxCode, tuhao, prodCode,
-				prodNumber, beginTime, endTime, poCode, shopId, fcId);
+				prodNumber, beginTime, endTime, poCode, shopId, fcId, prodBatchCode);
 		//是否导出
 		if(isExport == 1){
 			List<String> titleList = new ArrayList<String>();
