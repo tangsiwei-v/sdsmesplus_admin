@@ -7,7 +7,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.uspring.sdsmesplus.entity.po.PlanOrderPOExample;
+import com.uspring.sdsmesplus.dao.PrinterTmplDao;
+import com.uspring.sdsmesplus.entity.po.*;
+import com.uspring.sdsmesplus.entity.vo.PrinterTmplVO;
 import com.uspring.sdsmesplus.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,6 @@ import com.uspring.sdsmesplus.common.DateUtils;
 import com.uspring.sdsmesplus.common.ExportXls;
 import com.uspring.sdsmesplus.dao.PlanOrderDao;
 import com.uspring.sdsmesplus.dao.SysFactoryDao;
-import com.uspring.sdsmesplus.entity.po.PlanOrderPO;
-import com.uspring.sdsmesplus.entity.po.SysFactoryPO;
 import com.uspring.sdsmesplus.service.OrderService;
 
 /**
@@ -27,7 +27,7 @@ import com.uspring.sdsmesplus.service.OrderService;
  * @Description: 订单实现类
  * @author chengtenfgei chentengfei@uspring.cn
  * @date 2019年6月18日 下午 13:16:04
- * 
+ *
  */
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -37,6 +37,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private SysFactoryDao sysFactoryDao;
+
+	@Autowired
+	private PrinterTmplDao printerTmplDao;
 
 	@Override
 	public PageInfo<PlanOrderPO> selectOrder(Map<String, Object> map, Integer isExport, HttpServletResponse response) {
@@ -171,6 +174,16 @@ public class OrderServiceImpl implements OrderService {
 		planOrderPOExample.createCriteria().andPoCodeEqualTo(poCode);
 		List<PlanOrderPO> planOrderPOS = planDao.selectByExample(planOrderPOExample);
 		Map<String, String> todayPrintCountMap = this.planDao.getTodayPrintCount(planOrderPOS.get(0).getLineId(), planOrderPOS.get(0).getProdCode(), planOrderPOS.get(0).getCustomerCode());
+
+		SysPrinterTmplPOExample sysPrinterTmplPOExample = new SysPrinterTmplPOExample();
+		sysPrinterTmplPOExample.createCriteria().andCustomerCodeEqualTo(planOrderPOS.get(0).getCustomerCode()).andProdCodeEqualTo(planOrderPOS.get(0).getProdCode());
+		List<SysPrinterTmplPO> sysPrinterTmplPOS = this.printerTmplDao.selectByExample(sysPrinterTmplPOExample);
+		if (!sysPrinterTmplPOS.isEmpty()) {
+			Integer ptCounterValue = sysPrinterTmplPOS.get(0).getPtCounterValue();
+			todayPrintCountMap.put("ptCounterValue", ptCounterValue.toString());
+		} else {
+			todayPrintCountMap.put("ptCounterValue", "0");
+		}
 		return todayPrintCountMap;
 	}
 
