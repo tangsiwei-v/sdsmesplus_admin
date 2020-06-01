@@ -412,44 +412,45 @@ public class ReportServiceImpl implements ReportService {
 		for(int i = 0; i < orderList.size(); i++){
 			poCodes.add(orderList.get(i).getPoCode());
 		}
+//		if (lineId != null) {
+//			SysLineProdmodelPOExample modelExample = new SysLineProdmodelPOExample();
+//			SysLineProdmodelPOExample.Criteria criteria = modelExample.createCriteria();
+//			criteria.andLineIdEqualTo(lineId);
+//			modelExample.createCriteria().andLineIdEqualTo(lineId);
+//			List<SysLineProdmodelPO> modelList = this.LineProdModelDao.selectByExample(modelExample);
+//
+//			if (modelList.size() > 0) {
+//				String model = modelList.get(0).getProdModel();
+//				if (model.equals("cv_assy") || model.equals("sec_assy")) {
+//					stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode, isCleaned,
+//							shopId, fcId, beginTime, endTime, vsmId, poCodes);
+//					stockList.addAll(prodOrderStockDao.statCleanStock(lineId, poCode, matProdCode, boxCode, procCode,
+//							shopId, fcId, beginTime, endTime, poCodes));
+//				} else {
+//					stockList = prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode,
+//							isCleaned, shopId, fcId, beginTime, endTime, vsmId, poCodes);
+//					stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode, shopId,
+//							fcId, beginTime, endTime, vsmId, poCodes));
+//					stockList.addAll(prodOrderStockDao.statCleanStock(lineId, poCode, matProdCode, boxCode, procCode,
+//							shopId, fcId, beginTime, endTime, poCodes));
+//				}
+//				stockList.addAll(prodOrderStockDao.statNonconform(lineId, poCode, matProdCode, boxCode, procCode,
+//						shopId, fcId, beginTime, endTime, vsmId, poCodes));
+//			}
+//		} else {
 
-		if (lineId != null) {
-			SysLineProdmodelPOExample modelExample = new SysLineProdmodelPOExample();
-			SysLineProdmodelPOExample.Criteria criteria = modelExample.createCriteria();
-			criteria.andLineIdEqualTo(lineId);
-			modelExample.createCriteria().andLineIdEqualTo(lineId);
-			List<SysLineProdmodelPO> modelList = this.LineProdModelDao.selectByExample(modelExample);
-
-			if (modelList.size() > 0) {
-				String model = modelList.get(0).getProdModel();
-				if (model.equals("cv_assy") || model.equals("sec_assy")) {
-					stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode, isCleaned,
-							shopId, fcId, beginTime, endTime, vsmId, poCodes);
-					stockList.addAll(prodOrderStockDao.statCleanStock(lineId, poCode, matProdCode, boxCode, procCode,
-							shopId, fcId, beginTime, endTime, poCodes));
-				} else {
-					stockList = prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode,
-							isCleaned, shopId, fcId, beginTime, endTime, vsmId, poCodes);
-					stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode, shopId,
-							fcId, beginTime, endTime, vsmId, poCodes));
-					stockList.addAll(prodOrderStockDao.statCleanStock(lineId, poCode, matProdCode, boxCode, procCode,
-							shopId, fcId, beginTime, endTime, poCodes));
-				}
-				stockList.addAll(prodOrderStockDao.statNonconform(lineId, poCode, matProdCode, boxCode, procCode,
-						shopId, fcId, beginTime, endTime, vsmId, poCodes));
-			}
-		} else {
-			stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode, isCleaned, shopId, fcId,
-					beginTime, endTime, vsmId, poCodes);
-			stockList.addAll(prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode, isCleaned,
-					shopId, fcId, beginTime, endTime, vsmId, poCodes));
-			stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode, shopId,
-					fcId, beginTime, endTime, vsmId, poCodes));
-			stockList.addAll(prodOrderStockDao.statNonconform(lineId, poCode, matProdCode, boxCode, procCode,
-					shopId, fcId, beginTime, endTime, vsmId, poCodes));
-			stockList.addAll(prodOrderStockDao.statCleanStock(lineId, poCode, matProdCode, boxCode, procCode,
-					shopId, fcId, beginTime, endTime, poCodes));
-		}
+		stockList = prodOrderStockDao.statOrderStock(lineId, poCode, matProdCode, boxCode, isCleaned, shopId, fcId,
+				beginTime, endTime, vsmId, poCodes);
+		stockList.addAll(prodOrderStockDao.statProcStock(lineId, poCode, matProdCode, boxCode, procCode, isCleaned,
+				shopId, fcId, beginTime, endTime, vsmId, poCodes));
+		stockList.addAll(prodOrderStockDao.statWipStock(lineId, poCode, matProdCode, boxCode, procCode, shopId,
+				fcId, beginTime, endTime, vsmId, poCodes));
+		stockList.addAll(prodOrderStockDao.statNonconform(lineId, poCode, matProdCode, boxCode, procCode,
+				shopId, fcId, beginTime, endTime, vsmId, poCodes));
+		stockList.addAll(prodOrderStockDao.statCleanStock(lineId, poCode, matProdCode, boxCode, procCode,
+				shopId, fcId, beginTime, endTime, vsmId, poCodes));
+		stockList.addAll(prodOrderStockDao.statBoxLogStock(lineId, poCode, matProdCode, boxCode, procCode,
+				shopId, fcId, beginTime, endTime, vsmId, poCodes));
 
 		Map<String, StockStat> resultMap = new HashMap<String, StockStat>();
 		for (StockStat stock : stockList) {

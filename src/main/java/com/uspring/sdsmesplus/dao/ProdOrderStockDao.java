@@ -57,5 +57,12 @@ public interface ProdOrderStockDao extends ProdOrderStockPODao {
 	List<StockStat> statCleanStock(@Param("lineId") Integer lineId, @Param("poCode") String poCode,
 			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode,
 			@Param("procCode") String procCode, @Param("shopId") Integer shopId, @Param("fcId") Integer fcId,
-			@Param("beginTime") String beginTime, @Param("endTime") String e1ndTime, @Param("poCodes") List<String> poCodes);;
+			@Param("beginTime") String beginTime, @Param("endTime") String e1ndTime,
+			@Param("vsmId") Integer vsmId, @Param("poCodes") List<String> poCodes);
+
+	List<StockStat> statBoxLogStock(@Param("lineId") Integer lineId, @Param("poCode") String poCode,
+			@Param("matCode") String matCode, @Param("boxBarcode") String boxBarcode,
+			@Param("procCode") String procCode, @Param("shopId") Integer shopId, @Param("fcId") Integer fcId,
+			@Param("beginTime") String beginTime, @Param("endTime") String e1ndTime,
+			@Param("vsmId") Integer vsmId,@Param("poCodes") List<String> poCodes);
 }

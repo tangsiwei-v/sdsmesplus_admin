@@ -27,6 +27,66 @@
 	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
  	</resultMap>
 
+	<select id="statBoxLogStock" resultMap="StockStatMap">
+		select
+		po_code,
+		prod_box_log.op_no procCode,
+		prod_box_material.mat_box_barcode box_barcode,
+		mat_code,
+		mat_name,
+		mat_batch_no,
+		mat_furnace_no,
+		mat_glevel,
+		prod_box_material.mat_count box_quan_left,
+		prod_box_material.create_time
+		from prod_box_material
+		left join prod_box_log on prod_box_material.box_barcode = prod_box_log.box_barcode
+		left join sys_line c on prod_box_log.line_id = c.line_id
+		left join sys_workshop d on c.shop_id = d.shop_id
+		left join sys_factory e on d.fc_id = e.fc_id
+		where 1=1
+		<if test="lineId != null and lineId != ''">
+			and c.line_id = #{lineId}
+		</if>
+		<if test="vsmId != null and vsmId != ''">
+			and c.vsm_id = #{vsmId}
+		</if>
+		<if test="shopId != null and shopId != ''">
+			and d.shop_id = #{shopId}
+		</if>
+		<if test="fcId != null and fcId != ''">
+			and e.fc_id = #{fcId}
+		</if>
+		<if test="vsmId != null and vsmId != ''">
+			and c.vsm_id = #{vsmId}
+		</if>
+		<if test="poCode != null and poCode != ''">
+			and po_code = #{poCode}
+		</if>
+		<if test="procCode != null and procCode != ''">
+			and prod_box_log.op_no = #{procCode}
+		</if>
+		<if test="matCode != null and matCode != ''">
+			and mat_code = #{matCode}
+		</if>
+		<if test="boxBarcode != null and boxBarcode != ''">
+			and prod_box_material.mat_box_barcode = #{boxBarcode}
+		</if>
+		and prod_box_log.is_wip = 0
+		and prod_box_log.is_outsource = 0
+		and prod_box_log.is_confirmed = 0
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+			and prod_box_material.create_time between #{beginTime} and #{endTime}
+		</if>
+		<if test="poCodes != null">
+			and prod_box_log.po_code in
+			<foreach collection="poCodes" item="sta" index="index"
+					 open="(" close=")" separator=",">
+				#{sta}
+			</foreach>
+		</if>
+	</select>
+
 	<select id="statCleanStock" resultMap="StockStatMap">
 		SELECT
 		a.po_code,
@@ -55,6 +115,9 @@
 		<if test="fcId != null and fcId != ''">
 			and d.fc_id = #{fcId}
 		</if>
+		<if test="vsmId != null and vsmId != ''">
+			and c.vsm_id = #{vsmId}
+		</if>
 		<if test="poCode != null and poCode != ''">
 			and b.po_code = #{poCode}
 		</if>
@@ -63,6 +126,13 @@
 		</if>
 		<if test="boxBarcode != null and boxBarcode != ''">
 			and a.material_box_code = #{boxBarcode}
+		</if>
+		<if test="poCodes != null">
+			and a.po_code in
+			<foreach collection="poCodes" item="sta" index="index"
+					 open="(" close=")" separator=",">
+				#{sta}
+			</foreach>
 		</if>
 	</select>
 
@@ -152,13 +222,13 @@
 			<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
 			  and prod_order_stock.create_time between #{beginTime} and #{endTime}
 			</if>
-			<!-- <if test="poCodes != null">
+			<if test="poCodes != null">
 				and prod_order_stock.po_code in
 				<foreach collection="poCodes" item="sta" index="index"
 					open="(" close=")" separator=",">
 					#{sta}
 				</foreach>
-			</if> -->
+			</if>
 	</select>
 	
 	<select id="statProcStock" resultMap="StockStatMap">
@@ -264,6 +334,7 @@
 			and prod_box_log.is_wip = 1
 			and prod_box_log.is_feeded = 0
 			and prod_box_log.is_outsource = 0
+			and prod_box_log.is_deleted = 0
 			<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
 			  and prod_box_material.create_time between #{beginTime} and #{endTime}
 			</if>
@@ -311,13 +382,13 @@
 		  and b.create_time between #{beginTime} and #{endTime}
 		</if>
 		and b.npl_status = 'Submited'
-		<!-- <if test="poCodes != null">
+		<if test="poCodes != null">
 			and b.po_code in
 			<foreach collection="poCodes" item="sta" index="index"
 				open="(" close=")" separator=",">
 				#{sta}
 			</foreach>
-		</if> -->
+		</if>
 	</select>
 
 
