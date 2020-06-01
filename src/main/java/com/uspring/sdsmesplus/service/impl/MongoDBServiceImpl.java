@@ -695,7 +695,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 			//判断该工序是否有值
 			Map<String, Object> processData = (Map<String, Object>) rfData.get(processDo.getSpCode());
 			if(processData == null){
-				break;
+				continue;
 			}
 			
 			//查询所有的工序参数
