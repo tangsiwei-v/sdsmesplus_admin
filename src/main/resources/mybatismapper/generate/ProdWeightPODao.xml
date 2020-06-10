@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.ProdWeightPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.ProdWeightPO">
+    <id column="pwl_id" jdbcType="INTEGER" property="pwlId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="prod_rfid" jdbcType="VARCHAR" property="prodRfid" />
+    <result column="prod_weight" jdbcType="DECIMAL" property="prodWeight" />
+    <result column="prod_time" jdbcType="TIMESTAMP" property="prodTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pwl_id, line_id, prod_rfid, prod_weight, prod_time
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdWeightPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prod_weight_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_weight_log
+    where pwl_id = #{pwlId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prod_weight_log
+    where pwl_id = #{pwlId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdWeightPOExample">
+    delete from prod_weight_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdWeightPO">
+    insert into prod_weight_log (pwl_id, line_id, prod_rfid, 
+      prod_weight, prod_time)
+    values (#{pwlId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{prodRfid,jdbcType=VARCHAR}, 
+      #{prodWeight,jdbcType=DECIMAL}, #{prodTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdWeightPO">
+    insert into prod_weight_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pwlId != null">
+        pwl_id,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="prodRfid != null">
+        prod_rfid,
+      </if>
+      <if test="prodWeight != null">
+        prod_weight,
+      </if>
+      <if test="prodTime != null">
+        prod_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pwlId != null">
+        #{pwlId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="prodRfid != null">
+        #{prodRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="prodWeight != null">
+        #{prodWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="prodTime != null">
+        #{prodTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdWeightPOExample" resultType="java.lang.Long">
+    select count(*) from prod_weight_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_weight_log
+    <set>
+      <if test="record.pwlId != null">
+        pwl_id = #{record.pwlId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodRfid != null">
+        prod_rfid = #{record.prodRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodWeight != null">
+        prod_weight = #{record.prodWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.prodTime != null">
+        prod_time = #{record.prodTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_weight_log
+    set pwl_id = #{record.pwlId,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      prod_rfid = #{record.prodRfid,jdbcType=VARCHAR},
+      prod_weight = #{record.prodWeight,jdbcType=DECIMAL},
+      prod_time = #{record.prodTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdWeightPO">
+    update prod_weight_log
+    <set>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="prodRfid != null">
+        prod_rfid = #{prodRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="prodWeight != null">
+        prod_weight = #{prodWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="prodTime != null">
+        prod_time = #{prodTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pwl_id = #{pwlId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.ProdWeightPO">
+    update prod_weight_log
+    set line_id = #{lineId,jdbcType=INTEGER},
+      prod_rfid = #{prodRfid,jdbcType=VARCHAR},
+      prod_weight = #{prodWeight,jdbcType=DECIMAL},
+      prod_time = #{prodTime,jdbcType=TIMESTAMP}
+    where pwl_id = #{pwlId,jdbcType=INTEGER}
+  </update>
+</mapper>

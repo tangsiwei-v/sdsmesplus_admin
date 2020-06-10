@@ -3,11 +3,12 @@
 <mapper namespace="com.uspring.sdsmesplus.dao.ProdFinishedProductDao">
 
 	<select id="getProductList" resultType="map">
-	    select a.*,b.line_name,c.shop_id,c.shop_name,d.fc_id,d.fc_name,e.prod_number,e.prod_tuhao,e.prod_name from prod_finished_product a 
+	    select a.*,b.line_name,c.shop_id,c.shop_name,d.fc_id,d.fc_name,e.prod_number,e.prod_tuhao,e.prod_name,f.prod_weight from prod_finished_product a
 		left join sys_line b on a.line_id = b.line_id
 		left join sys_workshop c on b.shop_id = c.shop_id
 		left join sys_factory d on c.fc_id = d.fc_id
 		left join plan_order e on a.po_code = e.po_code
+		left join prod_weight_log f on f.prod_rfid = a.fp_rfid
 		where 1=1
 	    <if test="lineId != null and lineId > 0">
 	      and a.line_id = #{lineId}
