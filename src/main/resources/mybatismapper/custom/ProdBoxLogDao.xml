@@ -13,42 +13,70 @@
 	</select>
 	
 	<select id="getBoxList" resultType="map">
-	    select a.*,b.line_name,c.shop_id,c.shop_name,d.fc_id,d.fc_name from prod_box_log a
-		left join sys_line b on a.line_id = b.line_id
-		left join sys_workshop c on b.shop_id = c.shop_id
-		left join sys_factory d on c.fc_id = d.fc_id
+	    select b.po_code,b.prod_code,b.prod_number,b.prod_name,b.prod_tuhao,
+	    b.prod_furnace_no,prod_glevel,b.prod_trace_code,b.prod_batch_code,
+	    b.customer_code,b.customer_matcode,b.box_barcode,b.box_quan,
+	    b.is_over_submit,b.is_confirmed,b.is_wip,b.is_outsource,
+	    b.create_time,b.is_deleted,l.line_name,v.vsm_name,f.fc_name from prod_box_log b 
+		left join sys_line l
+			on b.line_id = l.line_id
+		left join sys_vsm v
+			on l.vsm_id=v.vsm_id
+		left join sys_factory f
+			on l.fc_id=f.fc_id
 		where 1=1
 	    <if test="lineId != null and lineId > 0">
-	      and a.line_id = #{lineId}
+	      and b.line_id = #{lineId}
 	    </if>
-	    <if test="shopId != null and shopId != ''">
-	      and c.shop_id = #{shopId}
+	    <if test="vsmId != null and vsmId != ''">
+	      and v.vsm_id = #{vsmId}
 	    </if>
 	    <if test="fcId != null and fcId != ''">
-	      and d.fc_id = #{fcId}
+	      and f.fc_id = #{fcId}
 	    </if>
 		<if test="prodBatchCode != null and prodBatchCode != ''">
-			and a.prod_batch_code = #{prodBatchCode}
+			and b.prod_batch_code = #{prodBatchCode}
 		</if>
 	    <if test="prodCode != null and prodCode != ''">
-	      and prod_code like '%'+#{prodCode}+'%'
+	      and b.prod_code = #{prodCode}
 	    </if>
 	    <if test="prodNumber != null and prodNumber != ''">
-	      and prod_number like '%'+#{prodNumber}+'%'
+	      and b.prod_number like '%'+#{prodNumber}+'%'
 	    </if>
 	    <if test="tuhao != null and tuhao != ''">
-	      and prod_tuhao like '%'+#{tuhao}+'%'
+	      and b.prod_tuhao like '%'+#{tuhao}+'%'
 	    </if>
-	    <if test="boxCode1 != null and boxCode1 != ''">
-	      and box_barcode = #{boxCode1}
+	    <if test="boxCode != null and boxCode != ''">
+	      and b.box_barcode = #{boxCode}
 	    </if>
 	    <if test="poCode != null and poCode != ''">
-	      and po_code = #{poCode}
+	      and b.po_code = #{poCode}
+	    </if>
+	    <if test="prodTraceCode != null and prodTraceCode != ''">
+	      and b.prod_trace_code = #{prodTraceCode}
+	    </if>
+	    <if test="boxareaCode != null and boxareaCode != ''">
+	      and b.boxarea_code, = #{boxareaCode}
+	    </if>
+	    <if test="isOverSubmit != null and isOverSubmit != ''">
+	      and b.is_over_submit = #{isOverSubmit}
+	    </if>
+	    <if test="isWip != null and isWip != ''">
+	      and b.is_wip = #{isWip}
+	    </if>
+	    <if test="isOutsource != null and isOutsource != ''">
+	      and b.is_outsource = #{isOutsource}
+	    </if>
+	     <if test="isDeleted != null and isDeleted != ''">
+	      and b.is_deleted = #{isDeleted}
+	    </if>
+	    <if test="isConfirmed != null and isConfirmed != ''">
+	      and b.is_confirmed = #{isConfirmed}
 	    </if>
 	    <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
-	      and a.create_time between #{beginTime} and #{endTime}
+	      and b.create_time between #{beginTime} and #{endTime}
 	    </if>
-	    order by a.create_time desc
+	    order by b.create_time desc
 	</select>
 
 </mapper>
