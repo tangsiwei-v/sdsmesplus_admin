@@ -140,54 +140,6 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public Map<String, Object> getBoxList(Integer lineId, String boxCode, String tuhao, String prodCode,
-			String prodNumber, String beginTime, String endTime, String poCode, Integer pageNum, Integer pageSize,
-			Integer shopId, Integer fcId,  String prodBatchCode, Integer isExport, HttpServletResponse response) {
-		PageHelper page = new PageHelper();
-		//是否分页显示
-		if(isExport != 1){
-			page.startPage(pageNum, pageSize);
-		}
-		List<Map<String, Object>> resultList = this.prodBoxLogDao.getBoxList(lineId, boxCode, tuhao, prodCode,
-				prodNumber, beginTime, endTime, poCode, shopId, fcId, prodBatchCode);
-		//是否导出
-		if(isExport == 1){
-			List<String> titleList = new ArrayList<String>();
-			titleList.add("箱号");
-			titleList.add("满箱时间");
-			titleList.add("装箱数量");
-			titleList.add("SAP号");
-			titleList.add("总成简码");
-			titleList.add("图号");
-			titleList.add("工单编号");
-			titleList.add("工厂");
-			titleList.add("车间");
-			titleList.add("产线");
-			
-			List<String> columnList = new ArrayList<String>();
-			columnList.add("box_barcode");
-			columnList.add("create_time");
-			columnList.add("box_quan");
-			columnList.add("prod_code");
-			columnList.add("prod_number");
-			columnList.add("prod_tuhao");
-			columnList.add("po_code");
-			columnList.add("fc_name");
-			columnList.add("shop_name");
-			columnList.add("line_name");
-			
-			ExportXls.exportXls(resultList, response, titleList, columnList, "箱合格证查询");
-	    }
-		
-		PageInfo info = new PageInfo(resultList);
-		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("data", resultList);
-		resultMap.put("total", info.getTotal());
-		return resultMap;
-	}
-
-	@Override
 	public Map<String, Object> getProductList(HttpServletResponse response,Integer lineId, String boxCode, String barcode, String tuhao,
 			String prodCode, String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum,
 			Integer pageSize, Integer shopId, Integer fcId, Integer isExport) {
@@ -1295,6 +1247,59 @@ public class ReportServiceImpl implements ReportService {
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", dataList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getBoxList(Integer lineId, String boxCode, String tuhao, String prodCode,
+			String prodNumber, String beginTime, String endTime, String poCode, Integer vsmId, Integer fcId,
+			String prodBatchCode, String prodTraceCode, String boxareaCode, Integer isOverSubmit, Integer isWip,
+			Integer isOutsource, Integer isDeleted, Integer isConfirmed, Integer pageNum, Integer pageSize,
+			Integer isExport, HttpServletResponse response) {
+		
+		PageHelper page = new PageHelper();
+		//是否分页显示
+		if(isExport != 1){
+			page.startPage(pageNum, pageSize);
+		}
+		List<Map<String, Object>> resultList = this.prodBoxLogDao.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime,
+				poCode, vsmId, fcId, prodBatchCode, prodTraceCode, boxareaCode, isOverSubmit, isWip, isOutsource, isDeleted, isConfirmed);
+		//是否导出
+		if(isExport == 1){
+			List<String> titleList = new ArrayList<String>();
+			titleList.add("成品箱号");
+			titleList.add("满箱时间");
+			titleList.add("装箱数量");
+			titleList.add("成品SAP号");
+			titleList.add("批次号");
+			titleList.add("总成简码");
+			titleList.add("图号");
+			titleList.add("工单号");
+			titleList.add("工段");
+			titleList.add("产线");
+			titleList.add("工厂");
+			
+			List<String> columnList = new ArrayList<String>();
+			columnList.add("box_barcode");
+			columnList.add("create_time");
+			columnList.add("box_quan");
+			columnList.add("prod_code");
+			columnList.add("prod_batch_code");
+			columnList.add("prod_number");
+			columnList.add("prod_tuhao");
+			columnList.add("po_code");
+			columnList.add("vsm_name");
+			columnList.add("line_name");
+			columnList.add("fc_name");
+			
+			ExportXls.exportXls(resultList, response, titleList, columnList, "箱合格证查询");
+	    }
+		
+		PageInfo info = new PageInfo(resultList);
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("data", resultList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
 	}

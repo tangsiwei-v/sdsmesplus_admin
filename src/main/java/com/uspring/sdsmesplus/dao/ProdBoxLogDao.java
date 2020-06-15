@@ -51,7 +51,12 @@ public interface ProdBoxLogDao extends ProdBoxLogPODao{
 	 * @param endTime 结束时间
 	 * @return
 	 */
-	List<Map<String,Object>> getBoxList(@Param("lineId")Integer lineId,@Param("boxCode1")String boxCode,
-	@Param("tuhao")String tuhao,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("poCode")String poCode,@Param("shopId")Integer shopId,@Param("fcId")Integer fcId,@Param("prodBatchCode") String prodBatchCode);
+	List<Map<String,Object>> getBoxList(@Param("lineId")Integer lineId,@Param("boxCode")String boxCode,
+	@Param("tuhao")String tuhao,@Param("prodCode")String prodCode,@Param("prodNumber")String prodNumber,
+	@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("poCode")String poCode,
+	@Param("vsmId")Integer vsmId,@Param("fcId")Integer fcId,@Param("prodBatchCode") String prodBatchCode,
+	@Param("prodTraceCode")String prodTraceCode,@Param("boxareaCode")String boxareaCode,
+	@Param("isOverSubmit")Integer isOverSubmit,@Param("isWip")Integer isWip,
+	@Param("isOutsource")Integer isOutsource,@Param("isDeleted")Integer isDeleted,@Param("isConfirmed")Integer isConfirmed);
 
 }

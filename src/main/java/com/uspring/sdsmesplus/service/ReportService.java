@@ -13,6 +13,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 import com.uspring.sdsmesplus.entity.po.ProdFinishedProductPO;
 import com.uspring.sdsmesplus.entity.po.ProdProductMaterialPO;
@@ -65,10 +67,10 @@ public interface ReportService {
 	 * @param isExport 是否导出
 	 * @return
 	 */
-	Map<String, Object> getBoxList(Integer lineId, String boxCode, String tuhao, String prodCode, String prodNumber,
-			String beginTime, String endTime, String poCode, Integer pageNum, Integer pageSize, Integer shopId,
-			Integer fcId, String prodBatchCode, Integer isExport, HttpServletResponse response);
-
+	Map<String, Object> getBoxList(Integer lineId,String boxCode,String tuhao,String prodCode,String prodNumber,
+			String beginTime,String endTime,String poCode,Integer vsmId,Integer fcId,String prodBatchCode,
+			String prodTraceCode,String boxareaCode,Integer isOverSubmit,Integer isWip,Integer isOutsource,
+			Integer isDeleted, Integer isConfirmed, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
 	/**
 	 * @Title: getProductList
 	 * @Description: 查询产品总成信息
