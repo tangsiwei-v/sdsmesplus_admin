@@ -56,7 +56,7 @@
 	      and b.prod_trace_code = #{prodTraceCode}
 	    </if>
 	    <if test="boxareaCode != null and boxareaCode != ''">
-	      and b.boxarea_code, = #{boxareaCode}
+	      and b.boxarea_code = #{boxareaCode}
 	    </if>
 	    <if test="isOverSubmit != null and isOverSubmit != ''">
 	      and b.is_over_submit = #{isOverSubmit}
