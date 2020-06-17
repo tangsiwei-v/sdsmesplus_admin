@@ -103,8 +103,8 @@ public class ReportController {
 	@ResponseBody
 	@RequestMapping(value = "/barcode/process", method = RequestMethod.GET)
 	@ApiOperation(value = "查询产品的工序", notes = "查询产品的工序", response = Result.class)
-	public Result getBarcodeProcess(HttpServletResponse response,String rfid,Integer lineId) {
-		return new Result("查询成功", this.reportService.getProcessInfo(rfid, lineId), StatusCode.SUCCESS);
+	public Result getBarcodeProcess(HttpServletResponse response,String rfid,Integer lineId,  String fp_barcode) {
+		return new Result("查询成功", this.reportService.getProcessInfo(rfid, lineId, fp_barcode), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody

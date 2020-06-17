@@ -52,7 +52,7 @@ public interface ReportService {
 	 * @param lineId 产线编号
 	 * @return 工序数据
 	 */
-	List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId);
+	List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId,  String fp_barcode);
 
 	/**
 	 * @Title: getBoxList
