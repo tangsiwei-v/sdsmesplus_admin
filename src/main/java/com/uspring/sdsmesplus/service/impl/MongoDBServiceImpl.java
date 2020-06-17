@@ -758,6 +758,8 @@ public class MongoDBServiceImpl implements MongoDBService {
 					}else{
 						resultValue = "合格";
 					}
+				}else if(type.equals("Boolean") || type.equals("Integer")) {
+					resultValue = paramData.get(key)+"";
 				}
 			}
 		}
