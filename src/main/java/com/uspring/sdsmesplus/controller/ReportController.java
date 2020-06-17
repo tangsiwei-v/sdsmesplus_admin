@@ -37,8 +37,8 @@ public class ReportController {
 	@RequestMapping(value = "/box", method = RequestMethod.GET)
 	@ApiOperation(value = "查询箱合格证信息", notes = "查询箱合格证信息", response = Result.class)
 	public Result getBoxList(HttpServletResponse response,Integer lineId,String boxCode,String tuhao,String prodCode,String prodNumber,
-			String beginTime,String endTime,String poCode, String prodTraceCode,String boxareaCode,Integer isOverSubmit,Integer isWip,
-			Integer isOutsource,Integer isDeleted,Integer isConfirmed,Integer pageNum,Integer pageSize,Integer vsmId,Integer fcId,String prodBatchCode) {
+			String beginTime,String endTime,String poCode, String prodTraceCode,String boxareaCode,Boolean isOverSubmit,Boolean isWip,
+			Boolean isOutsource,Boolean isDeleted,Boolean isConfirmed,Integer pageNum,Integer pageSize,Integer vsmId,Integer fcId,String prodBatchCode) {
 		endTime = DateUtils.dealEndTime(endTime);
 		return new Result("查询成功", this.reportService.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime, 
 				poCode, vsmId, fcId, prodBatchCode, prodTraceCode, boxareaCode, isOverSubmit, isWip, isOutsource, isDeleted, 
@@ -49,8 +49,8 @@ public class ReportController {
 	@RequestMapping(value = "/box/export", method = RequestMethod.POST)
 	@ApiOperation(value = "导出箱合格证信息", notes = "导出箱合格证信息", response = Result.class)
 	public Result exportBoxList(HttpServletResponse response,Integer lineId,String boxCode,String tuhao,String prodCode,String prodNumber,
-			String beginTime,String endTime,String poCode, String prodTraceCode,String boxareaCode,Integer isOverSubmit,Integer isWip,
-			Integer isOutsource,Integer isDeleted,Integer isConfirmed,Integer pageNum,Integer pageSize,Integer vsmId,Integer fcId,String prodBatchCode) {
+			String beginTime,String endTime,String poCode, String prodTraceCode,String boxareaCode,Boolean isOverSubmit,Boolean isWip,
+			Boolean isOutsource,Boolean isDeleted,Boolean isConfirmed,Integer pageNum,Integer pageSize,Integer vsmId,Integer fcId,String prodBatchCode) {
 		endTime = DateUtils.dealEndTime(endTime);
 		return new Result("导出成功", this.reportService.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime, 
 				poCode, vsmId, fcId, prodBatchCode, prodTraceCode, boxareaCode, isOverSubmit, isWip, isOutsource, isDeleted, 

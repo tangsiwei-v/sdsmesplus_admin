@@ -69,8 +69,8 @@ public interface ReportService {
 	 */
 	Map<String, Object> getBoxList(Integer lineId,String boxCode,String tuhao,String prodCode,String prodNumber,
 			String beginTime,String endTime,String poCode,Integer vsmId,Integer fcId,String prodBatchCode,
-			String prodTraceCode,String boxareaCode,Integer isOverSubmit,Integer isWip,Integer isOutsource,
-			Integer isDeleted, Integer isConfirmed, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
+			String prodTraceCode,String boxareaCode,Boolean isOverSubmit,Boolean isWip,Boolean isOutsource,
+			Boolean isDeleted, Boolean isConfirmed, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
 	/**
 	 * @Title: getProductList
 	 * @Description: 查询产品总成信息

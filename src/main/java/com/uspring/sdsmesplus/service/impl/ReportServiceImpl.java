@@ -1254,8 +1254,8 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public Map<String, Object> getBoxList(Integer lineId, String boxCode, String tuhao, String prodCode,
 			String prodNumber, String beginTime, String endTime, String poCode, Integer vsmId, Integer fcId,
-			String prodBatchCode, String prodTraceCode, String boxareaCode, Integer isOverSubmit, Integer isWip,
-			Integer isOutsource, Integer isDeleted, Integer isConfirmed, Integer pageNum, Integer pageSize,
+			String prodBatchCode, String prodTraceCode, String boxareaCode, Boolean isOverSubmit, Boolean isWip,
+			Boolean isOutsource, Boolean isDeleted, Boolean isConfirmed, Integer pageNum, Integer pageSize,
 			Integer isExport, HttpServletResponse response) {
 		
 		PageHelper page = new PageHelper();

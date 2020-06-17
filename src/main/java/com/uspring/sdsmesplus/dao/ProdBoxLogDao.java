@@ -56,7 +56,7 @@ public interface ProdBoxLogDao extends ProdBoxLogPODao{
 	@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("poCode")String poCode,
 	@Param("vsmId")Integer vsmId,@Param("fcId")Integer fcId,@Param("prodBatchCode") String prodBatchCode,
 	@Param("prodTraceCode")String prodTraceCode,@Param("boxareaCode")String boxareaCode,
-	@Param("isOverSubmit")Integer isOverSubmit,@Param("isWip")Integer isWip,
-	@Param("isOutsource")Integer isOutsource,@Param("isDeleted")Integer isDeleted,@Param("isConfirmed")Integer isConfirmed);
+	@Param("isOverSubmit")Boolean isOverSubmit,@Param("isWip")Boolean isWip,
+	@Param("isOutsource")Boolean isOutsource,@Param("isDeleted")Boolean isDeleted,@Param("isConfirmed")Boolean isConfirmed);
 
 }
