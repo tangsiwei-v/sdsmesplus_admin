@@ -758,6 +758,10 @@ public class MongoDBServiceImpl implements MongoDBService {
 		for(SysProcessPO processDo:processList){
 			Map<String, Object> processData = (Map<String, Object>) processRestData.get(processDo.getSpCode());
 
+			if(processData == null){
+				continue;
+			}
+
 			Map<String,Object> processMap = new HashMap<String,Object>();
 			processMap.put("processName", processDo.getSpName());
 			processMap.put("processCode", processDo.getSpCode());
