@@ -741,6 +741,10 @@ public class MongoDBServiceImpl implements MongoDBService {
 		if (fp_barcode.indexOf("[)>") != -1) {
 			result_fp_barcode = fp_barcode.substring(3);
 		}
+
+		if ("".equals(result_fp_barcode)){
+			throw new ServiceException("RDM线、总成条码不符合[)>0560开头");
+		}
 		// 平湖Clutch精确追溯查询
 		RestTemplate restTemplate = new RestTemplate();
 		Map<String, Object> processRestData = restTemplate.getForObject(this.RESTTEMPLATE_CLUTCH_URL + result_fp_barcode, Map.class);
