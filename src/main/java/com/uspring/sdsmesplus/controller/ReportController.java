@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping("/api/report")
-public class ReportController {
+public class ReportController extends BaseController{
 
 	@Autowired
 	private ReportService reportService;

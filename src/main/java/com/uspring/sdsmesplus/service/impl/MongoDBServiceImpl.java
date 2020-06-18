@@ -8,6 +8,7 @@
  */
 package com.uspring.sdsmesplus.service.impl;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.WriteResult;
@@ -45,6 +48,7 @@ import com.uspring.sdsmesplus.entity.vo.ProdProcess;
 import com.uspring.sdsmesplus.entity.vo.ProdProcessParam;
 import com.uspring.sdsmesplus.exception.ServiceException;
 import com.uspring.sdsmesplus.service.MongoDBService;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -747,6 +751,22 @@ public class MongoDBServiceImpl implements MongoDBService {
 		}
 		// 平湖Clutch精确追溯查询
 		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ResponseErrorHandler() {
+			@Override
+			public boolean hasError(ClientHttpResponse clientHttpResponse) throws IOException {
+				HttpStatus statusCode = clientHttpResponse.getStatusCode();
+				System.out.println(statusCode);
+				if (statusCode.value() == 200) {
+					return false;
+				}
+				return true;
+			}
+
+			@Override
+			public void handleError(ClientHttpResponse clientHttpResponse)  {
+				throw new ServiceException("Clutch线内部服务器异常");
+			}
+		});
 		Map<String, Object> processRestData = restTemplate.getForObject(this.RESTTEMPLATE_CLUTCH_URL + result_fp_barcode, Map.class);
 		SysProcessPOExample processExample = new SysProcessPOExample();
 		processExample.createCriteria().andLineIdEqualTo(lineId).andSpShowEqualTo(true);
