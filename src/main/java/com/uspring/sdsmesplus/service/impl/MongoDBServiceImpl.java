@@ -70,7 +70,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 	private ProcessParamDao ParamDao;
 
 	@Value("#{prop.restTemplate_clutch_url}")
-	private static String RESTTEMPLATE_CLUTCH_URL;
+	private  String RESTTEMPLATE_CLUTCH_URL;
 
 	private final String PPARAM_COLLECTIONS = "ProcessParameter";
 
@@ -737,9 +737,13 @@ public class MongoDBServiceImpl implements MongoDBService {
 	@Override
 	public List<Map<String, Object>> getProcessClutchData(String fp_barcode, Integer lineId) {
 		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
+		String result_fp_barcode = "";
+		if (fp_barcode.indexOf("[)>") != -1) {
+			result_fp_barcode = fp_barcode.substring(3);
+		}
 		// 平湖Clutch精确追溯查询
 		RestTemplate restTemplate = new RestTemplate();
-		Map<String, Object> processRestData = restTemplate.getForObject(this.RESTTEMPLATE_CLUTCH_URL + fp_barcode, Map.class);
+		Map<String, Object> processRestData = restTemplate.getForObject(this.RESTTEMPLATE_CLUTCH_URL + result_fp_barcode, Map.class);
 		SysProcessPOExample processExample = new SysProcessPOExample();
 		processExample.createCriteria().andLineIdEqualTo(lineId).andSpShowEqualTo(true);
 		processExample.setOrderByClause("sp_order asc");
