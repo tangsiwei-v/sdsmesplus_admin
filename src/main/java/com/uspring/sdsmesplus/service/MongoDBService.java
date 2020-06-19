@@ -82,5 +82,8 @@ public interface MongoDBService {
 	
 	//查询所有工序数据
 	List<Map<String,Object>> getProcessData(String rfid,Integer lineId);
+
+	//查询平湖所有工序数据
+	List<Map<String,Object>> getProcessClutchData(String fp_barcode,Integer lineId);
 	
 }

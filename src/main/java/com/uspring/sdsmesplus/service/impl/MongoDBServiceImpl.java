@@ -8,6 +8,7 @@
  */
 package com.uspring.sdsmesplus.service.impl;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +22,7 @@ import java.util.Map;
 import java.util.SimpleTimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
@@ -28,6 +30,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.WriteResult;
@@ -44,6 +48,8 @@ import com.uspring.sdsmesplus.entity.vo.ProdProcess;
 import com.uspring.sdsmesplus.entity.vo.ProdProcessParam;
 import com.uspring.sdsmesplus.exception.ServiceException;
 import com.uspring.sdsmesplus.service.MongoDBService;
+import org.springframework.web.client.ResponseErrorHandler;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @ClassName: MongoDBServiceImpl
@@ -67,7 +73,11 @@ public class MongoDBServiceImpl implements MongoDBService {
 	@Autowired
 	private ProcessParamDao ParamDao;
 
+	@Value("#{prop.restTemplate_clutch_url}")
+	private  String RESTTEMPLATE_CLUTCH_URL;
+
 	private final String PPARAM_COLLECTIONS = "ProcessParameter";
+
 
 	@Override
 	public Map<String, Object> findPParamByRFID(String rfid) {
@@ -176,7 +186,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 	/**
 	 * mongo 日期查询isodate
 	 * 
-	 * @param dateStr
+	 * @param
 	 * @return
 	 */
 	public static Date dateToISODate(Date date) {
@@ -727,7 +737,89 @@ public class MongoDBServiceImpl implements MongoDBService {
 		
 		return resultList;
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> getProcessClutchData(String fp_barcode, Integer lineId) {
+		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
+		String result_fp_barcode = "";
+		if (fp_barcode.indexOf("[)>") != -1) {
+			result_fp_barcode = fp_barcode.substring(3);
+		}
+
+		if ("".equals(result_fp_barcode)){
+			throw new ServiceException("RDM线、总成条码不符合[)>0560开头");
+		}
+		// 平湖Clutch精确追溯查询
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ResponseErrorHandler() {
+			@Override
+			public boolean hasError(ClientHttpResponse clientHttpResponse) throws IOException {
+				HttpStatus statusCode = clientHttpResponse.getStatusCode();
+				System.out.println(statusCode);
+				if (statusCode.value() == 200) {
+					return false;
+				}
+				return true;
+			}
+
+			@Override
+			public void handleError(ClientHttpResponse clientHttpResponse)  {
+				throw new ServiceException("Clutch线内部服务器异常");
+			}
+		});
+		Map<String, Object> processRestData = restTemplate.getForObject(this.RESTTEMPLATE_CLUTCH_URL + result_fp_barcode, Map.class);
+		SysProcessPOExample processExample = new SysProcessPOExample();
+		processExample.createCriteria().andLineIdEqualTo(lineId).andSpShowEqualTo(true);
+		processExample.setOrderByClause("sp_order asc");
+
+		//查询产品需要显示的工序
+		List<SysProcessPO> processList = this.processDao.selectByExample(processExample);
+
+		if(processList.size() == 0){
+			return null;
+		}
+
+		for(SysProcessPO processDo:processList){
+			Map<String, Object> processData = (Map<String, Object>) processRestData.get(processDo.getSpCode());
+
+			if(processData == null){
+				continue;
+			}
+
+			Map<String,Object> processMap = new HashMap<String,Object>();
+			processMap.put("processName", processDo.getSpName());
+			processMap.put("processCode", processDo.getSpCode());
+			processMap.put("paramList", new ArrayList());
+
+			//查询所有的工序参数
+			SysProcessParamPOExample paramExample = new SysProcessParamPOExample();
+			paramExample.createCriteria().andSpIdEqualTo(processDo.getSpId()).andPpShowEqualTo(true);
+			paramExample.setOrderByClause("pp_order asc");
+			List<SysProcessParamPO> paramList = this.processParamDao.selectByExample(paramExample);
+
+			List<Map<String,Object>> paramValueList = new ArrayList<Map<String,Object>>();
+
+			for(SysProcessParamPO paramDo:paramList){
+				Map<String,Object> paramMap = new HashMap<String,Object>();
+				paramMap.put("paramName", paramDo.getPpName());
+				paramMap.put("paramCode", paramDo.getPpCode());
+
+				Map<String,Object> paramValueMap = getParamValue(processData,paramDo.getPpCode(),paramDo.getPpType());
+
+				paramMap.put("paramValue", paramValueMap.get("dealValue"));
+				paramMap.put("paramRealValue", paramValueMap.get("realValue"));
+
+				paramValueList.add(paramMap);
+			}
+
+			processMap.put("paramList", paramValueList);
+
+			resultList.add(processMap);
+		}
+
+		return resultList;
+	}
+
 	/**
 	 * 查询指定参数的的值
 	 * @param paramData  工序的所有参数
@@ -758,6 +850,8 @@ public class MongoDBServiceImpl implements MongoDBService {
 					}else{
 						resultValue = "合格";
 					}
+				}else if(type.equals("Boolean") || type.equals("Integer")) {
+					resultValue = paramData.get(key)+"";
 				}
 			}
 		}

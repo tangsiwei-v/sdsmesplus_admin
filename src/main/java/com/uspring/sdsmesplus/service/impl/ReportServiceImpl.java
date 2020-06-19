@@ -1,5 +1,6 @@
 package com.uspring.sdsmesplus.service.impl;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -135,8 +136,13 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId) {
-		return this.mongoDBservice.getProcessData(rfid, lineId);
+	public List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId, String fp_barcode) {
+		if (lineId.equals(234)) {
+			return this.mongoDBservice.getProcessClutchData(fp_barcode, lineId);
+		}else {
+			return this.mongoDBservice.getProcessData(rfid, lineId);
+		}
+
 	}
 
 	@Override
