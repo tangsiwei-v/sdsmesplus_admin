@@ -1,6 +1,5 @@
 package com.uspring.sdsmesplus.service.impl;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,10 +53,8 @@ import com.uspring.sdsmesplus.entity.po.SysProcessPO;
 import com.uspring.sdsmesplus.entity.po.SysProcessPOExample;
 import com.uspring.sdsmesplus.entity.po.SysProcessParamPO;
 import com.uspring.sdsmesplus.entity.po.SysProcessParamPOExample;
-import com.uspring.sdsmesplus.entity.vo.PlanOrderVO;
 import com.uspring.sdsmesplus.entity.vo.StockStat;
 import com.uspring.sdsmesplus.service.MongoDBService;
-import com.uspring.sdsmesplus.service.OrderService;
 import com.uspring.sdsmesplus.service.ReportService;
 
 @Service
@@ -1082,72 +1079,6 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public Map<String, Object> getCleanInfo(Integer fcId, Integer shopId, Integer lineId, String poCode,
-			String prodCode, String prodNumber, String matProdCode, String matProdNumber, String boxCode,
-			String matBoxCode, String beginTime, String endTime, String type, Integer pageNum, Integer pageSize,
-			Integer isExport, HttpServletResponse response) {
-		PageHelper page = new PageHelper();
-		if(isExport != 1){
-			page.startPage(pageNum, pageSize);
-		}
-
-		boolean searchType = false;
-		String fileName = "";
-		if (type.equals("1")) {
-			searchType = false;
-			fileName = "清线报表";
-		} else {
-			searchType = true;
-			fileName = "委外报表";
-		}
-
-		List<Map<String, Object>> dataList = this.prodCleanLogPoDao.getCleanLog(fcId, shopId, lineId, poCode, prodCode,
-				prodNumber, matProdCode, matProdNumber, boxCode, matBoxCode, beginTime, endTime, searchType);
-
-		//是否导出
-		if(isExport == 1){
-			List<String> titleList = new ArrayList<String>();
-			titleList.add("工单号");
-			titleList.add("SAP号");
-			titleList.add("总成简码");
-			titleList.add("描述");
-			titleList.add("物料SAP号");
-			titleList.add("物料简码");
-			titleList.add("描述");
-			titleList.add("旧箱合格证");
-			titleList.add("新箱合格证");
-			titleList.add("前线时间");
-			titleList.add("工厂");
-			titleList.add("车间");
-			titleList.add("产线");
-			
-			List<String> columnList = new ArrayList<String>();
-			columnList.add("po_code");
-			columnList.add("prod_code");
-			columnList.add("prod_number");
-			columnList.add("prod_name");
-			columnList.add("mat_code");
-			columnList.add("mat_number");
-			columnList.add("mat_name");
-			columnList.add("box_barcode_old");
-			columnList.add("box_barcode_new");
-			columnList.add("create_time");
-			columnList.add("fc_name");
-			columnList.add("shop_name");
-			columnList.add("line_name");
-			
-			ExportXls.exportXls(dataList, response, titleList, columnList, fileName);
-	    }
-		
-		PageInfo info = new PageInfo(dataList);
-
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("data", dataList);
-		resultMap.put("total", info.getTotal());
-		return resultMap;
-	}
-
-	@Override
 	public Map<String, Object> getProductReplace(Integer fcId, Integer shopId, Integer lineId, String poCode,
 			String prodCode, String beginTime, String endTime, Integer pageNum, Integer pageSize,
 			Integer isExport, HttpServletResponse response) {
@@ -1269,6 +1200,7 @@ public class ReportServiceImpl implements ReportService {
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
 		}
+		
 		List<Map<String, Object>> resultList = this.prodBoxLogDao.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime,
 				poCode, vsmId, fcId, prodBatchCode, prodTraceCode, boxareaCode, isOverSubmit, isWip, isOutsource, isDeleted, isConfirmed);
 		//是否导出
@@ -1277,7 +1209,10 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("成品箱号");
 			titleList.add("满箱时间");
 			titleList.add("装箱数量");
+			titleList.add("工单号");
 			titleList.add("成品SAP号");
+			titleList.add("总成简码");
+			titleList.add("成品名称");
 			titleList.add("批次号");
 			titleList.add("总成简码");
 			titleList.add("图号");
@@ -1306,6 +1241,63 @@ public class ReportServiceImpl implements ReportService {
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", resultList);
+		resultMap.put("total", info.getTotal());
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getCleanInfo(Integer fcId, Integer vsmId, Integer lineId, String poCode, String prodCode,
+			String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode,
+			String beginTime, String endTime, boolean isConfirmed, Integer pageNum, Integer pageSize, Integer isExport,
+			HttpServletResponse response) {
+		PageHelper page = new PageHelper();
+		if(isExport != 1){
+			page.startPage(pageNum, pageSize);
+		}
+		String fileName = "";
+
+		List<Map<String, Object>> dataList = this.prodCleanLogPoDao.getCleanLog(fcId, vsmId, lineId, poCode, prodCode, prodNumber, matProdCode, 
+				matProdNumber, boxCode, matBoxCode, beginTime, endTime, isConfirmed);
+
+		//是否导出
+		if(isExport == 1){
+			List<String> titleList = new ArrayList<String>();
+			titleList.add("工单号");
+			titleList.add("成品SAP号");
+			titleList.add("总成简码");
+			titleList.add("描述");
+			titleList.add("物料SAP号");
+			titleList.add("物料简码");
+			titleList.add("描述");
+			titleList.add("旧箱合格证");
+			titleList.add("新箱合格证");
+			titleList.add("前线时间");
+			titleList.add("工厂");
+			titleList.add("车间");
+			titleList.add("产线");
+			
+			List<String> columnList = new ArrayList<String>();
+			columnList.add("po_code");
+			columnList.add("prod_code");
+			columnList.add("prod_number");
+			columnList.add("prod_name");
+			columnList.add("mat_code");
+			columnList.add("mat_number");
+			columnList.add("mat_name");
+			columnList.add("box_barcode_old");
+			columnList.add("box_barcode_new");
+			columnList.add("create_time");
+			columnList.add("fc_name");
+			columnList.add("shop_name");
+			columnList.add("line_name");
+			
+			ExportXls.exportXls(dataList, response, titleList, columnList, fileName);
+	    }
+		
+		PageInfo info = new PageInfo(dataList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("data", dataList);
 		resultMap.put("total", info.getTotal());
 		return resultMap;
 	}
