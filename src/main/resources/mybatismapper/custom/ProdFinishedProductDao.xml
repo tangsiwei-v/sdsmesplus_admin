@@ -44,11 +44,16 @@
 	</select>
 	
 	<select id="getProductInfo" resultType="map">
-	    select top 1 a.*,b.line_name,c.shop_id,c.shop_name,d.fc_id,d.fc_name,e.pt_draw prod_tuhao from prod_finished_product a
-		left join sys_line b on a.line_id = b.line_id
-		left join sys_workshop c on b.shop_id = c.shop_id
-		left join sys_factory d on c.fc_id = d.fc_id
-		left join [DBSAP].[SAP].[dbo].[pt_mstr] e on a.prod_code = e.pt_part
+	    select top 1 a.*,b.line_name,c.shop_id,c.shop_name,d.fc_id,d.fc_name,o.prod_tuhao 
+			from prod_finished_product a
+		left join sys_line b 
+			on a.line_id = b.line_id
+		left join sys_workshop c 
+			on b.shop_id = c.shop_id
+		left join sys_factory d 
+			on c.fc_id = d.fc_id
+		left join plan_order o 
+			on a.po_code=o.po_code
 		where 1=1
 		<if test="barcode != null and barcode != ''">
 		  and a.fp_barcode = #{barcode}

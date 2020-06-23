@@ -15,7 +15,7 @@
 	<select id="getBoxList" resultType="map">
 	    select b.po_code,b.prod_code,b.prod_number,b.prod_name,b.prod_tuhao,
 	    b.prod_furnace_no,prod_glevel,b.prod_trace_code,b.prod_batch_code,
-	    b.customer_code,b.customer_matcode,b.box_barcode,b.box_quan,
+	    b.customer_code,b.customer_matcode,b.box_barcode,b.box_quan,b.boxarea_code,
 	    b.is_over_submit,b.is_confirmed,b.is_wip,b.is_outsource,
 	    b.create_time,b.is_deleted,l.line_name,v.vsm_name,f.fc_name from prod_box_log b 
 		left join sys_line l
@@ -58,21 +58,11 @@
 	    <if test="boxareaCode != null and boxareaCode != ''">
 	      and b.boxarea_code = #{boxareaCode}
 	    </if>
-	    <if test="isOverSubmit != null and isOverSubmit != ''">
 	      and b.is_over_submit = #{isOverSubmit}
-	    </if>
-	    <if test="isWip != null and isWip != ''">
 	      and b.is_wip = #{isWip}
-	    </if>
-	    <if test="isOutsource != null and isOutsource != ''">
 	      and b.is_outsource = #{isOutsource}
-	    </if>
-	     <if test="isDeleted != null and isDeleted != ''">
 	      and b.is_deleted = #{isDeleted}
-	    </if>
-	    <if test="isConfirmed != null and isConfirmed != ''">
 	      and b.is_confirmed = #{isConfirmed}
-	    </if>
 	    <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
 	      and b.create_time between #{beginTime} and #{endTime}
 	    </if>

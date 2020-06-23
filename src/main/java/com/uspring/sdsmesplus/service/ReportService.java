@@ -296,11 +296,10 @@ public interface ReportService {
 	
 	/**
 	 * 产品清线记录
-	 * type 1清线， 2委外
 	 */
-	Map<String,Object> getCleanInfo(Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode, 
+	Map<String,Object> getCleanInfo(Integer fcId, Integer vsmId, Integer lineId, String poCode, String prodCode, 
 			String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, 
-			String beginTime, String endTime, String type, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
+			String beginTime, String endTime, boolean isConfirmed, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
 	/**
 	 * 总成替换查询
 	 */
