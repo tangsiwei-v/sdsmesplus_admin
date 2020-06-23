@@ -6,13 +6,15 @@
         select a.po_code,a.mat_code,a.mat_name,a.mat_number,a.mat_batch_no,
 			a.box_barcode_old,a.box_barcode_new,a.cl_rest_count,a.is_confirmed,a.create_time,
 			b.prod_code,b.prod_number,b.prod_tuhao,
-			b.prod_name,c.line_name,e.fc_name 
+			b.prod_name,c.line_name,v.vsm_name,e.fc_name 
 		from prod_clean_log a
 			left join plan_order b 
 		on a.po_code = b.po_code
 			left join sys_line c 
 		on b.line_id = c.line_id
-			left join sys_factory e 
+			left join sys_vsm v
+		on c.vsm_id=v.vsm_id
+			left join sys_factory e	
 		on c.fc_id = e.fc_id
 			where 1=1
 		<if test="poCode != null and poCode != ''">
