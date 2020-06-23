@@ -40,7 +40,7 @@
 	</bean> 
 	
 	<!-- MongoDB 设置 -->
-    <mongo:mongo-client id="mongoClient" host="10.50.52.118" port="27017"/>
+    <mongo:mongo-client id="mongoClient" host="10.50.52.157" port="27017"/>
     <mongo:db-factory id="mgFactory" dbname="sds_mes_trace" mongo-ref="mongoClient"/>
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
   		<constructor-arg name="mongoDbFactory" ref="mgFactory"/>
