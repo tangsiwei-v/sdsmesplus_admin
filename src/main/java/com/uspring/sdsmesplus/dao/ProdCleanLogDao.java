@@ -14,8 +14,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.uspring.sdsmesplus.dao.generate.ProdCleanLogPODao;
-import com.uspring.sdsmesplus.dao.generate.ProdProductMaterialPODao;
-import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 
 /** 
  * @ClassName: ProdProductMaterialDao
@@ -26,8 +24,8 @@ import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
  */
 public interface ProdCleanLogDao extends ProdCleanLogPODao{
 
-   List<Map<String,Object>>	getCleanLog(@Param("fcId")Integer fcId, @Param("shopId")Integer shopId, @Param("lineId")Integer lineId, @Param("poCode")String poCode, 
+   List<Map<String,Object>>	getCleanLog(@Param("fcId")Integer fcId, @Param("vsmId")Integer vsmId, @Param("lineId")Integer lineId, @Param("poCode")String poCode, 
 		   @Param("prodCode")String prodCode, @Param("prodNumber")String prodNumber,@Param("matProdCode")String matProdCode, 
 		   @Param("matProdNumber")String matProdNumber, @Param("boxCode")String boxCode, @Param("matBoxCode")String matBoxCode, 
-		   @Param("beginTime")String beginTime, @Param("endTime")String endTime, @Param("searchType")boolean searchType);
+		   @Param("beginTime")String beginTime, @Param("endTime")String endTime, @Param("isConfirmed")boolean isConfirmed);
 }

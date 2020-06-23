@@ -88,7 +88,8 @@ public class ReportController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value = "/barcode/info", method = RequestMethod.GET)
 	@ApiOperation(value = "查询产品的基本信息", notes = "查询产品的基本信息", response = Result.class)
-	public Result getBarcodeInfo(HttpServletResponse response,String barcode,String prodCode) {
+	public Result getBarcodeInfo(HttpServletResponse response, @RequestParam(value = "barcode", required = false) String barcode,
+			@RequestParam(value = "prodCode", required = false) String prodCode) {
 		barcode = URLDecoder.decode(barcode);
 		return new Result("查询成功", this.reportService.getProductInfo(barcode,prodCode), StatusCode.SUCCESS);
 	}
@@ -293,17 +294,23 @@ public class ReportController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value = "/clean/detail", method = RequestMethod.GET)
 	@ApiOperation(value = "查询清线记录", notes = "查询清线记录", response = Result.class)
-	public Result getCleanInfo(HttpServletResponse response,Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode, String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, String beginTime, String endTime, String type, Integer pageNum, Integer pageSize) {
+	public Result getCleanInfo(HttpServletResponse response,Integer fcId, Integer vsmId, Integer lineId, String poCode, String prodCode, 
+			String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, 
+			String beginTime, String endTime, Integer pageNum, Integer pageSize,boolean isConfirmed) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getCleanInfo(fcId, shopId, lineId, poCode, prodCode, prodNumber, matProdCode, matProdNumber, boxCode, matBoxCode, beginTime, endTime, type, pageNum, pageSize, 0, response), StatusCode.SUCCESS);
+		return new Result("查询成功", this.reportService.getCleanInfo(fcId, vsmId, lineId, poCode, prodCode, prodNumber, matProdCode, 
+				matProdNumber, boxCode, matBoxCode, beginTime, endTime, isConfirmed, pageNum, pageSize, 0, response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/clean/detail/export", method = RequestMethod.POST)
 	@ApiOperation(value = "导出清线记录", notes = "导出清线记录", response = Result.class)
-	public Result exportCleanInfo(HttpServletResponse response,Integer fcId, Integer shopId, Integer lineId, String poCode, String prodCode, String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, String beginTime, String endTime, String type, Integer pageNum, Integer pageSize) {
+	public Result exportCleanInfo(HttpServletResponse response,Integer fcId, Integer vsmId, Integer lineId, String poCode, String prodCode, 
+			String prodNumber, String matProdCode, String matProdNumber, String boxCode, String matBoxCode, 
+			String beginTime, String endTime, String type, Integer pageNum, Integer pageSize, boolean isConfirmed) {
 		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("导出成功", this.reportService.getCleanInfo(fcId, shopId, lineId, poCode, prodCode, prodNumber, matProdCode, matProdNumber, boxCode, matBoxCode, beginTime, endTime, type, pageNum, pageSize, 1,response), StatusCode.SUCCESS);
+		return new Result("导出成功", this.reportService.getCleanInfo(fcId, vsmId, lineId, poCode, prodCode, prodNumber, matProdCode, 
+				matProdNumber, boxCode, matBoxCode, beginTime, endTime, isConfirmed, pageNum, pageSize, 1,response), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
