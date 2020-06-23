@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.uspring.sdsmesplus.dao.generate.sysMatFpCodeRulePODao;
+import com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePO;
+import com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePOExample;
+import com.uspring.sdsmesplus.entity.vo.sysMatFpCodeRulePOVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,9 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 	
 	@Autowired
 	private PrinterTmplDao printerTmplDao;
+
+	@Autowired
+	private sysMatFpCodeRulePODao sysMatFpCodeRulePODao;
 
 	// 条码模板主数据
 	public PageInfo<PrinterTmplVO> printerTmpl(String prod_code, String customer_code, Integer fcId, Integer page_size,
@@ -97,6 +104,36 @@ public class PrinterTmplServiceImpl implements PrinterTmplService {
 		Map<String, Object> result = printerTmplDao.queryTemplate(tmplId);
 		byte[] bytes = (byte[]) result.get("Template");
 		return bytes;
+	}
+
+	@Override
+	public PageInfo<sysMatFpCodeRulePOVO> selectMatFpCodeRuleService(Integer fcId, String prod_code, Integer page_size, Integer page_num) {
+
+		if (page_num == null) {
+			page_num = 1;
+		}
+		if (page_size == null) {
+			page_size = 1000;
+		}
+		PageHelper.startPage(page_num, page_size);
+		List<sysMatFpCodeRulePOVO> sysMatFpCodeRulePOVOS = this.printerTmplDao.selectMatFpCodeRule(prod_code, fcId);
+		PageInfo<sysMatFpCodeRulePOVO> poPageInfo = new PageInfo<>(sysMatFpCodeRulePOVOS);
+		return poPageInfo;
+	}
+
+	@Override
+	public void updateMatFpCodeRuleService(sysMatFpCodeRulePO sysMatFpCodeRulePO) {
+		this.sysMatFpCodeRulePODao.updateByPrimaryKeySelective(sysMatFpCodeRulePO);
+	}
+
+	@Override
+	public void deleteMatFpCodeRuleService(Integer mfpcId) {
+		this.sysMatFpCodeRulePODao.deleteByPrimaryKey(mfpcId);
+	}
+
+	@Override
+	public void insertMatFpCodeRuleService(sysMatFpCodeRulePO sysMatFpCodeRulePO) {
+		this.sysMatFpCodeRulePODao.insertSelective(sysMatFpCodeRulePO);
 	}
 
 }

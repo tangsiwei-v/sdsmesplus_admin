@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -107,5 +108,35 @@ public class ProductInfoController extends BaseController {
 		printerTmplService.deletePrinterTmpl(ptmplId);
 		return new Result("删除成功", "success", StatusCode.SUCCESS);
 	}
-	
+
+	@ResponseBody
+	@RequestMapping(value = "/mat_fpcode_rule/select", method = RequestMethod.GET)
+	@ApiOperation(value = "查询子零件规则配置", notes = "查询子零件规则配置", response = Result.class)
+	public Result selectMatFpCodeRule(Integer fcId, String prod_code, Integer page_size, Integer page_num) {
+		return new Result("查询成功", this.printerTmplService.selectMatFpCodeRuleService(fcId, prod_code, page_size, page_num), StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/mat_fpcode_rule/update", method = RequestMethod.PUT)
+	@ApiOperation(value = "修改子零件规则配置", notes = "修改子零件规则配置", response = Result.class)
+	public Result updateMatFpCodeRule(@RequestBody sysMatFpCodeRulePO sysMatFpCodeRulePO) {
+		this.printerTmplService.updateMatFpCodeRuleService(sysMatFpCodeRulePO);
+		return new Result("修改成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/mat_fpcode_rule/delete/{mfpcId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除子零件规则配置", notes = "删除子零件规则配置", response = Result.class)
+	public Result deleteMatFpCodeRule(@PathVariable("mfpcId")Integer mfpcId) {
+		this.printerTmplService.deleteMatFpCodeRuleService(mfpcId);
+		return new Result("删除成功", "success", StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/mat_fpcode_rule/insert", method = RequestMethod.POST)
+	@ApiOperation(value = "添加子零件规则配置", notes = "添加子零件规则配置", response = Result.class)
+	public Result insertMatFpCodeRule(@RequestBody sysMatFpCodeRulePO sysMatFpCodeRulePO) {
+		this.printerTmplService.insertMatFpCodeRuleService(sysMatFpCodeRulePO);
+		return new Result("添加成功", "success", StatusCode.SUCCESS);
+	}
 }
