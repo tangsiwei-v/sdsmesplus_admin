@@ -26,6 +26,22 @@
     	<result column="fc_sds_id" jdbcType="VARCHAR" property="fcSdsId" />
     </collection>
   </resultMap>
+  <resultMap id="BaseResultMapRule" type="com.uspring.sdsmesplus.entity.vo.sysMatFpCodeRulePOVO">
+        <id column="mfpc_id" jdbcType="INTEGER" property="mfpcId" />
+        <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+        <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+        <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+        <result column="mat_code" jdbcType="VARCHAR" property="matCode" />
+        <result column="code_name" jdbcType="VARCHAR" property="codeName" />
+        <result column="code_length" jdbcType="INTEGER" property="codeLength" />
+        <result column="code_start" jdbcType="VARCHAR" property="codeStart" />
+        <result column="code_regex" jdbcType="VARCHAR" property="codeRegex" />
+        <result column="is_active" jdbcType="BIT" property="isActive" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+        <result column="fc_name" jdbcType="VARCHAR" property="factoryName" />
+    </resultMap>
   <select id="printerTmpl" resultMap="PrinterTmplMap">
   	 	select p.ptmpl_id,p.fc_id,p.prod_code,p.customer_code,p.ptmpl_size,
 			p.ptmpl_file_name,p.pt_counter_min,p.pt_counter_max,p.pt_counter_reset_type,p.ptmpl_regex,p.pt_counter_value,
@@ -46,4 +62,17 @@
   <select id="queryTemplate"  resultType="map" >
 	select top 1 pt_file_binary as Template from sys_printer_tmpl where ptmpl_id=#{tmplId}
   </select>
+
+  <select id="selectMatFpCodeRule" resultMap="BaseResultMapRule">
+        select a.*, b.fc_name from sys_matfpcode_rule a left join sys_factory b on a.fc_id = b.fc_id
+        <where>
+            <if test="prod_code != '' and prod_code != null" >
+                and a.prod_code like #{prod_code}
+            </if>
+            <if test="fcId !='' and fcId != null">
+                and b.fc_id = #{fcId}
+            </if>
+        </where>
+    </select>
+
 </mapper>

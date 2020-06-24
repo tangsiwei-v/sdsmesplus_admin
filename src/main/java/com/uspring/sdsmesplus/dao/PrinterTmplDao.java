@@ -3,6 +3,7 @@ package com.uspring.sdsmesplus.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.uspring.sdsmesplus.entity.vo.sysMatFpCodeRulePOVO;
 import org.apache.ibatis.annotations.Param;
 
 import com.uspring.sdsmesplus.dao.generate.SysPrinterTmplDao;
@@ -32,5 +33,6 @@ public interface PrinterTmplDao extends SysPrinterTmplDao {
 	  * @return
 	  */
 	 Map<String, Object> queryTemplate(Integer tmplId);
-	 
+
+	 List<sysMatFpCodeRulePOVO> selectMatFpCodeRule(@Param("prod_code") String prod_code, @Param("fcId") Integer fcId);
 }

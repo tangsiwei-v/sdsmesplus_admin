@@ -1,10 +1,14 @@
 package com.uspring.sdsmesplus.service;
 
+import com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePO;
+import com.uspring.sdsmesplus.entity.vo.sysMatFpCodeRulePOVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageInfo;
 import com.uspring.sdsmesplus.entity.po.SysPrinterTmplPO;
 import com.uspring.sdsmesplus.entity.vo.PrinterTmplVO;
+
+import java.util.List;
 
 /** 
  * @ClassName: PrinterTmplService 
@@ -64,4 +68,11 @@ public interface PrinterTmplService {
 	 */
 	byte[] downloadTemplate(Integer tmplId) throws Exception;
 
+	PageInfo<sysMatFpCodeRulePOVO>  selectMatFpCodeRuleService(Integer fcId, String prod_code, Integer page_size, Integer page_num);
+
+	void updateMatFpCodeRuleService(sysMatFpCodeRulePO sysMatFpCodeRulePO);
+
+	void deleteMatFpCodeRuleService(Integer mfpcId);
+
+	void insertMatFpCodeRuleService(sysMatFpCodeRulePO sysMatFpCodeRulePO);
 }

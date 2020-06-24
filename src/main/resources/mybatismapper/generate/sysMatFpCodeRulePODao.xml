@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.sysMatFpCodeRulePODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePO">
+    <id column="mfpc_id" jdbcType="INTEGER" property="mfpcId" />
+    <result column="fc_id" jdbcType="INTEGER" property="fcId" />
+    <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="mat_code" jdbcType="VARCHAR" property="matCode" />
+    <result column="code_name" jdbcType="VARCHAR" property="codeName" />
+    <result column="code_length" jdbcType="INTEGER" property="codeLength" />
+    <result column="code_start" jdbcType="VARCHAR" property="codeStart" />
+    <result column="code_regex" jdbcType="VARCHAR" property="codeRegex" />
+    <result column="is_active" jdbcType="BIT" property="isActive" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    mfpc_id, fc_id, prod_code, customer_code, mat_code, code_name, code_length, code_start, 
+    code_regex, is_active, create_time, update_time, is_deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_matfpcode_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_matfpcode_rule
+    where mfpc_id = #{mfpcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_matfpcode_rule
+    where mfpc_id = #{mfpcId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePOExample">
+    delete from sys_matfpcode_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePO">
+    insert into sys_matfpcode_rule (mfpc_id, fc_id, prod_code, 
+      customer_code, mat_code, code_name, 
+      code_length, code_start, code_regex, 
+      is_active, create_time, update_time, 
+      is_deleted)
+    values (#{mfpcId,jdbcType=INTEGER}, #{fcId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, 
+      #{customerCode,jdbcType=VARCHAR}, #{matCode,jdbcType=VARCHAR}, #{codeName,jdbcType=VARCHAR}, 
+      #{codeLength,jdbcType=INTEGER}, #{codeStart,jdbcType=VARCHAR}, #{codeRegex,jdbcType=VARCHAR}, 
+      #{isActive,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePO">
+    insert into sys_matfpcode_rule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mfpcId != null">
+        mfpc_id,
+      </if>
+      <if test="fcId != null">
+        fc_id,
+      </if>
+      <if test="prodCode != null">
+        prod_code,
+      </if>
+      <if test="customerCode != null">
+        customer_code,
+      </if>
+      <if test="matCode != null">
+        mat_code,
+      </if>
+      <if test="codeName != null">
+        code_name,
+      </if>
+      <if test="codeLength != null">
+        code_length,
+      </if>
+      <if test="codeStart != null">
+        code_start,
+      </if>
+      <if test="codeRegex != null">
+        code_regex,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mfpcId != null">
+        #{mfpcId,jdbcType=INTEGER},
+      </if>
+      <if test="fcId != null">
+        #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="matCode != null">
+        #{matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="codeName != null">
+        #{codeName,jdbcType=VARCHAR},
+      </if>
+      <if test="codeLength != null">
+        #{codeLength,jdbcType=INTEGER},
+      </if>
+      <if test="codeStart != null">
+        #{codeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="codeRegex != null">
+        #{codeRegex,jdbcType=VARCHAR},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePOExample" resultType="java.lang.Long">
+    select count(*) from sys_matfpcode_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_matfpcode_rule
+    <set>
+      <if test="record.mfpcId != null">
+        mfpc_id = #{record.mfpcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcId != null">
+        fc_id = #{record.fcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodCode != null">
+        prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matCode != null">
+        mat_code = #{record.matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codeName != null">
+        code_name = #{record.codeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codeLength != null">
+        code_length = #{record.codeLength,jdbcType=INTEGER},
+      </if>
+      <if test="record.codeStart != null">
+        code_start = #{record.codeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codeRegex != null">
+        code_regex = #{record.codeRegex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isActive != null">
+        is_active = #{record.isActive,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_matfpcode_rule
+    set mfpc_id = #{record.mfpcId,jdbcType=INTEGER},
+      fc_id = #{record.fcId,jdbcType=INTEGER},
+      prod_code = #{record.prodCode,jdbcType=VARCHAR},
+      customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      mat_code = #{record.matCode,jdbcType=VARCHAR},
+      code_name = #{record.codeName,jdbcType=VARCHAR},
+      code_length = #{record.codeLength,jdbcType=INTEGER},
+      code_start = #{record.codeStart,jdbcType=VARCHAR},
+      code_regex = #{record.codeRegex,jdbcType=VARCHAR},
+      is_active = #{record.isActive,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{record.isDeleted,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePO">
+    update sys_matfpcode_rule
+    <set>
+      <if test="fcId != null">
+        fc_id = #{fcId,jdbcType=INTEGER},
+      </if>
+      <if test="prodCode != null">
+        prod_code = #{prodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        customer_code = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="matCode != null">
+        mat_code = #{matCode,jdbcType=VARCHAR},
+      </if>
+      <if test="codeName != null">
+        code_name = #{codeName,jdbcType=VARCHAR},
+      </if>
+      <if test="codeLength != null">
+        code_length = #{codeLength,jdbcType=INTEGER},
+      </if>
+      <if test="codeStart != null">
+        code_start = #{codeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="codeRegex != null">
+        code_regex = #{codeRegex,jdbcType=VARCHAR},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where mfpc_id = #{mfpcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.sysMatFpCodeRulePO">
+    update sys_matfpcode_rule
+    set fc_id = #{fcId,jdbcType=INTEGER},
+      prod_code = #{prodCode,jdbcType=VARCHAR},
+      customer_code = #{customerCode,jdbcType=VARCHAR},
+      mat_code = #{matCode,jdbcType=VARCHAR},
+      code_name = #{codeName,jdbcType=VARCHAR},
+      code_length = #{codeLength,jdbcType=INTEGER},
+      code_start = #{codeStart,jdbcType=VARCHAR},
+      code_regex = #{codeRegex,jdbcType=VARCHAR},
+      is_active = #{isActive,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=BIT}
+    where mfpc_id = #{mfpcId,jdbcType=INTEGER}
+  </update>
+</mapper>
