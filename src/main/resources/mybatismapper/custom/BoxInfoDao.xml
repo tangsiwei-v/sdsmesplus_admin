@@ -6,6 +6,7 @@
     <result column="fc_id" jdbcType="INTEGER" property="fcId" />
     <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
     <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+	<result column="recevier_code" jdbcType="VARCHAR" property="recevierCode" />
     <result column="bif_count" jdbcType="INTEGER" property="bifCount" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <collection property="factorys" ofType="com.uspring.sdsmesplus.entity.po.SysFactoryPO">
@@ -18,7 +19,7 @@
     </collection>
   </resultMap>
   <select id="standard" resultMap="BoxInfoMap">
-  	 	select b.bif_id,b.fc_id,b.prod_code,b.customer_code,b.bif_count,b.create_time,
+  	 	select b.bif_id,b.fc_id,b.prod_code,b.customer_code,b.recevier_code,b.bif_count,b.create_time,
 				f.fc_id ff_id,f.fc_name
  	 	 from sys_box_info b left join sys_factory f 
  	  			on b.fc_id=f.fc_id
@@ -29,6 +30,9 @@
 		<if test="customer_code != '' and customer_code != null">
 			and b.customer_code = #{customer_code}
 		</if>
+	  	<if test="recevier_code != '' and recevier_code != null">
+		  and b.recevier_code = #{recevier_code}
+	  	</if>
 		<if test="fcId !='' and fcId != null">
 			and b.fc_id = #{fcId}
 		</if>

@@ -35,9 +35,9 @@ public class PackBoxController extends BaseController {
 	@RequestMapping(value = "/standard/{prod_code}", method = RequestMethod.GET)
 	@ApiOperation(value = "查询产品装箱主数据", response = Result.class)
 	public Result searchBoxInfo(HttpServletResponse response, @PathVariable("prod_code") String prod_code,
-			@RequestParam(value = "customer_code", required = true) String customer_code,
+			@RequestParam(value = "customer_code", required = true) String customer_code, String recevier_code,
 			@RequestParam(value = "fc_id", required = false) Integer fc_id) {
-		BoxInfoPO queryboxLog = packBoxService.queryboxLog(prod_code, customer_code, fc_id);
+		BoxInfoPO queryboxLog = packBoxService.queryboxLog(prod_code, customer_code,recevier_code, fc_id);
 		return new Result("sucess", queryboxLog, StatusCode.SUCCESS);
 	}
 
@@ -73,9 +73,10 @@ public class PackBoxController extends BaseController {
 			@RequestParam(value = "prod_code", required = false) String prod_code,
 			@RequestParam(value = "customer_code", required = false) String customer_code,
 			@RequestParam(value = "fcId", required = false) Integer fcId,
+		    @RequestParam(value = "recevier_code", required = false) String recevier_code,
 			@RequestParam(value = "page_size", required = false) Integer page_size,
 			@RequestParam(value = "page_num", required = false) Integer page_num) {
-		PageInfo<BoxInfoVO> queryboxLog = packBoxService.standard(prod_code, customer_code, fcId, page_size, page_num);
+		PageInfo<BoxInfoVO> queryboxLog = packBoxService.standard(prod_code, customer_code,recevier_code,fcId, page_size, page_num);
 		return new Result("sucess", queryboxLog, StatusCode.SUCCESS);
 	}
 

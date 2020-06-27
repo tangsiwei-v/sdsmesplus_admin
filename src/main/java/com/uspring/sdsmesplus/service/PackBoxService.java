@@ -19,7 +19,7 @@ public interface PackBoxService {
 	PageInfo<BoxInfoPO> searchBoxInfo(Map<String, Object> map) throws Exception;
 	
 	//查询产品装箱主数据
-	BoxInfoPO queryboxLog(String prod_code , String customer_code, Integer fc_id);
+	BoxInfoPO queryboxLog(String prod_code , String customer_code,String recevier_code, Integer fc_id);
   
 	//添加装箱数主数据
 	void insertBoxInfo(BoxInfoPO boxInfo);
@@ -28,7 +28,7 @@ public interface PackBoxService {
 	void updateBoxInfo(BoxInfoPO boxInfo);
 	
 	//查询额定装箱数主数据
-	PageInfo<BoxInfoVO> standard(String prod_code, String customer_code, Integer fcId, Integer page_size,
+	PageInfo<BoxInfoVO> standard(String prod_code, String customer_code,String recevierCode,Integer fcId, Integer page_size,
 			Integer page_num);
 	
 	//删除装箱数主数据

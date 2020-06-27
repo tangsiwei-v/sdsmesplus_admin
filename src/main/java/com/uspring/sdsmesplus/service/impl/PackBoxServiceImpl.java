@@ -65,11 +65,12 @@ public class PackBoxServiceImpl implements PackBoxService {
 	}
 
 	@Override
-	public BoxInfoPO queryboxLog(String prod_code, String customer_code, Integer fc_id) {
+	public BoxInfoPO queryboxLog(String prod_code, String customer_code,String recevier_code, Integer fc_id) {
 
 		BoxInfoPOExample boxinfo = new BoxInfoPOExample();
 		Criteria createCriteria = boxinfo.createCriteria();
-		createCriteria.andProdCodeEqualTo(prod_code).andCustomerCodeEqualTo(customer_code).andFcIdEqualTo(fc_id);
+		createCriteria.andProdCodeEqualTo(prod_code).andCustomerCodeEqualTo(customer_code).andFcIdEqualTo(fc_id)
+				.andRecevierCodeEqualTo(recevier_code);
 		List<BoxInfoPO> selectByExample = boxInfoPODao.selectByExample(boxinfo);
 		return selectByExample.get(0);
 	}
@@ -88,8 +89,11 @@ public class PackBoxServiceImpl implements PackBoxService {
 		boxInfoDao.updateByPrimaryKey(boxInfo);
 	}
 
+
+
+
 	// 查询额定装箱数主数据
-	public PageInfo<BoxInfoVO> standard(String prod_code, String customer_code, Integer fcId, Integer page_size,
+	public PageInfo<BoxInfoVO> standard(String prod_code, String customer_code,String recevierCode, Integer fcId, Integer page_size,
 			Integer page_num) {
 		if (page_num == null) {
 			page_num = 1;
@@ -101,7 +105,7 @@ public class PackBoxServiceImpl implements PackBoxService {
 			prod_code = "%" + prod_code + "%";
 		}
 		PageHelper.startPage(page_num, page_size);
-		List<BoxInfoVO> standard = boxInfoDao.standard(prod_code, customer_code, fcId, page_size, page_num);
+		List<BoxInfoVO> standard = boxInfoDao.standard(prod_code, customer_code,recevierCode, fcId, page_size, page_num);
 		PageInfo<BoxInfoVO> pageInfo = new PageInfo<BoxInfoVO>(standard);
 		return pageInfo;
 	}
