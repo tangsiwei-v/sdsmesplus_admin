@@ -72,7 +72,10 @@ public class PackBoxServiceImpl implements PackBoxService {
 		createCriteria.andProdCodeEqualTo(prod_code).andCustomerCodeEqualTo(customer_code).andFcIdEqualTo(fc_id)
 				.andRecevierCodeEqualTo(recevier_code);
 		List<BoxInfoPO> selectByExample = boxInfoPODao.selectByExample(boxinfo);
-		return selectByExample.get(0);
+		if(selectByExample.size()>0){
+			return selectByExample.get(0);
+		}
+		return null;
 	}
 
 	// 添加装箱数主数据

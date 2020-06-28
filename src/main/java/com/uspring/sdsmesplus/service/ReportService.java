@@ -45,14 +45,14 @@ public interface ReportService {
 	 */
 	List<Map<String, Object>> costMaterial(Integer fpId);
 
-	/**
-	 * @Title: getProcessInfo
-	 * @Description: 查询产品的过程参数数据
-	 * @param rfid   RFID
-	 * @param lineId 产线编号
-	 * @return 工序数据
-	 */
-	List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId,  String fp_barcode);
+//	/**
+//	 * @Title: getProcessInfo
+//	 * @Description: 查询产品的过程参数数据
+//	 * @param rfid   RFID
+//	 * @param lineId 产线编号
+//	 * @return 工序数据
+//	 */
+//	List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId,  String fp_barcode);
 
 	/**
 	 * @Title: getBoxList
@@ -71,21 +71,21 @@ public interface ReportService {
 			String beginTime,String endTime,String poCode,Integer vsmId,Integer fcId,String prodBatchCode,
 			String prodTraceCode,String boxareaCode,Boolean isOverSubmit,Boolean isWip,Boolean isOutsource,
 			Boolean isDeleted, Boolean isConfirmed, Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
-	/**
-	 * @Title: getProductList
-	 * @Description: 查询产品总成信息
-	 * @param lineId    产线编号
-	 * @param boxCode   箱编号
-	 * @param barcode   产品条码
-	 * @param tuhao     图号
-	 * @param prodCode  产品简码
-	 * @param beginTime 开始时间
-	 * @param endTime   结束时间
-	 * @return
-	 */
-	Map<String, Object> getProductList(HttpServletResponse response,Integer lineId, String boxCode, String barcode, String tuhao, String prodCode,
-			String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize,
-			Integer shopId, Integer fcId, Integer isExport);
+//	/**
+//	 * @Title: getProductList
+//	 * @Description: 查询产品总成信息
+//	 * @param lineId    产线编号
+//	 * @param boxCode   箱编号
+//	 * @param barcode   产品条码
+//	 * @param tuhao     图号
+//	 * @param prodCode  产品简码
+//	 * @param beginTime 开始时间
+//	 * @param endTime   结束时间
+//	 * @return
+//	 */
+//	Map<String, Object> getProductList(HttpServletResponse response,Integer lineId, String boxCode, String barcode, String tuhao, String prodCode,
+//			String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum, Integer pageSize,
+//			Integer shopId, Integer fcId, Integer isExport);
 
 	/**
 	 * @Title: useMaterialInfo
@@ -107,15 +107,15 @@ public interface ReportService {
 			String furnaceNo, String prodCode, String materialBoxCode, String beginTime, String endTime,
 			Integer pageNum, Integer pageSize, Integer isExport, HttpServletResponse response);
 
-	/**
-	 * 三大件反查
-	 * 
-	 * @param type        1:轴， 2：外星轮，3：轴叉
-	 * @param value       二维码编号
-	 * @param factoryCode 工厂编号
-	 * @return
-	 */
-	List<Map<String, Object>> getInverseQuery(Integer type, String value, Integer fcId);
+//	/**
+//	 * 三大件反查
+//	 *
+//	 * @param type        1:轴， 2：外星轮，3：轴叉
+//	 * @param value       二维码编号
+//	 * @param factoryCode 工厂编号
+//	 * @return
+//	 */
+//	List<Map<String, Object>> getInverseQuery(Integer type, String value, Integer fcId);
 
 	/**
 	 * 获取线边库存数据

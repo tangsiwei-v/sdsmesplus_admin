@@ -66,8 +66,8 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private ProdBoxLogDao prodBoxLogDao;
 
-	@Autowired
-	private MongoDBService mongoDBservice;
+//	@Autowired
+//	private MongoDBService mongoDBservice;
 
 	@Autowired
 	private ProdProductMaterialDao productMaterialDao;
@@ -101,25 +101,25 @@ public class ReportServiceImpl implements ReportService {
 
 	@Autowired
 	private LineProdModelDao LineProdModelDao;
-	
-	@Autowired  
+
+	@Autowired
 	private SysProcessPODao processDao;
-	
+
 	@Autowired
 	private SysProcessParamPODao processParamDao;
-	
+
 	@Autowired
 	private ProcessParamDao ParamDao;
-	
+
 	@Autowired
 	private PlanOrderDao planDao;
-	
+
 	@Autowired
 	private ProductReplaceDao productReplaceDao;
-	
+
 	@Autowired
 	private SysLogDao sysLogdao;
-	
+
 
 	@Override
 	public Map<String, Object> getProductInfo(String barcode,String prodCode) {
@@ -132,146 +132,146 @@ public class ReportServiceImpl implements ReportService {
 		return this.productMaterialDao.costMaterialInfo(fpId);
 	}
 
-	@Override
-	public List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId, String fp_barcode) {
-		if (lineId.equals(234)) {
-			return this.mongoDBservice.getProcessClutchData(fp_barcode, lineId);
-		}else {
-			return this.mongoDBservice.getProcessData(rfid, lineId);
-		}
+//	@Override
+//	public List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId, String fp_barcode) {
+//		if (lineId.equals(234)) {
+//			return this.mongoDBservice.getProcessClutchData(fp_barcode, lineId);
+//		}else {
+//			return this.mongoDBservice.getProcessData(rfid, lineId);
+//		}
+//
+//	}
 
-	}
+//	@Override
+//	public Map<String, Object> getProductList(HttpServletResponse response,Integer lineId, String boxCode, String barcode, String tuhao,
+//			String prodCode, String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum,
+//			Integer pageSize, Integer shopId, Integer fcId, Integer isExport) {
+//
+//
+//		if(lineId != null && lineId == 161){
+//			shopId = null;
+//			fcId = null;
+//			lineId = 42281;
+//		}
+//
+//		Map<String, Object> resultMap = new HashMap<String, Object>();
+//
+//		ProdFinishedProductPOExample prodExample = new ProdFinishedProductPOExample();
+//		ProdFinishedProductPOExample.Criteria criteria = prodExample.createCriteria();
+//
+//		PageHelper page = new PageHelper();
+//
+//		//是否分页显示
+//		if(isExport == 0){
+//			page.startPage(pageNum, pageSize);
+//		}
+//		List<Map<String, Object>> resultList = this.prodFinishDao.getProductList(lineId, boxCode, barcode, tuhao,
+//				prodCode, prodNumber, poCode, beginTime, endTime, shopId, fcId);
+//
+//		//是否导出
+//		if(isExport != 0){
+//			if(isExport == 1){
+//				exportProductInfo(resultList,response);
+//			}else if(isExport == 2){
+//				List<String> titleList = new ArrayList<String>();
+//				titleList.add("产品总成码");
+//				titleList.add("箱号");
+//				titleList.add("工单号");
+//				titleList.add("装箱时间");
+//				titleList.add("描述");
+//				titleList.add("SAP号");
+//				titleList.add("总成简码");
+//				titleList.add("图号");
+//				titleList.add("工厂");
+//				titleList.add("车间");
+//				titleList.add("产线");
+//
+//				List<String> columnList = new ArrayList<String>();
+//				columnList.add("fp_barcode");
+//				columnList.add("box_barcode");
+//				columnList.add("po_code");
+//				columnList.add("create_time");
+//				columnList.add("prod_name");
+//				columnList.add("prod_code");
+//				columnList.add("prod_number");
+//				columnList.add("prod_tuhao");
+//				columnList.add("fc_name");
+//				columnList.add("shop_name");
+//				columnList.add("line_name");
+//
+//				ExportXls.exportXls(resultList, response, titleList, columnList, "总成查询");
+//			}
+//	    }
+//
+//		PageInfo info = new PageInfo(resultList);
+//
+//		resultMap.put("data", resultList);
+//		resultMap.put("total", info.getTotal());
+//
+//		return resultMap;
+//	}
 
-	@Override
-	public Map<String, Object> getProductList(HttpServletResponse response,Integer lineId, String boxCode, String barcode, String tuhao,
-			String prodCode, String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum,
-			Integer pageSize, Integer shopId, Integer fcId, Integer isExport) {
-		
-		
-		if(lineId != null && lineId == 161){
-			shopId = null;
-			fcId = null;
-			lineId = 42281;
-		}
-		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		
-		ProdFinishedProductPOExample prodExample = new ProdFinishedProductPOExample();
-		ProdFinishedProductPOExample.Criteria criteria = prodExample.createCriteria();
-
-		PageHelper page = new PageHelper();
-		
-		//是否分页显示
-		if(isExport == 0){
-			page.startPage(pageNum, pageSize);
-		}
-		List<Map<String, Object>> resultList = this.prodFinishDao.getProductList(lineId, boxCode, barcode, tuhao,
-				prodCode, prodNumber, poCode, beginTime, endTime, shopId, fcId);
-        
-		//是否导出
-		if(isExport != 0){
-			if(isExport == 1){
-				exportProductInfo(resultList,response);
-			}else if(isExport == 2){
-				List<String> titleList = new ArrayList<String>();
-				titleList.add("产品总成码");
-				titleList.add("箱号");
-				titleList.add("工单号");
-				titleList.add("装箱时间");
-				titleList.add("描述");
-				titleList.add("SAP号");
-				titleList.add("总成简码");
-				titleList.add("图号");
-				titleList.add("工厂");
-				titleList.add("车间");
-				titleList.add("产线");
-				
-				List<String> columnList = new ArrayList<String>();
-				columnList.add("fp_barcode");
-				columnList.add("box_barcode");
-				columnList.add("po_code");
-				columnList.add("create_time");
-				columnList.add("prod_name");
-				columnList.add("prod_code");
-				columnList.add("prod_number");
-				columnList.add("prod_tuhao");
-				columnList.add("fc_name");
-				columnList.add("shop_name");
-				columnList.add("line_name");
-				
-				ExportXls.exportXls(resultList, response, titleList, columnList, "总成查询");
-			}
-	    }
-		
-		PageInfo info = new PageInfo(resultList);
-
-		resultMap.put("data", resultList);
-		resultMap.put("total", info.getTotal());
-
-		return resultMap;
-	}
-	
-	public void exportProductInfo(List<Map<String, Object>> productList,HttpServletResponse response){
-		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
-		Integer lineId = 0;
-		
-		List<String> rfidList = new ArrayList<String>();
-		
-		for(Map<String,Object> productInfo:productList){
-			/*List<Map<String,Object>> processList = this.mongoDBservice.getProcessData(productInfo.get("fp_rfid").toString(), Integer.parseInt(productInfo.get("line_id").toString()));
-			resultList.add(processList);*/
-			
-			lineId = Integer.parseInt(productInfo.get("line_id").toString());
-			rfidList.add(productInfo.get("fp_rfid").toString());
-		}
-		
-		/*rfidList.clear();
-		rfidList.add("20191129060018");
-		rfidList.add("20191129060016");
-		rfidList.add("20191129060015");
-		rfidList.add("20191129060014");
-		rfidList.add("20191129060006");
-		rfidList.add("20191129060005");*/
-		//获取产品的所有数据
-		resultList = this.mongoDBservice.findPParamByRFIDList(rfidList, lineId+"");
-		
-		lineId = 161;
-		//获取所有工序的数据
-		SysProcessPOExample processExample = new SysProcessPOExample();
-		processExample.createCriteria().andLineIdEqualTo(lineId);
-		processExample.setOrderByClause("sp_order asc");
-		
-		List<Map<String,Object>> resultProcessList = new ArrayList<Map<String,Object>>();
-		//查询产品需要显示的工序
-		List<SysProcessPO> processList = this.processDao.selectByExample(processExample);
-		for(SysProcessPO processDo:processList){
-			/*Map<String,Object> processMap = new HashMap<String,Object>();
-			processMap.put("processName", processDo.getSpName());
-			processMap.put("processCode", processDo.getSpCode());
-			processMap.put("paramList", new ArrayList());*/
-			
-			//查询所有的工序参数
-			SysProcessParamPOExample paramExample = new SysProcessParamPOExample();
-			paramExample.createCriteria().andSpIdEqualTo(processDo.getSpId()).andPpShowEqualTo(true);
-			paramExample.setOrderByClause("pp_order asc");
-			List<SysProcessParamPO> paramList = this.processParamDao.selectByExample(paramExample);
-			
-			//List<Map<String,Object>> paramValueList = new ArrayList<Map<String,Object>>();
-			
-			for(SysProcessParamPO paramDo:paramList){
-				Map<String,Object> paramMap = new HashMap<String,Object>();
-				paramMap.put("paramName", paramDo.getPpName());
-				paramMap.put("paramCode", paramDo.getPpCode());
-				
-				paramMap.put("processName", processDo.getSpName());
-				paramMap.put("processCode", processDo.getSpCode());
-				
-				resultProcessList.add(paramMap);
-			}
-			//processMap.put("paramList", paramValueList);
-		}
-		ExportXls.exportBarcode(resultList, response, resultProcessList, null, "精确追溯数据");
-	}
+//	public void exportProductInfo(List<Map<String, Object>> productList,HttpServletResponse response){
+//		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
+//		Integer lineId = 0;
+//
+//		List<String> rfidList = new ArrayList<String>();
+//
+//		for(Map<String,Object> productInfo:productList){
+//			/*List<Map<String,Object>> processList = this.mongoDBservice.getProcessData(productInfo.get("fp_rfid").toString(), Integer.parseInt(productInfo.get("line_id").toString()));
+//			resultList.add(processList);*/
+//
+//			lineId = Integer.parseInt(productInfo.get("line_id").toString());
+//			rfidList.add(productInfo.get("fp_rfid").toString());
+//		}
+//
+//		/*rfidList.clear();
+//		rfidList.add("20191129060018");
+//		rfidList.add("20191129060016");
+//		rfidList.add("20191129060015");
+//		rfidList.add("20191129060014");
+//		rfidList.add("20191129060006");
+//		rfidList.add("20191129060005");*/
+//		//获取产品的所有数据
+//		resultList = this.mongoDBservice.findPParamByRFIDList(rfidList, lineId+"");
+//
+//		lineId = 161;
+//		//获取所有工序的数据
+//		SysProcessPOExample processExample = new SysProcessPOExample();
+//		processExample.createCriteria().andLineIdEqualTo(lineId);
+//		processExample.setOrderByClause("sp_order asc");
+//
+//		List<Map<String,Object>> resultProcessList = new ArrayList<Map<String,Object>>();
+//		//查询产品需要显示的工序
+//		List<SysProcessPO> processList = this.processDao.selectByExample(processExample);
+//		for(SysProcessPO processDo:processList){
+//			/*Map<String,Object> processMap = new HashMap<String,Object>();
+//			processMap.put("processName", processDo.getSpName());
+//			processMap.put("processCode", processDo.getSpCode());
+//			processMap.put("paramList", new ArrayList());*/
+//
+//			//查询所有的工序参数
+//			SysProcessParamPOExample paramExample = new SysProcessParamPOExample();
+//			paramExample.createCriteria().andSpIdEqualTo(processDo.getSpId()).andPpShowEqualTo(true);
+//			paramExample.setOrderByClause("pp_order asc");
+//			List<SysProcessParamPO> paramList = this.processParamDao.selectByExample(paramExample);
+//
+//			//List<Map<String,Object>> paramValueList = new ArrayList<Map<String,Object>>();
+//
+//			for(SysProcessParamPO paramDo:paramList){
+//				Map<String,Object> paramMap = new HashMap<String,Object>();
+//				paramMap.put("paramName", paramDo.getPpName());
+//				paramMap.put("paramCode", paramDo.getPpCode());
+//
+//				paramMap.put("processName", processDo.getSpName());
+//				paramMap.put("processCode", processDo.getSpCode());
+//
+//				resultProcessList.add(paramMap);
+//			}
+//			//processMap.put("paramList", paramValueList);
+//		}
+//		ExportXls.exportBarcode(resultList, response, resultProcessList, null, "精确追溯数据");
+//	}
 
 	@Override
 	public Map<String, Object> useMaterialInfo(String fpBarcode, String boxCode, String materialCode, String batchNo,
@@ -295,7 +295,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("炉号");
 			titleList.add("使用量");
 			titleList.add("绑定时间");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("fp_barcode");
 			columnList.add("box_barcode");
@@ -306,10 +306,10 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("mat_furnace_no");
 			columnList.add("mat_count");
 			columnList.add("create_time");
-			
+
 			ExportXls.exportXls(dataList, response, titleList, columnList, "总成使用查询");
 	    }
-		
+
 		PageInfo info = new PageInfo(dataList);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -318,17 +318,17 @@ public class ReportServiceImpl implements ReportService {
 		return resultMap;
 	}
 
-	@Override
-	public List<Map<String, Object>> getInverseQuery(Integer type, String value, Integer fcId) {
-		List<Map<String, Object>> resulList = new ArrayList<Map<String, Object>>();
-		Map<String, Object> rfidMap = this.mongoDBservice.dataReverSearch(type, value, fcId);
-		if (rfidMap != null) {
-			resulList = this.prodFinishDao.getProductData(Integer.parseInt(rfidMap.get("line").toString()),
-					rfidMap.get("rfid").toString());
-		}
-
-		return resulList;
-	}
+//	@Override
+//	public List<Map<String, Object>> getInverseQuery(Integer type, String value, Integer fcId) {
+//		List<Map<String, Object>> resulList = new ArrayList<Map<String, Object>>();
+//		Map<String, Object> rfidMap = this.mongoDBservice.dataReverSearch(type, value, fcId);
+//		if (rfidMap != null) {
+//			resulList = this.prodFinishDao.getProductData(Integer.parseInt(rfidMap.get("line").toString()),
+//					rfidMap.get("rfid").toString());
+//		}
+//
+//		return resulList;
+//	}
 
 	@Override
 	public Map<String, Object> getOrderStock(String orderCode, String prodCode, String beginTime, String endTime,
@@ -354,7 +354,7 @@ public class ReportServiceImpl implements ReportService {
 			Integer pageSize, Integer isCleaned, Integer shopId, Integer fcId, Integer vsmId, Integer isExprot,HttpServletResponse response) {
 
 		List<StockStat> stockList = new ArrayList<StockStat>();
-		
+
 		Map<String, Object> orderParam = new HashMap<String, Object>();
 		orderParam.put("vsmId", vsmId);
 		orderParam.put("line_id", lineId);
@@ -362,7 +362,7 @@ public class ReportServiceImpl implements ReportService {
 		status.add("Executing");
 		orderParam.put("statusList", status);
 		List<PlanOrderPO> orderList = planDao.queryPlanVO(orderParam);
-		
+
 		List<String> poCodes = new ArrayList<String>();
 		for(int i = 0; i < orderList.size(); i++){
 			poCodes.add(orderList.get(i).getPoCode());
@@ -427,16 +427,16 @@ public class ReportServiceImpl implements ReportService {
 		}
 		List<StockStat> resultList = new ArrayList<StockStat>();
 		resultList.addAll(resultMap.values());
-		
+
 		//导出
 		if(isExprot == 1){
 			List<Object> objList = new ArrayList<Object>();
 			for(StockStat stockStat:resultList){
 				objList.add(stockStat);
 			}
-			
+
 			List<Map<String,Object>> historyData = ExportXls.entityListToMapList(objList);
-			
+
 			List<String> titleList = new ArrayList<String>();
 			titleList.add("工单号");
 			titleList.add("工序号");
@@ -447,7 +447,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("炉号");
 			titleList.add("档位");
 			titleList.add("数量");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("poCode");
 			columnList.add("procCode");
@@ -458,14 +458,14 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("furnaceNo");
 			columnList.add("glevel");
 			columnList.add("matCount");
-			
+
 			String fileName = "上料记录查询";
 			if(isCleaned == 0){
 				fileName = "线上库存报表";
 			}
 			ExportXls.exportXls(historyData, response, titleList, columnList, fileName);
 		}
-		
+
 
 		return resultList;
 	}
@@ -490,7 +490,7 @@ public class ReportServiceImpl implements ReportService {
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
 		}
-		
+
 		List<Map<String, Object>> dataList = this.noConformProductDao.getWasteProd(lineId, prodCode, prodNumber,
 				beginTime, endTime, matProdCode, matProdNumber, status, poCode, shopId, fcId);
 
@@ -505,7 +505,7 @@ public class ReportServiceImpl implements ReportService {
 					type = "作废";
 				}
 				dataMap.put("type", type);
-				
+
 				String isDebug = "";
 				if(dataMap.get("npl_is_test_part").toString().equals("true")){
 					isDebug = "是";
@@ -514,7 +514,7 @@ public class ReportServiceImpl implements ReportService {
 				}
 				dataMap.put("isDebug", isDebug);
 			}
-			
+
 			List<String> titleList = new ArrayList<String>();
 			titleList.add("不合格品编号");
 			titleList.add("工单号");
@@ -539,7 +539,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("产线");
 			titleList.add("车间");
 			titleList.add("工厂");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("npl_barcode");
 			columnList.add("po_code");
@@ -564,10 +564,10 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("line_name");
 			columnList.add("shop_name");
 			columnList.add("fc_name");
-			
+
 			ExportXls.exportXls(dataList, response, titleList, columnList, "不合格品报表");
 	    }
-		
+
 		PageInfo info = new PageInfo(dataList);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -583,7 +583,7 @@ public class ReportServiceImpl implements ReportService {
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
 		}
-		
+
 
 		List<Map<String, Object>> dataList = this.noConformProductDao.getWasteProdMaterial(lineId, nplBarcode,
 				beginTime, endTime, matProdCode, matProdNumber, shopId, fcId);
@@ -602,7 +602,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("零件等级");
 			titleList.add("零件数量");
 			titleList.add("生成时间");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("npl_barcode");
 			columnList.add("nplm_barcode");
@@ -616,10 +616,10 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("material_glevel");
 			columnList.add("material_qty");
 			columnList.add("create_time");
-			
+
 			ExportXls.exportXls(dataList, response, titleList, columnList, "不合格物料报表");
 	    }
-		
+
 		PageInfo info = new PageInfo(dataList);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -655,14 +655,14 @@ public class ReportServiceImpl implements ReportService {
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
 		}
-		
+
 
 		List<Map<String, Object>> dataList = this.safelunchOrderDao.getSafeLunch(lineId, poCode, prodCode, prodNumber,
 				boxCode, beginTime, endTime, safelineId, shopId, fcId);
 
 		//是否导出
 		if(isExport == 1){
-			
+
 			for(Map<String,Object> dataMap:dataList){
 				String isPass = "";
 				if(dataMap.get("is_pass").toString().equals("true")){
@@ -671,7 +671,7 @@ public class ReportServiceImpl implements ReportService {
 					isPass = "否";
 				}
 				dataMap.put("isPass", isPass);
-				
+
 				String isCommit = "";
 				if(dataMap.get("is_commit").toString().equals("true")){
 					isCommit = "是";
@@ -680,7 +680,7 @@ public class ReportServiceImpl implements ReportService {
 				}
 				dataMap.put("isCommit", isCommit);
 			}
-			
+
 			List<String> titleList = new ArrayList<String>();
 			titleList.add("safelunch编号");
 			titleList.add("工单号");
@@ -696,7 +696,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("确认人");
 			titleList.add("safelunch线");
 			titleList.add("时间");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("safelunch_order");
 			columnList.add("po_code");
@@ -712,10 +712,10 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("check_person_name");
 			columnList.add("safline_name");
 			columnList.add("update_time");
-			
+
 			ExportXls.exportXls(dataList, response, titleList, columnList, "safelunch检验记录");
 	    }
-		
+
 		PageInfo info = new PageInfo(dataList);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -738,7 +738,7 @@ public class ReportServiceImpl implements ReportService {
 
 		//是否导出
 		if(isExport == 1){
-			
+
 			for(Map<String,Object> dataMap:dataList){
 				String isPass = "否";
 				if(dataMap.get("is_pass").toString().equals("true")){
@@ -746,7 +746,7 @@ public class ReportServiceImpl implements ReportService {
 				}
 				dataMap.put("isPass", isPass);
 			}
-			
+
 			List<String> titleList = new ArrayList<String>();
 			titleList.add("工单编号 ");
 			titleList.add("safelunch");
@@ -757,7 +757,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("箱号");
 			titleList.add("是否通过");
 			titleList.add("时间");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("po_code");
 			columnList.add("safelunch_order");
@@ -768,10 +768,10 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("box_barcode");
 			columnList.add("isPass");
 			columnList.add("update_time");
-			
+
 			ExportXls.exportXls(dataList, response, titleList, columnList, "safelunch检验详情");
 	    }
-		
+
 		PageInfo info = new PageInfo(dataList);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -798,7 +798,7 @@ public class ReportServiceImpl implements ReportService {
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
 		}
-		
+
 		List<Map<String, Object>> dataList = this.prodBoxMaterialDao.boxMaterialUseInfo(lineId, beginTime, endTime,
 				prodCode, matProdCode, boxCode, matBoxCode, furnaceNo, batchNo);
 
@@ -813,7 +813,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("炉号");
 			titleList.add("使用量");
 			titleList.add("绑定时间");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("box_barcode");
 			columnList.add("mat_box_barcode");
@@ -824,10 +824,10 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("mat_furnace_no");
 			columnList.add("mat_count");
 			columnList.add("create_time");
-			
+
 			ExportXls.exportXls(dataList, response, titleList, columnList, "箱物料使用查询");
 		}
-		
+
 		PageInfo info = new PageInfo(dataList);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -844,7 +844,7 @@ public class ReportServiceImpl implements ReportService {
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
 		}
-		
+
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("line_id", lineId);
 		paramMap.put("shopId", shopId);
@@ -892,8 +892,8 @@ public class ReportServiceImpl implements ReportService {
 					dataMap.put("fcName", planOrderPO.getFcName());
 				}
 			}
-			
-			
+
+
 			List<String> titleList = new ArrayList<String>();
 			titleList.add("工单号");
 			titleList.add("产品SAP号");
@@ -911,7 +911,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("产线");
 			titleList.add("车间");
 			titleList.add("工厂");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("poCode");
 			columnList.add("prodCode");
@@ -929,10 +929,10 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("lineName");
 			columnList.add("shopName");
 			columnList.add("fcName");
-			
+
 			ExportXls.exportXls(resultList, response, titleList, columnList, "工单详情报表");
 	    }
-		
+
 		PageInfo info = new PageInfo(dataList);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -951,23 +951,23 @@ public class ReportServiceImpl implements ReportService {
 		double wasteCount = 0;
 		double cleanCount = 0;
 		double outSourceCount = 0;
-		
+
 		//类型 1装配上料，2机加上料
 		int type = 1;
-		
+
 		//判断产线类型
 		SysLineProdmodelPOExample modelExample = new SysLineProdmodelPOExample();
 		modelExample.createCriteria().andLineIdEqualTo(lineId);
 		List<SysLineProdmodelPO> modelList = this.LineProdModelDao.selectByExample(modelExample);
-		
+
 		if(modelList.size() > 0){
 			String model = modelList.get(0).getProdModel();
-			
+
 			if(model.equals("cv_assy") || model.equals("sec_assy")){
 				//读取工单库存表
 				ProdOrderStockPOExample orderStockExample = new ProdOrderStockPOExample();
 				orderStockExample.createCriteria().andPoCodeEqualTo(poCode);
-				
+
 				List<ProdOrderStockPO> prodOrderStockList = this.prodOrderStockDao.selectByExample(orderStockExample);
 				for(ProdOrderStockPO data:prodOrderStockList){
 					chargCount += data.getBoxQuan().doubleValue();
@@ -977,16 +977,16 @@ public class ReportServiceImpl implements ReportService {
 				//读取工序库存表
 				ProdProcessStockPOExample prodProcessStockExampel = new ProdProcessStockPOExample();
 				prodProcessStockExampel.createCriteria().andPoCodeEqualTo(poCode);
-				
+
 				List<ProdProcessStockPO> prodProcessStockList = this.prodProcessStockDao.selectByExample(prodProcessStockExampel);
-				
+
 				for(ProdProcessStockPO data:prodProcessStockList){
 					chargCount += data.getBoxQuan().doubleValue();
 				}
 				type = 2;
 
 			}
-			
+
 		}
 
 		// 报交数量
@@ -1083,7 +1083,7 @@ public class ReportServiceImpl implements ReportService {
 			String prodCode, String beginTime, String endTime, Integer pageNum, Integer pageSize,
 			Integer isExport, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		
+
 		PageHelper page = new PageHelper();
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
@@ -1102,7 +1102,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("产线");
 			titleList.add("车间");
 			titleList.add("工厂");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("po_code");
 			columnList.add("prod_code");
@@ -1112,10 +1112,10 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("line_name");
 			columnList.add("shop_name");
 			columnList.add("fc_name");
-			
+
 			ExportXls.exportXls(dataList, response, titleList, columnList, "总成替换查询");
 	    }
-		
+
 		PageInfo info = new PageInfo(dataList);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -1129,14 +1129,14 @@ public class ReportServiceImpl implements ReportService {
 			String empNumber, String note, String beginTime, String endTime, String logType, Integer pageNum,
 			Integer pageSize, Integer isExport, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		
+
 		PageHelper page = new PageHelper();
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
 		}
 
 		List<Map<String, Object>> dataList = this.sysLogdao.getSysLog(fcId, shopId, lineId, poCode,logType, empName, empNumber, note, beginTime, endTime);
-				
+
 		for(Map<String, Object> dataMap:dataList){
 			if(dataMap.get("log_type").toString().equals("unqlty")){
 				dataMap.put("logType", "不合格品");
@@ -1150,7 +1150,7 @@ public class ReportServiceImpl implements ReportService {
 				dataMap.put("logType", "委外");
 			}
 		}
-		
+
 		//是否导出
 		if(isExport == 1){
 			List<String> titleList = new ArrayList<String>();
@@ -1164,7 +1164,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("工厂");
 			titleList.add("车间");
 			titleList.add("产线");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("po_code");
 			columnList.add("logType");
@@ -1176,10 +1176,10 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("fc_name");
 			columnList.add("shop_name");
 			columnList.add("line_name");
-			
+
 			ExportXls.exportXls(dataList, response, titleList, columnList, "日志查询");
 	    }
-		
+
 		PageInfo info = new PageInfo(dataList);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -1194,13 +1194,13 @@ public class ReportServiceImpl implements ReportService {
 			String prodBatchCode, String prodTraceCode, String boxareaCode, Boolean isOverSubmit, Boolean isWip,
 			Boolean isOutsource, Boolean isDeleted, Boolean isConfirmed, Integer pageNum, Integer pageSize,
 			Integer isExport, HttpServletResponse response) {
-		
+
 		PageHelper page = new PageHelper();
 		//是否分页显示
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
 		}
-		
+
 		List<Map<String, Object>> resultList = this.prodBoxLogDao.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime,
 				poCode, vsmId, fcId, prodBatchCode, prodTraceCode, boxareaCode, isOverSubmit, isWip, isOutsource, isDeleted, isConfirmed);
 		//是否导出
@@ -1220,7 +1220,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("工段");
 			titleList.add("产线");
 			titleList.add("工厂");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("box_barcode");
 			columnList.add("create_time");
@@ -1233,12 +1233,12 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("vsm_name");
 			columnList.add("line_name");
 			columnList.add("fc_name");
-			
+
 			ExportXls.exportXls(resultList, response, titleList, columnList, "箱合格证查询");
 	    }
-		
+
 		PageInfo info = new PageInfo(resultList);
-		
+
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("data", resultList);
 		resultMap.put("total", info.getTotal());
@@ -1256,7 +1256,7 @@ public class ReportServiceImpl implements ReportService {
 		}
 		String fileName = "";
 
-		List<Map<String, Object>> dataList = this.prodCleanLogPoDao.getCleanLog(fcId, vsmId, lineId, poCode, prodCode, prodNumber, matProdCode, 
+		List<Map<String, Object>> dataList = this.prodCleanLogPoDao.getCleanLog(fcId, vsmId, lineId, poCode, prodCode, prodNumber, matProdCode,
 				matProdNumber, boxCode, matBoxCode, beginTime, endTime, isConfirmed);
 
 		//是否导出
@@ -1275,7 +1275,7 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("工厂");
 			titleList.add("车间");
 			titleList.add("产线");
-			
+
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("po_code");
 			columnList.add("prod_code");
@@ -1290,10 +1290,10 @@ public class ReportServiceImpl implements ReportService {
 			columnList.add("fc_name");
 			columnList.add("shop_name");
 			columnList.add("line_name");
-			
+
 			ExportXls.exportXls(dataList, response, titleList, columnList, fileName);
 	    }
-		
+
 		PageInfo info = new PageInfo(dataList);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();

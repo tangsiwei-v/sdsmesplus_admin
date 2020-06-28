@@ -11,6 +11,7 @@ package com.uspring.sdsmesplus.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.uspring.sdsmesplus.entity.vo.ProdBoxLogVO;
 import org.apache.ibatis.annotations.Param;
 
 import com.uspring.sdsmesplus.dao.generate.ProdBoxLogPODao;
@@ -59,4 +60,6 @@ public interface ProdBoxLogDao extends ProdBoxLogPODao{
 	@Param("isOverSubmit")Boolean isOverSubmit,@Param("isWip")Boolean isWip,
 	@Param("isOutsource")Boolean isOutsource,@Param("isDeleted")Boolean isDeleted,@Param("isConfirmed")Boolean isConfirmed);
 
+
+	List<ProdBoxLogVO> selectBox_barcodeByProdBatchCode(@Param("prodBatchCode") String prodBatchCode);
 }

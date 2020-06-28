@@ -1,7 +1,6 @@
 package com.uspring.sdsmesplus.service;
 
 import com.uspring.sdsmesplus.entity.po.ProdBatchLogPO;
-import com.uspring.sdsmesplus.entity.vo.ProdBoxLogVO;
 import com.uspring.sdsmesplus.entity.vo.MatBatchCodeVO;
 import com.uspring.sdsmesplus.entity.vo.ProdBatchCodeVO;
 import com.uspring.sdsmesplus.entity.vo.ProdBoxLogVO;

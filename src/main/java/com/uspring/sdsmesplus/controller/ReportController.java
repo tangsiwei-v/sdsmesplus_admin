@@ -57,32 +57,32 @@ public class ReportController extends BaseController{
 				isConfirmed, pageNum, pageSize,1, response), StatusCode.SUCCESS);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/barcode", method = RequestMethod.GET)
-	@ApiOperation(value = "查询产品总成信息", notes = "查询产品总成信息", response = Result.class)
-	public Result getBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,
-			Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,@RequestParam(defaultValue="0",value="isExprot",required=false) Integer ixExport) {
-		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getProductList(response, lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId, ixExport), StatusCode.SUCCESS);
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/barcode", method = RequestMethod.GET)
+//	@ApiOperation(value = "查询产品总成信息", notes = "查询产品总成信息", response = Result.class)
+//	public Result getBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,
+//			Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,@RequestParam(defaultValue="0",value="isExprot",required=false) Integer ixExport) {
+//		endTime = DateUtils.dealEndTime(endTime);
+//		return new Result("查询成功", this.reportService.getProductList(response, lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId, ixExport), StatusCode.SUCCESS);
+//	}
+//
+//	@ResponseBody
+//	@RequestMapping(value = "/barcode/export", method = RequestMethod.POST)
+//	@ApiOperation(value = "导出精确追溯数据", notes = "导出精确追溯数据", response = Result.class)
+//	public Result exportBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,
+//			Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,@RequestParam(defaultValue="0",value="isExprot",required=false) Integer ixExport) {
+//		endTime = DateUtils.dealEndTime(endTime);
+//		return new Result("查询成功", this.reportService.getProductList(response, lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId, ixExport), StatusCode.SUCCESS);
+//	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/barcode/export", method = RequestMethod.POST)
-	@ApiOperation(value = "导出精确追溯数据", notes = "导出精确追溯数据", response = Result.class)
-	public Result exportBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,
-			Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,@RequestParam(defaultValue="0",value="isExprot",required=false) Integer ixExport) {
-		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getProductList(response, lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId, ixExport), StatusCode.SUCCESS);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/barcode/base/export", method = RequestMethod.POST)
-	@ApiOperation(value = "导出精确追溯数据", notes = "导出精确追溯数据", response = Result.class)
-	public Result exportBaseBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,
-			Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,@RequestParam(defaultValue="0",value="isExprot",required=false) Integer ixExport) {
-		endTime = DateUtils.dealEndTime(endTime);
-		return new Result("查询成功", this.reportService.getProductList(response, lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId, ixExport), StatusCode.SUCCESS);
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/barcode/base/export", method = RequestMethod.POST)
+//	@ApiOperation(value = "导出精确追溯数据", notes = "导出精确追溯数据", response = Result.class)
+//	public Result exportBaseBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,
+//			Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,@RequestParam(defaultValue="0",value="isExprot",required=false) Integer ixExport) {
+//		endTime = DateUtils.dealEndTime(endTime);
+//		return new Result("查询成功", this.reportService.getProductList(response, lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId, ixExport), StatusCode.SUCCESS);
+//	}
 	
 	
 	@ResponseBody
@@ -101,12 +101,12 @@ public class ReportController extends BaseController{
 		return new Result("查询成功", this.reportService.costMaterial(fpId), StatusCode.SUCCESS);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/barcode/process", method = RequestMethod.GET)
-	@ApiOperation(value = "查询产品的工序", notes = "查询产品的工序", response = Result.class)
-	public Result getBarcodeProcess(HttpServletResponse response,String rfid,Integer lineId,  String fp_barcode) {
-		return new Result("查询成功", this.reportService.getProcessInfo(rfid, lineId, fp_barcode), StatusCode.SUCCESS);
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/barcode/process", method = RequestMethod.GET)
+//	@ApiOperation(value = "查询产品的工序", notes = "查询产品的工序", response = Result.class)
+//	public Result getBarcodeProcess(HttpServletResponse response,String rfid,Integer lineId,  String fp_barcode) {
+//		return new Result("查询成功", this.reportService.getProcessInfo(rfid, lineId, fp_barcode), StatusCode.SUCCESS);
+//	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/material", method = RequestMethod.GET)
@@ -126,12 +126,12 @@ public class ReportController extends BaseController{
 		return new Result("导出成功", this.reportService.useMaterialInfo(fpBarcode, boxCode, materialCode, batchNo, furnaceNo, prodCode, materialBoxCode, beginTime, endTime, pageNum, pageSize, 1 ,response), StatusCode.SUCCESS);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/inverseQuery", method = RequestMethod.GET)
-	@ApiOperation(value = "三大件反查", notes = "查询物料使用", response = Result.class)
-	public Result getInverseQuery(HttpServletResponse response,Integer type,String value,Integer fcId) {
-		return new Result("查询成功", this.reportService.getInverseQuery(type, value, fcId), StatusCode.SUCCESS);
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/inverseQuery", method = RequestMethod.GET)
+//	@ApiOperation(value = "三大件反查", notes = "查询物料使用", response = Result.class)
+//	public Result getInverseQuery(HttpServletResponse response,Integer type,String value,Integer fcId) {
+//		return new Result("查询成功", this.reportService.getInverseQuery(type, value, fcId), StatusCode.SUCCESS);
+//	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/orderStock", method = RequestMethod.GET)

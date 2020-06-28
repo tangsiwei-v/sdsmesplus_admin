@@ -17,6 +17,8 @@
 		<!-- 登录接口开放 -->
 		<security:intercept-url pattern="/api/user/user_login" access="permitAll" />
 		<security:intercept-url pattern="/api/user/card_login" access="permitAll" />
+		<security:intercept-url pattern="/api/package/**" access="permitAll" />
+		<security:intercept-url pattern="/api/batch_trace/**" access="permitAll" />
 		<!-- 跨域接口开放 -->
 		<security:intercept-url pattern="/api/**" access="permitAll" method="OPTIONS"/>
 		<!-- 文件访问接口开放 -->
