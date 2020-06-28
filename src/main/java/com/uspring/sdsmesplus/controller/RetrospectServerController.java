@@ -48,8 +48,7 @@ public class RetrospectServerController {
     @ApiOperation(value = "根据成品批号反向追溯", response = Result.class)
     public Result queryReverseTrace(@PathVariable("prodBatchCode") String prodBatchCode
     ) {
-        List<MatBatchCodeVO> resultList = retrospectServer.listReverseTraceByProdBatchCode(prodBatchCode);
-        return new Result("查询成功",resultList , StatusCode.SUCCESS);
+        return new Result("查询成功", retrospectServer.listReverseTraceByProdBatchCode(prodBatchCode), StatusCode.SUCCESS);
     }
 
     @ResponseBody

@@ -1,10 +1,9 @@
 package com.uspring.sdsmesplus.service;
 
 import com.uspring.sdsmesplus.entity.po.ProdBatchLogPO;
-import com.uspring.sdsmesplus.entity.vo.MatBatchCodeVO;
+import com.uspring.sdsmesplus.entity.vo.BackMatBatchCodeVO;
 import com.uspring.sdsmesplus.entity.vo.ProdBatchCodeVO;
 import com.uspring.sdsmesplus.entity.vo.ProdBoxLogVO;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public interface RetrospectServer {
     List<ProdBatchCodeVO> listForwardTraceByMatBatchNo(String matBatchNo);
 
 
-    List<MatBatchCodeVO> listReverseTraceByProdBatchCode(String prodBatchCode);
+    List<BackMatBatchCodeVO> listReverseTraceByProdBatchCode(String prodBatchCode);
 
     List<ProdBatchLogPO> getByProdBatchCode(String prodBatchCode);
 

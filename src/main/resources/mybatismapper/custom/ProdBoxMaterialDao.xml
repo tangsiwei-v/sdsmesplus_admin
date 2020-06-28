@@ -26,7 +26,7 @@
 	<select id="listReverseTraceByProdBatchCode"  resultMap="BaseResultMapReverse">
 		select  b.mat_code,b.mat_batch_no,b.mat_name,sum(b.mat_count) as mat_count  from prod_box_log a
 		RIGHT join prod_box_material  b on a.box_barcode = b.box_barcode
-		where a.prod_batch_code = #{prodBatchCode}
+		where a.prod_batch_code = #{prodBatchCode} and a.box_barcode NOT like 'WIP%'
 		group by b.mat_code,b.mat_batch_no,b.mat_name
 	</select>
 

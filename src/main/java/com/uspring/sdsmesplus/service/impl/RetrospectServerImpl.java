@@ -6,6 +6,8 @@ import com.uspring.sdsmesplus.dao.generate.ProdBatchLogPODao;
 import com.uspring.sdsmesplus.entity.po.ProdBatchLogPO;
 import com.uspring.sdsmesplus.entity.po.ProdBatchLogPOExample;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
+import com.uspring.sdsmesplus.entity.po.ProdBoxLogPOExample;
+import com.uspring.sdsmesplus.entity.vo.BackMatBatchCodeVO;
 import com.uspring.sdsmesplus.entity.vo.MatBatchCodeVO;
 import com.uspring.sdsmesplus.entity.vo.ProdBatchCodeVO;
 import com.uspring.sdsmesplus.entity.vo.ProdBoxLogVO;
@@ -42,8 +44,31 @@ public class RetrospectServerImpl implements RetrospectServer {
     }
 
     @Override
-    public List<MatBatchCodeVO> listReverseTraceByProdBatchCode(String prodBatchCode) {
-        return prodBoxMaterialDao.listReverseTraceByProdBatchCode(prodBatchCode);
+    public List<BackMatBatchCodeVO> listReverseTraceByProdBatchCode(String prodBatchCode) {
+    	//首先根据批次查询成品物料和批号，如果批号多显示产品，批次在下一层
+        List<MatBatchCodeVO> maters = prodBoxMaterialDao.listReverseTraceByProdBatchCode(prodBatchCode);
+        
+        List<BackMatBatchCodeVO> backs = new ArrayList<>();
+        Map<String,List<MatBatchCodeVO>> map = new HashMap<String,List<MatBatchCodeVO>>();
+        for (MatBatchCodeVO matBatchCodeVO : maters) {
+			String key = matBatchCodeVO.getMatCode();
+			if(map.containsKey(key)) {
+				map.get(key).add(matBatchCodeVO);
+			}else {
+			List<MatBatchCodeVO> matVos = new ArrayList<MatBatchCodeVO>();
+			matVos.add(matBatchCodeVO);
+			map.put(key,matVos);
+			}
+		}
+    	
+        for(String key: map.keySet()) {
+       	 BackMatBatchCodeVO back = new BackMatBatchCodeVO();
+       		back.setMatCode(key);
+       		back.setMatBatchNos(map.get(key));
+       		backs.add(back);
+       	 }
+            	
+    	return backs;
     }
 
     @Override
