@@ -991,7 +991,7 @@ public class ReportServiceImpl implements ReportService {
 
 		// 报交数量
 		ProdBoxLogPOExample prodBoxLogExample = new ProdBoxLogPOExample();
-		prodBoxLogExample.createCriteria().andPoCodeEqualTo(poCode);
+		prodBoxLogExample.createCriteria().andPoCodeEqualTo(poCode).andIsWipEqualTo(false);
 
 		List<ProdBoxLogPO> prodBoxLogList = prodBoxLogDao.selectByExample(prodBoxLogExample);
 
