@@ -9,6 +9,7 @@ import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 import com.uspring.sdsmesplus.entity.po.ProdBoxLogPOExample;
 import com.uspring.sdsmesplus.entity.vo.BackMatBatchCodeVO;
 import com.uspring.sdsmesplus.entity.vo.MatBatchCodeVO;
+import com.uspring.sdsmesplus.entity.vo.MatBatchVO;
 import com.uspring.sdsmesplus.entity.vo.ProdBatchCodeVO;
 import com.uspring.sdsmesplus.entity.vo.ProdBoxLogVO;
 import com.uspring.sdsmesplus.service.RetrospectServer;
@@ -63,9 +64,17 @@ public class RetrospectServerImpl implements RetrospectServer {
     	
         for(String key: map.keySet()) {
        	 BackMatBatchCodeVO back = new BackMatBatchCodeVO();
+       	 if(map.get(key).size() == 1) {
+       		 back.setMatCode(map.get(key).get(0).getMatCode());
+       		 back.setMatBatchNo(map.get(key).get(0).getMatBatchNo());
+       		 back.setMatCount(map.get(key).get(0).getMatCount());
+       		 back.setMatName(map.get(key).get(0).getMatName());  
+       		backs.add(back);
+       	 }else {      	 
        		back.setMatCode(key);
        		back.setMatBatchNos(map.get(key));
        		backs.add(back);
+       	 }
        	 }
             	
     	return backs;
