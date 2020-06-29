@@ -109,7 +109,7 @@ public interface ReportService {
 
 	/**
 	 * 三大件反查
-	 * 
+	 *
 	 * @param type        1:轴， 2：外星轮，3：轴叉
 	 * @param value       二维码编号
 	 * @param factoryCode 工厂编号

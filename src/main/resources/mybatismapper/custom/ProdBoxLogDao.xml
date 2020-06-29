@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.uspring.sdsmesplus.dao.ProdBoxLogDao">
 
+	<resultMap id="BaseResultMappingOne" type="com.uspring.sdsmesplus.entity.vo.ProdBoxLogVO">
+		<result column="box_barcode" jdbcType="VARCHAR" property="boxBarcode" />
+		<result column="line_id" jdbcType="VARCHAR" property="lineId" />
+		<result column="boxarea_code" jdbcType="VARCHAR" property="boxareaCode" />
+		<result column="prod_batch_code" jdbcType="VARCHAR" property="prodBatchCode"/>
+		<result column="emp_number" jdbcType="VARCHAR" property="empNumber"/>
+		<result column="emp_name" jdbcType="VARCHAR" property="empName"/>
+		<result column="box_quan" jdbcType="VARCHAR" property="boxQuan"/>
+		<result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+		<result column="prod_tuhao" jdbcType="VARCHAR" property="prodTuhao"/>
+		<result column="prod_name" jdbcType="VARCHAR" property="prodName"/>
+	</resultMap>
+
 	<!--根据工单查询产品数量-->
 	<select id="quryProdCounts" resultType="Integer">
 		select COALESCE(SUM(box_quan), 0) from prod_box_log where po_code=#{poCode}
@@ -67,6 +80,13 @@
 	      and b.create_time between #{beginTime} and #{endTime}
 	    </if>
 	    order by b.create_time desc
+	</select>
+
+	<select id = "selectBox_barcodeByProdBatchCode" resultMap="BaseResultMappingOne">
+		select box_barcode,line_id,boxarea_code,prod_batch_code,emp_number,emp_name,box_quan,create_time,prod_tuhao,prod_name
+		from prod_box_log
+		where prod_batch_code =  #{prodBatchCode}
+		and is_wip = 0
 	</select>
 
 </mapper>

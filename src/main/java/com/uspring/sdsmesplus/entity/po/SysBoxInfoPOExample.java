@@ -365,6 +365,76 @@ public class SysBoxInfoPOExample {
             return (Criteria) this;
         }
 
+        public Criteria andRecevierCodeIsNull() {
+            addCriterion("recevier_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeIsNotNull() {
+            addCriterion("recevier_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeEqualTo(String value) {
+            addCriterion("recevier_code =", value, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeNotEqualTo(String value) {
+            addCriterion("recevier_code <>", value, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeGreaterThan(String value) {
+            addCriterion("recevier_code >", value, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("recevier_code >=", value, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeLessThan(String value) {
+            addCriterion("recevier_code <", value, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeLessThanOrEqualTo(String value) {
+            addCriterion("recevier_code <=", value, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeLike(String value) {
+            addCriterion("recevier_code like", value, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeNotLike(String value) {
+            addCriterion("recevier_code not like", value, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeIn(List<String> values) {
+            addCriterion("recevier_code in", values, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeNotIn(List<String> values) {
+            addCriterion("recevier_code not in", values, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeBetween(String value1, String value2) {
+            addCriterion("recevier_code between", value1, value2, "recevierCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecevierCodeNotBetween(String value1, String value2) {
+            addCriterion("recevier_code not between", value1, value2, "recevierCode");
+            return (Criteria) this;
+        }
+
         public Criteria andBifCountIsNull() {
             addCriterion("bif_count is null");
             return (Criteria) this;

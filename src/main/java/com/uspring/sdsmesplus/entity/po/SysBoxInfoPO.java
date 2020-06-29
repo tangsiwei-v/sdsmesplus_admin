@@ -11,6 +11,8 @@ public class SysBoxInfoPO {
 
     private String customerCode;
 
+    private String recevierCode;
+
     private Integer bifCount;
 
     private Date createTime;
@@ -45,6 +47,14 @@ public class SysBoxInfoPO {
 
     public void setCustomerCode(String customerCode) {
         this.customerCode = customerCode == null ? null : customerCode.trim();
+    }
+
+    public String getRecevierCode() {
+        return recevierCode;
+    }
+
+    public void setRecevierCode(String recevierCode) {
+        this.recevierCode = recevierCode == null ? null : recevierCode.trim();
     }
 
     public Integer getBifCount() {

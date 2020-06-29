@@ -24,6 +24,7 @@ public interface BoxInfoDao extends BoxInfoPODao {
 	 * @return BoxInfoPO实体类
 	 */
 	List<BoxInfoVO> standard(@Param("prod_code") String prod_code, @Param("customer_code") String customer_code,
+							 @Param("recevier_code") String	 recevierCode,
 			@Param("fcId") Integer fcId, Integer page_size, Integer page_num);
 	
 	/**

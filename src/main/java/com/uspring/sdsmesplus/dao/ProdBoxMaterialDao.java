@@ -11,6 +11,8 @@ package com.uspring.sdsmesplus.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.uspring.sdsmesplus.entity.vo.MatBatchCodeVO;
+import com.uspring.sdsmesplus.entity.vo.ProdBatchCodeVO;
 import org.apache.ibatis.annotations.Param;
 
 import com.uspring.sdsmesplus.dao.generate.ProdProductMaterialPODao;
@@ -26,4 +28,8 @@ import com.uspring.sdsmesplus.entity.po.ProdBoxLogPO;
 public interface ProdBoxMaterialDao{
 
    List<Map<String,Object>>	boxMaterialUseInfo(@Param("lineId")Integer lineId,@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("prodCode")String prodCode,@Param("matProdCode")String matProdCode,@Param("boxCode")String boxCode,@Param("matBoxCode")String matBoxCode,@Param("furnaceNo")String furnaceNo,@Param("batchNo")String batchNo);
+
+   List<ProdBatchCodeVO> listForwardTraceByMatBatchNo(@Param("matBatchNo")String  matBatchNo);
+
+   List<MatBatchCodeVO> listReverseTraceByProdBatchCode(@Param("prodBatchCode")String  prodBatchCode);
 }

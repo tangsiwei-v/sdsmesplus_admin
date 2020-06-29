@@ -2,6 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.uspring.sdsmesplus.dao.ProdBoxMaterialDao">
 
+	<resultMap id="BaseResultMapForward" type="com.uspring.sdsmesplus.entity.vo.ProdBatchCodeVO">
+		<result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
+		<result column="prod_batch_code" jdbcType="VARCHAR" property="prodBatchCode"/>
+		<result column="prod_name" jdbcType="VARCHAR" property="prodName" />
+		<result column="box_quan" jdbcType="VARCHAR" property="boxQuan"/>
+	</resultMap>
+
+	<resultMap id="BaseResultMapReverse" type="com.uspring.sdsmesplus.entity.vo.MatBatchCodeVO">
+		<result column="mat_code" jdbcType="VARCHAR" property="matCode" />
+		<result column="mat_batch_no" jdbcType="VARCHAR" property="matBatchNo" />
+		<result column="mat_name" jdbcType="VARCHAR" property="matName" />
+		<result column="mat_count" jdbcType="VARCHAR" property="matCount" />
+	</resultMap>
+
+	<select id="listForwardTraceByMatBatchNo"  resultMap="BaseResultMapForward">
+		select   a.prod_code,a.prod_batch_code,a.prod_name,sum(a.box_quan) as box_quan  from prod_box_log a
+		LEFT join prod_box_material  b on a.box_barcode = b.box_barcode
+		where b.mat_batch_no = #{matBatchNo} and a.box_barcode NOT like 'WIP%'
+		group by a.prod_code,a.prod_batch_code,a.prod_name
+	</select>
+
+	<select id="listReverseTraceByProdBatchCode"  resultMap="BaseResultMapReverse">
+		select  b.mat_code,b.mat_batch_no,b.mat_name,sum(b.mat_count) as mat_count  from prod_box_log a
+		RIGHT join prod_box_material  b on a.box_barcode = b.box_barcode
+		where a.prod_batch_code = #{prodBatchCode} and a.box_barcode NOT like 'WIP%'
+		group by b.mat_code,b.mat_batch_no,b.mat_name
+	</select>
+
 	<select id="boxMaterialUseInfo" resultType="map">
 	    select distinct a.*,b.prod_code prodCode from prod_box_material a
 		left join prod_box_log b on a.box_barcode = b.box_barcode

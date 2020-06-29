@@ -1,10 +1,10 @@
 /**
- * @Title: MongoDBServiceImpl.java 
- * @Package com.uspring.natiefu.mes.service.impl 
- * @Description: TODO(用一句话描述该文件做什么) 
+ * @Title: MongoDBServiceImpl.java
+ * @Package com.uspring.natiefu.mes.service.impl
+ * @Description: TODO(用一句话描述该文件做什么)
  * @author lihuan lihuanwk@126.com
- * @date 2018年8月5日 上午9:13:32 
- * @version V1.0 
+ * @date 2018年8月5日 上午9:13:32
+ * @version V1.0
  */
 package com.uspring.sdsmesplus.service.impl;
 
@@ -56,20 +56,20 @@ import org.springframework.web.client.RestTemplate;
  * @Description: MongoDB服务实现类
  * @author lihuan lihuan@uspring.cn
  * @date 2018年8月5日 上午9:13:32
- * 
+ *
  */
 @Service
 public class MongoDBServiceImpl implements MongoDBService {
 
 	@Autowired
 	private MongoTemplate mongoTemplate;
-	
-	@Autowired  
+
+	@Autowired
 	private SysProcessPODao processDao;
-	
+
 	@Autowired
 	private SysProcessParamPODao processParamDao;
-	
+
 	@Autowired
 	private ProcessParamDao ParamDao;
 
@@ -85,7 +85,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		return mongoTemplate.findOne(query, map.getClass(), PPARAM_COLLECTIONS);
 	}
-	
+
 	@Override
 	public Map<String, Object> findPParamByRFIDAndLine(String rfid, String lineId) {
 		Criteria criatira = new Criteria();
@@ -94,7 +94,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		return mongoTemplate.findOne(query, map.getClass(), PPARAM_COLLECTIONS);
 	}
-	
+
 	@Override
 	public List<Map<String, Object>> findPParamByRFIDList(List<String> rfids, String lineId) {
 		Criteria criatira = new Criteria();
@@ -104,7 +104,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 		return (List<Map<String, Object>>) mongoTemplate.find(query, map.getClass(), PPARAM_COLLECTIONS);
 	}
 
-	
+
 	@Override
 	public String updateCodeByOrder(Integer lineId, String qrCode) {
 		// 获取最新的一条记录
@@ -185,7 +185,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 
 	/**
 	 * mongo 日期查询isodate
-	 * 
+	 *
 	 * @param
 	 * @return
 	 */
@@ -349,12 +349,12 @@ public class MongoDBServiceImpl implements MongoDBService {
 
 	@Override
 	public void fillData(String beginTime, String tuhao, Integer lineId, String orderCode) throws ServiceException {
-		
+
 	}
 
 	// 默认给数据填充一个完整的输入
 	public List<String> getCompleteRfid(String tuhao) {
-		
+
 		return null;
 	}
 
@@ -426,7 +426,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 	public void materialBind(List<Map<String, Object>> bindList, String time, Integer lineId) {
 		// 1. 产品图号，2.轴编号，3.外星轮编号，4.轴叉编号
 		// 将bindList的数据进行反转 excel中的按时间的升序排列， 后台处理的按照时间降序排列
-		
+
 	}
 
 	public void dealBindData(Map<String, Object> mongoMap, Map<String, Object> dataMap) {
@@ -466,7 +466,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 
 	@Override
 	public void getProduceDataByLine(String time, Integer line) {
-		
+
 
 	}
 
@@ -520,9 +520,9 @@ public class MongoDBServiceImpl implements MongoDBService {
 					}
 
 					if (factoryCode.equals("04D")) {
-						
+
 						 * if(paramMap.get("Result").toString().equals("0")){ return false; }
-						 
+
 					}
 
 				}
@@ -581,7 +581,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 		LineRFID resultData = new LineRFID();
 		resultData.setStatus(true);
 		resultData.setMessage("");
-		
+
 		List<ProdProcess> resultProcessList = new ArrayList<ProdProcess>();
 		Map<String, Object> rfData = findPParamByRFIDAndLine(rfid, lineId+"");
 		if (rfData == null) {
@@ -592,9 +592,9 @@ public class MongoDBServiceImpl implements MongoDBService {
 		SysProcessPOExample processExample = new SysProcessPOExample();
 		processExample.createCriteria().andLineIdEqualTo(lineId).andSpCheckEqualTo(true);
 		processExample.setOrderByClause("sp_order asc");
-		
+
 		List<SysProcessPO> processList = this.processDao.selectByExample(processExample);
-		
+
 		if(processList.size() == 0){
 			resultData.setMessage("未查询到产线需要校验的工序");
 			return resultData;
@@ -602,38 +602,38 @@ public class MongoDBServiceImpl implements MongoDBService {
 
 		// 判断是否存在全部工序 status 0不合格  1合格  2无数据
 		for (SysProcessPO processData : processList) {
-			
+
 			ProdProcess processDo = new ProdProcess();
 			processDo.setProcessCode(processData.getSpCode());
 			processDo.setProcessName(processData.getSpName());
 			processDo.setProcessStatus(1);
-			
+
 			if (!isExistProcedure(processData.getSpCode(), rfData)) {
 				// 如果不存在返回该工序名称
 				resultData.setStatus(false);
 				resultData.setMessage("存在无数据工序");
-				
+
 				processDo.setProcessStatus(2);
 			}
 			resultProcessList.add(processDo);
 		}
-		
+
 		//获取判断合格的点位信息
 		List<ProdProcessParam> paramList = this.ParamDao.getCheckParam(lineId);
-		
+
 		//保存不合格工序
 		List<String> errorList = new ArrayList<String>();
-		
+
 		for (String key : rfData.keySet()) {
 			System.out.println(key);
 			if (rfData.get(key) != null) {
 				if (rfData.get(key).getClass().getName().equals("java.util.LinkedHashMap")) {
 
 					Map<String, Object> paramMap = (Map<String, Object>) rfData.get(key);
-					
+
 					//获取判断是否合格的属性。
 					String paramValue = getCheckParam(paramList, key);
-					
+
 					if(paramValue != null){
 						if(paramMap.get(paramValue) != null){
 							if(paramMap.get(paramValue).toString().equals("2")){
@@ -644,15 +644,15 @@ public class MongoDBServiceImpl implements MongoDBService {
 				}
 			}
 		}
-		
+
 		//将不合格工序的状态改为0
 		for(ProdProcess prodProcessDo : resultProcessList){
 			for(String product : errorList){
 				if(prodProcessDo.getProcessCode().equals(product)){
-					
+
 					resultData.setStatus(false);
 					resultData.setMessage("存在不合格工序");
-					
+
 					prodProcessDo.setProcessStatus(0);
 				}
 			}
@@ -661,16 +661,16 @@ public class MongoDBServiceImpl implements MongoDBService {
 
 		return resultData;
 	}
-	
+
 	public String getCheckParam(List<ProdProcessParam> paramList,String processCode){
 		String param = null;
-		
+
 		for(ProdProcessParam paramData:paramList){
 			if(paramData.getProcessCode().equals(processCode)){
 				param = paramData.getParamCode();
 			}
 		}
-		
+
 		return param;
 	}
 
@@ -678,7 +678,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 	public List<Map<String, Object>> getProcessData(String rfid, Integer lineId) {
 		// TODO Auto-generated method stub
 		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
-		
+
 		Map<String, Object> rfData = findPParamByRFIDAndLine(rfid, lineId+"");
 		if (rfData == null) {
 			return null;
@@ -687,54 +687,54 @@ public class MongoDBServiceImpl implements MongoDBService {
 		SysProcessPOExample processExample = new SysProcessPOExample();
 		processExample.createCriteria().andLineIdEqualTo(lineId).andSpShowEqualTo(true);
 		processExample.setOrderByClause("sp_order asc");
-		
+
 		//查询产品需要显示的工序
 		List<SysProcessPO> processList = this.processDao.selectByExample(processExample);
-		
+
 		if(processList.size() == 0){
 			return null;
 		}
-		
+
 		for(SysProcessPO processDo:processList){
 			Map<String,Object> processMap = new HashMap<String,Object>();
 			processMap.put("processName", processDo.getSpName());
 			processMap.put("processCode", processDo.getSpCode());
 			processMap.put("paramList", new ArrayList());
-			
-			
+
+
 			//判断该工序是否有值
 			Map<String, Object> processData = (Map<String, Object>) rfData.get(processDo.getSpCode());
 			if(processData == null){
 				continue;
 			}
-			
+
 			//查询所有的工序参数
 			SysProcessParamPOExample paramExample = new SysProcessParamPOExample();
 			paramExample.createCriteria().andSpIdEqualTo(processDo.getSpId()).andPpShowEqualTo(true);
 			paramExample.setOrderByClause("pp_order asc");
 			List<SysProcessParamPO> paramList = this.processParamDao.selectByExample(paramExample);
-			
+
 			List<Map<String,Object>> paramValueList = new ArrayList<Map<String,Object>>();
-			
+
 			for(SysProcessParamPO paramDo:paramList){
 				Map<String,Object> paramMap = new HashMap<String,Object>();
 				paramMap.put("paramName", paramDo.getPpName());
 				paramMap.put("paramCode", paramDo.getPpCode());
-				
+
 				Map<String,Object> paramValueMap = getParamValue(processData,paramDo.getPpCode(),paramDo.getPpType());
-				
+
 				paramMap.put("paramValue", paramValueMap.get("dealValue"));
 				paramMap.put("paramRealValue", paramValueMap.get("realValue"));
-				
+
 				paramValueList.add(paramMap);
 			}
-			
+
 			processMap.put("paramList", paramValueList);
-			
+
 			resultList.add(processMap);
 		}
-		
-		
+
+
 		return resultList;
 	}
 
@@ -831,7 +831,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		String resultValue = "";
 		String realValue = "";
-		
+
 		for(String key:paramData.keySet()){
 			if(paramCode.equals(key)){
 				realValue = paramData.get(key)+"";
@@ -857,7 +857,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 		}
 		resultMap.put("dealValue", resultValue);
 		resultMap.put("realValue", realValue);
-		
+
 		return resultMap;
 	}
 

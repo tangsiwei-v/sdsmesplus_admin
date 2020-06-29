@@ -65,7 +65,7 @@ public class ReportController extends BaseController{
 		endTime = DateUtils.dealEndTime(endTime);
 		return new Result("查询成功", this.reportService.getProductList(response, lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId, ixExport), StatusCode.SUCCESS);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/barcode/export", method = RequestMethod.POST)
 	@ApiOperation(value = "导出精确追溯数据", notes = "导出精确追溯数据", response = Result.class)
