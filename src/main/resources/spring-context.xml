@@ -24,7 +24,9 @@
                      http://cxf.apache.org/jaxws
                      http://cxf.apache.org/schemas/jaxws.xsd
                      http://cxf.apache.org/core
-                     http://cxf.apache.org/schemas/core.xsd">
+                     http://cxf.apache.org/schemas/core.xsd
+                     http://www.springframework.org/schema/data/mongo 
+                     http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 	
 	<!-- <mvc:annotation-driven /> -->
 	<mvc:default-servlet-handler />
@@ -69,9 +71,9 @@
 	<task:annotation-driven executor="myexecutor"/>
 	
 	<!-- Dozer配置 -->
-	<bean id="mapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+	 <bean id="mapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
 		<property name="mappingFiles" value="classpath*:dozer/**/*.xml"/>
-	</bean>
+	   </bean>   
 
 	<!-- WebService Client -->
 	<cxf:bus>
@@ -82,5 +84,5 @@
 
 	<jaxws:client id="SIMESSTOCKDETAILOut"
 				  serviceClass="com.uspring.sdsmesplus.wms.sap.f135.SIMESSTOCKDETAILOut"
-				  wsdlLocation="#{prop.f135_wsdl_location}" />
+				  wsdlLocation="#{prop.f135_wsdl_location}" /> 
 </beans>  
