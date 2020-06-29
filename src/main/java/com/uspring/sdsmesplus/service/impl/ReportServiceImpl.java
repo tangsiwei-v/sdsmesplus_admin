@@ -1213,25 +1213,28 @@ public class ReportServiceImpl implements ReportService {
 			titleList.add("成品SAP号");
 			titleList.add("总成简码");
 			titleList.add("成品名称");
-			titleList.add("批次号");
-			titleList.add("总成简码");
 			titleList.add("图号");
-			titleList.add("工单号");
-			titleList.add("工段");
+			titleList.add("批次号");
+			titleList.add("结箱区域号");
+			titleList.add("追溯号");
 			titleList.add("产线");
+			titleList.add("工段");
 			titleList.add("工厂");
 			
 			List<String> columnList = new ArrayList<String>();
 			columnList.add("box_barcode");
 			columnList.add("create_time");
 			columnList.add("box_quan");
-			columnList.add("prod_code");
-			columnList.add("prod_batch_code");
-			columnList.add("prod_number");
-			columnList.add("prod_tuhao");
 			columnList.add("po_code");
-			columnList.add("vsm_name");
+			columnList.add("prod_code");
+			columnList.add("prod_number");
+			columnList.add("prod_name");
+			columnList.add("prod_tuhao");
+			columnList.add("prod_batch_code");
+			columnList.add("boxarea_code");
+			columnList.add("prod_trace_code");
 			columnList.add("line_name");
+			columnList.add("vsm_name");
 			columnList.add("fc_name");
 			
 			ExportXls.exportXls(resultList, response, titleList, columnList, "箱合格证查询");
