@@ -66,8 +66,8 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private ProdBoxLogDao prodBoxLogDao;
 
-//	@Autowired
-//	private MongoDBService mongoDBservice;
+	@Autowired
+	private MongoDBService mongoDBservice;
 
 	@Autowired
 	private ProdProductMaterialDao productMaterialDao;
@@ -132,146 +132,146 @@ public class ReportServiceImpl implements ReportService {
 		return this.productMaterialDao.costMaterialInfo(fpId);
 	}
 
-//	@Override
-//	public List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId, String fp_barcode) {
-//		if (lineId.equals(234)) {
-//			return this.mongoDBservice.getProcessClutchData(fp_barcode, lineId);
-//		}else {
-//			return this.mongoDBservice.getProcessData(rfid, lineId);
-//		}
-//
-//	}
+	@Override
+	public List<Map<String, Object>> getProcessInfo(String rfid, Integer lineId, String fp_barcode) {
+		if (lineId.equals(234)) {
+			return this.mongoDBservice.getProcessClutchData(fp_barcode, lineId);
+		}else {
+			return this.mongoDBservice.getProcessData(rfid, lineId);
+		}
 
-//	@Override
-//	public Map<String, Object> getProductList(HttpServletResponse response,Integer lineId, String boxCode, String barcode, String tuhao,
-//			String prodCode, String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum,
-//			Integer pageSize, Integer shopId, Integer fcId, Integer isExport) {
-//
-//
-//		if(lineId != null && lineId == 161){
-//			shopId = null;
-//			fcId = null;
-//			lineId = 42281;
-//		}
-//
-//		Map<String, Object> resultMap = new HashMap<String, Object>();
-//
-//		ProdFinishedProductPOExample prodExample = new ProdFinishedProductPOExample();
-//		ProdFinishedProductPOExample.Criteria criteria = prodExample.createCriteria();
-//
-//		PageHelper page = new PageHelper();
-//
-//		//是否分页显示
-//		if(isExport == 0){
-//			page.startPage(pageNum, pageSize);
-//		}
-//		List<Map<String, Object>> resultList = this.prodFinishDao.getProductList(lineId, boxCode, barcode, tuhao,
-//				prodCode, prodNumber, poCode, beginTime, endTime, shopId, fcId);
-//
-//		//是否导出
-//		if(isExport != 0){
-//			if(isExport == 1){
-//				exportProductInfo(resultList,response);
-//			}else if(isExport == 2){
-//				List<String> titleList = new ArrayList<String>();
-//				titleList.add("产品总成码");
-//				titleList.add("箱号");
-//				titleList.add("工单号");
-//				titleList.add("装箱时间");
-//				titleList.add("描述");
-//				titleList.add("SAP号");
-//				titleList.add("总成简码");
-//				titleList.add("图号");
-//				titleList.add("工厂");
-//				titleList.add("车间");
-//				titleList.add("产线");
-//
-//				List<String> columnList = new ArrayList<String>();
-//				columnList.add("fp_barcode");
-//				columnList.add("box_barcode");
-//				columnList.add("po_code");
-//				columnList.add("create_time");
-//				columnList.add("prod_name");
-//				columnList.add("prod_code");
-//				columnList.add("prod_number");
-//				columnList.add("prod_tuhao");
-//				columnList.add("fc_name");
-//				columnList.add("shop_name");
-//				columnList.add("line_name");
-//
-//				ExportXls.exportXls(resultList, response, titleList, columnList, "总成查询");
-//			}
-//	    }
-//
-//		PageInfo info = new PageInfo(resultList);
-//
-//		resultMap.put("data", resultList);
-//		resultMap.put("total", info.getTotal());
-//
-//		return resultMap;
-//	}
+	}
 
-//	public void exportProductInfo(List<Map<String, Object>> productList,HttpServletResponse response){
-//		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
-//		Integer lineId = 0;
-//
-//		List<String> rfidList = new ArrayList<String>();
-//
-//		for(Map<String,Object> productInfo:productList){
-//			/*List<Map<String,Object>> processList = this.mongoDBservice.getProcessData(productInfo.get("fp_rfid").toString(), Integer.parseInt(productInfo.get("line_id").toString()));
-//			resultList.add(processList);*/
-//
-//			lineId = Integer.parseInt(productInfo.get("line_id").toString());
-//			rfidList.add(productInfo.get("fp_rfid").toString());
-//		}
-//
-//		/*rfidList.clear();
-//		rfidList.add("20191129060018");
-//		rfidList.add("20191129060016");
-//		rfidList.add("20191129060015");
-//		rfidList.add("20191129060014");
-//		rfidList.add("20191129060006");
-//		rfidList.add("20191129060005");*/
-//		//获取产品的所有数据
-//		resultList = this.mongoDBservice.findPParamByRFIDList(rfidList, lineId+"");
-//
-//		lineId = 161;
-//		//获取所有工序的数据
-//		SysProcessPOExample processExample = new SysProcessPOExample();
-//		processExample.createCriteria().andLineIdEqualTo(lineId);
-//		processExample.setOrderByClause("sp_order asc");
-//
-//		List<Map<String,Object>> resultProcessList = new ArrayList<Map<String,Object>>();
-//		//查询产品需要显示的工序
-//		List<SysProcessPO> processList = this.processDao.selectByExample(processExample);
-//		for(SysProcessPO processDo:processList){
-//			/*Map<String,Object> processMap = new HashMap<String,Object>();
-//			processMap.put("processName", processDo.getSpName());
-//			processMap.put("processCode", processDo.getSpCode());
-//			processMap.put("paramList", new ArrayList());*/
-//
-//			//查询所有的工序参数
-//			SysProcessParamPOExample paramExample = new SysProcessParamPOExample();
-//			paramExample.createCriteria().andSpIdEqualTo(processDo.getSpId()).andPpShowEqualTo(true);
-//			paramExample.setOrderByClause("pp_order asc");
-//			List<SysProcessParamPO> paramList = this.processParamDao.selectByExample(paramExample);
-//
-//			//List<Map<String,Object>> paramValueList = new ArrayList<Map<String,Object>>();
-//
-//			for(SysProcessParamPO paramDo:paramList){
-//				Map<String,Object> paramMap = new HashMap<String,Object>();
-//				paramMap.put("paramName", paramDo.getPpName());
-//				paramMap.put("paramCode", paramDo.getPpCode());
-//
-//				paramMap.put("processName", processDo.getSpName());
-//				paramMap.put("processCode", processDo.getSpCode());
-//
-//				resultProcessList.add(paramMap);
-//			}
-//			//processMap.put("paramList", paramValueList);
-//		}
-//		ExportXls.exportBarcode(resultList, response, resultProcessList, null, "精确追溯数据");
-//	}
+	@Override
+	public Map<String, Object> getProductList(HttpServletResponse response,Integer lineId, String boxCode, String barcode, String tuhao,
+			String prodCode, String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum,
+			Integer pageSize, Integer shopId, Integer fcId, Integer isExport) {
+
+
+		if(lineId != null && lineId == 161){
+			shopId = null;
+			fcId = null;
+			lineId = 42281;
+		}
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		ProdFinishedProductPOExample prodExample = new ProdFinishedProductPOExample();
+		ProdFinishedProductPOExample.Criteria criteria = prodExample.createCriteria();
+
+		PageHelper page = new PageHelper();
+
+		//是否分页显示
+		if(isExport == 0){
+			page.startPage(pageNum, pageSize);
+		}
+		List<Map<String, Object>> resultList = this.prodFinishDao.getProductList(lineId, boxCode, barcode, tuhao,
+				prodCode, prodNumber, poCode, beginTime, endTime, shopId, fcId);
+
+		//是否导出
+		if(isExport != 0){
+			if(isExport == 1){
+				exportProductInfo(resultList,response);
+			}else if(isExport == 2){
+				List<String> titleList = new ArrayList<String>();
+				titleList.add("产品总成码");
+				titleList.add("箱号");
+				titleList.add("工单号");
+				titleList.add("装箱时间");
+				titleList.add("描述");
+				titleList.add("SAP号");
+				titleList.add("总成简码");
+				titleList.add("图号");
+				titleList.add("工厂");
+				titleList.add("车间");
+				titleList.add("产线");
+
+				List<String> columnList = new ArrayList<String>();
+				columnList.add("fp_barcode");
+				columnList.add("box_barcode");
+				columnList.add("po_code");
+				columnList.add("create_time");
+				columnList.add("prod_name");
+				columnList.add("prod_code");
+				columnList.add("prod_number");
+				columnList.add("prod_tuhao");
+				columnList.add("fc_name");
+				columnList.add("shop_name");
+				columnList.add("line_name");
+
+				ExportXls.exportXls(resultList, response, titleList, columnList, "总成查询");
+			}
+	    }
+
+		PageInfo info = new PageInfo(resultList);
+
+		resultMap.put("data", resultList);
+		resultMap.put("total", info.getTotal());
+
+		return resultMap;
+	}
+
+	public void exportProductInfo(List<Map<String, Object>> productList,HttpServletResponse response){
+		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
+		Integer lineId = 0;
+
+		List<String> rfidList = new ArrayList<String>();
+
+		for(Map<String,Object> productInfo:productList){
+			/*List<Map<String,Object>> processList = this.mongoDBservice.getProcessData(productInfo.get("fp_rfid").toString(), Integer.parseInt(productInfo.get("line_id").toString()));
+			resultList.add(processList);*/
+
+			lineId = Integer.parseInt(productInfo.get("line_id").toString());
+			rfidList.add(productInfo.get("fp_rfid").toString());
+		}
+
+		/*rfidList.clear();
+		rfidList.add("20191129060018");
+		rfidList.add("20191129060016");
+		rfidList.add("20191129060015");
+		rfidList.add("20191129060014");
+		rfidList.add("20191129060006");
+		rfidList.add("20191129060005");*/
+		//获取产品的所有数据
+		resultList = this.mongoDBservice.findPParamByRFIDList(rfidList, lineId+"");
+
+		lineId = 161;
+		//获取所有工序的数据
+		SysProcessPOExample processExample = new SysProcessPOExample();
+		processExample.createCriteria().andLineIdEqualTo(lineId);
+		processExample.setOrderByClause("sp_order asc");
+
+		List<Map<String,Object>> resultProcessList = new ArrayList<Map<String,Object>>();
+		//查询产品需要显示的工序
+		List<SysProcessPO> processList = this.processDao.selectByExample(processExample);
+		for(SysProcessPO processDo:processList){
+			/*Map<String,Object> processMap = new HashMap<String,Object>();
+			processMap.put("processName", processDo.getSpName());
+			processMap.put("processCode", processDo.getSpCode());
+			processMap.put("paramList", new ArrayList());*/
+
+			//查询所有的工序参数
+			SysProcessParamPOExample paramExample = new SysProcessParamPOExample();
+			paramExample.createCriteria().andSpIdEqualTo(processDo.getSpId()).andPpShowEqualTo(true);
+			paramExample.setOrderByClause("pp_order asc");
+			List<SysProcessParamPO> paramList = this.processParamDao.selectByExample(paramExample);
+
+			//List<Map<String,Object>> paramValueList = new ArrayList<Map<String,Object>>();
+
+			for(SysProcessParamPO paramDo:paramList){
+				Map<String,Object> paramMap = new HashMap<String,Object>();
+				paramMap.put("paramName", paramDo.getPpName());
+				paramMap.put("paramCode", paramDo.getPpCode());
+
+				paramMap.put("processName", processDo.getSpName());
+				paramMap.put("processCode", processDo.getSpCode());
+
+				resultProcessList.add(paramMap);
+			}
+			//processMap.put("paramList", paramValueList);
+		}
+		ExportXls.exportBarcode(resultList, response, resultProcessList, null, "精确追溯数据");
+	}
 
 	@Override
 	public Map<String, Object> useMaterialInfo(String fpBarcode, String boxCode, String materialCode, String batchNo,
@@ -318,17 +318,17 @@ public class ReportServiceImpl implements ReportService {
 		return resultMap;
 	}
 
-//	@Override
-//	public List<Map<String, Object>> getInverseQuery(Integer type, String value, Integer fcId) {
-//		List<Map<String, Object>> resulList = new ArrayList<Map<String, Object>>();
-//		Map<String, Object> rfidMap = this.mongoDBservice.dataReverSearch(type, value, fcId);
-//		if (rfidMap != null) {
-//			resulList = this.prodFinishDao.getProductData(Integer.parseInt(rfidMap.get("line").toString()),
-//					rfidMap.get("rfid").toString());
-//		}
-//
-//		return resulList;
-//	}
+	@Override
+	public List<Map<String, Object>> getInverseQuery(Integer type, String value, Integer fcId) {
+		List<Map<String, Object>> resulList = new ArrayList<Map<String, Object>>();
+		Map<String, Object> rfidMap = this.mongoDBservice.dataReverSearch(type, value, fcId);
+		if (rfidMap != null) {
+			resulList = this.prodFinishDao.getProductData(Integer.parseInt(rfidMap.get("line").toString()),
+					rfidMap.get("rfid").toString());
+		}
+
+		return resulList;
+	}
 
 	@Override
 	public Map<String, Object> getOrderStock(String orderCode, String prodCode, String beginTime, String endTime,
