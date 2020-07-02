@@ -13,6 +13,7 @@ import java.util.Map;
 
 import com.uspring.sdsmesplus.entity.vo.LineRFID;
 import com.uspring.sdsmesplus.exception.ServiceException;
+import org.springframework.data.domain.PageImpl;
 
 /** 
  * @ClassName: MongoDBService 
@@ -36,7 +37,7 @@ public interface MongoDBService {
 	String updateCodeByOrder(Integer lineId,String qrCode);
 	
 	//根据工单查询产品生产个数
-	List<Map<String,Object>> findList(Integer lineId);
+	PageImpl<Map<String, Object>> findList(Integer lineId, Integer pageNum, Integer pageSize);
 	
 	//根据二维码获取过程参数
 	Map<String, Object> getParamBySerial(String qrCode);
