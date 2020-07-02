@@ -1197,9 +1197,23 @@ public class ReportServiceImpl implements ReportService {
 
 		PageHelper page = new PageHelper();
 		//是否分页显示
+		if(pageNum == null)
+			pageNum = 1;
+		if(pageSize == null)
+			pageSize = 10;
 		if(isExport != 1){
 			page.startPage(pageNum, pageSize);
 		}
+		if(isOverSubmit == null )
+			isOverSubmit = false;
+		if(isWip == null )
+			isWip = false;
+		if(isOutsource == null )
+			isOutsource = false;
+		if(isDeleted == null )
+			isDeleted = false;
+		if(isConfirmed == null )
+			isConfirmed = true;
 
 		List<Map<String, Object>> resultList = this.prodBoxLogDao.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime,
 				poCode, vsmId, fcId, prodBatchCode, prodTraceCode, boxareaCode, isOverSubmit, isWip, isOutsource, isDeleted, isConfirmed);

@@ -21,6 +21,9 @@
 		<security:intercept-url pattern="/api/**" access="permitAll" method="OPTIONS"/>
 		<!-- 文件访问接口开放 -->
 		<security:intercept-url pattern="/api/file/**" access="permitAll" method="GET"/>
+		
+		<!-- 文件访问接口开放 -->
+		<security:intercept-url pattern="/api/report/*" access="permitAll" method="GET"/>
 		<!-- 产线信息查询 -->
 		<security:intercept-url pattern="/api/department/workline/tree_novsm" access="permitAll" />
         <security:intercept-url pattern="/api/work_shift" access="permitAll" />
