@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.SimpleTimeZone;
 
+import com.uspring.sdsmesplus.common.DateUtils;
+import jdk.nashorn.internal.objects.NativeNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageImpl;
@@ -29,6 +31,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.mongodb.UncategorizedMongoDbException;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -130,16 +133,30 @@ public class MongoDBServiceImpl implements MongoDBService {
 	}
 
 	@Override
-	public PageImpl<Map<String, Object>> findList(Integer lineId, Integer pageNum,Integer pageSize) {
-		Query query = new Query(Criteria.where("line").is(lineId + ""));
+	public PageImpl<Map<String, Object>> findList(String rfid, Integer lineId,String[] times, Integer pageNum,Integer pageSize) {
+		Query query = null;
+		if (rfid != null && !"".equals(rfid)) {
+			query = new Query(Criteria.where("line").is(lineId + "").and("rfid").is(rfid));
+		} else if (times != null && times.length != 0){
+			Criteria line = Criteria.where("line").is(lineId.toString());
+			Criteria time = Criteria.where("time").gte(DateUtils.dateToISODate(times[0] + " 00:00:00")).lt(DateUtils.dateToISODate(times[1] + " 59:59:59"));
+			query = new Query().addCriteria(time).addCriteria(line);
+		} else  {
+			query = new Query(Criteria.where("line").is(lineId + ""));
+		}
+
 		Pageable pageable = new PageRequest((pageNum - 1), pageSize);
 		query.with(pageable);
-		Sort sort = new Sort(new Order(Direction.DESC, "time"));
-		query.with(sort);
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Map<String, Object>> dataList = (List<Map<String, Object>>) mongoTemplate.find(query, map.getClass(), PPARAM_COLLECTIONS);
-		int count = (int) mongoTemplate.count(query, map.getClass(), PPARAM_COLLECTIONS);
-		return (PageImpl<Map<String, Object>>)PageableExecutionUtils.getPage(dataList, pageable, () -> count);
+
+		try {
+			List<Map<String, Object>> dataList = (List<Map<String, Object>>) mongoTemplate.find(query, map.getClass(), PPARAM_COLLECTIONS);
+			int count = (int) mongoTemplate.count(query, map.getClass(), PPARAM_COLLECTIONS);
+			return (PageImpl<Map<String, Object>>)PageableExecutionUtils.getPage(dataList, pageable, () -> count);
+		} catch (UncategorizedMongoDbException e) {
+			e.printStackTrace();
+			throw new ServiceException("请选择一个较小的区间查询");
+		}
 	}
 
 	@Override

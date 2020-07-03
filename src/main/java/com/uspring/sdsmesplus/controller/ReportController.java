@@ -115,8 +115,8 @@ public class ReportController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value = "/rfid/all", method = RequestMethod.GET)
 	@ApiOperation(value = "直接查询mongdb的rfid数据", notes = "直接查询mongdb的rfid数据", response = Result.class)
-	public Result getMongdbRfidAll(HttpServletResponse response,Integer lineId,Integer pageNum,Integer pageSize) {
-		return new Result("查询成功", this.mongoDBService.findList(lineId, pageNum, pageSize), StatusCode.SUCCESS);
+	public Result getMongdbRfidAll(HttpServletResponse response,String rfid, Integer lineId,@RequestParam(value = "times[]", required = false) String[] times,Integer pageNum,Integer pageSize) {
+		return new Result("查询成功", this.mongoDBService.findList(rfid, lineId, times, pageNum, pageSize), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody

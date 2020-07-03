@@ -37,7 +37,7 @@ public interface MongoDBService {
 	String updateCodeByOrder(Integer lineId,String qrCode);
 	
 	//根据工单查询产品生产个数
-	PageImpl<Map<String, Object>> findList(Integer lineId, Integer pageNum, Integer pageSize);
+	PageImpl<Map<String, Object>> findList(String rfid, Integer lineId, String[] times, Integer pageNum, Integer pageSize);
 	
 	//根据二维码获取过程参数
 	Map<String, Object> getParamBySerial(String qrCode);
