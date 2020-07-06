@@ -81,7 +81,7 @@ public class PackBoxServiceImpl implements PackBoxService {
 	// 添加装箱数主数据
 	public void insertBoxInfo(BoxInfoPO boxInfo) {
 		boxInfo.setBifId(null);
-		List<BoxInfoPO> repeat = boxInfoDao.repeat(boxInfo.getFcId(), boxInfo.getProdCode(), boxInfo.getCustomerCode());
+		List<BoxInfoPO> repeat = boxInfoDao.repeat(boxInfo.getFcId(), boxInfo.getProdCode(), boxInfo.getCustomerCode() ,boxInfo.getRecevierCode());
 		if (repeat.size() > 0)
 			throw new ServiceException("装箱主数据已存在！");
 		boxInfoDao.insertSelective(boxInfo);

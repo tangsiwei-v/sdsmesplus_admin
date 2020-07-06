@@ -68,7 +68,7 @@ public class ReportController extends BaseController{
 
 	@ResponseBody
 	@RequestMapping(value = "/barcode/export", method = RequestMethod.POST)
-	@ApiOperation(value = "导出精确追溯数据", notes = "导出精确追溯数据", response = Result.class)
+	@ApiOperation(value = "查询精确追溯数据", notes = "查询精确追溯数据", response = Result.class)
 	public Result exportBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,
 			Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,@RequestParam(defaultValue="0",value="isExprot",required=false) Integer ixExport) {
 		endTime = DateUtils.dealEndTime(endTime);

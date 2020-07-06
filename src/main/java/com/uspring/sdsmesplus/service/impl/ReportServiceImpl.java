@@ -147,13 +147,6 @@ public class ReportServiceImpl implements ReportService {
 			String prodCode, String prodNumber, String poCode, String beginTime, String endTime, Integer pageNum,
 			Integer pageSize, Integer shopId, Integer fcId, Integer isExport) {
 
-
-		if(lineId != null && lineId == 161){
-			shopId = null;
-			fcId = null;
-			lineId = 42281;
-		}
-
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
 		ProdFinishedProductPOExample prodExample = new ProdFinishedProductPOExample();

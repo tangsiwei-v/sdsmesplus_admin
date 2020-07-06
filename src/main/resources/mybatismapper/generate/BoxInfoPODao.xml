@@ -6,6 +6,7 @@
     <result column="fc_id" jdbcType="INTEGER" property="fcId" />
     <result column="prod_code" jdbcType="VARCHAR" property="prodCode" />
     <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="recevier_code" jdbcType="VARCHAR" property="recevierCode" />
     <result column="bif_count" jdbcType="INTEGER" property="bifCount" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    bif_id, fc_id, prod_code, customer_code, bif_count, create_time
+    bif_id, fc_id, prod_code, customer_code, recevier_code, bif_count, create_time
   </sql>
   <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.BoxInfoPOExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.BoxInfoPO">
     insert into sys_box_info (bif_id, fc_id, prod_code, 
-      customer_code, bif_count, create_time
-      )
+      customer_code, recevier_code, bif_count, 
+      create_time)
     values (#{bifId,jdbcType=INTEGER}, #{fcId,jdbcType=INTEGER}, #{prodCode,jdbcType=VARCHAR}, 
-      #{customerCode,jdbcType=VARCHAR}, #{bifCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{customerCode,jdbcType=VARCHAR}, #{recevierCode,jdbcType=VARCHAR}, #{bifCount,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.BoxInfoPO">
     insert into sys_box_info
@@ -122,6 +123,9 @@
       </if>
       <if test="customerCode != null">
         customer_code,
+      </if>
+      <if test="recevierCode != null">
+        recevier_code,
       </if>
       <if test="bifCount != null">
         bif_count,
@@ -142,6 +146,9 @@
       </if>
       <if test="customerCode != null">
         #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recevierCode != null">
+        #{recevierCode,jdbcType=VARCHAR},
       </if>
       <if test="bifCount != null">
         #{bifCount,jdbcType=INTEGER},
@@ -172,6 +179,9 @@
       <if test="record.customerCode != null">
         customer_code = #{record.customerCode,jdbcType=VARCHAR},
       </if>
+      <if test="record.recevierCode != null">
+        recevier_code = #{record.recevierCode,jdbcType=VARCHAR},
+      </if>
       <if test="record.bifCount != null">
         bif_count = #{record.bifCount,jdbcType=INTEGER},
       </if>
@@ -189,6 +199,7 @@
       fc_id = #{record.fcId,jdbcType=INTEGER},
       prod_code = #{record.prodCode,jdbcType=VARCHAR},
       customer_code = #{record.customerCode,jdbcType=VARCHAR},
+      recevier_code = #{record.recevierCode,jdbcType=VARCHAR},
       bif_count = #{record.bifCount,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -207,6 +218,9 @@
       <if test="customerCode != null">
         customer_code = #{customerCode,jdbcType=VARCHAR},
       </if>
+      <if test="recevierCode != null">
+        recevier_code = #{recevierCode,jdbcType=VARCHAR},
+      </if>
       <if test="bifCount != null">
         bif_count = #{bifCount,jdbcType=INTEGER},
       </if>
@@ -221,6 +235,7 @@
     set fc_id = #{fcId,jdbcType=INTEGER},
       prod_code = #{prodCode,jdbcType=VARCHAR},
       customer_code = #{customerCode,jdbcType=VARCHAR},
+      recevier_code = #{recevierCode,jdbcType=VARCHAR},
       bif_count = #{bifCount,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where bif_id = #{bifId,jdbcType=INTEGER}
