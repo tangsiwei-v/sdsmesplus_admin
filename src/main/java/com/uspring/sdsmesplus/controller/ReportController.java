@@ -1,6 +1,8 @@
 package com.uspring.sdsmesplus.controller;
 
 import java.net.URLDecoder;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -41,9 +43,14 @@ public class ReportController extends BaseController{
 			Boolean isOutsource,Boolean isDeleted,Boolean isConfirmed,Integer pageNum,Integer pageSize,Integer vsmId,Integer fcId,String prodBatchCode) {
 		if(endTime!=null) {
 		endTime = DateUtils.dealEndTime(endTime);}
-		return new Result("查询成功", this.reportService.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime, 
+		Map<String, Object> boxList = this.reportService.getBoxList(lineId, boxCode, tuhao, prodCode, prodNumber, beginTime, endTime, 
 				poCode, vsmId, fcId, prodBatchCode, prodTraceCode, boxareaCode, isOverSubmit, isWip, isOutsource, isDeleted, 
-				isConfirmed, pageNum, pageSize,0, response), StatusCode.SUCCESS);
+				isConfirmed, pageNum, pageSize,0, response);
+		
+		List<Map<String, Object>> resultList = (List<Map<String, Object>>) boxList.get("data");
+		if(resultList.isEmpty())
+			return new Result("查询失败","", StatusCode.FAILED);			
+		return new Result("查询成功",boxList, StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
