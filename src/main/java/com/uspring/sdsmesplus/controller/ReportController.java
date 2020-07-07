@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.uspring.sdsmesplus.service.MongoDBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,9 @@ public class ReportController extends BaseController{
 
 	@Autowired
 	private ReportService reportService;
+
+	@Autowired
+	private MongoDBService mongoDBService;
 
 	@ResponseBody
 	@RequestMapping(value = "/box", method = RequestMethod.GET)
@@ -114,6 +118,13 @@ public class ReportController extends BaseController{
 	@ApiOperation(value = "查询产品的工序", notes = "查询产品的工序", response = Result.class)
 	public Result getBarcodeProcess(HttpServletResponse response,String rfid,Integer lineId,  String fp_barcode) {
 		return new Result("查询成功", this.reportService.getProcessInfo(rfid, lineId, fp_barcode), StatusCode.SUCCESS);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/rfid/all", method = RequestMethod.GET)
+	@ApiOperation(value = "直接查询mongdb的rfid数据", notes = "直接查询mongdb的rfid数据", response = Result.class)
+	public Result getMongdbRfidAll(HttpServletResponse response,String rfid, Integer lineId,@RequestParam(value = "times[]", required = false) String[] times,Integer pageNum,Integer pageSize) {
+		return new Result("查询成功", this.mongoDBService.findList(rfid, lineId, times, pageNum, pageSize), StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
