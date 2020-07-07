@@ -33,5 +33,5 @@ public interface BoxInfoDao extends BoxInfoPODao {
 	 * @param prod_code 产品简码, customer_code 客户号, fcId 工厂ID
 	 * @return BoxInfoPO实体类
 	 */
-	List<BoxInfoPO> repeat(@Param("fcId") Integer fcId,@Param("prod_code") String prod_code,@Param("customer_code")String customer_code);
+	List<BoxInfoPO> repeat(@Param("fcId") Integer fcId,@Param("prod_code") String prod_code,@Param("customer_code")String customer_code,@Param("recevier_code")String recevier_code);
 }

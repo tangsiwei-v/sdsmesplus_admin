@@ -38,6 +38,6 @@
 		</if>
   </select>
   <select id="repeat" resultType="com.uspring.sdsmesplus.entity.po.SysBoxInfoPO">
-  	select * from sys_box_info where fc_id = #{fcId} and prod_code = #{prod_code}  and customer_code = #{customer_code}
+  	select * from sys_box_info where fc_id = #{fcId} and prod_code = #{prod_code} and customer_code = #{customer_code} and recevier_code = #{recevier_code}
   </select>
 </mapper>
