@@ -19,4 +19,7 @@ public interface ProdFinishedProductDao extends ProdFinishedProductPODao {
 	
 	//
 	List<Map<String,Object>> getProductData(@Param("lineId")Integer lineId,@Param("rfid")String rfid);
+
+	//依据箱合格证查询RFID
+
 }

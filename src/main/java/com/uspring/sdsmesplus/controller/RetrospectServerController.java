@@ -7,8 +7,6 @@ import com.uspring.sdsmesplus.entity.vo.ProdBoxLogVO;
 import com.uspring.sdsmesplus.entity.vo.Result;
 import com.uspring.sdsmesplus.enums.StatusCode;
 import com.uspring.sdsmesplus.service.RetrospectServer;
-import com.uspring.sdsmesplus.wms.WMSService;
-import com.uspring.sdsmesplus.wms.entity.EWMStockDetails;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +27,7 @@ public class RetrospectServerController {
     @Autowired
     private RetrospectServer retrospectServer;
 
-    @Autowired
-    private WMSService wMSService;
+
 
 
 
@@ -69,13 +66,6 @@ public class RetrospectServerController {
         return new Result("查询成功",resultList , StatusCode.SUCCESS);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/query_stock_details",method = RequestMethod.GET)
-    @ApiOperation(value = "根据批号获取库存信息", response = Result.class)
-    public Result query_stock_details(String prodBatchCode,String matWarehouseNum
-    ) {
-        List<EWMStockDetails> resultList = wMSService.getStockDetails(prodBatchCode,matWarehouseNum);
-        return new Result("查询成功",resultList , StatusCode.SUCCESS);
-    }
+
 
 }

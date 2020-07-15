@@ -32,7 +32,7 @@
         <!-- 文件上传 -->
         <security:intercept-url pattern="/api/file/**" access="permitAll" />
 		<!-- 其他接口接受权限认证 -->
-		<security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER')" />
+<!--		<security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER')" />-->
 		
 		<security:csrf disabled="true"/>
 	</security:http>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uspring.sdsmesplus.dao.generate.ProdProcessParamHistPODao">
+  <resultMap id="BaseResultMap" type="com.uspring.sdsmesplus.entity.po.ProdProcessParamHistPO">
+    <id column="ppph_id" jdbcType="INTEGER" property="ppphId" />
+    <result column="line_id" jdbcType="INTEGER" property="lineId" />
+    <result column="rfid" jdbcType="NVARCHAR" property="rfid" />
+    <result column="process_param" jdbcType="NVARCHAR" property="processParam" />
+    <result column="param_value" jdbcType="NVARCHAR" property="paramValue" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="line_name" property="line_name"/>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    a.ppph_id, a.line_id, a.rfid, a.process_param, a.param_value, a.create_time,b.line_name
+  </sql>
+  <select id="selectByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessParamHistPOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prod_process_param_hist
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prod_process_param_hist
+    where ppph_id = #{ppphId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prod_process_param_hist
+    where ppph_id = #{ppphId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessParamHistPOExample">
+    delete from prod_process_param_hist
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessParamHistPO">
+    insert into prod_process_param_hist (ppph_id, line_id, rfid, 
+      process_param, param_value, create_time
+      )
+    values (#{ppphId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{rfid,jdbcType=NVARCHAR}, 
+      #{processParam,jdbcType=NVARCHAR}, #{paramValue,jdbcType=NVARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessParamHistPO">
+    insert into prod_process_param_hist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ppphId != null">
+        ppph_id,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="rfid != null">
+        rfid,
+      </if>
+      <if test="processParam != null">
+        process_param,
+      </if>
+      <if test="paramValue != null">
+        param_value,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ppphId != null">
+        #{ppphId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="rfid != null">
+        #{rfid,jdbcType=NVARCHAR},
+      </if>
+      <if test="processParam != null">
+        #{processParam,jdbcType=NVARCHAR},
+      </if>
+      <if test="paramValue != null">
+        #{paramValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessParamHistPOExample" resultType="java.lang.Long">
+    select count(*) from prod_process_param_hist
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prod_process_param_hist
+    <set>
+      <if test="record.ppphId != null">
+        ppph_id = #{record.ppphId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rfid != null">
+        rfid = #{record.rfid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.processParam != null">
+        process_param = #{record.processParam,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.paramValue != null">
+        param_value = #{record.paramValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prod_process_param_hist
+    set ppph_id = #{record.ppphId,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      rfid = #{record.rfid,jdbcType=NVARCHAR},
+      process_param = #{record.processParam,jdbcType=NVARCHAR},
+      param_value = #{record.paramValue,jdbcType=NVARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessParamHistPO">
+    update prod_process_param_hist
+    <set>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="rfid != null">
+        rfid = #{rfid,jdbcType=NVARCHAR},
+      </if>
+      <if test="processParam != null">
+        process_param = #{processParam,jdbcType=NVARCHAR},
+      </if>
+      <if test="paramValue != null">
+        param_value = #{paramValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ppph_id = #{ppphId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uspring.sdsmesplus.entity.po.ProdProcessParamHistPO">
+    update prod_process_param_hist
+    set line_id = #{lineId,jdbcType=INTEGER},
+      rfid = #{rfid,jdbcType=NVARCHAR},
+      process_param = #{processParam,jdbcType=NVARCHAR},
+      param_value = #{paramValue,jdbcType=NVARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where ppph_id = #{ppphId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByRfid" resultType="int">
+    select top 1 a.line_id
+    from prod_process_param_hist a,sys_line b where rfid = #{rfid} and a.line_id = b.line_id
+  </select>
+</mapper>

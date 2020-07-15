@@ -19,4 +19,6 @@ public interface SysProcessPODao {
     int updateByExampleSelective(@Param("record") SysProcessPO record, @Param("example") SysProcessPOExample example);
 
     int updateByExample(@Param("record") SysProcessPO record, @Param("example") SysProcessPOExample example);
+
+    List<SysProcessPO> selectBylineID(@Param("lineid") int lineid);
 }

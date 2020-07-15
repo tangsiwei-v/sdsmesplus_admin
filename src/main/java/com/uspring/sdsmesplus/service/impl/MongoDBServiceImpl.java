@@ -62,7 +62,7 @@ import org.springframework.web.client.RestTemplate;
  * @ClassName: MongoDBServiceImpl
  * @Description: MongoDB服务实现类
  * @author lihuan lihuan@uspring.cn
- * @date 2018年8月5日 上午9:13:32
+ * @date 2018年8月5日 上午	9:13:32
  *
  */
 @Service
@@ -805,6 +805,7 @@ public class MongoDBServiceImpl implements MongoDBService {
 
 			if(processData == null){
 				continue;
+
 			}
 
 			Map<String,Object> processMap = new HashMap<String,Object>();

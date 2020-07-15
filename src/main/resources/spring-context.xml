@@ -82,7 +82,4 @@
 		</cxf:features>
 	</cxf:bus>
 
-	<jaxws:client id="SIMESSTOCKDETAILOut"
-				  serviceClass="com.uspring.sdsmesplus.wms.sap.f135.SIMESSTOCKDETAILOut"
-				  wsdlLocation="#{prop.f135_wsdl_location}" /> 
 </beans>  

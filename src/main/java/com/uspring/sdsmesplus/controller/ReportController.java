@@ -75,6 +75,7 @@ public class ReportController extends BaseController{
 	public Result getBarcodeList(HttpServletResponse response,Integer lineId,String boxCode,String barcode,String tuhao,String prodCode,String prodNumber,String poCode,String beginTime,String endTime,
 			Integer pageNum,Integer pageSize,Integer shopId,Integer fcId,@RequestParam(defaultValue="0",value="isExprot",required=false) Integer ixExport) {
 		endTime = DateUtils.dealEndTime(endTime);
+		System.out.println(111);
 		return new Result("查询成功", this.reportService.getProductList(response, lineId, boxCode, barcode, tuhao, prodCode, prodNumber,poCode, beginTime, endTime, pageNum, pageSize, shopId, fcId, ixExport), StatusCode.SUCCESS);
 	}
 
@@ -103,7 +104,9 @@ public class ReportController extends BaseController{
 	public Result getBarcodeInfo(HttpServletResponse response, @RequestParam(value = "barcode", required = false) String barcode,
 			@RequestParam(value = "prodCode", required = false) String prodCode) {
 		barcode = URLDecoder.decode(barcode);
-		return new Result("查询成功", this.reportService.getProductInfo(barcode,prodCode), StatusCode.SUCCESS);
+		Map<String ,Object> Map = reportService.getProductInfo(barcode,prodCode);
+		System.out.println(111);
+		return new Result("查询成功", Map, StatusCode.SUCCESS);
 	}
 	
 	@ResponseBody
@@ -117,7 +120,9 @@ public class ReportController extends BaseController{
 	@RequestMapping(value = "/barcode/process", method = RequestMethod.GET)
 	@ApiOperation(value = "查询产品的工序", notes = "查询产品的工序", response = Result.class)
 	public Result getBarcodeProcess(HttpServletResponse response,String rfid,Integer lineId,  String fp_barcode) {
-		return new Result("查询成功", this.reportService.getProcessInfo(rfid, lineId, fp_barcode), StatusCode.SUCCESS);
+		List<Map<String, Object>> list = this.reportService.getProcessInfo(rfid, lineId, fp_barcode);
+		System.out.println(111);
+		return new Result("查询成功",list , StatusCode.SUCCESS);
 	}
 
 	@ResponseBody
