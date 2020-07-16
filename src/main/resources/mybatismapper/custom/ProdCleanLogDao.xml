@@ -3,56 +3,55 @@
 <mapper namespace="com.uspring.sdsmesplus.dao.ProdCleanLogDao">
     
     <select id="getCleanLog" resultType="map">
-        select a.po_code,a.mat_code,a.mat_name,a.mat_number,a.mat_batch_no,
-			a.box_barcode_old,a.box_barcode_new,a.cl_rest_count,a.is_confirmed,a.create_time,
-			b.prod_code,b.prod_number,b.prod_tuhao,
-			b.prod_name,c.line_name,v.vsm_name,e.fc_name 
-		from prod_clean_log a
-			left join plan_order b 
-		on a.po_code = b.po_code
-			left join sys_line c 
-		on b.line_id = c.line_id
+		select l.line_name,c.po_code,c.mat_name,c.mat_code,c.mat_number,
+			c.mat_batch_no,c.box_barcode_old,c.box_barcode_new,
+			c.cl_rest_count,c.mat_glevel,c.create_time,v.vsm_name,f.fc_name
+		from prod_clean_log c
+			left join plan_order o
+		on c.po_code=o.po_code
+			left join sys_line l
+		on o.line_id=l.line_id
+			left join sys_factory f
+		on l.fc_id = f.fc_id
 			left join sys_vsm v
-		on c.vsm_id=v.vsm_id
-			left join sys_factory e	
-		on c.fc_id = e.fc_id
+		on l.vsm_id = v.vsm_id
 			where 1=1
 		<if test="poCode != null and poCode != ''">
-		  and a.po_code = #{poCode}
+		  and c.po_code = #{poCode}
 		</if>
 		<if test="lineId != null and lineId != ''">
-		  and b.line_id = #{lineId}
+		  and l.line_id = #{lineId}
 		</if>
 		<if test="vsmId != null and vsmId != ''">
-		  and c.vsm_id = #{vsmId}
+		  and v.vsm_id = #{vsmId}
 		</if>
 	    <if test="fcId != null and fcId != ''">
-	      and e.fc_id = #{fcId}
+	      and f.fc_id = #{fcId}
 	    </if>
 		<if test="prodCode != null and prodCode != ''">
-		  and b.prod_code = #{prodCode}
+		  and c.prod_code = #{prodCode}
 		</if>
 		<if test="prodNumber != null and prodNumber != ''">
-		  and b.prod_number = #{prodNumber}
+		  and c.prod_number = #{prodNumber}
 		</if>
 		<if test="matProdCode != null and matProdCode != ''">
-		  and a.mat_code = #{matProdCode}
+		  and c.mat_code = #{matProdCode}
 		</if>
 		<if test="matProdNumber != null and matProdNumber != ''">
-		  and a.mat_number = #{matProdNumber}
+		  and c.mat_number = #{matProdNumber}
 		</if>
 		<if test="boxCode != null and boxCode != ''">
-		  and a.box_barcode_old = #{boxCode}
+		  and c.box_barcode_old = #{boxCode}
 		</if>
 		<if test="matBoxCode != null and matBoxCode != ''">
-		  and a.box_barcode_new = #{matBoxCode}
+		  and c.box_barcode_new like '%'+#{matBoxCode}+'%'
 		</if>
 		<if test="isConfirmed != null and isConfirmed != ''">
-		  and a.is_confirmed = #{isConfirmed}
+		  and c.is_confirmed = #{isConfirmed}
 		</if>
 		<if test="beginTime != null and beginTime != '' and endTime != null and endTime !=''">
-		  and a.create_time between #{beginTime} and #{endTime}
+		  and c.create_time between #{beginTime} and #{endTime}
 		</if>
-		order by a.create_time desc
+		order by c.create_time desc
     </select>
 </mapper>
