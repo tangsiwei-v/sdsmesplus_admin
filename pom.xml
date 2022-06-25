@@ -17,7 +17,7 @@
 		<swagger.version>2.2.2</swagger.version>
 		<mybatis.generator.configurationFile>${basedir}/src/main/resources/generatorConfig.xml</mybatis.generator.configurationFile>
 		<mybatis.generator.overwrite>true</mybatis.generator.overwrite>
-		<spring.mongo.version>1.10.14.RELEASE</spring.mongo.version>
+		<spring.mongo.version>3.3.5</spring.mongo.version>
 		<cxf.version>3.3.2</cxf.version>
 	</properties>
 
